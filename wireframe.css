@@ -101,14 +101,27 @@
     --wf-radius-lg: 24px;
     --wf-radius-pill: 9999px;
 
-    /* Sombras Sutis de Wireframe */
-    --wf-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --wf-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-    --wf-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+    /* Sombras Sutis & Profundidade SaaS */
+    --wf-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --wf-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --wf-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+    --wf-shadow-hover: 0 24px 48px -12px rgba(0, 0, 0, 0.18);
 
     /* Grid & Layout */
     --wf-container-max: 1240px;
-    --wf-transition: all 0.2s ease-in-out;
+    --wf-transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Barra de Progresso de Scroll Superior */
+.wf-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--wf-gray-500), var(--wf-black));
+    z-index: 2000;
+    transition: width 0.1s ease-out;
 }
 
 /* Reset Básico */
@@ -118,12 +131,68 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--wf-font-primary);
     background-color: var(--wf-white);
     color: var(--wf-dark);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Motion & Reveal Framework (Efeito SaaS Fluido)
+   -------------------------------------------------------------------------- */
+.wf-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+.wf-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.wf-stagger-1 { transition-delay: 0.1s; }
+.wf-stagger-2 { transition-delay: 0.2s; }
+.wf-stagger-3 { transition-delay: 0.3s; }
+.wf-stagger-4 { transition-delay: 0.4s; }
+
+/* Micro-animação de Flutuação Contínua (Floating) */
+@keyframes wfFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-0.5deg); }
+}
+.wf-floating {
+    animation: wfFloat 4.5s ease-in-out infinite;
+}
+
+/* "The Thread" (O Fio Conector Dinâmico da Compassion) */
+.wf-thread-container {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+.wf-thread-svg {
+    width: 100%;
+    height: 120px;
+    display: block;
+}
+.wf-thread-path {
+    stroke: var(--wf-gray-300);
+    stroke-width: 2;
+    stroke-dasharray: 8 8;
+    fill: none;
+    animation: wfDashPulse 30s linear infinite;
+}
+@keyframes wfDashPulse {
+    to { stroke-dashoffset: -1000; }
 }
 
 /* --------------------------------------------------------------------------
@@ -319,15 +388,23 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Header / Barra de Navegação
+   Header / Barra de Navegação com Glassmorphism & Indicador Ativo
    -------------------------------------------------------------------------- */
 .wf-header {
-    background-color: var(--wf-white);
-    border-bottom: 1px solid var(--wf-gray-200);
-    padding: 18px 0;
+    background-color: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+    padding: 14px 0;
     position: sticky;
     top: 38px;
     z-index: 999;
+    transition: var(--wf-transition);
+}
+.wf-header.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-bottom-color: var(--wf-gray-300);
 }
 .wf-header-inner {
     display: flex;
@@ -340,6 +417,10 @@ body {
     gap: 12px;
     text-decoration: none;
     color: var(--wf-black);
+    transition: transform 0.2s ease;
+}
+.wf-logo-wrap:hover {
+    transform: scale(1.02);
 }
 .wf-logo-icon {
     width: 40px;
@@ -352,6 +433,7 @@ body {
     justify-content: center;
     font-weight: 800;
     font-size: 1.2rem;
+    box-shadow: var(--wf-shadow-sm);
 }
 .wf-logo-text {
     font-size: 1.35rem;
@@ -371,19 +453,32 @@ body {
 .wf-nav-menu {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 8px;
     list-style: none;
+    background: var(--wf-gray-100);
+    padding: 4px;
+    border-radius: var(--wf-radius-pill);
+    border: 1px solid var(--wf-gray-200);
 }
 .wf-nav-link {
     text-decoration: none;
     color: var(--wf-gray-600);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
+    padding: 8px 16px;
+    border-radius: var(--wf-radius-pill);
     transition: var(--wf-transition);
+    display: inline-block;
 }
-.wf-nav-link:hover, .wf-nav-link.active {
+.wf-nav-link:hover {
     color: var(--wf-black);
+    background: rgba(255, 255, 255, 0.6);
+}
+.wf-nav-link.active {
+    color: var(--wf-black);
+    background: var(--wf-white);
     font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 .wf-header-actions {
     display: flex;
@@ -700,6 +795,197 @@ body {
     align-items: center;
     font-size: 0.8rem;
     color: var(--wf-gray-400);
+}
+
+/* --------------------------------------------------------------------------
+   Tabs de Filtro Interativo (SaaS Segmented Controls)
+   -------------------------------------------------------------------------- */
+.wf-tabs-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.wf-segmented-control {
+    display: inline-flex;
+    background: var(--wf-gray-200);
+    padding: 5px;
+    border-radius: var(--wf-radius-pill);
+    gap: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.wf-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 8px 20px;
+    border-radius: var(--wf-radius-pill);
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: var(--wf-font-primary);
+    color: var(--wf-gray-600);
+    cursor: pointer;
+    transition: var(--wf-transition);
+}
+.wf-tab-btn:hover {
+    color: var(--wf-black);
+}
+.wf-tab-btn.active {
+    background: var(--wf-white);
+    color: var(--wf-black);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Slider / Carrossel Interativo de Micro-Histórias
+   -------------------------------------------------------------------------- */
+.wf-carousel {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+}
+.wf-carousel-inner {
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--wf-radius-lg);
+}
+.wf-slide {
+    display: none;
+    animation: wfFadeSlide 0.4s ease-out;
+}
+.wf-slide.active {
+    display: block;
+}
+@keyframes wfFadeSlide {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.wf-carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+.wf-carousel-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--wf-gray-300);
+    background: var(--wf-white);
+    color: var(--wf-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--wf-transition);
+    font-size: 1.2rem;
+}
+.wf-carousel-arrow:hover {
+    border-color: var(--wf-black);
+    background: var(--wf-black);
+    color: var(--wf-white);
+    transform: scale(1.05);
+}
+.wf-carousel-dots {
+    display: flex;
+    gap: 8px;
+}
+.wf-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--wf-gray-300);
+    cursor: pointer;
+    transition: var(--wf-transition);
+}
+.wf-dot.active {
+    width: 28px;
+    border-radius: var(--wf-radius-pill);
+    background: var(--wf-black);
+}
+
+/* --------------------------------------------------------------------------
+   Hub de Treinamentos: SaaS Dashboard Interativo (Substituto do Moodle)
+   -------------------------------------------------------------------------- */
+.wf-saas-dashboard {
+    background: var(--wf-white);
+    border: 1.5px solid var(--wf-gray-300);
+    border-radius: var(--wf-radius-lg);
+    box-shadow: var(--wf-shadow-lg);
+    overflow: hidden;
+    transition: var(--wf-transition);
+}
+.wf-saas-topbar {
+    background: var(--wf-gray-100);
+    border-bottom: 1px solid var(--wf-gray-200);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wf-saas-dots {
+    display: flex;
+    gap: 6px;
+}
+.wf-saas-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--wf-gray-300);
+}
+.wf-saas-tabs {
+    display: flex;
+    gap: 8px;
+}
+.wf-saas-tab {
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border-radius: var(--wf-radius-pill);
+    border: none;
+    background: transparent;
+    color: var(--wf-gray-600);
+    cursor: pointer;
+    transition: var(--wf-transition);
+}
+.wf-saas-tab.active {
+    background: var(--wf-white);
+    color: var(--wf-black);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.wf-saas-content {
+    padding: 32px;
+}
+.wf-saas-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    height: 140px;
+    padding-top: 20px;
+    border-bottom: 1px solid var(--wf-gray-200);
+    margin-bottom: 24px;
+}
+.wf-chart-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+}
+.wf-chart-bar {
+    width: 100%;
+    background: var(--wf-gray-300);
+    border-radius: 6px 6px 0 0;
+    transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+.wf-chart-bar:hover, .wf-chart-col.active .wf-chart-bar {
+    background: var(--wf-black);
+}
+.wf-chart-label {
+    font-size: 0.72rem;
+    color: var(--wf-gray-500);
+    margin-top: 8px;
+    font-weight: 600;
 }
 
 /* --------------------------------------------------------------------------
