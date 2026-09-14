@@ -1,0 +1,9 @@
+# Dependências e caches
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Ignorar fotos pesadas de alta resolução para manter o deploy leve no GitHub Pages
+assets/images/
+backlog/brandbook/
+backlog/inspiracao/

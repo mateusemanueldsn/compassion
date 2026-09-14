@@ -1,0 +1,45 @@
+# Documentação da Identidade da Marca - Compassion Brasil
+Data da análise: Abril de 2026
+Baseado no Brandbook Original da Compassion.
+
+## 1. Plataforma da Marca (Brand Platform)
+- **Públicos-Alvo (Audience):** The Global Neighbourhood (A Vizinhança Global), Crianças e jovens em situação de pobreza, Parceiros das igrejas locais, Força de trabalho global, Apoiadores.
+- **Persona:** The Good Neighbour (O Bom Vizinho).
+- **Personalidade da Marca:** Atenta, Compassiva, Corajosa.
+- **Tom de Voz:** Claro (Clear), Caloroso (Warm), Confiante (Confident).
+- **Identidade Visual:** G-Local (Global e Local), Humana, Simples.
+- **Ações Principais:** Vê a necessidade (Sees need) -> Sente compaixão (Feels compassion) -> Age com compaixão (Moves with compassion).
+
+### 1.1 Propósito e Fundação
+- **Propósito:** Inspirar e capacitar nossos "vizinhos" a agir com compaixão.
+- **Promessa:** Conhecido, Amado, Conectado (Known, Loved, Connected).
+- **Mensagem Central:** Move with compassion.
+- **Visão:** Todas as crianças na pobreza prosperando em direção ao seu potencial dado por Deus.
+- **Missão:** Libertar crianças da pobreza em nome de Jesus.
+- **Valores:** Integridade, Discernimento, Dignidade, Mordomia (Stewardship), Excelência.
+- **Diferenciais:** Centrado em Cristo, Impulsionado pela Igreja, Focado na Criança.
+
+## 2. Sistema de Logos e Arquitetura da Marca
+- **Logo Principal:** A palavra "Compassion", onde sobre a letra "C" repousa o ícone "Skippy" (uma figura humana com a mão levantada).
+- **Marca de Ação:** Utilização constante do selo "move with compassion".
+- **Sub-marcas de Campanhas:** Utilizam tipografia em negrito intenso (ex: "Poverty Stops With Me", "WE RISE AS ONE", "ONE Girl CAN CHANGE HER WORLD").
+- **Aplicações sobre fundos coloridos (Lockup):** O texto do departamento ou projeto deve ser Branco Puro (Pure White) sobre a cor de fundo, contido em um retângulo. O ícone "Skippy" passa a ter a cor azul "Nana's Pool Blue" e deve ficar enclausurado dentro de um círculo Branco Puro.
+
+## 3. Paleta de Cores (Color Palette)
+A paleta é dividida em Cores Primárias, Secundárias, Neutras e variações de tons e sombras (Shades and tints).
+- **Tons Neutros Principais:** Dark (Escuro), White (Branco Puro), Eggshell (Casca de ovo) e tons de Greyscale (escala de cinza). Estes neutros formam a base core do design.
+- **Acessibilidade:** É obrigatório manter o nível de contraste correto entre fundo e texto ("Accessibility = love").
+
+## 4. Tipografia (Typography)
+- **Fonte Primária (Primary Font):** `NeighbourSans`. Esta é a escolha oficial para a maior parte das comunicações da marca.
+- **Fontes Secundárias / Alternativas:** `Ballinger Pro Condensed` e `Ballinger Pro X-Condensed`.
+  - *Regra de uso:* Usadas estritamente em casos onde a largura da coluna é muito apertada (manchetes e títulos estreitos).
+  - *Restrição:* Não devem ser utilizadas para blocos longos de texto, pois a legibilidade é inferior à da NeighbourSans.
+- **Hierarquia:** A hierarquia tipográfica (títulos, subtítulos, corpo de texto) deve ser rigorosamente respeitada, não misturando pesos de forma conflitante.
+
+## 5. Sistema Gráfico, Ilustração e Fotografia
+- **Fotografia (Micro stories):** A direção de fotografia é focada no lado humano. Registros emocionais, centrados na pessoa e contando as "micro histórias" de transformação e impacto.
+- **Composição de Grafismos ("Tapestry"):** A construção visual de banners e artes modulares (tapetes gráficos) segue limites rígidos de cor:
+  - Máximo de **6 cores** para backgrounds, padrões, molduras e formas geométricas de preenchimento.
+  - Máximo de **8 a 10 cores** para ilustrações na peça como um todo (este limite já engloba as cores do background).
+  - As ilustrações mesclam elementos cotidianos, rostos, objetos e padrões, de forma super colorida, integrada e geométrica.

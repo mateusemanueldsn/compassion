@@ -1,0 +1,43 @@
+# Análise de UX/UI e Padrões de Interface - Compassion Brasil
+Data da análise: Abril de 2026
+Baseado nas capturas de tela do backlog de inspiração (Peru, Ásia/Coreia, Brasil e Plataforma Interna).
+
+## 1. Visão Geral e Contexto Operacional
+- **Nomenclatura Oficial:** A nova área de cursos voltada ao público externo será chamada estritamente de **Treinamentos**.
+- **Correção de CTA Atual:** No site do Brasil atual, o botão amarelo no header chama-se "Seja um voluntário". Isso é um erro conceitual. O botão é referente ao **Apadrinhamento** (Sponsorship) e redireciona para a plataforma da Compassion Internacional. No novo design, ele deverá ter o nome e função clarificados, mantendo o link de redirecionamento já conhecido.
+
+## 2. Padrões Visuais Internacionais (Referências de Alta Fidelidade)
+A análise das filiais do Peru e Ásia/Coreia revela um padrão estético moderno, dinâmico e orgânico que será a base do nosso redesign no Brasil.
+
+### 2.1. Imagens e Tratamento de Formas
+- **Ausência de Linhas Duras:** As fotografias abandonam os cantos secos (retângulos perfeitos). O padrão dita o uso de **bordas arredondadas** (border-radius suave) em cartões e blocos de imagem.
+- **Elementos Orgânicos e Circulares:** Forte presença de fotos recortadas em círculos perfeitos, especialmente para retratos de pessoas e detalhes humanizados.
+- **Sobreposições (Overlaps):** É muito comum imagens flutuarem umas sobre as outras. Um elemento chave é um selo ou botão circular sobreposto nas quinas inferiores das fotos.
+- **Fios Conectores:** Utilização intensa de linhas gráficas (pontilhadas, tracejadas ou "swooshes" curvos e coloridos) que interligam as seções, guiando o olhar do usuário ao longo do scroll (ex: o arco "His love goes" na versão asiática).
+
+### 2.2. Botões e CTAs
+- O formato rígido é evitado. Predominam botões **pill-shaped** (pílula/totalmente arredondados).
+- **Cores:** Uso de preenchimentos sólidos e fortes (Azul Vibrante ou Laranja/Amarelo). Em alguns casos, botões flutuantes brancos com texto azul para máximo contraste sobre fundos escuros.
+- Ícones de ação (como setas de "leia mais" ou "play" de vídeos) são frequentemente encapsulados em círculos perfeitos.
+
+### 2.3. Tipografia e Marcações de Texto
+- **Hero Headers Dinâmicos:** Textos de apresentação gigantes (usando a NeighbourSans) em branco sobre imagens, com palavras-chave marcadas em cores contrastantes (ex: textos todos em branco, com a última frase em amarelo/laranja).
+- **Tags e Badges Flutuantes:** Datas, categorias e etiquetas ("Sobre Nós", "Novidades") não ficam apenas como texto corrido; são colocadas em pequenos "selos" ou caixas de fundo colorido, flutuando sobre a imagem de topo do card.
+
+### 2.4. Navegação (Header) e Rodapé (Footer)
+- **Header:** Transparente sobre imagens de fundo grandes, ou branco minimalista. O foco total fica no botão principal (agora "Apadrinhamento").
+- **Seção de Estatísticas:** Apresentada em faixas sólidas de ponta a ponta na tela (ex: fundo todo amarelo), com grandes números em branco precedidos do sinal de mais (+13892, +41, etc.), garantindo alto impacto e leitura rápida.
+- **Footer:** Blocos densos, limpos e de fundo escuro (Dark Blue ou Dark Grey). Simples, organizado, focando apenas no essencial, formulário de newsletter simples e contatos.
+
+## 3. Diagnóstico do Site Atual do Brasil
+- **Problema de Rigidez:** O site atual do Brasil utiliza uma diagramação muito quadrada ("em caixotes"). Seções como "Programas" usam layouts onde imagens são retângulos duros com caixas sólidas flutuando desalinhadas por trás.
+- **Cards e Listagens:** Utilizam cartões muito marcados, com textos engessados. A página "Sobre" apresenta blocos que alternam cores fortes (azul, branco, azul), o que cansa a visão e quebra a leitura.
+- **O Objetivo:** Desconstruir esses blocos rígidos, aplicando a fluidez das referências internacionais: uso dos tapetes gráficos (Tapestry), sombras ultra-leves e bordas arredondadas.
+
+## 4. O Sistema de Treinamentos (Dashboard Moodle/Externo)
+- **A Referência Atual (Cursos Internos):** O painel do Moodle atual tem um visual administrativo cru e datado (tabelas estáticas, colunas cinzas, menus laterais escuros padronizados, status de "Falhou/Pendente" em listas frias). A página "ForChildren" é um grid básico de imagens quadradas de recursos.
+- **O Novo Padrão "Treinamentos":**
+  - Nosso painel deve quebrar a aparência de "software legado" e trazer uma UI premium.
+  - O rastreio de alunos, métricas de inscritos e acessos deve usar cartões métricos (Metric Cards) com cantos arredondados, fontes gigantes para os números (NeighbourSans Bold) e gráficos minimalistas.
+  - Selos de status ("Concluído", "Em andamento") devem seguir a estética de badges arredondados, trazendo uma experiência gamificada e amigável em vez de uma tabela punitiva de sistema corporativo.
+  - Integração perfeita: Mesmo puxando dados do Moodle no backend, o frontend (Next.js/React) irá aplicar o "Color Palette" oficial e os "Fios Conectores" para criar um ambiente vivo e acolhedor.

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Home | Compassion Brasil (Redesign)</title>
+    <meta name="description" content="Protótipo em Wireframe de Alta Fidelidade Estrutural para o novo portal da Compassion Brasil.">
+    <link rel="stylesheet" href="wireframe.css">
+    <script src="wireframe.js" defer></script>
+</head>
+<body>
+
+    <!-- Aviso Superior do Wireframe -->
+    <aside class="wf-top-notice">
+        <div>
+            <strong>PROTO-WIREFRAME V1.0</strong> • ESTRUTURA MONOCROMÁTICA PARA ALINHAMENTO DE CONTEÚDO E ARQUITETURA
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <span class="badge">Pronto para Elementor</span>
+            <span class="badge">Monocromático</span>
+        </div>
+    </aside>
+
+    <!-- 01. HEADER / NAVEGAÇÃO -->
+    <header class="wf-header" data-elementor-section="header">
+        <div class="wf-container wf-header-inner">
+            <a href="#" class="wf-logo-wrap" title="Compassion Brasil">
+                <div class="wf-logo-icon">C</div>
+                <div class="wf-logo-text">
+                    Compassion
+                    <span class="wf-logo-sub">Brasil</span>
+                </div>
+            </a>
+
+            <nav>
+                <ul class="wf-nav-menu">
+                    <li><a href="#quem-somos" class="wf-nav-link active">Quem Somos</a></li>
+                    <li><a href="#programas" class="wf-nav-link">Programas</a></li>
+                    <li><a href="#impacto" class="wf-nav-link">Onde Atuamos</a></li>
+                    <li><a href="#treinamentos" class="wf-nav-link">Treinamentos</a></li>
+                    <li><a href="#contato" class="wf-nav-link">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="wf-header-actions">
+                <!-- CTA Corrigido conforme análise de UX: 'Apadrinhamento' -->
+                <a href="#apadrinhar" class="wf-btn wf-btn-pill-cta" data-elementor-field="cta_header">
+                    Apadrinhamento
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 02. HERO SECTION -->
+        <section class="wf-section" id="quem-somos" data-elementor-section="hero">
+            <div class="wf-container">
+                <div class="wf-hero-grid">
+                    <div class="wf-hero-content">
+                        <div class="wf-hero-tag">
+                            <span class="wf-badge wf-badge-dark" data-elementor-field="hero_badge">
+                                Conhecido • Amado • Conectado
+                            </span>
+                        </div>
+                        <h1 class="wf-hero-title" data-elementor-field="hero_titulo">
+                            Libertando crianças da pobreza em nome de Jesus.
+                        </h1>
+                        <p class="wf-hero-description" data-elementor-field="hero_descricao">
+                            Conectamos pessoas compassivas a crianças em situação de extrema vulnerabilidade social através do discipulado e do cuidado integral da igreja local.
+                        </p>
+                        <div class="wf-hero-buttons">
+                            <a href="#apadrinhar" class="wf-btn wf-btn-primary" data-elementor-field="hero_btn_principal">
+                                Apadrinhe uma Criança
+                            </a>
+                            <a href="#programas" class="wf-btn wf-btn-secondary" data-elementor-field="hero_btn_secundario">
+                                Conheça Nossos Programas
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="wf-hero-visual">
+                        <!-- Componente Reutilizável de Imagem -->
+                        <wf-image ratio="hero" label="Fotografia de Campo: Criança Sorrindo na Comunidade" dim="1200 × 750 px"></wf-image>
+                        
+                        <div class="wf-hero-float-badge">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <span>Move with Compassion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. FAIXA DE IMPACTO E NÚMEROS (STAT BANNER) -->
+        <section class="wf-stats-bar" id="impacto" data-elementor-section="estatisticas">
+            <div class="wf-container">
+                <div class="wf-stats-grid">
+                    <div class="wf-stat-item">
+                        <div class="wf-stat-number" data-elementor-field="stat_num_1">+13.800</div>
+                        <div class="wf-stat-label" data-elementor-field="stat_label_1">Crianças e jovens atendidos no Brasil</div>
+                    </div>
+                    <div class="wf-stat-item">
+                        <div class="wf-stat-number" data-elementor-field="stat_num_2">+40</div>
+                        <div class="wf-stat-label" data-elementor-field="stat_label_2">Igrejas e centros parceiros locais</div>
+                    </div>
+                    <div class="wf-stat-item">
+                        <div class="wf-stat-number" data-elementor-field="stat_num_3">100%</div>
+                        <div class="wf-stat-label" data-elementor-field="stat_label_3">Focado na criança e centrado em Cristo</div>
+                    </div>
+                    <div class="wf-stat-item">
+                        <div class="wf-stat-number" data-elementor-field="stat_num_4">70+</div>
+                        <div class="wf-stat-label" data-elementor-field="stat_label_4">Anos de compromisso e impacto global</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04. EIXOS DE ATUAÇÃO / PROGRAMAS -->
+        <section class="wf-section wf-section-alt" id="programas" data-elementor-section="programas">
+            <div class="wf-container">
+                <div class="wf-section-header">
+                    <span class="wf-badge" data-elementor-field="programas_badge">Nossos Eixos de Ação</span>
+                    <h2 class="wf-section-title" data-elementor-field="programas_titulo">Como Atuamos no Brasil</h2>
+                    <p class="wf-section-subtitle" data-elementor-field="programas_subtitulo">
+                        Desenvolvimento holístico que atende as dimensões física, socioemocional, cognitiva e espiritual.
+                    </p>
+                </div>
+
+                <div class="wf-programs-grid">
+                    <!-- Card 1 -->
+                    <article class="wf-card">
+                        <wf-image ratio="16-9" label="Foto: Mães e Bebês" dim="600 × 338 px"></wf-image>
+                        <div class="wf-card-body">
+                            <span class="wf-badge wf-card-badge">0 a 3 anos</span>
+                            <h3 class="wf-card-title" data-elementor-field="prog_1_titulo">Sobrevivência e Primeira Infância</h3>
+                            <p class="wf-card-text" data-elementor-field="prog_1_texto">
+                                Suporte vital pré-natal, nutrição e assistência médica essencial para mães e bebês nos primeiros mil dias de vida.
+                            </p>
+                            <a href="#" class="wf-card-link">Conhecer o programa &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="wf-card">
+                        <wf-image ratio="16-9" label="Foto: Apoio Escolar e Saúde" dim="600 × 338 px"></wf-image>
+                        <div class="wf-card-body">
+                            <span class="wf-badge wf-card-badge">Desenvolvimento</span>
+                            <h3 class="wf-card-title" data-elementor-field="prog_2_titulo">Apoio Escolar e Nutricional</h3>
+                            <p class="wf-card-text" data-elementor-field="prog_2_texto">
+                                Reforço escolar, acompanhamento de saúde periódico e refeições saudáveis servidas nos centros comunitários.
+                            </p>
+                            <a href="#" class="wf-card-link">Conhecer o programa &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="wf-card">
+                        <wf-image ratio="16-9" label="Foto: Jovens em Oficina" dim="600 × 338 px"></wf-image>
+                        <div class="wf-card-body">
+                            <span class="wf-badge wf-card-badge">Juventude</span>
+                            <h3 class="wf-card-title" data-elementor-field="prog_3_titulo">Capacitação e Mentoria</h3>
+                            <p class="wf-card-text" data-elementor-field="prog_3_texto">
+                                Formação vocacional, desenvolvimento de liderança bíblica e preparação profissional para jovens.
+                            </p>
+                            <a href="#" class="wf-card-link">Conhecer o programa &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="wf-card">
+                        <wf-image ratio="16-9" label="Foto: Ajuda Emergencial" dim="600 × 338 px"></wf-image>
+                        <div class="wf-card-body">
+                            <span class="wf-badge wf-card-badge">Proteção</span>
+                            <h3 class="wf-card-title" data-elementor-field="prog_4_titulo">Intervenções Críticas</h3>
+                            <p class="wf-card-text" data-elementor-field="prog_4_texto">
+                                Resposta ágil a situações de emergência climática, tratamento médico especializado e segurança alimentar.
+                            </p>
+                            <a href="#" class="wf-card-link">Conhecer o programa &rarr;</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. MICRO-HISTÓRIAS DE IMPACTO (HUMANIZAÇÃO) -->
+        <section class="wf-section" data-elementor-section="depoimentos">
+            <div class="wf-container">
+                <div class="wf-story-box">
+                    <div class="wf-story-author-wrap">
+                        <!-- Imagem com recorte circular (Avatar) -->
+                        <wf-image circle label="Avatar"></wf-image>
+                    </div>
+                    <div>
+                        <div class="wf-badge" style="margin-bottom: 16px;">Voz da Comunidade</div>
+                        <blockquote class="wf-story-quote" data-elementor-field="depoimento_citacao">
+                            "Antes do projeto da igreja, não tínhamos perspectiva de estudo e alimentação digna. Hoje, sei que sou amado por Deus e posso sonhar com um futuro diferente."
+                        </blockquote>
+                        <div class="wf-story-author" data-elementor-field="depoimento_autor">Lucas, 14 anos</div>
+                        <div class="wf-story-location" data-elementor-field="depoimento_local">Participante do Centro de Desenvolvimento • Sertão do Brasil</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. SEÇÃO TREINAMENTOS (SUBSTITUIÇÃO DO MOODLE LEGADO) -->
+        <section class="wf-section wf-section-alt" id="treinamentos" data-elementor-section="treinamentos">
+            <div class="wf-container">
+                <div class="wf-training-banner">
+                    <div>
+                        <span class="wf-badge wf-badge-dark">Capacitação Contínua</span>
+                        <h2 class="wf-section-title" style="margin-top: 14px;" data-elementor-field="treinamentos_titulo">
+                            Plataforma de Treinamentos
+                        </h2>
+                        <p class="wf-section-subtitle" style="margin-bottom: 24px;" data-elementor-field="treinamentos_descricao">
+                            Ambiente gamificado e intuitivo para pastores, educadores e voluntários das igrejas parceiras ampliarem seu impacto comunitário com excelência.
+                        </p>
+                        <a href="#acessar-treinamento" class="wf-btn wf-btn-primary" data-elementor-field="treinamentos_btn">
+                            Acessar Portal de Treinamentos &rarr;
+                        </a>
+                    </div>
+
+                    <div class="wf-metric-preview-grid">
+                        <div class="wf-metric-card">
+                            <div class="wf-metric-card-number">12+</div>
+                            <div class="wf-metric-card-label">Trilhas de Aprendizagem</div>
+                        </div>
+                        <div class="wf-metric-card">
+                            <div class="wf-metric-card-number">98%</div>
+                            <div class="wf-metric-card-label">Satisfação dos Líderes</div>
+                        </div>
+                        <div class="wf-metric-card">
+                            <div class="wf-metric-card-number">Certificado</div>
+                            <div class="wf-metric-card-label">Reconhecimento Oficial</div>
+                        </div>
+                        <div class="wf-metric-card">
+                            <div class="wf-metric-card-number">100%</div>
+                            <div class="wf-metric-card-label">Gratuito aos Parceiros</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07. CTA FINAL (MOVE WITH COMPASSION) -->
+        <section class="wf-section" id="apadrinhar" data-elementor-section="cta_final">
+            <div class="wf-container">
+                <div class="wf-final-cta">
+                    <span class="wf-badge" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2); margin-bottom: 20px;">
+                        The Good Neighbour
+                    </span>
+                    <h2 data-elementor-field="cta_final_titulo">Pronto para agir com compaixão?</h2>
+                    <p data-elementor-field="cta_final_subtitulo">
+                        Sua conexão com uma criança transforma não apenas a vida dela, mas toda uma família e comunidade.
+                    </p>
+                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.compassion.com" target="_blank" class="wf-btn wf-btn-secondary" data-elementor-field="cta_final_btn_1">
+                            Apadrinhe Agora
+                        </a>
+                        <a href="#contato" class="wf-btn wf-btn-outline-white" data-elementor-field="cta_final_btn_2">
+                            Fale com Nossa Equipe
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 08. FOOTER INSTITUCIONAL -->
+    <footer class="wf-footer" id="contato" data-elementor-section="footer">
+        <div class="wf-container">
+            <div class="wf-footer-grid">
+                <div>
+                    <div class="wf-logo-wrap" style="color: #fff; margin-bottom: 16px;">
+                        <div class="wf-logo-icon" style="background: #fff; color: #111827;">C</div>
+                        <div class="wf-logo-text">Compassion <span class="wf-logo-sub" style="color: #9CA3AF;">Brasil</span></div>
+                    </div>
+                    <p style="color: #9CA3AF; line-height: 1.6; max-width: 340px;">
+                        Uma organização cristã de desenvolvimento infantil dedicada a libertar crianças da pobreza em nome de Jesus.
+                    </p>
+                </div>
+
+                <div>
+                    <h4>Programas</h4>
+                    <ul>
+                        <li><a href="#">Primeira Infância</a></li>
+                        <li><a href="#">Desenvolvimento Infantil</a></li>
+                        <li><a href="#">Liderança Jovem</a></li>
+                        <li><a href="#">Apoio Emergencial</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a href="#">Nossa História</a></li>
+                        <li><a href="#">Transparência & Relatórios</a></li>
+                        <li><a href="#">Igrejas Parceiras</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="#">contato@compassion.com.br</a></li>
+                        <li><a href="#">Central de Atendimento</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="wf-footer-bottom">
+                <div>&copy; 2026 Compassion do Brasil. Todos os direitos reservados. CNPJ sob consulta.</div>
+                <div>Move with Compassion • Conhecido, Amado, Conectado</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

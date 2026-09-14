@@ -1,0 +1,86 @@
+# Styleguide Oficial - Compassion Brasil (Redesign)
+Data de Criação: Abril de 2026
+
+Este documento unifica as diretrizes de identidade visual (Brandbook) e os padrões de interface (UX/UI) extraídos das referências internacionais, definindo a base técnica para o desenvolvimento do novo portal e da área de Treinamentos.
+
+---
+
+## 1. SISTEMA DE CORES (COLOR PALETTE)
+As cores são o motor emocional do design. A aplicação deve seguir estritamente as porcentagens de uso para garantir a personalidade de "Good Neighbour" sem pesar a interface.
+
+### 1.1 Cores Primárias (Primary & Core)
+Uso principal: Ações, destaque de hierarquia, fundos de seções hero.
+*   **Nana's Pool Blue (Core Blue):** `#2A5EEC` (RGB: 42 94 236)
+*   **Mist Blue (High Blue):** `#AABBF7`
+*   **Rainy Day Blue (Mid Blue):** `#6A8EF2`
+*   **School Uniform Blue (Low Blue):** `#1D42A5`
+*   **Night Time Blue (Dark Blue):** `#11265E`
+
+### 1.2 Tons Neutros (Neutrals & Bases)
+Uso principal: Textos, fundos estruturais e sombras.
+*   **Black Cat (Off Black):** `#121A1A` - (Cor primária para textos corporais e títulos principais)
+*   **Pure Black (Low Black):** `#000000`
+*   **Our Fence Grey (High Grey):** `#D2D5DF` - (Uso em bordas e divisórias sutis)
+*   **Wolf Grey (Mid Grey):** `#7C8399`
+*   **Weighty Slatey Grey (Low Grey):** `#494F61`
+*   **Pure White:** `#FFFFFF` - (Background principal de leitura)
+*   **Teddy Bear Stuffing Eggshell:** `#FCF8F4` - (Fundo off-white principal para seções alternadas)
+*   **Meringue Eggshell:** `#F7F0EB`
+*   **Dirty Snow Eggshell:** `#EAE4DF`
+
+### 1.3 Cores Secundárias (Apoio e Tapestry)
+Uso principal: Tags, badges, detalhes em botões, gráficos e o sistema modular de ilustrações (Tapestry).
+*   **Greens:**
+    *   Pistachio Pudding Green: `#C2E189`
+    *   Gecko Green: `#499E57`
+    *   Chalkboard Green: `#235339`
+*   **Yellows:**
+    *   Wheat Stem Yellow: `#FFF2AD`
+    *   Madeline's Dress Yellow: `#FFD257`
+    *   Torch Yellow: `#FDB518` (Amarelo padrão de destaque)
+*   **Pinks:**
+    *   Flamingo Wing Pink: `#FAC6D2`
+    *   Cotton Candy Pink: `#EE828D`
+    *   Grandma's Lipstick Pink: `#A50F25`
+*   **Oranges:**
+    *   Sunburn Orange: `#FF9C7C`
+    *   Cricket Ball Orange: `#FB513A`
+    *   Ketchup Orange: `#AB270A`
+*   **Browns:**
+    *   Latte Brown: `#F1B782`
+    *   Log Cabin Brown: `#914A22`
+    *   Chocolate Brown: `#6C3813`
+
+### 1.4 Regra de Proporção (Usage Scale)
+*   **40%:** Nana's Pool Blue (`#2A5EEC`)
+*   **30%:** Azuis secundários e brancos/eggshells.
+*   **25%:** Cores secundárias (como acentos em botões, tags e Tapestry).
+*   **5%:** Cinzas e Pretos (Textos e elementos estruturais muito discretos).
+
+---
+
+## 2. TIPOGRAFIA (TYPOGRAPHY)
+As fontes estão disponíveis na pasta `assets/fonts`.
+*   **Fonte Principal:** `Neighbour Sans` (Uso obrigatório em títulos, hero headers, menus e corpo de texto).
+*   **Fontes Secundárias (Restritas):** `Ballinger Condensed Series` e `Ballinger Pro X-Condensed` (Usadas estritamente para manchetes estreitas quando há limite crítico de largura).
+*   **Outras famílias na base:** `Addington CF v2.3`, `Quincy CF v4.3`, `Noto_Sans_KR` (Suporte a línguas/scripts específicos ou campanhas isoladas).
+
+---
+
+## 3. LOGO E ICONOGRAFIA
+*   **Logo Principal:** A palavra "Compassion" com o ícone "Skippy" (figura com mão levantada) sobre a letra "C".
+*   **Variações:** Disponível o `logo_branco.svg` (assets/logo) para aplicação sobre os fundos fotográficos escuros ou fundos azuis institucionais (Night Time Blue).
+*   **Aplicação em Lockups:** Quando a marca for aplicada com nomes de projetos, o ícone Skippy será pintado de Nana's Pool Blue e enclausurado em um círculo branco puro.
+
+---
+
+## 4. DIRETRIZES DE UI (COMPONENTS & LAYOUT)
+Estilos mapeados para o Redesign (Next.js/React) baseados no padrão Internacional.
+
+*   **Bordas e Imagens:** Zero cantos duros. Todas as imagens e cards devem usar **border-radius suave**. Recortes de perfis preferencialmente em círculos perfeitos.
+*   **Botões (CTAs):** Padrão **pill-shaped** (totalmente arredondados). Uso de cores contrastantes (ex: Torch Yellow ou Nana's Pool Blue). O botão de navegação "Seja um voluntário" passa a chamar-se **"Apadrinhamento"**.
+*   **Elementos Flutuantes e Conectores:** 
+    *   Tags flutuantes sobre quinas de imagens.
+    *   Linhas guia ("fios conectores" tracejados ou sólidos) navegando as seções.
+*   **Tapestry Gráfico:** Fundos e artes de suporte não podem ultrapassar 6 cores da paleta, focando em mesclar elementos geométricos da marca com a fotografia.
+*   **Dashboard "Treinamentos" (Substituto do Moodle):** O novo frontend para a área de cursos deve abandonar a interface de tabelas. Obrigatório o uso de **Metric Cards** arredondados, fontes grandes para dados, e **Badges** vibrantes de status. O painel deve exalar a mesma energia "Good Neighbour" da Home, focado no aspecto humano e gamificado.
