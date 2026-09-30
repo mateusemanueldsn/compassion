@@ -178,7 +178,7 @@ img{display:block;max-width:100%}
 
 /* Nav */
 .nav-list{display:flex;align-items:center;gap:2px;list-style:none}
-.nav-link{display:block;color:var(--g700);font-size:.9rem;font-weight:500;padding:8px 14px;border-radius:var(--r-sm);transition:var(--t1);position:relative}
+.nav-link{display:block;white-space:nowrap;color:var(--g700);font-size:.82rem;font-weight:500;padding:8px 10px;border-radius:var(--r-sm);transition:var(--t1);position:relative}
 .nav-link::after{content:"";display:block;position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:3px;border-radius:2px;background:var(--blue);transition:width .3s var(--ease)}
 .nav-link:hover{color:var(--dark)}
 .nav-link:hover::after,.nav-link.active::after{width:60%}
@@ -316,6 +316,47 @@ img{display:block;max-width:100%}
 
 .prog-card{background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:var(--t2);cursor:pointer;display:flex;flex-direction:column}
 .prog-card:hover{transform:translateY(-8px);box-shadow:var(--sh-lg)}
+
+/* Editorial Phases / Como Trabalhamos */
+.phases-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin-top: 64px;
+}
+.phase-ed-item {
+  display: flex;
+  flex-direction: column;
+}
+.phase-ed-age {
+  font-family: var(--condx);
+  font-size: clamp(4rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 0.85;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+  opacity: 0.85;
+}
+.phase-ed-line {
+  height: 6px;
+  width: 48px;
+  margin-bottom: 32px;
+  border-radius: 3px;
+}
+.phase-ed-title {
+  font-family: var(--font);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.phase-ed-desc {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.65;
+}
 
 /* Thread topo do card */
 .card-thread-top{display:flex;height:8px;gap:2px;transition:var(--t2)}
@@ -860,3 +901,6 @@ img{display:block;max-width:100%}
   font-size:.8rem;
 }
 
+
+@media(max-width: 1024px) { .phases-editorial-grid { grid-template-columns: repeat(2, 1fr); gap: 64px 40px; } }
+@media(max-width: 600px) { .phases-editorial-grid { grid-template-columns: 1fr; } .phase-ed-age { font-size: 4rem; } }
