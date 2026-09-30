@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Análise do SVG - Identificar estados</title>
+<style>
+body { background: #111; display: flex; justify-content: center; align-items: flex-start; padding: 20px; }
+.container { position: relative; width: 600px; }
+object { width: 600px; height: 600px; }
+.labels { position: absolute; top: 0; left: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <object data="assets/Mapa Brasil V4.svg" type="image/svg+xml" id="map"></object>
+  <div class="labels" id="labels"></div>
+</div>
+<script>
+// Coordenadas extraídas do SVG (matrix transform + offset do viewBox center)
+// O SVG usa translate(275,274.696) como centro
+const cx = 275, cy = 274.696;
+const states = [
+  { id:'i1',  x:45.645,   y:189.974 },
+  { id:'i2',  x:474.443,  y:196.106 },
+  { id:'i3',  x:274.911,  y:47.309  },
+  { id:'i4',  x:112.604,  y:118.810 },
+  { id:'i5',  x:406.431,  y:246.261 },
+  { id:'i6',  x:440.822,  y:138.951 },
+  { id:'i7',  x:332.908,  y:277.454 },
+  { id:'i8',  x:422.563,  y:327.748 },
+  { id:'i9',  x:309.857,  y:281.124 },
+  { id:'i10', x:367.239,  y:144.060 },
+  { id:'i11', x:229.207,  y:236.726 },
+  { id:'i12', x:246.912,  y:341.413 },
+  { id:'i13', x:362.697,  y:314.422 },
+  { id:'i14', x:274.016,  y:116.749 },
+  { id:'i15', x:287.507,  y:394.169 },
+  { id:'i16', x:473.560,  y:163.576 },
+  { id:'i17', x:457.838,  y:179.572 },
+  { id:'i18', x:391.467,  y:159.581 },
+  { id:'i19', x:396.072,  y:359.300 },
+  { id:'i20', x:473.752,  y:146.598 },
+  { id:'i21', x:258.340,  y:471.414 },
+  { id:'i22', x:135.597,  y:211.838 },
+  { id:'i23', x:154.643,  y:43.209  },
+  { id:'i24', x:290.270,  y:434.419 },
+  { id:'i25', x:323.056,  y:366.462 },
+];
+
+// SVG original usa translate(275,274.696) como centro do grupo principal
+// Então as coords absolutas são: x_abs = 275 + x_local - offset_path
+// Mas como o SVG se auto-dimensiona, vamos só plotar labels nas posições relativas
+const labels = document.getElementById('labels');
+// Scale: SVG 550x550 -> div 600x600
+const scale = 600/550;
+
+states.forEach(s => {
+  const div = document.createElement('div');
+  div.textContent = s.id;
+  div.style.cssText = `
+    position: absolute;
+    left: ${s.x * scale}px;
+    top: ${s.y * scale}px;
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
+    background: rgba(255,255,0,0.8);
+    padding: 1px 3px;
+    border-radius: 2px;
+    transform: translate(-50%,-50%);
+    z-index: 10;
+  `;
+  labels.appendChild(div);
+});
+</script>
+</body>
+</html>
