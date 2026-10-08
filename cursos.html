@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursos e Capacitação — Compassion Brasil</title>
+  <meta name="description"
+    content="Plataforma de cursos e formação da Compassion Brasil. Capacitando pastores, líderes, voluntários e educadores na proteção, cuidado e desenvolvimento integral da criança.">
+  <link rel="stylesheet" href="wireframe.css">
+  <script src="wireframe.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Barra de progresso de leitura -->
+  <div id="scrollProgress"></div>
+
+  <!-- Cursor customizado oficial -->
+  <div id="customCursor" aria-hidden="true">
+    <svg id="cursorSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 293 360.1" width="36" height="36">
+      <path id="cursorPath" fill="#1A5FFF"
+        d="M122.7,175.3c-7.6,4.3-14.7,9.3-21.3,15C89.3,201,79.5,214,72.4,228.5c-7.7,14-13.6,31.5-18.3,52.6c-2.1,9.4-3.4,19-3.9,28.6l5.1-7.1c-1.7,10.3-2.6,20.7-2.8,31.1c2.4-4.1,4-6.9,5.1-8.5l-0.6,27.2l11.2-27.2c0.8,2.4,1.4,4.9,2.2,7.9c6.9-16,12.8-29.2,18.1-39.6c4.8-10.2,10.2-20,16.2-29.6c5.2-8.6,11-16.8,17.3-24.6c5.7-7.1,13-15.6,21.9-24.9c1.6-2.2,10.9-6.2,11.4-6.5c3.9-1.4,8.9-3,15.2-4.5c3-0.8,10.1-2.4,20.9-5.1c9.5-2.2,17.1-4.3,23.1-5.7c18.3-5.1,32.3-10.6,42.4-16.6c12.8-7.9,20.2-16.9,22.1-27.6c-12.4,2.8-25,4.5-37.6,5.3c-6.9,0.4-17.1,0.6-31.1,0.6c-9.5-0.2-18.9,0.2-28.4,1c-10.3,1.1-20.4,3.4-30.1,6.8C141.7,165.5,131.9,170,122.7,175.3L122.7,175.3z M67.5,194.6l-5.7,8.5c4.3-3.7,12.4-8.7,23.9-14.8c7.7-4.1,26.5-14,56.2-29.2c22.5-11.6,41-29,55.4-52c4.7-7.4,8.8-15.2,12.2-23.3c1.7-4,3.2-8.1,4.5-12.2c0.5-2.3,0.7-4.7,0.6-7.1c0.2-3.3,0.1-6.6-0.4-9.8c-0.4-3.5-1-5.9-2-7.1c-1-1.2-2.6-0.6-3.9,1.8c-10.8,14.9-23.4,28.5-37.5,40.5c-15.9,13.2-33.2,24.5-51.6,33.9c-23.7,11.6-43,23.8-58.1,36.5c-15.8,13.2-29.8,28.4-41.6,45.3c-1.9,3-3.3,6.4-4.1,9.9c2.2-1.4,4.8-1.9,7.3-1.4L18,223l7.3-5.9c1.9-1.8,4.2-3.1,6.7-3.9l-1.8,6.2c5.6-5.3,11.8-10,18.3-14l-2.6,6.4c3.1-3.2,6.5-6.1,10.1-8.7L67.5,194.6L67.5,194.6z M69.6,64.1c-2.8,3.7-4.7,7.9-5.7,12.4c-1.4,4.6-1.4,9.5-0.2,14.2c1.1,4.7,3.1,9.1,5.9,13c3,3.9,6.8,7.2,11,9.7c4.4,2.5,9.1,4.3,14,5.3c10.5,2.1,21.4,0.2,30.6-5.3c4.2-2.5,7.9-5.8,10.9-9.7c2.8-3.7,4.8-7.9,5.7-12.4c1.2-4.6,1.3-9.4,0.2-14c-0.9-4.8-3-9.3-5.9-13.2c-3.1-3.8-6.8-7.1-11-9.7c-4.4-2.6-9.1-4.4-14-5.5c-5.3-1-10.7-1-16,0C90,49.8,85,51.6,80.6,54.3C76.3,56.8,72.6,60.1,69.6,64.1L69.6,64.1z" />
+    </svg>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="logo-wrap" aria-label="Compassion Brasil - Início">
+        <img src="assets/logo/logo_branco.svg" alt="Compassion Brasil" class="header-logo-img">
+      </a>
+
+      <nav aria-label="Navegação principal">
+        <ul class="nav-list">
+          <li><a href="index.html#quem-somos" class="nav-link">Quem Somos<span class="nav-thread"></span></a></li>
+          <li><a href="index.html#como-trabalhamos" class="nav-link">Como Trabalhamos<span class="nav-thread"></span></a></li>
+          <li><a href="index.html#programas" class="nav-link">Programas<span class="nav-thread"></span></a></li>
+          <li><a href="index.html#impacto" class="nav-link">Onde Atuamos<span class="nav-thread"></span></a></li>
+          <li><a href="cursos.html" class="nav-link active">Cursos<span class="nav-thread"></span></a></li>
+          <li><a href="index.html#apadrinhar" class="nav-link">Contato<span class="nav-thread"></span></a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://compassioncauses.com/en?country=BR#cause-browser" target="_blank" rel="noopener noreferrer"
+          class="btn-nav-cta btn-nav-causes" id="headerCauses">
+          Compassion Causas
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+        <a href="https://www.compassion.com/sponsor-a-child/?AgeMaxFilter=22&amp;AgeMinFilter=1&amp;CountryFilter=Peru&amp;ageMax=22&amp;ageMin=1&amp;countries=BR&amp;home_hero=true"
+          target="_blank" rel="noopener noreferrer" class="btn-nav-cta" id="headerCta">
+          Apadrinhe uma Criança
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════
+         HERO DA PÁGINA DE CURSOS
+         ═══════════════════════════════════════════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-eyebrow reveal">
+          <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+          Plataforma de Formação Compassion
+        </div>
+        <h1 class="page-hero-title reveal d1">
+          Capacitando Líderes para<br>
+          <span style="color:var(--blue)">Proteger, Cuidar e Servir</span>
+        </h1>
+        <p class="page-hero-subtitle reveal d2">
+          Conheça o catálogo completo de cursos e trilhas formativas da Compassion Brasil. Um ambiente preparado para equipar educadores, voluntários e pastores de igrejas parceiras com rigor técnico, fundamentação bíblica e excelência prática.
+        </p>
+
+        <div class="page-stats-row reveal d3">
+          <div class="page-stat-badge">
+            <span class="page-stat-dot" style="background:var(--blue)"></span>
+            +14 Trilhas Formativas
+          </div>
+          <div class="page-stat-badge">
+            <span class="page-stat-dot" style="background:var(--green)"></span>
+            100% Online & Flexível
+          </div>
+          <div class="page-stat-badge">
+            <span class="page-stat-dot" style="background:var(--yellow)"></span>
+            Certificação Oficial
+          </div>
+          <div class="page-stat-badge">
+            <span class="page-stat-dot" style="background:var(--orange)"></span>
+            Gratuito para Igrejas Parceiras
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         CATÁLOGO COMPLETO DE CURSOS
+         ═══════════════════════════════════════════════ -->
+    <section class="section section-white" id="catalogo">
+      <div class="container">
+
+        <div class="section-header center reveal">
+          <div class="section-eyebrow">
+            <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+            Catálogo de Cursos
+          </div>
+          <h2 class="section-title">Explore Nossas Trilhas de Formação</h2>
+          <p class="section-subtitle">
+            Selecione uma categoria ou navegue pelos cursos abaixo para conhecer a ementa e garantir sua vaga.
+          </p>
+        </div>
+
+        <!-- Grade Completa de Cursos (3 por linha com fundo cinza) -->
+        <div class="programs-grid" id="coursesGrid">
+
+          <!-- Curso 01 -->
+          <article class="course-card reveal">
+            <div class="course-thumb-ph">
+              <span class="course-thumb-badge" style="border-left: 3px solid var(--yellow)">Proteção & Salvaguarda</span>
+              <div class="course-thumb-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <span class="course-thumb-meta">40 horas · 100% Online</span>
+            </div>
+            <div class="course-card-content">
+              <span class="course-cat-tag">Trilha Obrigatória para Parceiros</span>
+              <h3 class="course-card-title">Oficial de Proteção e Salvaguarda Infantil</h3>
+              <p class="course-card-desc">
+                Formação aprofundada nos protocolos institucionais de prevenção, encaminhamento legal, acolhimento de denúncias e manutenção de ambientes seguros para crianças e adolescentes.
+              </p>
+              <div class="course-card-footer">
+                <span class="course-card-meta">Certificado com Chancela</span>
+                <button type="button" class="btn btn-primary btn-open-enroll" data-course="Oficial de Proteção e Salvaguarda Infantil" style="padding:7px 14px;font-size:.78rem">
+                  Inscrever-se
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Curso 02 -->
+          <article class="course-card reveal d1">
+            <div class="course-thumb-ph">
+              <span class="course-thumb-badge" style="border-left: 3px solid var(--blue)">Primeira Infância</span>
+              <div class="course-thumb-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <span class="course-thumb-meta">30 horas · 100% Online</span>
+            </div>
+            <div class="course-card-content">
+              <span class="course-cat-tag">Desenvolvimento 0 a 5 Anos</span>
+              <h3 class="course-card-title">Acolhimento e Vínculo Materno-Infantil</h3>
+              <p class="course-card-desc">
+                Capacitação para agentes comunitários em visitação domiciliar, cuidados na gestação, estímulo sensorial precoce e fortalecimento do apego seguro entre mãe e bebê.
+              </p>
+              <div class="course-card-footer">
+                <span class="course-card-meta">Certificado Incluso</span>
+                <button type="button" class="btn btn-primary btn-open-enroll" data-course="Acolhimento e Vínculo Materno-Infantil" style="padding:7px 14px;font-size:.78rem">
+                  Inscrever-se
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Curso 03 -->
+          <article class="course-card reveal d2">
+            <div class="course-thumb-ph">
+              <span class="course-thumb-badge" style="border-left: 3px solid var(--orange)">Juventude</span>
+              <div class="course-thumb-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <span class="course-thumb-meta">45 horas · 100% Online</span>
+            </div>
+            <div class="course-card-content">
+              <span class="course-cat-tag">Liderança & Mentoria</span>
+              <h3 class="course-card-title">Liderança Servidora e Protagonismo Jovem</h3>
+              <p class="course-card-desc">
+                Estratégias de mentoria e facilitação de grupos para adolescentes. Desenvolvimento de resiliência, liderança comunitária, projeto de vida e transição para o mercado profissional.
+              </p>
+              <div class="course-card-footer">
+                <span class="course-card-meta">Certificado Incluso</span>
+                <button type="button" class="btn btn-primary btn-open-enroll" data-course="Liderança Servidora e Protagonismo Jovem" style="padding:7px 14px;font-size:.78rem">
+                  Inscrever-se
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Curso 04 -->
+          <article class="course-card reveal">
+            <div class="course-thumb-ph">
+              <span class="course-thumb-badge" style="border-left: 3px solid var(--green)">Discipulado</span>
+              <div class="course-thumb-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <span class="course-thumb-meta">25 horas · 100% Online</span>
+            </div>
+            <div class="course-card-content">
+              <span class="course-cat-tag">Formação Bíblica e Espiritual</span>
+              <h3 class="course-card-title">Discipulado e Educação Bíblica Criativa</h3>
+              <p class="course-card-desc">
+                Metodologias pedagógicas dinâmicas para educadores cristãos ensinarem a Palavra de Deus às crianças de maneira cativante, amorosa e contextualizada.
+              </p>
+              <div class="course-card-footer">
+                <span class="course-card-meta">Certificado Incluso</span>
+                <button type="button" class="btn btn-primary btn-open-enroll" data-course="Discipulado e Educação Bíblica Criativa" style="padding:7px 14px;font-size:.78rem">
+                  Inscrever-se
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Curso 05 -->
+          <article class="course-card reveal d1">
+            <div class="course-thumb-ph">
+              <span class="course-thumb-badge" style="border-left: 3px solid var(--teal)">Gestão Social</span>
+              <div class="course-thumb-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <span class="course-thumb-meta">35 horas · 100% Online</span>
+            </div>
+            <div class="course-card-content">
+              <span class="course-cat-tag">Igrejas e Projetos Locais</span>
+              <h3 class="course-card-title">Gestão e Sustentabilidade de Projetos Sociais</h3>
+              <p class="course-card-desc">
+                Governança sem fins lucrativos, gestão financeira e contábil transparente, organização de equipes voluntárias e planejamento de longo prazo para projetos com crianças.
+              </p>
+              <div class="course-card-footer">
+                <span class="course-card-meta">Certificado Incluso</span>
+                <button type="button" class="btn btn-primary btn-open-enroll" data-course="Gestão e Sustentabilidade de Projetos Sociais" style="padding:7px 14px;font-size:.78rem">
+                  Inscrever-se
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Curso 06 -->
+          <article class="course-card reveal d2">
+            <div class="course-thumb-ph">
+              <span class="course-thumb-badge" style="border-left: 3px solid var(--yellow)">Saúde Mental</span>
+              <div class="course-thumb-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+              </div>
+              <span class="course-thumb-meta">30 horas · 100% Online</span>
+            </div>
+            <div class="course-card-content">
+              <span class="course-cat-tag">Apoio Emocional</span>
+              <h3 class="course-card-title">Cuidado Pós-Trauma e Saúde Emocional</h3>
+              <p class="course-card-desc">
+                Abordagem sensível e orientada por princípios científicos e bíblicos para acolher crianças em sofrimento emocional, perdas e situações de vulnerabilidade aguda.
+              </p>
+              <div class="course-card-footer">
+                <span class="course-card-meta">Certificado Incluso</span>
+                <button type="button" class="btn btn-primary btn-open-enroll" data-course="Cuidado Pós-Trauma e Saúde Emocional" style="padding:7px 14px;font-size:.78rem">
+                  Inscrever-se
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO DE INSCRIÇÃO DIRETA
+         ═══════════════════════════════════════════════ -->
+    <section class="section section-dark" id="inscricao">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- Lado esquerdo: informações -->
+          <div class="contact-text reveal">
+            <div class="section-eyebrow" style="color:var(--yellow)">
+              <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+              Matrícula e Cadastro
+            </div>
+            <h2 class="contact-heading" style="color:var(--white)">
+              Comece sua<br><span style="color:var(--yellow)">jornada de capacitação</span><br>hoje mesmo
+            </h2>
+            <p class="contact-desc" style="color:rgba(255,255,255,0.75)">
+              Nossos cursos são disponibilizados gratuitamente para colaboradores, pastores e voluntários de igrejas parceiras da Compassion do Brasil. Preencha seus dados para solicitar acesso imediato à plataforma.
+            </p>
+
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:28px">
+              <li style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:.92rem">
+                <span style="color:var(--green);font-size:1.1rem;font-weight:900">✓</span> Acesso a videoaulas, manuais práticos e cartilhas em PDF
+              </li>
+              <li style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:.92rem">
+                <span style="color:var(--green);font-size:1.1rem;font-weight:900">✓</span> Tutoria e suporte com a equipe técnica da Compassion Brasil
+              </li>
+              <li style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:.92rem">
+                <span style="color:var(--green);font-size:1.1rem;font-weight:900">✓</span> Certificado de conclusão nominal validado
+              </li>
+            </ul>
+          </div>
+
+          <!-- Lado direito: formulário de inscrição -->
+          <div class="contact-form-col reveal d1">
+            <div style="background:var(--white);border-radius:var(--r-lg);padding:36px;box-shadow:var(--sh-lg)">
+              
+              <h3 style="font-size:1.35rem;font-weight:800;color:var(--dark);margin-bottom:6px">Formulário de Inscrição</h3>
+              <p style="font-size:.85rem;color:var(--g500);margin-bottom:24px">Preencha com seus dados para liberar seu acesso à plataforma.</p>
+
+              <form class="contact-form" id="pageEnrollForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="pageEnrollName" style="color:var(--dark)">Nome completo</label>
+                    <input type="text" id="pageEnrollName" required placeholder="Seu nome" style="border:1.5px solid var(--g300)">
+                  </div>
+                  <div class="form-group">
+                    <label for="pageEnrollEmail" style="color:var(--dark)">E-mail institucional/pessoal</label>
+                    <input type="email" id="pageEnrollEmail" required placeholder="seu@email.com" style="border:1.5px solid var(--g300)">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="pageEnrollPhone" style="color:var(--dark)">WhatsApp</label>
+                    <input type="tel" id="pageEnrollPhone" required placeholder="(00) 00000-0000" style="border:1.5px solid var(--g300)">
+                  </div>
+                  <div class="form-group">
+                    <label for="pageEnrollChurch" style="color:var(--dark)">Igreja / Organização</label>
+                    <input type="text" id="pageEnrollChurch" required placeholder="Nome da igreja ou projeto" style="border:1.5px solid var(--g300)">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="pageEnrollCourse" style="color:var(--dark)">Curso de interesse</label>
+                  <select id="pageEnrollCourse" required style="width:100%;padding:14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
+                    <option value="">Selecione o curso desejado...</option>
+                    <option value="Oficial de Proteção e Salvaguarda Infantil">Oficial de Proteção e Salvaguarda Infantil</option>
+                    <option value="Acolhimento e Vínculo Materno-Infantil">Acolhimento e Vínculo Materno-Infantil (0 a 5 anos)</option>
+                    <option value="Liderança Servidora e Protagonismo Jovem">Liderança Servidora e Protagonismo Jovem</option>
+                    <option value="Discipulado e Educação Bíblica Criativa">Discipulado e Educação Bíblica Criativa</option>
+                    <option value="Gestão e Sustentabilidade de Projetos Sociais">Gestão e Sustentabilidade de Projetos Sociais</option>
+                    <option value="Cuidado Pós-Trauma e Saúde Emocional">Cuidado Pós-Trauma e Saúde Emocional</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:10px">
+                  Confirmar Inscrição Gratuita →
+                </button>
+              </form>
+
+              <!-- Mensagem de confirmação pós-envio -->
+              <div id="pageEnrollSuccess" style="display:none;text-align:center;padding:24px 10px">
+                <div style="width:54px;height:54px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px">✓</div>
+                <h4 style="font-size:1.25rem;font-weight:800;color:var(--dark);margin-bottom:8px">Inscrição Confirmada!</h4>
+                <p style="font-size:.9rem;color:var(--g700);line-height:1.6">
+                  Seus dados foram registrados com sucesso. Enviamos as instruções de acesso para o e-mail informado.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       MODAL DE INSCRIÇÃO RÁPIDA
+       ═══════════════════════════════════════════════ -->
+  <div class="course-enroll-modal" id="courseEnrollModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="course-enroll-card">
+      <button class="course-enroll-close" id="closeEnrollModal" aria-label="Fechar modal">&times;</button>
+      
+      <h3 id="modalTitle" style="font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:6px">Inscrição no Curso</h3>
+      <p style="font-size:.85rem;color:var(--g500);margin-bottom:24px">Complete os campos abaixo para iniciar sua capacitação.</p>
+
+      <form id="enrollForm">
+        <div class="form-group" style="margin-bottom:16px">
+          <label style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Curso Escolhido</label>
+          <input type="text" id="enrollCourseSelect" readonly style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--g100);font-weight:600">
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px">
+          <label for="mName" style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Nome Completo</label>
+          <input type="text" id="mName" required placeholder="Seu nome" style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300)">
+        </div>
+
+        <div class="form-group" style="margin-bottom:16px">
+          <label for="mEmail" style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Seu E-mail</label>
+          <input type="email" id="mEmail" required placeholder="seu@email.com" style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300)">
+        </div>
+
+        <div class="form-group" style="margin-bottom:24px">
+          <label for="mPhone" style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Telefone / WhatsApp</label>
+          <input type="tel" id="mPhone" required placeholder="(00) 00000-0000" style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300)">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
+          Confirmar e Começar →
+        </button>
+      </form>
+
+      <div id="enrollSuccess" style="display:none;text-align:center;padding:24px 10px">
+        <div style="width:52px;height:52px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px">✓</div>
+        <h4 style="font-size:1.2rem;font-weight:800;color:var(--dark);margin-bottom:8px">Inscrição Realizada com Sucesso!</h4>
+        <p style="font-size:.88rem;color:var(--g700);line-height:1.6">
+          Verifique sua caixa de entrada para acessar a plataforma de aulas.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════ -->
+  <footer class="site-footer" aria-labelledby="footerHeading">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="logo-wrap" style="margin-bottom:12px">
+            <img src="assets/logo/logo_branco_white.svg" alt="Compassion Brasil" class="footer-logo-img">
+          </div>
+          <div class="footer-logo-threads" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <p class="footer-brand-text">
+            Libertando crianças da pobreza em nome de Jesus, conectando-as a igrejas locais parceiras em todo o Brasil.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5 id="footerHeading">Programas</h5>
+          <ul>
+            <li><a href="index.html#programas">Desenvolvimento da Criança</a></li>
+            <li><a href="index.html#programas">Proteção e Cuidado</a></li>
+            <li><a href="index.html#programas">Fortalecimento Familiar</a></li>
+            <li><a href="index.html#programas">Liderança Jovem</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Cursos</h5>
+          <ul>
+            <li><a href="cursos.html">Catálogo de Cursos</a></li>
+            <li><a href="cursos.html#catalogo">Trilhas de Proteção</a></li>
+            <li><a href="cursos.html#inscricao">Inscrição & Certificados</a></li>
+            <li><a href="cursos.html#inscricao">Para Igrejas Parceiras</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contato</h5>
+          <ul>
+            <li><a href="mailto:brasil@compassion.com">brasil@compassion.com</a></li>
+            <li><a href="index.html#apadrinhar">Fale Conosco</a></li>
+            <li><a href="#">Imprensa</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2025 Compassion Brasil. Todos os direitos reservados.</span>
+        <span>CNPJ 00.000.000/0001-00</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Listener adicional para o formulário da página cursos.html
+    const pageForm = document.getElementById('pageEnrollForm');
+    const pageSuccess = document.getElementById('pageEnrollSuccess');
+    if (pageForm && pageSuccess) {
+      pageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        pageForm.style.display = 'none';
+        pageSuccess.style.display = 'block';
+      });
+    }
+  </script>
+
+</body>
+
+</html>

@@ -153,27 +153,110 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ── 8. DASHBOARD TABS ── */
-  const dashTabs = document.querySelectorAll(".dash-tab");
-  const dashData = {
-    geral:        { num: "1.240", lbl: "Líderes capacitados no trimestre" },
-    trilhas:      { num: "14",    lbl: "Trilhas de formação ativas" },
-    certificados: { num: "387",   lbl: "Certificados emitidos este mês" }
-  };
+  /* ── 8. CATÁLOGO DE CURSOS — SCROLL HORIZONTAL & DRAG-TO-SCROLL ── */
+  const coursesTrack = document.getElementById("coursesTrack");
+  const btnPrev = document.getElementById("coursesPrev");
+  const btnNext = document.getElementById("coursesNext");
 
-  dashTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      dashTabs.forEach(t => { t.classList.remove("active"); t.setAttribute("aria-selected", false); });
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", true);
+  if (coursesTrack) {
+    if (btnPrev && btnNext) {
+      btnPrev.addEventListener("click", () => {
+        coursesTrack.scrollBy({ left: -360, behavior: "smooth" });
+      });
+      btnNext.addEventListener("click", () => {
+        coursesTrack.scrollBy({ left: 360, behavior: "smooth" });
+      });
+    }
 
-      const data = dashData[tab.dataset.tab];
-      const numEl = document.getElementById("dashBigNum");
-      const lblEl = document.getElementById("dashBigLbl");
-      if (numEl && data) { numEl.textContent = data.num; }
-      if (lblEl && data) { lblEl.textContent = data.lbl; }
+    // Funcionalidade de clicar e arrastar com o mouse (Drag to Scroll)
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+    let hasDragged = false;
+
+    coursesTrack.addEventListener("mousedown", (e) => {
+      if (e.target.closest("a, button")) return;
+      isDown = true;
+      hasDragged = false;
+      coursesTrack.classList.add("is-dragging");
+      startX = e.pageX - coursesTrack.offsetLeft;
+      scrollStart = coursesTrack.scrollLeft;
     });
-  });
+
+    coursesTrack.addEventListener("mouseleave", () => {
+      if (isDown) {
+        isDown = false;
+        coursesTrack.classList.remove("is-dragging");
+      }
+    });
+
+    window.addEventListener("mouseup", () => {
+      if (isDown) {
+        isDown = false;
+        coursesTrack.classList.remove("is-dragging");
+      }
+    });
+
+    coursesTrack.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - coursesTrack.offsetLeft;
+      const walk = (x - startX) * 1.6;
+      if (Math.abs(walk) > 5) hasDragged = true;
+      coursesTrack.scrollLeft = scrollStart - walk;
+    });
+
+    // Previne clique acidental ao soltar se estiver arrastando
+    coursesTrack.addEventListener("click", (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+
+  /* ── 8.1 MODAL DE INSCRIÇÃO EM CURSOS (cursos.html) ── */
+  const enrollModal = document.getElementById("courseEnrollModal");
+  const enrollCourseSelect = document.getElementById("enrollCourseSelect");
+  const openEnrollBtns = document.querySelectorAll(".btn-open-enroll");
+  const closeEnrollBtn = document.getElementById("closeEnrollModal");
+
+  if (enrollModal) {
+    openEnrollBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const courseName = btn.dataset.course;
+        if (enrollCourseSelect && courseName) {
+          enrollCourseSelect.value = courseName;
+        }
+        enrollModal.classList.add("open");
+      });
+    });
+
+    if (closeEnrollBtn) {
+      closeEnrollBtn.addEventListener("click", () => {
+        enrollModal.classList.remove("open");
+      });
+    }
+
+    enrollModal.addEventListener("click", (e) => {
+      if (e.target === enrollModal) {
+        enrollModal.classList.remove("open");
+      }
+    });
+
+    const enrollForm = document.getElementById("enrollForm");
+    if (enrollForm) {
+      enrollForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const successEl = document.getElementById("enrollSuccess");
+        if (successEl) {
+          enrollForm.style.display = "none";
+          successEl.style.display = "block";
+        }
+      });
+    }
+  }
 
   /* ── 9. HERO THREAD NAV (tooltip hover já é CSS; click = scroll) ── */
   const heroNavItems = document.querySelectorAll(".hero-nav-item");
