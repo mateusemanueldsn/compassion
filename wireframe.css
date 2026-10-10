@@ -154,9 +154,11 @@ img {
   0% {
     box-shadow: 0 0 0 0 rgba(var(--pulse-r, 26), var(--pulse-g, 95), var(--pulse-b, 255), 0.4);
   }
+
   70% {
     box-shadow: 0 0 0 20px rgba(var(--pulse-r, 26), var(--pulse-g, 95), var(--pulse-b, 255), 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(var(--pulse-r, 26), var(--pulse-g, 95), var(--pulse-b, 255), 0);
   }
@@ -2682,19 +2684,20 @@ img {
   position: fixed;
   z-index: 9999;
   pointer-events: none;
-  background: var(--dark);
-  border: 1.5px solid rgba(26, 95, 255, 0.5);
+  background: #0B1B3D;
+  border: 1.5px solid #1A5FFF;
+  border-left: 4px solid #1A5FFF;
   border-radius: var(--r-sm);
-  padding: 10px 16px;
+  padding: 10px 16px 10px 14px;
   font-size: .82rem;
   color: var(--white);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(26, 95, 255, 0.15);
+  box-shadow: none;
   opacity: 0;
   transform: translateY(6px);
   transition: opacity .18s ease, transform .18s ease;
-  max-width: 260px;
+  max-width: 220px;
   white-space: normal;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .map-tooltip.visible {
@@ -2704,25 +2707,29 @@ img {
 
 .map-tooltip-state {
   font-weight: 700;
-  font-size: .9rem;
-  color: var(--blue);
+  font-size: 1rem;
+  color: #FFFFFF;
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 .map-tooltip-region {
-  font-size: .72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #A0BFFF;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
 
 .map-tooltip-info {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: .8rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: .78rem;
+  margin-top: 4px;
+  display: block;
 }
 
 
@@ -2752,6 +2759,7 @@ img {
     gap: 20px;
   }
 }
+
 /* -- ACCORDION FASES -- */
 .phases-accordion {
   display: flex;
@@ -2759,15 +2767,18 @@ img {
   gap: 16px;
   margin-top: 40px;
 }
+
 .phase-accordion-item {
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--r-md);
   overflow: hidden;
   transition: background 0.3s ease;
 }
+
 .phase-accordion-item:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
 .phase-accordion-title {
   padding: 24px;
   font-size: 1.5rem;
@@ -2777,29 +2788,36 @@ img {
   align-items: center;
   cursor: pointer;
   position: relative;
-  list-style: none; /* Hide default triangle */
+  list-style: none;
+  /* Hide default triangle */
 }
+
 .phase-accordion-title::-webkit-details-marker {
   display: none;
 }
+
 .phase-accordion-line {
   width: 40px;
   height: 4px;
   border-radius: var(--r-pill);
   margin-right: 16px;
 }
+
 .accordion-icon {
   margin-left: auto;
   font-size: 1.8rem;
   font-weight: 300;
   transition: transform 0.3s ease;
 }
+
 details[open] .accordion-icon {
   transform: rotate(45deg);
 }
+
 .phase-accordion-content {
   padding: 0 24px 32px 24px;
 }
+
 .phase-accordion-image {
   width: 100%;
   max-height: 400px;
@@ -2817,6 +2835,7 @@ details[open] .accordion-icon {
   width: 100%;
   margin-top: 40px;
 }
+
 .phases-carousel {
   display: flex;
   overflow-x: auto;
@@ -2826,18 +2845,22 @@ details[open] .accordion-icon {
   padding-bottom: 20px;
   scroll-behavior: smooth;
 }
+
 .phases-carousel::-webkit-scrollbar {
   display: none;
 }
+
 .phase-slide {
   flex: 0 0 100%;
   scroll-snap-align: center;
 }
+
 @media (min-width: 992px) {
   .phase-slide {
     flex: 0 0 75%;
   }
 }
+
 .phase-card {
   background: var(--white);
   color: var(--dark);
@@ -2848,12 +2871,14 @@ details[open] .accordion-icon {
   box-shadow: var(--sh-md);
   height: 100%;
 }
+
 @media (min-width: 768px) {
   .phase-card {
     flex-direction: row;
     min-height: 380px;
   }
 }
+
 .phase-card-left {
   padding: 40px;
   flex: 1;
@@ -2861,6 +2886,7 @@ details[open] .accordion-icon {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .phase-card-right {
   flex: 1;
   background-color: #d1d5db;
@@ -2869,12 +2895,14 @@ details[open] .accordion-icon {
   align-items: center;
   justify-content: center;
 }
+
 .phase-card-left .phase-ed-line {
   width: 40px;
   height: 4px;
   border-radius: var(--r-pill);
   margin-bottom: 12px;
 }
+
 .phase-card-left .phase-ed-title {
   font-size: 1.75rem;
   font-family: var(--font);
@@ -2883,18 +2911,21 @@ details[open] .accordion-icon {
   margin-bottom: 20px;
   line-height: 1.2;
 }
+
 .phase-card-left .phase-ed-desc {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--g700);
   margin-bottom: 0;
 }
+
 .carousel-dots {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 24px;
 }
+
 .carousel-dot {
   width: 12px;
   height: 12px;
@@ -2905,8 +2936,8 @@ details[open] .accordion-icon {
   padding: 0;
   transition: var(--t1);
 }
+
 .carousel-dot.active {
   background: var(--white);
   transform: scale(1.2);
 }
-

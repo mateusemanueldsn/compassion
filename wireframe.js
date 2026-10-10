@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const total = document.body.scrollHeight - window.innerHeight;
       const scrollPct = window.scrollY / total;
       progress.style.width = (scrollPct * 100) + "%";
-      
+
       const colorIndex = Math.min(Math.floor(scrollPct * brandColors.length), brandColors.length - 1);
       progress.style.backgroundColor = brandColors[colorIndex];
     }, { passive: true });
@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
   statItems.forEach(el => statObs.observe(el));
 
   /* ── 5. NAV ACTIVE LINK (IntersectionObserver) ── */
-  const sections  = document.querySelectorAll("section[id]");
-  const navLinks  = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
   const sectionObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -71,76 +71,116 @@ document.addEventListener("DOMContentLoaded", () => {
   sections.forEach(s => sectionObs.observe(s));
 
   /* ── 6. MAPA INTERATIVO — Tooltip nos estados ── */
-  const tooltip    = document.getElementById("mapTooltip");
-  const mapStates  = document.querySelectorAll(".br-state");
+  const tooltip = document.getElementById("mapTooltip");
+  if (tooltip && tooltip.parentElement !== document.body) {
+    document.body.appendChild(tooltip);
+  }
 
-  if (tooltip && mapStates.length) {
+  // Mapeamento direto por ID sem modificar classes CSS
+  const STATE_LABELS = {
+    i1:  { state: "Acre",                region: "Região Norte"    },
+    i3:  { state: "Amapá",               region: "Região Norte"    },
+    i4:  { state: "Amazonas",            region: "Região Norte"    },
+    i11: { state: "Tocantins",           region: "Região Norte"    },
+    i14: { state: "Pará",                region: "Região Norte"    },
+    i22: { state: "Rondônia",            region: "Região Norte"    },
+    i23: { state: "Roraima",             region: "Região Norte"    },
+    i2:  { state: "Alagoas / Sergipe",   region: "Região Nordeste" },
+    i5:  { state: "Bahia",               region: "Região Nordeste" },
+    i6:  { state: "Ceará",               region: "Região Nordeste" },
+    i10: { state: "Maranhão",            region: "Região Nordeste" },
+    i16: { state: "Paraíba",             region: "Região Nordeste" },
+    i17: { state: "Pernambuco",          region: "Região Nordeste" },
+    i18: { state: "Piauí",               region: "Região Nordeste" },
+    i20: { state: "Rio Grande do Norte", region: "Região Nordeste" },
+    i7:  { state: "Distrito Federal",    region: "Região Centro-Oeste" },
+    i8:  { state: "Goiás",               region: "Região Centro-Oeste" },
+    i9:  { state: "Mato Grosso",         region: "Região Centro-Oeste" },
+    i13: { state: "Mato Grosso do Sul",  region: "Região Centro-Oeste" },
+    i12: { state: "Minas Gerais",        region: "Região Sudeste"  },
+    i15: { state: "Rio de Janeiro",      region: "Região Sudeste"  },
+    i19: { state: "São Paulo",           region: "Região Sudeste"  },
+    i24: { state: "Espírito Santo",      region: "Região Sudeste"  },
+    i21: { state: "Rio Grande do Sul",   region: "Região Sul"      },
+    i25: { state: "Santa Catarina",      region: "Região Sul"      },
+  };
+
+  if (tooltip) {
     let tooltipVisible = false;
 
-    function showTooltip(e, stateName, regionName, infoText) {
+    function showMapTooltip(e, stateName, regionName, infoText) {
       tooltip.innerHTML =
         `<span class="map-tooltip-state">${stateName}</span>` +
         `<span class="map-tooltip-region">${regionName}</span>` +
         (infoText ? `<span class="map-tooltip-info">${infoText}</span>` : "");
-      positionTooltip(e);
+      moveMapTooltip(e);
       tooltip.classList.add("visible");
       tooltipVisible = true;
     }
 
-    function positionTooltip(e) {
+    function moveMapTooltip(e) {
       const offset = 16;
       let x = e.clientX + offset;
       let y = e.clientY + offset;
-      // Evita sair da viewport pela direita
-      if (x + 280 > window.innerWidth) x = e.clientX - 280 - offset;
-      // Evita sair da viewport por baixo
+      if (x + 280 > window.innerWidth)  x = e.clientX - 280 - offset;
       if (y + 120 > window.innerHeight) y = e.clientY - 120 - offset;
       tooltip.style.left = x + "px";
       tooltip.style.top  = y + "px";
     }
 
-    function hideTooltip() {
+    function hideMapTooltip() {
       tooltip.classList.remove("visible");
       tooltipVisible = false;
     }
 
-    mapStates.forEach(path => {
-      path.addEventListener("mouseenter", e => {
-        showTooltip(e, path.dataset.state, path.dataset.region, path.dataset.info);
+    // Delegação de evento no SVG root — percorre a árvore DOM até achar o <g id="iX">
+    const mapSvg = document.getElementById("brazilMap");
+    if (mapSvg) {
+      mapSvg.style.cursor = "pointer";
+      let lastId = null;
+
+      mapSvg.addEventListener("mousemove", e => {
+        // Sobe pelo DOM a partir do target até achar um <g> com ID no STATE_LABELS
+        let el = e.target;
+        let found = null;
+        while (el && el !== mapSvg) {
+          if (el.id && STATE_LABELS[el.id]) { found = el; break; }
+          el = el.parentNode;
+        }
+        
+        if (found) {
+          if (found.id !== lastId) {
+            lastId = found.id;
+            showMapTooltip(e, STATE_LABELS[found.id].state, STATE_LABELS[found.id].region);
+          } else {
+            moveMapTooltip(e);
+          }
+        } else {
+          lastId = null;
+          hideMapTooltip();
+        }
       });
-      path.addEventListener("mousemove", e => {
-        if (tooltipVisible) positionTooltip(e);
-      });
-      path.addEventListener("mouseleave", hideTooltip);
-      // Acessibilidade: teclado
-      path.setAttribute("tabindex", "0");
-      path.setAttribute("role", "button");
-      path.setAttribute("aria-label", `${path.dataset.state} — ${path.dataset.region}`);
-      path.addEventListener("focus", e => {
-        const rect = path.getBoundingClientRect();
-        const fakeE = { clientX: rect.left + rect.width / 2, clientY: rect.top };
-        showTooltip(fakeE, path.dataset.state, path.dataset.region, path.dataset.info);
-      });
-      path.addEventListener("blur", hideTooltip);
-    });
+
+      mapSvg.addEventListener("mouseleave", () => { lastId = null; hideMapTooltip(); });
+    }
 
     // Pin de sede também mostra tooltip
     const mapPin = document.querySelector(".map-pin");
     if (mapPin) {
       mapPin.setAttribute("tabindex", "0");
       mapPin.addEventListener("mouseenter", e => {
-        showTooltip(e, "Sede Nacional", "Fortaleza, Ceará", "Escritório central da Compassion no Brasil desde 2018");
+        showMapTooltip(e, "Sede Nacional", "Fortaleza, Ceará", "Escritório central da Compassion no Brasil desde 2018");
       });
       mapPin.addEventListener("mousemove", e => {
-        if (tooltipVisible) positionTooltip(e);
+        if (tooltipVisible) moveMapTooltip(e);
       });
-      mapPin.addEventListener("mouseleave", hideTooltip);
+      mapPin.addEventListener("mouseleave", hideMapTooltip);
     }
   }
 
   /* ── 7. PROGRAM FILTER TABS ── */
-  const filterTabs  = document.querySelectorAll(".filter-tab");
-  const progCards   = document.querySelectorAll(".prog-card");
+  const filterTabs = document.querySelectorAll(".filter-tab");
+  const progCards = document.querySelectorAll(".prog-card");
 
   filterTabs.forEach(tab => {
     tab.addEventListener("click", () => {
@@ -151,9 +191,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const filter = tab.dataset.filter;
       progCards.forEach(card => {
         const match = filter === "all" || card.dataset.category === filter;
-        card.style.opacity   = match ? "1"       : "0.25";
+        card.style.opacity = match ? "1" : "0.25";
         card.style.transform = match ? "scale(1)" : "scale(0.97)";
-        card.style.pointerEvents = match ? "auto"  : "none";
+        card.style.pointerEvents = match ? "auto" : "none";
       });
     });
   });
@@ -290,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ── 11. CURSOR CUSTOMIZADO (skipping.svg) ── */
-  const cursorEl   = document.getElementById("customCursor");
+  const cursorEl = document.getElementById("customCursor");
   const cursorPath = document.getElementById("cursorPath");
 
   // Seções de fundo escuro — cursor vira branco
@@ -342,28 +382,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-  /* -- 7. CAROUSEL DE FASES -- */
-  const carousel = document.getElementById("phasesCarousel");
-  const dots = document.querySelectorAll("#phasesDots .carousel-dot");
-  if (carousel && dots.length > 0) {
-    const slides = carousel.querySelectorAll(".phase-slide");
-    
-    // Atualiza os dots baseado no scroll
-    carousel.addEventListener("scroll", () => {
-      let index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-      });
-    }, { passive: true });
+/* -- 7. CAROUSEL DE FASES -- */
+const carousel = document.getElementById("phasesCarousel");
+const dots = document.querySelectorAll("#phasesDots .carousel-dot");
+if (carousel && dots.length > 0) {
+  const slides = carousel.querySelectorAll(".phase-slide");
 
-    // Clica no dot para scrollar
+  // Atualiza os dots baseado no scroll
+  carousel.addEventListener("scroll", () => {
+    let index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
     dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        carousel.scrollTo({
-          left: i * carousel.offsetWidth,
-          behavior: "smooth"
-        });
+      dot.classList.toggle("active", i === index);
+    });
+  }, { passive: true });
+
+  // Clica no dot para scrollar
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      carousel.scrollTo({
+        left: i * carousel.offsetWidth,
+        behavior: "smooth"
       });
     });
-  }
+  });
+}
 
