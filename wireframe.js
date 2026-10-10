@@ -7,9 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ── 1. SCROLL PROGRESS BAR ── */
   const progress = document.getElementById("scrollProgress");
   if (progress) {
+    const brandColors = ["var(--blue)", "var(--green)", "var(--yellow)", "var(--orange)", "var(--teal)"];
     window.addEventListener("scroll", () => {
       const total = document.body.scrollHeight - window.innerHeight;
-      progress.style.width = (window.scrollY / total * 100) + "%";
+      const scrollPct = window.scrollY / total;
+      progress.style.width = (scrollPct * 100) + "%";
+      
+      const colorIndex = Math.min(Math.floor(scrollPct * brandColors.length), brandColors.length - 1);
+      progress.style.backgroundColor = brandColors[colorIndex];
     }, { passive: true });
   }
 
@@ -308,7 +313,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
-          cursorEl.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+          cursorEl.style.transform = `translate(${mouseX - 12}px, ${mouseY - 12}px)`;
+          if (!cursorEl.classList.contains("visible")) {
+            cursorEl.classList.add("visible");
+          }
           rafId = null;
         });
       }
@@ -320,6 +328,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isDark !== isDarkMode) {
           isDarkMode = isDark;
           cursorPath.setAttribute("fill", isDark ? "#FFFFFF" : "#1A5FFF");
+          document.documentElement.style.setProperty("--pulse-r", isDark ? "255" : "26");
+          document.documentElement.style.setProperty("--pulse-g", isDark ? "255" : "95");
+          document.documentElement.style.setProperty("--pulse-b", isDark ? "255" : "255");
         }
       }
     });
@@ -329,4 +340,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+  /* -- 7. CAROUSEL DE FASES -- */
+  const carousel = document.getElementById("phasesCarousel");
+  const dots = document.querySelectorAll("#phasesDots .carousel-dot");
+  if (carousel && dots.length > 0) {
+    const slides = carousel.querySelectorAll(".phase-slide");
+    
+    // Atualiza os dots baseado no scroll
+    carousel.addEventListener("scroll", () => {
+      let index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }, { passive: true });
+
+    // Clica no dot para scrollar
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        carousel.scrollTo({
+          left: i * carousel.offsetWidth,
+          behavior: "smooth"
+        });
+      });
+    });
+  }
 

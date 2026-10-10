@@ -31,7 +31,7 @@
     <div class="header-inner">
       <!-- Logo oficial Compassion Brasil -->
       <a href="#" class="logo-wrap" aria-label="Compassion Brasil - Home">
-        <img src="assets/logo/logo_branco.svg" alt="Compassion Brasil" class="header-logo-img">
+        <img src="assets/logo/logo_azul.svg" alt="Compassion Brasil" class="header-logo-img">
       </a>
 
       <nav aria-label="Navegação principal">
@@ -113,7 +113,8 @@
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a href="#quem-somos-video" class="btn btn-ghost" id="heroCta2">
+            <a href="https://www.youtube.com/watch?v=Cas6bKgTXHI"
+              target="_blank" rel="noopener noreferrer" class="btn btn-ghost" id="heroCta2">
               ▶ Assistir Vídeo
             </a>
           </div>
@@ -126,23 +127,22 @@
             <span></span><span></span><span></span><span></span><span></span>
           </div>
 
-          <!-- Imagem real da criança no projeto com overlay harmônico -->
+          <!-- Vídeo institucional YouTube em loop como fundo -->
           <div class="hero-img-bg">
-            <img src="assets/images/CC-BR040700645-MyNewSong-13-2211.jpg"
-              alt="Criança sorridente tocando violino em projeto parceiro da Compassion Brasil" class="hero-img-photo">
+            <iframe
+              class="hero-video-bg"
+              src="https://www.youtube.com/embed/Cas6bKgTXHI?autoplay=1&mute=1&loop=1&playlist=Cas6bKgTXHI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
+              title="Vídeo institucional Compassion Brasil"
+              frameborder="0"
+              allow="autoplay; encrypted-media"
+              aria-hidden="true"
+            ></iframe>
+            <!-- Overlay que bloqueia toda a UI do YouTube -->
+            <div class="hero-video-overlay" aria-hidden="true"></div>
             <div class="hero-img-gradient"></div>
           </div>
 
-          <!-- Card flutuante com stats -->
-          <div class="hero-float-card" aria-label="Estatística de impacto">
-            <div class="fcard-threads" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="fcard-info">
-              <div class="big">+2.800</div>
-              <div class="lbl">crianças impactadas</div>
-            </div>
-          </div>
+
         </div>
 
       </div>
@@ -155,14 +155,14 @@
       <div class="container">
         <div class="stats-grid" id="statsGrid">
 
-          <div class="stat-item reveal" data-target="70000" data-suffix="">
-            <div class="stat-num" data-count="70000" data-prefix="" data-sfx=" mil+">70 mil+</div>
-            <p class="stat-lbl">Crianças e jovens<br>beneficiados</p>
+          <div class="stat-item reveal" data-target="60000" data-suffix="">
+            <div class="stat-num" data-count="60000" data-prefix="+" data-sfx="mil">&plus;60mil</div>
+            <p class="stat-lbl">Crianças e jovens<br>participantes</p>
           </div>
 
           <div class="stat-item reveal d1" data-target="200">
             <div class="stat-num" data-count="200" data-prefix="+" data-sfx="">+200</div>
-            <p class="stat-lbl">Organizações e igrejas<br>parceiras</p>
+            <p class="stat-lbl">Organizações, igrejas e<br>parceiras</p>
           </div>
 
           <div class="stat-item reveal d2" data-target="145">
@@ -191,36 +191,66 @@
           </div>
           <h2 class="section-title" id="comoTrabalhamosHeading">As 4 fases da nossa<br>Atuação</h2>
           <p class="section-subtitle" style="margin-left: 0; max-width: 600px; color: rgba(255,255,255,0.7);">
-            Acompanhamos a criança desde a gestação até a juventude, garantindo suporte adequado às necessidades específicas de cada fase da vida.
+            Acompanhamos a criança desde a gestação até a juventude, garantindo suporte adequado às necessidades
+            específicas de cada fase da vida.
           </p>
         </div>
 
-        <div class="phases-editorial-grid">
+        <div class="phases-carousel-wrapper reveal">
+          <div class="phases-carousel" id="phasesCarousel">
+            
+            <div class="phase-slide">
+              <div class="phase-card">
+                <div class="phase-card-left">
+                  <div class="phase-ed-line" style="background:var(--yellow)"></div>
+                  <h3 class="phase-ed-title">Sobrevivência</h3>
+                  <p class="phase-ed-desc">Acompanhamos mães e bebês desde a gestação até o 1º ano, oferecendo suporte prático em saúde, proteção e amamentação.</p>
+                </div>
+                <div class="phase-card-right"></div>
+              </div>
+            </div>
+
+            <div class="phase-slide">
+              <div class="phase-card">
+                <div class="phase-card-left">
+                  <div class="phase-ed-line" style="background:var(--blue)"></div>
+                  <h3 class="phase-ed-title">Primeira Infância</h3>
+                  <p class="phase-ed-desc">A partir dos três anos, a criança inicia a transição para as atividades desenvolvidas em centros parceiros da Compassion. As ações têm como foco a promoção do desenvolvimento integral na primeira infância, contemplando experiências voltadas ao fortalecimento das habilidades motoras, cognitivas, socioemocionais e de linguagem, por meio de atividades lúdicas em ambientes seguros e acolhedores. Também inclui ações de educação não formal, saúde e nutrição, fortalecimento de vínculos familiares e comunitários, além da formação espiritual.</p>
+                </div>
+                <div class="phase-card-right"></div>
+              </div>
+            </div>
+
+            <div class="phase-slide">
+              <div class="phase-card">
+                <div class="phase-card-left">
+                  <div class="phase-ed-line" style="background:var(--green)"></div>
+                  <h3 class="phase-ed-title">Infância</h3>
+                  <p class="phase-ed-desc">O programa é ofertado em espaços seguros e acolhedores dos centros parceiros e adaptado às necessidades de cada criança, promovendo o estímulo ao desenvolvimento cognitivo, da convivência, da formação da identidade e formação espiritual. Também explora oportunidades para o desenvolvimento da autonomia, o compartilhamento e a solidariedade com o próximo e a formação de cidadãos responsáveis em suas famílias e comunidades, além da promoção do bem-estar físico, mental e social.</p>
+                </div>
+                <div class="phase-card-right"></div>
+              </div>
+            </div>
+
+            <div class="phase-slide">
+              <div class="phase-card">
+                <div class="phase-card-left">
+                  <div class="phase-ed-line" style="background:var(--orange)"></div>
+                  <h3 class="phase-ed-title">Juventude</h3>
+                  <p class="phase-ed-desc">Etapa fundamental para apoiar adolescentes e jovens em sua transição para a vida adulta, promovendo desenvolvimento integral, autonomia, protagonismo e ampliação de oportunidades. Nossa Estratégia de Desenvolvimento Holístico está baseada em liderança servidora, mentoria e formação integral. Os participantes são incentivados a construir seus projetos de vida, ampliar suas perspectivas de futuro, reconhecer e desenvolver seus talentos e potencialidades dados por Deus, exercer a cidadania e atuar como agentes de transformação em suas famílias e comunidades.</p>
+                </div>
+                <div class="phase-card-right"></div>
+              </div>
+            </div>
+
+          </div>
           
-          <div class="phase-ed-item reveal d1">
-            <div class="phase-ed-line" style="background:var(--yellow)"></div>
-            <h3 class="phase-ed-title">Sobrevivência</h3>
-            <p class="phase-ed-desc">Acompanhamos mães e bebês desde a gestação até o 1º ano, oferecendo suporte prático em saúde, proteção e amamentação.</p>
+          <div class="carousel-dots" id="phasesDots">
+            <button class="carousel-dot active" aria-label="Slide 1"></button>
+            <button class="carousel-dot" aria-label="Slide 2"></button>
+            <button class="carousel-dot" aria-label="Slide 3"></button>
+            <button class="carousel-dot" aria-label="Slide 4"></button>
           </div>
-
-          <div class="phase-ed-item reveal d2">
-            <div class="phase-ed-line" style="background:var(--blue)"></div>
-            <h3 class="phase-ed-title">Primeira Infância</h3>
-            <p class="phase-ed-desc">A partir dos três anos, a criança inicia a transição para as atividades desenvolvidas em centros parceiros da Compassion. As ações têm como foco a promoção do desenvolvimento integral na primeira infância, contemplando experiências voltadas ao fortalecimento das habilidades motoras, cognitivas, socioemocionais e de linguagem, por meio de atividades lúdicas em ambientes seguros e acolhedores. Também inclui ações de educação não formal, saúde e nutrição, fortalecimento de vínculos familiares e comunitários, além da formação espiritual.</p>
-          </div>
-
-          <div class="phase-ed-item reveal d3" style="margin-top: 40px;">
-            <div class="phase-ed-line" style="background:var(--green)"></div>
-            <h3 class="phase-ed-title">Infância</h3>
-            <p class="phase-ed-desc">O programa é ofertado em espaços seguros e acolhedores dos centros parceiros e adaptado às necessidades de cada criança, promovendo o estímulo ao desenvolvimento cognitivo, da convivência, da formação da identidade e formação espiritual. Também explora oportunidades para o desenvolvimento da autonomia, o compartilhamento e a solidariedade com o próximo e a formação de cidadãos responsáveis em suas famílias e comunidades, além da promoção do bem-estar físico, mental e social.</p>
-          </div>
-
-          <div class="phase-ed-item reveal d4" style="margin-top: 40px;">
-            <div class="phase-ed-line" style="background:var(--orange)"></div>
-            <h3 class="phase-ed-title">Juventude</h3>
-            <p class="phase-ed-desc">Etapa fundamental para apoiar adolescentes e jovens em sua transição para a vida adulta, promovendo desenvolvimento integral, autonomia, protagonismo e ampliação de oportunidades. Nossa Estratégia de Desenvolvimento Holístico está baseada em liderança servidora, mentoria e formação integral. Os participantes são incentivados a construir seus projetos de vida, ampliar suas perspectivas de futuro, reconhecer e desenvolver seus talentos e potencialidades dados por Deus, exercer a cidadania e atuar como agentes de transformação em suas famílias e comunidades.</p>
-          </div>
-
         </div>
       </div>
     </section>
@@ -303,7 +333,8 @@
               <h3 class="card-title">Programa Sobrevivência</h3>
               <p class="card-text">O Programa de Sobrevivência acompanha gestantes e bebês de 0 até 12 meses de vida,
                 promovendo condições para um desenvolvimento saudável desde os primeiros momentos da infância. Por meio
-                de visitas domiciliares e encontros em grupo, as famílias recebem orientação e apoio em temas como saúde,
+                de visitas domiciliares e encontros em grupo, as famílias recebem orientação e apoio em temas como
+                saúde,
                 amamentação, proteção e fortalecimento do vínculo entre mãe e bebê.</p>
               <a href="#contato" class="card-link" style="color:var(--blue)">
                 Saiba mais
@@ -329,9 +360,12 @@
               </div>
               <span class="card-tag" style="background:#D1FAE5;color:#065F46">Primeira & Segunda Infância</span>
               <h3 class="card-title">Desenvolvimento Integral</h3>
-              <p class="card-text">A partir dos 3 anos, as crianças participam de atividades que promovem seu desenvolvimento
-                integral em ambientes seguros e acolhedores. As ações que apoiamos através de nossos parceiros fortalecem
-                habilidades cognitivas, socioemocionais, físicas e espirituais, estimulando a aprendizagem, a autonomia, a
+              <p class="card-text">A partir dos 3 anos, as crianças participam de atividades que promovem seu
+                desenvolvimento
+                integral em ambientes seguros e acolhedores. As ações que apoiamos através de nossos parceiros
+                fortalecem
+                habilidades cognitivas, socioemocionais, físicas e espirituais, estimulando a aprendizagem, a autonomia,
+                a
                 convivência, a criatividade e a construção de hábitos saudáveis em cada etapa da infância.</p>
               <a href="https://www.compassion.com/sponsor-a-child/?AgeMaxFilter=22&amp;AgeMinFilter=1&amp;CountryFilter=Peru&amp;ageMax=22&amp;ageMin=1&amp;countries=BR&amp;home_hero=true"
                 target="_blank" rel="noopener noreferrer" class="card-link" style="color:var(--green)">
@@ -358,10 +392,13 @@
               </div>
               <span class="card-tag" style="background:#FFE4E6;color:#9F1239">Juventude</span>
               <h3 class="card-title">Juventude: Protagonismo & Autonomia</h3>
-              <p class="card-text">Incentivamos os jovens a desenvolver seu potencial e assumir papéis de liderança em suas
-                comunidades, fortalecendo habilidades como resiliência, empatia e liderança servidora, cremos na premissa
+              <p class="card-text">Incentivamos os jovens a desenvolver seu potencial e assumir papéis de liderança em
+                suas
+                comunidades, fortalecendo habilidades como resiliência, empatia e liderança servidora, cremos na
+                premissa
                 de que &ldquo;o jovem é o recurso&rdquo; para a transformação social. Por meio de encontros, grupos e
-                mentorias, promovemos autonomia, participação ativa e protagonismo, para que se tornem agentes de transformação
+                mentorias, promovemos autonomia, participação ativa e protagonismo, para que se tornem agentes de
+                transformação
                 em suas próprias vidas e na sociedade.</p>
               <a href="#contato" class="card-link" style="color:var(--orange)">
                 Saiba mais
@@ -388,7 +425,8 @@
               <span class="card-tag" style="background:#CFFAFE;color:#155E75">Infraestrutura & Causas</span>
               <h3 class="card-title">Intervenções Complementares (CIV)</h3>
               <p class="card-text">Por meio de Intervenções Complementares, a Compassion mobiliza recursos para atender
-                necessidades específicas das comunidades (por exemplo: acesso à água potável, laboratórios de informática,
+                necessidades específicas das comunidades (por exemplo: acesso à água potável, laboratórios de
+                informática,
                 resposta a emergências etc), fortalecendo ações de desenvolvimento e ampliando oportunidades para o
                 crescimento integral de crianças e adolescentes.</p>
               <a href="https://compassioncauses.com/en?country=BR#cause-browser" target="_blank"
@@ -2268,23 +2306,26 @@
             </div>
             <h2 class="section-title" id="cursosHeading">Cursos & Formação</h2>
             <p class="section-subtitle">
-              Equipando líderes, educadores, voluntários e igrejas parceiras com ferramentas práticas para proteger,
+              Equipando líderes, educadores, voluntários, igrejas e parceiras com ferramentas práticas para proteger,
               acolher e transformar a vida de crianças e adolescentes.
             </p>
           </div>
 
           <div class="courses-nav-btns">
             <span class="courses-drag-hint">↔ Arraste para navegar</span>
-            <a href="cursos.html" class="btn btn-ghost" style="padding: 10px 20px; font-size: .88rem; font-weight: 700;">
+            <a href="cursos.html" class="btn btn-ghost"
+              style="padding: 10px 20px; font-size: .88rem; font-weight: 700;">
               Ver todos os cursos →
             </a>
             <button class="btn-carousel-nav" id="coursesPrev" aria-label="Curso anterior">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
             <button class="btn-carousel-nav" id="coursesNext" aria-label="Próximo curso">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </button>
@@ -2300,7 +2341,8 @@
               <div class="course-thumb-ph">
                 <span class="course-thumb-badge" style="border-left: 3px solid var(--yellow);">Proteção</span>
                 <div class="course-thumb-center">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                 </div>
@@ -2310,7 +2352,8 @@
                 <span class="course-cat-tag">Salvaguarda & Defesa</span>
                 <h3 class="course-card-title">Oficial de Proteção e Salvaguarda Infantil</h3>
                 <p class="course-card-desc">
-                  Capacitação prática em protocolos institucionais, prevenção de violências, acolhimento e atuação integrada com igrejas locais.
+                  Capacitação prática em protocolos institucionais, prevenção de violências, acolhimento e atuação
+                  integrada com igrejas locais.
                 </p>
                 <div class="course-card-footer">
                   <span class="course-card-meta">Certificado Reconhecido</span>
@@ -2324,7 +2367,8 @@
               <div class="course-thumb-ph">
                 <span class="course-thumb-badge" style="border-left: 3px solid var(--blue);">Mães & Bebês</span>
                 <div class="course-thumb-center">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                 </div>
@@ -2334,7 +2378,8 @@
                 <span class="course-cat-tag">Primeira Infância</span>
                 <h3 class="course-card-title">Cuidado Integral e Vínculo Materno-Infantil</h3>
                 <p class="course-card-desc">
-                  Orientações para acompanhamento de gestantes, aleitamento materno, neurodesenvolvimento e visitas domiciliares humanizadas.
+                  Orientações para acompanhamento de gestantes, aleitamento materno, neurodesenvolvimento e visitas
+                  domiciliares humanizadas.
                 </p>
                 <div class="course-card-footer">
                   <span class="course-card-meta">Certificado Reconhecido</span>
@@ -2348,7 +2393,8 @@
               <div class="course-thumb-ph">
                 <span class="course-thumb-badge" style="border-left: 3px solid var(--orange);">Juventude</span>
                 <div class="course-thumb-center">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                 </div>
@@ -2358,7 +2404,8 @@
                 <span class="course-cat-tag">Protagonismo Jovem</span>
                 <h3 class="course-card-title">Liderança Servidora e Mentoria de Jovens</h3>
                 <p class="course-card-desc">
-                  Ferramentas para equipar adolescentes com inteligência socioemocional, projeto de vida e impacto nas comunidades.
+                  Ferramentas para equipar adolescentes com inteligência socioemocional, projeto de vida e impacto nas
+                  comunidades.
                 </p>
                 <div class="course-card-footer">
                   <span class="course-card-meta">Certificado Reconhecido</span>
@@ -2372,7 +2419,8 @@
               <div class="course-thumb-ph">
                 <span class="course-thumb-badge" style="border-left: 3px solid var(--green);">Discipulado</span>
                 <div class="course-thumb-center">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                 </div>
@@ -2382,7 +2430,8 @@
                 <span class="course-cat-tag">Desenvolvimento Espiritual</span>
                 <h3 class="course-card-title">Discipulado e Educação Bíblica Criativa</h3>
                 <p class="course-card-desc">
-                  Metodologias práticas e amorosas para o ensino bíblico centrado na pessoa de Jesus para crianças em situação de vulnerabilidade.
+                  Metodologias práticas e amorosas para o ensino bíblico centrado na pessoa de Jesus para crianças em
+                  situação de vulnerabilidade.
                 </p>
                 <div class="course-card-footer">
                   <span class="course-card-meta">Certificado Reconhecido</span>
@@ -2396,7 +2445,8 @@
               <div class="course-thumb-ph">
                 <span class="course-thumb-badge" style="border-left: 3px solid var(--teal);">Gestão</span>
                 <div class="course-thumb-center">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                 </div>
@@ -2406,7 +2456,8 @@
                 <span class="course-cat-tag">Igrejas Parceiras</span>
                 <h3 class="course-card-title">Gestão de Projetos Sociais Comunitários</h3>
                 <p class="course-card-desc">
-                  Governança responsável, transparência, mobilização de voluntários locais e mensuração de impacto transformador.
+                  Governança responsável, transparência, mobilização de voluntários locais e mensuração de impacto
+                  transformador.
                 </p>
                 <div class="course-card-footer">
                   <span class="course-card-meta">Certificado Reconhecido</span>
@@ -2486,6 +2537,15 @@
                 </svg>
                 <span><a href="https://instagram.com/compassionbrasil" target="_blank" rel="noopener noreferrer"
                     style="color:var(--dark);">@compassionbrasil</a></span>
+              </div>
+              <div class="contact-info-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
+                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                </svg>
+                <span><a href="https://www.youtube.com/@compassiondobrasil" target="_blank" rel="noopener noreferrer"
+                    style="color:var(--dark);">@compassiondobrasil</a></span>
               </div>
             </div>
           </div>
@@ -2578,7 +2638,7 @@
             <li><a href="cursos.html">Catálogo de Cursos</a></li>
             <li><a href="cursos.html#categoria-protecao">Trilhas de Proteção</a></li>
             <li><a href="cursos.html#inscricao">Inscrição & Certificados</a></li>
-            <li><a href="cursos.html#categoria-igrejas">Para Igrejas Parceiras</a></li>
+            <li><a href="cursos.html#categoria-igrejas">Para Igrejas e Parceiras</a></li>
           </ul>
         </div>
 
@@ -2605,4 +2665,3 @@
 </body>
 
 </html>
-
