@@ -2081,9 +2081,75 @@ img {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 52px;
-  margin-bottom: 52px
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1.3fr;
+  gap: 40px;
+  margin-bottom: 52px;
+}
+
+/* ── SELO MANDALLA & REDES SOCIAIS (FOOTER) ── */
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.footer-social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.25s ease;
+}
+
+.footer-social-btn:hover {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+}
+
+.mandalla-seal-wrap {
+  margin-top: 16px;
+}
+
+.mandalla-seal-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.mandalla-seal-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.mandalla-seal-img {
+  width: 124px;
+  height: auto;
+  display: block;
+}
+
+.mandalla-seal-text {
+  margin-top: 8px;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  transition: color 0.25s ease;
+}
+
+.mandalla-seal-link:hover .mandalla-seal-text {
+  color: var(--white);
 }
 
 .footer-logo-threads {
