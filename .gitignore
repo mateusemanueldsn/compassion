@@ -1,15 +1,18 @@
-# Dependências e caches
+﻿# Dependencias e caches
 node_modules/
 .DS_Store
 Thumbs.db
 
-# Ignorar fotos pesadas de alta resolução para manter o deploy leve no GitHub Pages
-assets/images/
+# Ignorar fotos pesadas de alta resolucao para manter o repositorio e deploy leves
+# Ignora todo o diretorio de imagens, exceto as que sao efetivamente utilizadas no site:
+assets/images/*
+!assets/images/PG23 PROGRAMA SOBREVIVENCIA  OP1.jpg
+!assets/images/CC_BR0524_TheySurvived_13_2307.jpg
+!assets/images/CC_BR_MyHappyPlace_05_2312.jpg
+!assets/images/CC-BR040700645-MyNewSong-13-2211.jpg
+
 backlog/brandbook/
 backlog/inspiracao/
 
-assets/video/V�deo Institucional_Governo.mp4
-
-assets/video/V�deo Institucional_Governo.mp4
-
+assets/video/
 *.mp4
