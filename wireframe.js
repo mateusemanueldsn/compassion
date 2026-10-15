@@ -385,25 +385,85 @@ document.addEventListener("DOMContentLoaded", () => {
 /* -- 7. CAROUSEL DE FASES -- */
 const carousel = document.getElementById("phasesCarousel");
 const dots = document.querySelectorAll("#phasesDots .carousel-dot");
-if (carousel && dots.length > 0) {
+const prevBtn = document.getElementById("phasesPrev");
+const nextBtn = document.getElementById("phasesNext");
+
+if (carousel) {
   const slides = carousel.querySelectorAll(".phase-slide");
 
-  // Atualiza os dots baseado no scroll
-  carousel.addEventListener("scroll", () => {
-    let index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
+  function scrollToSlide(index) {
+    if (!slides[index]) return;
+    const slide = slides[index];
+    const targetLeft = slide.offsetLeft - (carousel.clientWidth - slide.clientWidth) / 2;
+    carousel.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: "smooth"
     });
-  }, { passive: true });
+  }
 
-  // Clica no dot para scrollar
+  function getActiveIndex() {
+    const carouselCenter = carousel.scrollLeft + carousel.clientWidth / 2;
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    slides.forEach((slide, i) => {
+      const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+      const distance = Math.abs(carouselCenter - slideCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    });
+    return closestIndex;
+  }
+
+  function updateCarouselState() {
+    const activeIndex = getActiveIndex();
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === activeIndex);
+    });
+
+    if (prevBtn) {
+      const isStart = activeIndex === 0;
+      prevBtn.disabled = isStart;
+      prevBtn.style.opacity = isStart ? "0.35" : "1";
+      prevBtn.style.cursor = isStart ? "not-allowed" : "pointer";
+    }
+    if (nextBtn) {
+      const isEnd = activeIndex >= slides.length - 1;
+      nextBtn.disabled = isEnd;
+      nextBtn.style.opacity = isEnd ? "0.35" : "1";
+      nextBtn.style.cursor = isEnd ? "not-allowed" : "pointer";
+    }
+  }
+
+  carousel.addEventListener("scroll", updateCarouselState, { passive: true });
+
   dots.forEach((dot, i) => {
     dot.addEventListener("click", () => {
-      carousel.scrollTo({
-        left: i * carousel.offsetWidth,
-        behavior: "smooth"
-      });
+      scrollToSlide(i);
     });
   });
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      const current = getActiveIndex();
+      if (current > 0) {
+        scrollToSlide(current - 1);
+      }
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      const current = getActiveIndex();
+      if (current < slides.length - 1) {
+        scrollToSlide(current + 1);
+      }
+    });
+  }
+
+  // Define estado inicial das setas e dots
+  updateCarouselState();
 }
 

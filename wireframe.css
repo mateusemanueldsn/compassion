@@ -2900,6 +2900,19 @@ details[open] .accordion-icon {
   position: relative;
   width: 100%;
   margin-top: 40px;
+  padding: 0 72px; /* Garante distância segura entre as setas e os cards */
+}
+
+@media (max-width: 991px) {
+  .phases-carousel-wrapper {
+    padding: 0 54px;
+  }
+}
+
+@media (max-width: 600px) {
+  .phases-carousel-wrapper {
+    padding: 0 44px;
+  }
 }
 
 .phases-carousel {
@@ -2923,7 +2936,7 @@ details[open] .accordion-icon {
 
 @media (min-width: 992px) {
   .phase-slide {
-    flex: 0 0 75%;
+    flex: 0 0 80%;
   }
 }
 
@@ -2935,33 +2948,48 @@ details[open] .accordion-icon {
   flex-direction: column;
   overflow: hidden;
   box-shadow: var(--sh-md);
-  height: 100%;
 }
 
 @media (min-width: 768px) {
   .phase-card {
     flex-direction: row;
-    min-height: 380px;
+    height: 380px; /* Altura compacta alinhada com a imagem quadrada */
   }
 }
 
 .phase-card-left {
-  padding: 40px;
-  flex: 1;
+  padding: 32px 36px;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center; /* Centralizado verticalmente para eliminar o padding bottom excessivo */
 }
 
 .phase-card-right {
-  flex: 1;
   background-color: #d1d5db;
-  min-height: 250px;
+  overflow: hidden;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  position: relative;
+}
+
+@media (min-width: 768px) {
+  .phase-card-right {
+    flex: 0 0 380px;
+    width: 380px;
+    height: 380px;
+    aspect-ratio: 1 / 1; /* Formato rigorosamente quadrado no desktop */
+  }
+}
+
+@media (max-width: 767px) {
+  .phase-card-right {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Formato quadrado também no mobile */
+    height: auto;
+    flex: 0 0 auto;
+  }
 }
 
 .phase-card-right img {
@@ -2979,17 +3007,17 @@ details[open] .accordion-icon {
 }
 
 .phase-card-left .phase-ed-title {
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   font-family: var(--font);
   font-weight: 800;
   color: var(--blue);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   line-height: 1.2;
 }
 
 .phase-card-left .phase-ed-desc {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: var(--g700);
   margin-bottom: 0;
 }
@@ -3015,4 +3043,59 @@ details[open] .accordion-icon {
 .carousel-dot.active {
   background: var(--white);
   transform: scale(1.2);
+}
+
+/* -- BOTÕES DE NAVEGAÇÃO LATERAL DO CARROSSEL DE FASES -- */
+.phases-nav-btn {
+  position: absolute;
+  top: calc(50% - 22px);
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--blue);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              background-color 0.2s ease,
+              color 0.2s ease,
+              opacity 0.2s ease;
+}
+
+.phases-nav-btn:hover:not(:disabled) {
+  background: var(--blue);
+  color: var(--white);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(26, 95, 255, 0.5);
+}
+
+.phases-nav-btn:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.phases-nav-btn.phases-prev {
+  left: 6px;
+}
+
+.phases-nav-btn.phases-next {
+  right: 6px;
+}
+
+@media (max-width: 991px) {
+  .phases-nav-btn {
+    width: 42px;
+    height: 42px;
+  }
+  .phases-nav-btn.phases-prev {
+    left: 4px;
+  }
+  .phases-nav-btn.phases-next {
+    right: 4px;
+  }
 }
