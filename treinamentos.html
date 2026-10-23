@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Treinamentos — Compassion Brasil</title>
+  <meta name="description"
+    content="Dashboard corporativo de monitoramento de treinamentos, cursos e capacitações da Compassion Brasil. Painel restrito à equipe de gestão.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Estilos base e fontes oficiais da marca -->
+  <link rel="stylesheet" href="wireframe.css">
+
+  <!-- Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════
+       COMPASSION BRASIL — PAINEL DE TREINAMENTOS CORPORATIVO
+       Design System Oficial Compassion Brasil (Thread-Driven Design)
+       Cores Institucionais: 
+       - Nana's Pool Blue (#1A5FFF / #2A5EEC)
+       - Night Time Blue / Deep Dark Navy (#0F1B35 / #11265E)
+       - Teddy Bear Eggshell / Cream (#F7F4EF / #FCF8F4)
+       - Torch Yellow (#F5C400 / #FDB518)
+       - Gecko Green (#2ABB6E / #499E57)
+       - Cricket Ball Orange (#E8472A / #FB513A)
+       - Coastal Teal (#00B5CC)
+       ═══════════════════════════════════════════════════════════════════ */
+
+    :root {
+      /* Brand Cores Primárias */
+      --c-blue: #1A5FFF;          /* Azul Primário Vibrante Compassion */
+      --c-blue-hover: #1048D9;
+      --c-blue-high: #AABBF7;     /* Mist Blue */
+      --c-blue-mid: #6A8EF2;      /* Rainy Day Blue */
+      --c-blue-subtle: rgba(26, 95, 255, 0.08);
+      --c-blue-dark: #0F1B35;     /* Night Time Blue / Deep Dark Navy Oficial */
+      --c-navy-surface: #152547;  /* Superfície da Sidebar */
+      --c-navy-hover: #1C315C;
+
+      /* Tons Neutros Oficiais */
+      --c-text: #0F1B35;          /* Texto Primário com profundidade */
+      --c-text-muted: #5C677D;    /* Wolf Grey institucional */
+      --c-text-light: #8E98AB;
+      --c-border: #E5E9F2;        /* Divisórias elegantes */
+      --c-border-strong: #D1D8E6;
+      --c-bg-page: #F7F4EF;       /* Cream / Eggshell caloroso da Home */
+      --c-bg-card: #FFFFFF;       /* Fundo dos cartões */
+      --c-bg-subtle: #F0EDE6;     /* Variação quente sutil */
+      --c-bg-input: #FFFFFF;
+
+      /* Threads da Marca (Assinatura Oficial da Home) */
+      --th-blue: #1A5FFF;
+      --th-yellow: #F5C400;
+      --th-green: #2ABB6E;
+      --th-orange: #E8472A;
+      --th-teal: #00B5CC;
+
+      /* Acentos e Categorias (Styleguide) */
+      --c-green: #2ABB6E;
+      --c-green-subtle: #E8F8F0;
+      --c-yellow: #F5C400;
+      --c-yellow-subtle: #FEF9E6;
+      --c-orange: #E8472A;
+      --c-orange-subtle: #FDF0ED;
+      --c-teal: #00B5CC;
+      --c-teal-subtle: #E6F8FA;
+
+      /* Tipografia Oficial (Neighbour Sans) */
+      --font-brand: "Neighbour Sans", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-cond: "Ballinger Condensed", "Neighbour Sans", sans-serif;
+
+      /* Bordas Arredondadas (Zero cantos duros) */
+      --r-app: 24px;
+      --r-card: 20px;
+      --r-item: 14px;
+      --r-sm: 10px;
+      --r-pill: 9999px;
+
+      /* Sombras Quentes & Profundidade */
+      --sh-sidebar: 10px 0 35px rgba(15, 27, 53, 0.08);
+      --sh-card: 0 4px 16px rgba(15, 27, 53, 0.04), 0 1px 3px rgba(15, 27, 53, 0.02);
+      --sh-card-hover: 0 12px 28px rgba(26, 95, 255, 0.09), 0 2px 6px rgba(15, 27, 53, 0.04);
+      --sh-blue: 0 8px 24px rgba(26, 95, 255, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--c-bg-page);
+      color: var(--c-text);
+      font-family: var(--font-brand);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* ── Barra Superior de Threads da Marca (Assinatura Oficial) ── */
+    .brand-top-thread {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      display: flex;
+      z-index: 9999;
+    }
+
+    .brand-top-thread span {
+      flex: 1;
+      height: 100%;
+    }
+
+    .brand-top-thread .th-1 { background: var(--th-blue); }
+    .brand-top-thread .th-2 { background: var(--th-yellow); }
+    .brand-top-thread .th-3 { background: var(--th-green); }
+    .brand-top-thread .th-4 { background: var(--th-orange); }
+    .brand-top-thread .th-5 { background: var(--th-teal); }
+
+    /* ── Frame da Aplicação ── */
+    .app-frame {
+      width: 100%;
+      max-width: 100%;
+      background: var(--c-bg-page);
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      position: relative;
+    }
+
+    /* ══════════════════════════════════════════════
+       SIDEBAR INSTITUCIONAL COMPASSION (DARK NAVY)
+       ══════════════════════════════════════════════ */
+    .app-sidebar {
+      width: 275px;
+      background: linear-gradient(180deg, #0F1B35 0%, #0A1428 100%);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      padding: 24px 20px 20px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      z-index: 100;
+      box-shadow: var(--sh-sidebar);
+    }
+
+    /* Logo Oficial Branco com Bandeira do Brasil */
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 8px 6px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+      position: relative;
+    }
+
+    .sidebar-brand img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .sidebar-brand:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Pequena Tag Institucional */
+    .sidebar-brand-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(245, 196, 0, 0.15);
+      border: 1px solid rgba(245, 196, 0, 0.35);
+      color: var(--th-yellow);
+      font-size: 0.58rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 2px 6px;
+      border-radius: var(--r-pill);
+    }
+
+    .sidebar-nav-group {
+      margin-top: 24px;
+    }
+
+    .sidebar-group-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      padding: 0 12px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sidebar-group-title::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--th-yellow);
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--r-item);
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+      transition: all 0.22s ease;
+      position: relative;
+      border: 1px solid transparent;
+    }
+
+    .sidebar-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.08);
+      transform: translateX(2px);
+    }
+
+    .sidebar-link.active {
+      background: linear-gradient(90deg, var(--c-blue) 0%, #2566FF 100%);
+      color: #FFFFFF;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(26, 95, 255, 0.35);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .sidebar-link.active::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 18px;
+      background: var(--th-yellow);
+      border-radius: 4px;
+    }
+
+    .sidebar-link.logout {
+      margin-top: 12px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .sidebar-link.logout:hover {
+      background: rgba(232, 71, 42, 0.15);
+      color: #FFAAA0;
+      border-color: rgba(232, 71, 42, 0.3);
+    }
+
+    .sidebar-link.logout:hover .sidebar-icon {
+      stroke: #FFAAA0;
+    }
+
+    .sidebar-icon {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      flex-shrink: 0;
+      transition: stroke 0.2s, transform 0.2s;
+    }
+
+    .sidebar-link:hover .sidebar-icon {
+      transform: scale(1.05);
+    }
+
+    .sidebar-badge {
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: var(--r-pill);
+      letter-spacing: 0.3px;
+    }
+
+    .sidebar-badge.green {
+      background: var(--c-green);
+      color: #FFFFFF;
+      font-size: 0.6rem;
+    }
+
+    /* Card Oficial do Moodle LMS no Rodapé da Sidebar */
+    .sidebar-footer-card {
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--r-card);
+      padding: 18px 16px;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+
+    .sidebar-footer-card::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26, 95, 255, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .sfc-tag {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--c-blue-high);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sfc-tag::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-green);
+      box-shadow: 0 0 8px rgba(42, 187, 110, 0.7);
+    }
+
+    .sfc-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      color: #FFFFFF;
+    }
+
+    .sfc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      background: var(--c-blue);
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 9px 14px;
+      border-radius: var(--r-pill);
+      font-size: 0.76rem;
+      font-weight: 700;
+      font-family: var(--font-brand);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(26, 95, 255, 0.3);
+    }
+
+    .sfc-btn:hover {
+      background: var(--c-blue-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(26, 95, 255, 0.4);
+    }
+
+    /* ══════════════════════════════════════════════
+       MAIN CONTENT (ÁREA DE CONTEÚDO PRINCIPAL)
+       ══════════════════════════════════════════════ */
+    .app-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: var(--c-bg-page);
+    }
+
+    /* ── Topbar Institucional ── */
+    .app-topbar {
+      padding: 18px 40px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-search {
+      position: relative;
+      width: 400px;
+    }
+
+    .topbar-search input {
+      width: 100%;
+      padding: 10px 42px 10px 42px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--c-border);
+      background: #FFFFFF;
+      font-family: var(--font-brand);
+      font-size: 0.85rem;
+      color: var(--c-text);
+      outline: none;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(15, 27, 53, 0.03);
+    }
+
+    .topbar-search input:focus {
+      background: #FFFFFF;
+      border-color: var(--c-blue);
+      box-shadow: 0 0 0 3px rgba(26, 95, 255, 0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 17px;
+      height: 17px;
+      stroke: var(--c-text-muted);
+      stroke-width: 2.2;
+      fill: none;
+      pointer-events: none;
+    }
+
+    .search-shortcut {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--c-bg-page);
+      border: 1px solid var(--c-border);
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--c-text-muted);
+      padding: 1px 6px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--c-border);
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--c-text);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(15, 27, 53, 0.03);
+    }
+
+    .topbar-icon-btn:hover {
+      background: #FFFFFF;
+      color: var(--c-blue);
+      border-color: var(--c-blue-high);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(26, 95, 255, 0.12);
+    }
+
+    .topbar-icon-btn .badge-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--c-orange);
+      border: 2px solid #FFFFFF;
+    }
+
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-left: 16px;
+      border-left: 1px solid var(--c-border);
+      text-decoration: none;
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-blue-dark) 0%, #1D356A 100%);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(15, 27, 53, 0.2);
+      border: 2px solid #FFFFFF;
+      position: relative;
+    }
+
+    .user-avatar::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--c-green);
+      border: 2px solid #FFFFFF;
+    }
+
+    .user-info {
+      line-height: 1.3;
+    }
+
+    .user-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--c-text);
+    }
+
+    .user-role {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--c-text-muted);
+    }
+
+    /* ── Header da Página de Treinamentos ── */
+    .dashboard-header {
+      padding: 32px 40px 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .dh-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dh-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--c-text);
+      line-height: 1.15;
+    }
+
+    /* Threads Accent abaixo do Título (Identidade Oficial Compassion Home) */
+    .title-thread-accent {
+      display: flex;
+      gap: 6px;
+      margin: 8px 0 6px;
+      align-items: center;
+    }
+
+    .title-thread-accent span {
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    .title-thread-accent .th-blue { width: 44px; background: var(--th-blue); }
+    .title-thread-accent .th-yellow { width: 28px; background: var(--th-yellow); }
+    .title-thread-accent .th-green { width: 56px; background: var(--th-green); }
+    .title-thread-accent .th-orange { width: 32px; background: var(--th-orange); }
+
+    .dh-sub {
+      font-size: 0.88rem;
+      color: var(--c-text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .dh-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: var(--r-pill);
+      font-size: 0.84rem;
+      font-weight: 700;
+      font-family: var(--font-brand);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-pill-primary {
+      background: var(--c-blue);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(26, 95, 255, 0.25);
+    }
+
+    .btn-pill-primary:hover {
+      background: var(--c-blue-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(26, 95, 255, 0.35);
+    }
+
+    .btn-pill-secondary {
+      background: #FFFFFF;
+      color: var(--c-text);
+      border-color: var(--c-border);
+      box-shadow: 0 2px 6px rgba(15, 27, 53, 0.03);
+    }
+
+    .btn-pill-secondary:hover {
+      background: #FFFFFF;
+      border-color: var(--c-blue);
+      color: var(--c-blue);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15, 27, 53, 0.06);
+    }
+
+    /* ══════════════════════════════════════════════
+       GRID DE METRIC CARDS (4 CARDS SUPERIORES)
+       ══════════════════════════════════════════════ */
+    .metrics-grid {
+      padding: 0 40px 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .metric-card {
+      border-radius: var(--r-card);
+      padding: 24px;
+      position: relative;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 156px;
+      overflow: hidden;
+    }
+
+    /* Linha decorativa de thread no topo do cartão */
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    /* Card 1 em Destaque Oficial: Nana's Pool Blue */
+    .metric-card.featured {
+      background: linear-gradient(135deg, #1A5FFF 0%, #1042B8 100%);
+      color: #FFFFFF;
+      box-shadow: var(--sh-blue);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .metric-card.featured::before {
+      background: var(--th-yellow);
+      opacity: 1;
+      height: 4px;
+    }
+
+    .metric-card.standard {
+      background: #FFFFFF;
+      border: 1px solid var(--c-border);
+      box-shadow: var(--sh-card);
+    }
+
+    .metric-card.standard:hover {
+      border-color: rgba(26, 95, 255, 0.35);
+      box-shadow: var(--sh-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .metric-card.standard.border-green:hover::before {
+      background: var(--c-green);
+      opacity: 1;
+    }
+
+    .metric-card.standard.border-yellow:hover::before {
+      background: var(--c-yellow);
+      opacity: 1;
+    }
+
+    .metric-card.standard.border-teal:hover::before {
+      background: var(--c-teal);
+      opacity: 1;
+    }
+
+    .mc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .mc-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .metric-card.featured .mc-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .metric-card.standard .mc-label {
+      color: var(--c-text-muted);
+    }
+
+    .mc-arrow-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+    }
+
+    .metric-card.featured .mc-arrow-btn {
+      background: rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+    }
+
+    .metric-card.standard .mc-arrow-btn {
+      background: var(--c-bg-page);
+      color: var(--c-text-muted);
+      border: 1px solid var(--c-border);
+    }
+
+    .metric-card:hover .mc-arrow-btn {
+      transform: rotate(45deg);
+      background: var(--c-blue);
+      color: #FFFFFF;
+      border-color: var(--c-blue);
+    }
+
+    .mc-value {
+      font-family: var(--font-brand);
+      font-size: 2.35rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      margin: 12px 0 8px;
+    }
+
+    .metric-card.featured .mc-value {
+      color: #FFFFFF;
+    }
+
+    .metric-card.standard .mc-value {
+      color: var(--c-text);
+    }
+
+    .mc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      border-radius: var(--r-pill);
+      padding: 3px 10px;
+      width: fit-content;
+    }
+
+    .metric-card.featured .mc-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .metric-card.standard .mc-badge.up {
+      background: var(--c-green-subtle);
+      color: var(--c-green);
+    }
+
+    .metric-card.standard .mc-badge.blue {
+      background: var(--c-blue-subtle);
+      color: var(--c-blue);
+    }
+
+    /* ══════════════════════════════════════════════
+       GRID DO MEIO (ANALYTICS, LEMBRETE, CURSOS)
+       ══════════════════════════════════════════════ */
+    .middle-grid {
+      padding: 0 40px 24px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .dash-box {
+      background: #FFFFFF;
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-card);
+      padding: 24px;
+      box-shadow: var(--sh-card);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .dash-box:hover {
+      border-color: rgba(26, 95, 255, 0.2);
+    }
+
+    .box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .box-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--c-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .box-sub {
+      font-size: 0.74rem;
+      color: var(--c-text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    /* Seletor de Período Pill */
+    .period-pill-nav {
+      display: flex;
+      background: var(--c-bg-page);
+      padding: 3px;
+      border-radius: var(--r-pill);
+      border: 1px solid var(--c-border);
+    }
+
+    .period-tab {
+      padding: 4px 14px;
+      border-radius: var(--r-pill);
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: var(--font-brand);
+      color: var(--c-text-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .period-tab.active {
+      background: var(--c-blue-dark);
+      color: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(15, 27, 53, 0.15);
+    }
+
+    .chart-container-pills {
+      position: relative;
+      height: 195px;
+      width: 100%;
+    }
+
+    /* Card de Lembrete / Próxima Capacitação ao Vivo */
+    .reminder-box {
+      background: #FFFFFF;
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-card);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      box-shadow: var(--sh-card);
+      overflow: hidden;
+    }
+
+    .reminder-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--th-yellow);
+    }
+
+    .reminder-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--c-blue);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reminder-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--th-yellow);
+    }
+
+    .reminder-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--c-text);
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .reminder-info-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--c-text-muted);
+      margin-bottom: 20px;
+    }
+
+    .reminder-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--c-blue-dark);
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--r-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: var(--font-brand);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      box-shadow: 0 4px 12px rgba(15, 27, 53, 0.15);
+    }
+
+    .reminder-btn:hover {
+      background: var(--c-blue);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(26, 95, 255, 0.3);
+    }
+
+    /* Lista de Cursos em Destaque (Coluna 3) */
+    .course-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--c-border);
+      transition: transform 0.15s ease;
+    }
+
+    .course-item:hover {
+      transform: translateX(3px);
+    }
+
+    .course-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .course-icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .course-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .course-name {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--c-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .course-meta {
+      font-size: 0.71rem;
+      color: var(--c-text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .course-counter {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--c-blue);
+      font-family: var(--font-brand);
+      background: var(--c-bg-page);
+      padding: 3px 8px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--c-border);
+    }
+
+    /* ══════════════════════════════════════════════
+       GRID INFERIOR (COLABORAÇÃO, PROGRESSO, HORAS)
+       ══════════════════════════════════════════════ */
+    .bottom-grid {
+      padding: 0 40px 28px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Lista de Líderes e Inscrições Recentes */
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    .member-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .member-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .member-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .member-name {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--c-text);
+    }
+
+    .member-course {
+      font-size: 0.71rem;
+      color: var(--c-text-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+    }
+
+    .status-pill {
+      font-size: 0.69rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      white-space: nowrap;
+    }
+
+    .status-pill.concluido {
+      background: var(--c-green-subtle);
+      color: var(--c-green);
+      border: 1px solid rgba(42, 187, 110, 0.2);
+    }
+
+    .status-pill.andamento {
+      background: var(--c-blue-subtle);
+      color: var(--c-blue);
+      border: 1px solid rgba(26, 95, 255, 0.2);
+    }
+
+    .status-pill.inscrito {
+      background: var(--c-yellow-subtle);
+      color: #9E6B00;
+      border: 1px solid rgba(245, 196, 0, 0.3);
+    }
+
+    /* Gauge / Taxa de Conclusão */
+    .gauge-wrap {
+      position: relative;
+      width: 100%;
+      height: 165px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gauge-center-text {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .gauge-pct {
+      font-family: var(--font-brand);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--c-text);
+      line-height: 1;
+    }
+
+    .gauge-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--c-text-muted);
+      margin-top: 2px;
+    }
+
+    .gauge-legend {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .g-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--c-text-muted);
+    }
+
+    .g-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Widget de Horas / Time Tracker Institucional */
+    .tracker-card {
+      background: linear-gradient(135deg, #0F1B35 0%, #172A52 100%);
+      border-radius: var(--r-card);
+      padding: 24px;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--sh-card);
+    }
+
+    .tracker-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: radial-gradient(circle at 90% 10%, rgba(26, 95, 255, 0.4), transparent 60%);
+      pointer-events: none;
+    }
+
+    .tracker-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--th-yellow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tracker-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--th-yellow);
+    }
+
+    .tracker-time {
+      font-family: var(--font-brand);
+      font-size: 2.35rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin: 14px 0 14px;
+      color: #FFFFFF;
+    }
+
+    .tracker-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tracker-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tracker-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+    .tracker-btn.active {
+      background: var(--c-orange);
+      border-color: var(--c-orange);
+    }
+
+    .tracker-status-text {
+      font-size: 0.74rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* ══════════════════════════════════════════════
+       SEÇÕES DE TABELA & BIBLIOTECA
+       ══════════════════════════════════════════════ */
+    .table-section-clean {
+      margin: 0 40px 32px;
+      background: #FFFFFF;
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-card);
+      box-shadow: var(--sh-card);
+      overflow: hidden;
+    }
+
+    .tsc-header {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #FFFFFF;
+    }
+
+    .tsc-filters {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tsc-chip {
+      background: var(--c-bg-page);
+      border: 1px solid var(--c-border);
+      color: var(--c-text-muted);
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-family: var(--font-brand);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tsc-chip:hover,
+    .tsc-chip.active {
+      background: var(--c-blue);
+      border-color: var(--c-blue);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(26, 95, 255, 0.25);
+    }
+
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .clean-table th {
+      padding: 13px 26px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+      background: var(--c-bg-page);
+      border-bottom: 1px solid var(--c-border);
+      text-align: left;
+    }
+
+    .clean-table td {
+      padding: 15px 26px;
+      font-size: 0.83rem;
+      color: var(--c-text);
+      border-bottom: 1px solid var(--c-border);
+      vertical-align: middle;
+    }
+
+    .clean-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .clean-table tr:hover td {
+      background: rgba(26, 95, 255, 0.02);
+    }
+
+    .progress-bar-flat {
+      width: 80px;
+      height: 6px;
+      border-radius: var(--r-pill);
+      background: var(--c-bg-page);
+      overflow: hidden;
+      border: 1px solid var(--c-border);
+    }
+
+    .p-bar-fill {
+      height: 100%;
+      border-radius: var(--r-pill);
+      background: var(--c-blue);
+    }
+
+    /* Cards da Biblioteca */
+    .material-card {
+      background: #FFFFFF;
+      border: 1px solid var(--c-border);
+      border-radius: var(--r-card);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.22s ease;
+      box-shadow: var(--sh-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .material-card:hover {
+      border-color: rgba(26, 95, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: var(--sh-card-hover);
+    }
+
+    .material-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--c-blue);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .material-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Toast de Notificação */
+    .toast-pill {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #0F1B35;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 24px;
+      border-radius: var(--r-pill);
+      font-size: 0.83rem;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(15, 27, 53, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 99999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast-pill.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsividade */
+    @media (max-width: 1250px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .middle-grid,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 850px) {
+      body {
+        padding: 0;
+      }
+      .app-frame {
+        flex-direction: column;
+      }
+      .app-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .app-topbar {
+        padding: 16px 20px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .topbar-search {
+        width: 100%;
+      }
+      .dashboard-header {
+        padding: 24px 20px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .metrics-grid,
+      .middle-grid,
+      .bottom-grid,
+      .table-section-clean {
+        padding: 0 20px 20px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Barra de Threads Oficial da Compassion no Topo ── -->
+  <div class="brand-top-thread" aria-hidden="true">
+    <span class="th-1"></span>
+    <span class="th-2"></span>
+    <span class="th-3"></span>
+    <span class="th-4"></span>
+    <span class="th-5"></span>
+  </div>
+
+  <!-- ══ FRAME DA APLICAÇÃO ══ -->
+  <div class="app-frame">
+
+    <!-- ════════ SIDEBAR DE NAVEGAÇÃO INSTITUCIONAL COMPASSION ════════ -->
+    <aside class="app-sidebar">
+      
+      <!-- Brand Logo Oficial da Compassion (Branco com Bandeira do Brasil) -->
+      <a href="index.html" class="sidebar-brand" title="Compassion Brasil — Início">
+        <img src="assets/logo/logo_branco_bandeira.svg" alt="Compassion Brasil">
+      </a>
+
+      <!-- Menu de Navegação Unificado -->
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">Menu Principal</div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="treinamentos.html" class="sidebar-link active">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="7" height="7" rx="2" />
+                <rect x="14" y="3" width="7" height="7" rx="2" />
+                <rect x="14" y="14" width="7" height="7" rx="2" />
+                <rect x="3" y="14" width="7" height="7" rx="2" />
+              </svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="cursos-detalhes.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+              <span>Cursos & Trilhas</span>
+              <span class="sidebar-badge">14</span>
+            </a>
+          </li>
+          <li>
+            <a href="usuarios-inscricoes.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Usuários & Alunos</span>
+            </a>
+          </li>
+          <li>
+            <a href="biblioteca-materiais.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Biblioteca</span>
+            </a>
+          </li>
+          <li>
+            <a href="#relatorios" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+              <span>Relatórios</span>
+            </a>
+          </li>
+          <li>
+            <a href="moodle-config.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4l3 3" />
+              </svg>
+              <span>Moodle</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="sidebar-link logout" onclick="return confirmarSaida(event);">
+              <svg class="sidebar-icon" viewBox="0 0 24 24">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <polyline points="16 17 21 12 16 7" />
+                <line x1="21" y1="12" x2="9" y2="12" />
+              </svg>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card do Rodapé (Moodle LMS) -->
+      <div class="sidebar-footer-card">
+        <div class="sfc-tag">Servidor Conectado</div>
+        <div class="sfc-title">Ambiente Oficial Moodle LMS</div>
+        <a href="moodle-config.html" class="sfc-btn">
+          <span>Abrir Moodle LMS</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- ════════ ÁREA PRINCIPAL ════════ -->
+    <main class="app-main">
+
+      <!-- ── Topbar com Busca e Usuário ── -->
+      <header class="app-topbar">
+        <div class="topbar-search">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="text" placeholder="Buscar líderes, cursos, cidades..." id="searchDashboard">
+        </div>
+
+        <div class="topbar-actions">
+          <button class="topbar-icon-btn" title="Notificações" onclick="mostrarToast('Nenhuma notificação crítica pendente.')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span class="badge-dot"></span>
+          </button>
+
+          <button class="topbar-icon-btn" title="Mensagens de Suporte" onclick="mostrarToast('Suporte técnico Moodle ativo.')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </button>
+
+          <div class="topbar-user">
+            <div class="user-avatar">AF</div>
+            <div class="user-info">
+              <div class="user-name">Alexandre Ferreira</div>
+              <div class="user-role">Gestor Corporativo</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Cabeçalho do Dashboard & Ações Principais ── -->
+      <section class="dashboard-header" id="dashboard">
+        <div class="dh-title-wrap">
+          <h1 class="dh-title">Painel de Treinamentos</h1>
+
+          <p class="dh-sub">Acompanhe matrículas, conclusões e downloads de metodologias em tempo real.</p>
+        </div>
+
+        <div class="dh-actions">
+          <button class="btn-pill btn-pill-primary" onclick="exportarCSV()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Exportar Dados (CSV)
+          </button>
+
+          <button class="btn-pill btn-pill-secondary" onclick="exportarPDF()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            Relatório PDF
+          </button>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           4 METRIC CARDS SUPERIORES
+           ══════════════════════════════════════════════ -->
+      <section class="metrics-grid">
+
+        <!-- Card 1 (Destaque Oficial com Cor Primária Nana's Pool Blue) -->
+        <div class="metric-card featured">
+          <div class="mc-top">
+            <span class="mc-label">Líderes & Alunos Cadastrados</span>
+            <div class="mc-arrow-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </div>
+          <div class="mc-value" id="kpi-alunos">2.847</div>
+          <div class="mc-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            +18,4% vs. mês anterior
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="metric-card standard border-green">
+          <div class="mc-top">
+            <span class="mc-label">Matrículas Ativas em Cursos</span>
+            <div class="mc-arrow-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </div>
+          <div class="mc-value" id="kpi-matriculas">1.392</div>
+          <div class="mc-badge up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            +24,1% este mês
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="metric-card standard border-yellow">
+          <div class="mc-top">
+            <span class="mc-label">Downloads de Metodologias</span>
+            <div class="mc-arrow-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </div>
+          <div class="mc-value" id="kpi-downloads">5.218</div>
+          <div class="mc-badge up">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            +31,6% no período
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="metric-card standard border-teal">
+          <div class="mc-top">
+            <span class="mc-label">Certificados Conquistados</span>
+            <div class="mc-arrow-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+          </div>
+          <div class="mc-value" id="kpi-certificados">743</div>
+          <div class="mc-badge blue">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+            82% taxa de aprovação
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           GRID CENTRAL (ANALYTICS, REMINDER, CURSOS)
+           ══════════════════════════════════════════════ -->
+      <section class="middle-grid">
+
+        <!-- Coluna 1: Project Analytics (Gráfico em Pílulas Verticais) -->
+        <div class="dash-box">
+          <div class="box-header">
+            <div>
+              <div class="box-title">Evolução de Atividade</div>
+              <div class="box-sub">Matrículas e downloads nos últimos 7 dias</div>
+            </div>
+            <div class="period-pill-nav">
+              <button class="period-tab active" onclick="alternarAba(this)">Semanal</button>
+              <button class="period-tab" onclick="alternarAba(this)">Mensal</button>
+            </div>
+          </div>
+          <div class="chart-container-pills">
+            <canvas id="chartAnalytics"></canvas>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Lembretes / Próxima Capacitação ao Vivo -->
+        <div class="reminder-box">
+          <div>
+            <div class="reminder-tag">Próxima Formação ao Vivo</div>
+            <h3 class="reminder-title">Oficina de Salvaguarda & Proteção Infantil</h3>
+            <div class="reminder-info-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Quinta-feira · 14h00 às 16h00</span>
+            </div>
+          </div>
+          <button class="reminder-btn" onclick="mostrarToast('Link da sala de mentoria copiado!')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Acessar Sala Virtual
+          </button>
+        </div>
+
+        <!-- Coluna 3: Cursos em Destaque -->
+        <div class="dash-box" id="cursos">
+          <div class="box-header">
+            <div>
+              <div class="box-title">Cursos em Alta</div>
+              <div class="box-sub">Maior engajamento na plataforma</div>
+            </div>
+            <a href="cursos-detalhes.html" style="font-size:0.75rem;font-weight:700;color:var(--c-blue);text-decoration:none;">Ver todos</a>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            
+            <div class="course-item">
+              <div class="course-icon-wrap" style="background:var(--c-blue-subtle);color:var(--c-blue);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="course-info">
+                <div class="course-name">Proteção & Salvaguarda Infantil</div>
+                <div class="course-meta">Trilha Obrigatória · 40h</div>
+              </div>
+              <div class="course-counter">487</div>
+            </div>
+
+            <div class="course-item">
+              <div class="course-icon-wrap" style="background:var(--c-green-subtle);color:var(--c-green);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div class="course-info">
+                <div class="course-name">Acolhimento Materno-Infantil</div>
+                <div class="course-meta">Primeira Infância · 30h</div>
+              </div>
+              <div class="course-counter">412</div>
+            </div>
+
+            <div class="course-item">
+              <div class="course-icon-wrap" style="background:var(--c-yellow-subtle);color:var(--c-yellow);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="course-info">
+                <div class="course-name">Liderança Servidora Jovem</div>
+                <div class="course-meta">Mentoria & Vocação · 45h</div>
+              </div>
+              <div class="course-counter">315</div>
+            </div>
+
+            <div class="course-item">
+              <div class="course-icon-wrap" style="background:var(--c-teal-subtle);color:var(--c-teal);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div class="course-info">
+                <div class="course-name">Discipulado Bíblico Criativo</div>
+                <div class="course-meta">Pedagogia Infantil · 25h</div>
+              </div>
+              <div class="course-counter">248</div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           GRID INFERIOR (COLABORAÇÃO, PROGRESSO, TRACKER)
+           ══════════════════════════════════════════════ -->
+      <section class="bottom-grid" id="lideres">
+
+        <!-- Coluna 1: Inscrições Recentes de Líderes -->
+        <div class="dash-box">
+          <div class="box-header">
+            <div>
+              <div class="box-title">Inscrições Recentes de Líderes</div>
+              <div class="box-sub">Últimos participantes cadastrados</div>
+            </div>
+            <button class="tsc-chip active" style="padding:4px 12px;font-size:0.68rem;" onclick="mostrarToast('Lista filtrada por data.')">+ Recentes</button>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:2px;">
+
+            <div class="member-item">
+              <div class="member-avatar" style="background:#1A5FFF;">CS</div>
+              <div class="member-details">
+                <div class="member-name">Carlos Eduardo Silva · SP</div>
+                <div class="member-course">Liderança Servidora e Protagonismo Jovem</div>
+              </div>
+              <span class="status-pill concluido">Concluído</span>
+            </div>
+
+            <div class="member-item">
+              <div class="member-avatar" style="background:#2ABB6E;">AR</div>
+              <div class="member-details">
+                <div class="member-name">Ana Paula Rodrigues · MG</div>
+                <div class="member-course">Oficial de Proteção e Salvaguarda Infantil</div>
+              </div>
+              <span class="status-pill andamento">Em Andamento</span>
+            </div>
+
+            <div class="member-item">
+              <div class="member-avatar" style="background:#F5C400;color:#0F1B35;">MP</div>
+              <div class="member-details">
+                <div class="member-name">Marcos Antônio Pereira · BA</div>
+                <div class="member-course">Acolhimento e Vínculo Materno-Infantil</div>
+              </div>
+              <span class="status-pill inscrito">Inscrito</span>
+            </div>
+
+            <div class="member-item">
+              <div class="member-avatar" style="background:#00B5CC;">FC</div>
+              <div class="member-details">
+                <div class="member-name">Fernanda Costa Lima · RS</div>
+                <div class="member-course">Discipulado e Educação Bíblica Criativa</div>
+              </div>
+              <span class="status-pill andamento">Em Andamento</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Coluna 2: Taxa Geral de Conclusão -->
+        <div class="dash-box">
+          <div class="box-header">
+            <div>
+              <div class="box-title">Taxa de Conclusão</div>
+              <div class="box-sub">Desempenho acadêmico médio</div>
+            </div>
+          </div>
+
+          <div class="gauge-wrap">
+            <canvas id="chartGauge"></canvas>
+            <div class="gauge-center-text">
+              <div class="gauge-pct">78%</div>
+              <div class="gauge-label">Concluídos</div>
+            </div>
+          </div>
+
+          <div class="gauge-legend">
+            <div class="g-legend-item">
+              <span class="g-dot" style="background:var(--c-blue);"></span> Concluídos (78%)
+            </div>
+            <div class="g-legend-item">
+              <span class="g-dot" style="background:var(--c-blue-high);"></span> Em Andamento (18%)
+            </div>
+            <div class="g-legend-item">
+              <span class="g-dot" style="background:var(--c-border-strong);"></span> Pendentes (4%)
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 3: Horas de Capacitação -->
+        <div class="tracker-card">
+          <div>
+            <div class="tracker-tag">Tempo de Capacitação</div>
+            <div class="tracker-time">1.420h : 35m</div>
+            <div class="tracker-status-text">Horas acumuladas em videoaulas e SCORM em 2026.</div>
+          </div>
+
+          <div class="tracker-controls">
+            <button class="tracker-btn active" title="Pausar / Retomar Monitoramento" onclick="mostrarToast('Monitoramento de horas ativo em tempo real.')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+              </svg>
+            </button>
+            <button class="tracker-btn" title="Reiniciar Contador" onclick="mostrarToast('Métricas consolidadas com o banco do Moodle.')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="23 4 23 10 17 10"/>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+              </svg>
+            </button>
+            <span style="font-size:0.75rem;font-weight:700;color:#FFFFFF;margin-left:4px;">Ativo no Moodle</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           SEÇÃO: BIBLIOTECA DE MATERIAIS PARA DOWNLOAD
+           ══════════════════════════════════════════════ -->
+      <section class="table-section-clean" id="biblioteca" style="margin-bottom: 28px;">
+        <div class="tsc-header">
+          <div>
+            <div class="box-title">Biblioteca de Materiais Pedagógicos</div>
+            <div class="box-sub">Apostilas, PDFs e manuais metodológicos publicados no Moodle liberados para download</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <a href="biblioteca-materiais.html" class="tsc-chip active" style="text-decoration:none;">Ver Biblioteca Completa (18)</a>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:18px;padding:24px;">
+          <!-- Card Material 1 -->
+          <div class="material-card">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span class="status-pill concluido" style="font-size:0.65rem;">PDF OFICIAL</span>
+                <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">12.4 MB</span>
+              </div>
+              <div style="font-weight:800;font-size:0.95rem;color:var(--c-text);line-height:1.3;margin-bottom:6px;">Guia de Proteção e Salvaguarda Infantil</div>
+              <div style="font-size:0.75rem;color:var(--c-text-muted);line-height:1.4;">Diretriz nacional obrigatória para líderes e educadores de projetos parceiros.</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--c-border);">
+              <div>
+                <span style="font-size:0.68rem;color:var(--c-text-muted);display:block;">Downloads</span>
+                <span style="font-weight:800;color:var(--c-blue);font-size:1.1rem;font-family:var(--font-brand);">1.842</span>
+              </div>
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Guia de Proteção Infantil (PDF).')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Baixar PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Material 2 -->
+          <div class="material-card">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span class="status-pill concluido" style="font-size:0.65rem;">APOSTILA SCORM</span>
+                <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">18.2 MB</span>
+              </div>
+              <div style="font-weight:800;font-size:0.95rem;color:var(--c-text);line-height:1.3;margin-bottom:6px;">Caderno do Facilitador de Turmas</div>
+              <div style="font-size:0.75rem;color:var(--c-text-muted);line-height:1.4;">Metodologia de aplicação prática de dinâmicas e planos de aula socioemocionais.</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--c-border);">
+              <div>
+                <span style="font-size:0.68rem;color:var(--c-text-muted);display:block;">Downloads</span>
+                <span style="font-weight:800;color:var(--c-blue);font-size:1.1rem;font-family:var(--font-brand);">1.415</span>
+              </div>
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Caderno do Facilitador (PDF).')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Baixar PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Material 3 -->
+          <div class="material-card">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span class="status-pill andamento" style="font-size:0.65rem;">MANUAL PRÁTICO</span>
+                <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">9.6 MB</span>
+              </div>
+              <div style="font-weight:800;font-size:0.95rem;color:var(--c-text);line-height:1.3;margin-bottom:6px;">Apostila de Desenvolvimento Infantil</div>
+              <div style="font-size:0.75rem;color:var(--c-text-muted);line-height:1.4;">Fundamentos cognitivos, socioemocionais, físicos e espirituais para voluntários.</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--c-border);">
+              <div>
+                <span style="font-size:0.68rem;color:var(--c-text-muted);display:block;">Downloads</span>
+                <span style="font-weight:800;color:var(--c-blue);font-size:1.1rem;font-family:var(--font-brand);">1.096</span>
+              </div>
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Desenvolvimento Infantil (PDF).')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Baixar PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Material 4 -->
+          <div class="material-card">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span class="status-pill andamento" style="font-size:0.65rem;">LIVRO TEXTO</span>
+                <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">15.8 MB</span>
+              </div>
+              <div style="font-weight:800;font-size:0.95rem;color:var(--c-text);line-height:1.3;margin-bottom:6px;">Discipulado Bíblico Criativo e Vocação</div>
+              <div style="font-size:0.75rem;color:var(--c-text-muted);line-height:1.4;">Atividades pedagógicas e dinâmicas bíblicas para igrejas e centros comunitários.</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--c-border);">
+              <div>
+                <span style="font-size:0.68rem;color:var(--c-text-muted);display:block;">Downloads</span>
+                <span style="font-weight:800;color:var(--c-blue);font-size:1.1rem;font-family:var(--font-brand);">865</span>
+              </div>
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Discipulado Bíblico (PDF).')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Baixar PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════
+           TABELA COMPLETA DE RELATÓRIOS
+           ══════════════════════════════════════════════ -->
+      <section class="table-section-clean" id="relatorios">
+        <div class="tsc-header">
+          <div>
+            <div class="box-title">Relatório Geral de Participantes</div>
+            <div class="box-sub">Base unificada com status no Moodle e emissão de certificados nominais</div>
+          </div>
+          <div class="tsc-filters">
+            <button class="tsc-chip active" onclick="filtrarTabelaLimpa('todos', this)">Todos (18)</button>
+            <button class="tsc-chip" onclick="filtrarTabelaLimpa('concluido', this)">Concluídos</button>
+            <button class="tsc-chip" onclick="filtrarTabelaLimpa('andamento', this)">Em Andamento</button>
+            <button class="tsc-chip" onclick="filtrarTabelaLimpa('inscrito', this)">Inscritos</button>
+          </div>
+        </div>
+
+        <table class="clean-table" id="tabelaRelatorio">
+          <thead>
+            <tr>
+              <th>Nome Completo</th>
+              <th>Profissão / Atuação</th>
+              <th>UF</th>
+              <th>Curso Inscrito</th>
+              <th>Progresso</th>
+              <th>Status</th>
+              <th>Downloads</th>
+              <th>Data Cadastro</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaLimpaBody">
+            <!-- Preenchido via JavaScript -->
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+  </div><!-- /app-frame -->
+
+  <!-- Toast de Feedback Dinâmico -->
+  <div class="toast-pill" id="toastPill">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Ação concluída com sucesso!</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SCRIPTS: GRÁFICOS CHART.JS & EXPORTAÇÃO
+       ══════════════════════════════════════════════ -->
+  <script>
+    // ── Dados Fictícios de Demonstração para a Reunião ──
+    const participantes = [
+      { nome: "Carlos Eduardo Silva",      profissao: "Pastor",                   estado: "SP", curso: "Liderança Servidora",             progresso: 100, status: "concluido", downloads: 3, data: "05/09/2026" },
+      { nome: "Ana Paula Rodrigues",       profissao: "Educadora Social",         estado: "MG", curso: "Oficial de Proteção e Salvaguarda",progresso: 78,  status: "andamento", downloads: 5, data: "10/09/2026" },
+      { nome: "Marcos Antônio Pereira",    profissao: "Líder de Min. Infantil",   estado: "BA", curso: "Acolhimento Materno-Infantil",    progresso: 100, status: "concluido", downloads: 2, data: "14/09/2026" },
+      { nome: "Fernanda Costa Lima",       profissao: "Voluntária",               estado: "RS", curso: "Discipulado Bíblico Criativo",    progresso: 55,  status: "andamento", downloads: 7, data: "18/09/2026" },
+      { nome: "Ricardo Souza Mendes",      profissao: "Pastor",                   estado: "PE", curso: "Liderança Servidora",             progresso: 0,   status: "inscrito",  downloads: 0, data: "20/09/2026" },
+      { nome: "Juliana Alves Barros",      profissao: "Educadora Social",         estado: "CE", curso: "Oficial de Proteção e Salvaguarda",progresso: 100, status: "concluido", downloads: 4, data: "22/09/2026" },
+      { nome: "Paulo Roberto Nascimento",  profissao: "Líder Comunitário",        estado: "RJ", curso: "Gestão Social de Projetos",       progresso: 40,  status: "andamento", downloads: 1, data: "25/09/2026" },
+      { nome: "Maria Eduarda Santos",      profissao: "Voluntária",               estado: "GO", curso: "Metodologia Compassion — Módulo 1",progresso: 0,   status: "inscrito",  downloads: 2, data: "28/09/2026" },
+      { nome: "José Luiz Cavalcante",      profissao: "Pastor",                   estado: "AM", curso: "Liderança Servidora",             progresso: 100, status: "concluido", downloads: 3, data: "02/10/2026" },
+      { nome: "Luciana Ferreira Gomes",    profissao: "Educadora Social",         estado: "PA", curso: "Acolhimento Materno-Infantil",    progresso: 90,  status: "andamento", downloads: 6, data: "05/10/2026" },
+      { nome: "Bruno Henrique Torres",     profissao: "Líder de Min. Infantil",   estado: "PR", curso: "Oficial de Proteção e Salvaguarda",progresso: 100, status: "concluido", downloads: 2, data: "08/10/2026" },
+      { nome: "Isabela Martins Cruz",      profissao: "Voluntária",               estado: "SC", curso: "Discipulado Bíblico Criativo",    progresso: 60,  status: "andamento", downloads: 4, data: "10/10/2026" },
+      { nome: "Daniel Oliveira Pinto",     profissao: "Pastor",                   estado: "MT", curso: "Liderança Servidora",             progresso: 0,   status: "inscrito",  downloads: 0, data: "12/10/2026" },
+      { nome: "Priscila Lima Almeida",     profissao: "Líder Comunitário",        estado: "MS", curso: "Acolhimento Materno-Infantil",    progresso: 100, status: "concluido", downloads: 5, data: "14/10/2026" },
+      { nome: "Rafael Carvalho Dias",      profissao: "Educador Social",          estado: "ES", curso: "Oficial de Proteção e Salvaguarda",progresso: 35,  status: "andamento", downloads: 1, data: "16/10/2026" },
+      { nome: "Camila Rocha Freitas",      profissao: "Voluntária",               estado: "DF", curso: "Gestão Social de Projetos",       progresso: 0,   status: "inscrito",  downloads: 3, data: "18/10/2026" },
+      { nome: "André Luís Moreira",        profissao: "Pastor",                   estado: "RN", curso: "Liderança Servidora",             progresso: 100, status: "concluido", downloads: 2, data: "19/10/2026" },
+      { nome: "Tatiana Borges Nunes",      profissao: "Educadora Social",         estado: "PB", curso: "Acolhimento Materno-Infantil",    progresso: 70,  status: "andamento", downloads: 4, data: "20/10/2026" },
+    ];
+
+    const statusMap = {
+      concluido: { label: "Concluído", class: "concluido" },
+      andamento: { label: "Em Andamento", class: "andamento" },
+      inscrito: { label: "Inscrito", class: "inscrito" }
+    };
+
+    function renderTabela(filtro) {
+      const tbody = document.getElementById("tabelaLimpaBody");
+      const lista = filtro === "todos" ? participantes : participantes.filter(p => p.status === filtro);
+      tbody.innerHTML = lista.map(p => `
+        <tr>
+          <td><strong style="color:var(--c-text);">${p.nome}</strong></td>
+          <td style="color:var(--c-text-muted);">${p.profissao}</td>
+          <td><span style="background:var(--c-bg-page);border:1px solid var(--c-border);color:var(--c-blue);padding:2px 8px;border-radius:var(--r-sm);font-size:0.72rem;font-weight:700;">${p.estado}</span></td>
+          <td style="font-size:0.8rem;color:var(--c-text);font-weight:600;">${p.curso}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="progress-bar-flat">
+                <div class="p-bar-fill" style="width:${p.progresso}%;"></div>
+              </div>
+              <span style="font-size:0.7rem;font-weight:700;color:var(--c-text-muted);">${p.progresso}%</span>
+            </div>
+          </td>
+          <td><span class="status-pill ${statusMap[p.status].class}">${statusMap[p.status].label}</span></td>
+          <td style="text-align:center;font-weight:800;color:var(--c-blue);font-family:var(--font-brand);">${p.downloads}</td>
+          <td style="color:var(--c-text-muted);font-size:0.75rem;">${p.data}</td>
+        </tr>
+      `).join("");
+    }
+
+    function filtrarTabelaLimpa(filtro, btn) {
+      document.querySelectorAll(".tsc-chip").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderTabela(filtro);
+    }
+
+    renderTabela("todos");
+
+    // ── Toast de Feedback ──
+    function mostrarToast(msg) {
+      const t = document.getElementById("toastPill");
+      const m = document.getElementById("toastMsg");
+      m.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3200);
+    }
+
+    function alternarAba(btn) {
+      document.querySelectorAll(".period-tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      mostrarToast("Período atualizado: " + btn.textContent);
+    }
+
+    // ── Exportação CSV Funcional ──
+    function exportarCSV() {
+      const header = ["Nome Completo", "Profissão", "Estado", "Curso", "Progresso (%)", "Status", "Downloads", "Data"];
+      const rows = participantes.map(p => [
+        p.nome, p.profissao, p.estado, p.curso, p.progresso, p.status, p.downloads, p.data
+      ]);
+      const csv = [header, ...rows].map(r => r.join(";")).join("\n");
+      const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "compassion_relatorio_treinamentos_2026.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+      mostrarToast("Planilha CSV exportada com sucesso!");
+    }
+
+    function exportarPDF() {
+      mostrarToast("Gerando relatório executivo em PDF...");
+    }
+
+    // ── Inicialização dos Gráficos Chart.js ──
+    window.addEventListener("load", function () {
+      const fontFamily = "'Neighbour Sans', 'Montserrat', sans-serif";
+      Chart.defaults.font.family = fontFamily;
+      Chart.defaults.color = "#5C677D";
+
+      // 1. Gráfico em Pílulas Verticais (Evolução Semanal de Inscrições e Downloads)
+      const ctxAnalytics = document.getElementById("chartAnalytics");
+      if (ctxAnalytics) {
+        new Chart(ctxAnalytics, {
+          type: "bar",
+          data: {
+            labels: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
+            datasets: [
+              {
+                label: "Matrículas",
+                data: [42, 68, 85, 110, 95, 45, 30],
+                backgroundColor: "#1A5FFF",
+                borderRadius: 100,
+                borderSkipped: false,
+                barThickness: 14,
+              },
+              {
+                label: "Downloads",
+                data: [65, 92, 130, 160, 140, 75, 50],
+                backgroundColor: "#AABBF7",
+                borderRadius: 100,
+                borderSkipped: false,
+                barThickness: 14,
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { font: { size: 10, weight: 600 } }
+              },
+              y: {
+                grid: { color: "#E5E9F2" },
+                ticks: { font: { size: 10 } }
+              }
+            }
+          }
+        });
+      }
+
+      // 2. Gauge / Semi-Donut de Taxa de Conclusão
+      const ctxGauge = document.getElementById("chartGauge");
+      if (ctxGauge) {
+        new Chart(ctxGauge, {
+          type: "doughnut",
+          data: {
+            labels: ["Concluídos", "Em Andamento", "Pendentes"],
+            datasets: [{
+              data: [78, 18, 4],
+              backgroundColor: ["#1A5FFF", "#AABBF7", "#E5E9F2"],
+              borderWidth: 0,
+              hoverOffset: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            rotation: -90,
+            circumference: 180,
+            cutout: "78%",
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: true }
+            }
+          }
+        });
+      }
+    });
+
+    // Filtro na barra de busca superior
+    document.getElementById("searchDashboard").addEventListener("input", function (e) {
+      const q = e.target.value.toLowerCase();
+      const rows = document.querySelectorAll("#tabelaLimpaBody tr");
+      rows.forEach(r => {
+        const text = r.textContent.toLowerCase();
+        r.style.display = text.includes(q) ? "" : "none";
+      });
+    });
+
+    // Confirmação para sair da área restrita
+    function confirmarSaida(event) {
+      if (confirm("Deseja realmente sair da área restrita de treinamentos?")) {
+        window.location.href = "index.html";
+        return true;
+      }
+      if (event) event.preventDefault();
+      return false;
+    }
+  </script>
+
+</body>
+
+</html>

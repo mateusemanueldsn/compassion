@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Cursos & Trilhas — Compassion Brasil</title>
+  <meta name="description"
+    content="Gestão detalhada de cursos em alta, trilhas formativas e cadastro de novos conteúdos no Moodle da Compassion Brasil.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Estilos base e fontes oficiais da marca -->
+  <link rel="stylesheet" href="wireframe.css">
+
+  <style>
+    :root {
+      --c-blue: #1A5FFF;
+      --c-blue-hover: #1048D9;
+      --c-blue-high: #AABBF7;
+      --c-blue-subtle: rgba(26, 95, 255, 0.08);
+      --c-blue-dark: #0F1B35;
+      --c-text: #0F1B35;
+      --c-text-muted: #5C677D;
+      --c-border: #E5E9F2;
+      --c-bg-page: #F7F4EF;
+      --c-bg-card: #FFFFFF;
+      --th-blue: #1A5FFF;
+      --th-yellow: #F5C400;
+      --th-green: #2ABB6E;
+      --th-orange: #E8472A;
+      --th-teal: #00B5CC;
+      --c-green: #2ABB6E;
+      --c-green-subtle: #E8F8F0;
+      --c-yellow: #F5C400;
+      --c-yellow-subtle: #FEF9E6;
+      --font-brand: "Neighbour Sans", "Montserrat", sans-serif;
+      --r-card: 20px;
+      --r-item: 14px;
+      --r-sm: 10px;
+      --r-pill: 9999px;
+      --sh-sidebar: 10px 0 35px rgba(15, 27, 53, 0.08);
+      --sh-card: 0 4px 16px rgba(15, 27, 53, 0.04);
+      --sh-card-hover: 0 12px 28px rgba(26, 95, 255, 0.09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--c-bg-page); color: var(--c-text); font-family: var(--font-brand); min-height: 100vh; display: flex; overflow-x: hidden; }
+
+    .brand-top-thread { position: fixed; top: 0; left: 0; right: 0; height: 4px; display: flex; z-index: 9999; }
+    .brand-top-thread span { flex: 1; height: 100%; }
+    .brand-top-thread .th-1 { background: var(--th-blue); }
+    .brand-top-thread .th-2 { background: var(--th-yellow); }
+    .brand-top-thread .th-3 { background: var(--th-green); }
+    .brand-top-thread .th-4 { background: var(--th-orange); }
+    .brand-top-thread .th-5 { background: var(--th-teal); }
+
+    .app-frame { width: 100%; display: flex; min-height: 100vh; position: relative; }
+
+    /* Sidebar */
+    .app-sidebar {
+      width: 275px; background: linear-gradient(180deg, #0F1B35 0%, #0A1428 100%);
+      border-right: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; flex-shrink: 0;
+      padding: 24px 20px 20px; height: 100vh; position: sticky; top: 0; overflow-y: auto; z-index: 100; box-shadow: var(--sh-sidebar);
+    }
+    .sidebar-brand { display: flex; align-items: center; justify-content: flex-start; padding: 8px 6px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-decoration: none; position: relative; }
+    .sidebar-brand img { width: 100%; max-width: 200px; height: auto; }
+    .sidebar-brand-badge { position: absolute; bottom: 6px; right: 6px; background: rgba(245, 196, 0, 0.15); border: 1px solid rgba(245, 196, 0, 0.35); color: var(--th-yellow); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 2px 6px; border-radius: var(--r-pill); }
+    .sidebar-nav-group { margin-top: 24px; }
+    .sidebar-group-title { font-size: 0.65rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(255, 255, 255, 0.45); padding: 0 12px 10px; display: flex; align-items: center; gap: 6px; }
+    .sidebar-group-title::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--th-yellow); }
+    .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--r-item); font-size: 0.86rem; font-weight: 600; color: rgba(255, 255, 255, 0.72); text-decoration: none; transition: all 0.22s ease; position: relative; }
+    .sidebar-link:hover { background: rgba(255, 255, 255, 0.06); color: #FFFFFF; transform: translateX(2px); }
+    .sidebar-link.active { background: linear-gradient(90deg, var(--c-blue) 0%, #2566FF 100%); color: #FFFFFF; font-weight: 700; box-shadow: 0 6px 18px rgba(26, 95, 255, 0.35); }
+    .sidebar-link.active::before { content: ""; position: absolute; left: -6px; top: 50%; transform: translateY(-50%); width: 4px; height: 18px; background: var(--th-yellow); border-radius: 4px; }
+    .sidebar-link.logout { margin-top: 12px; padding-top: 14px; border-top: 1px dashed rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.55); }
+    .sidebar-icon { width: 19px; height: 19px; stroke-width: 2; stroke: currentColor; fill: none; flex-shrink: 0; }
+    .sidebar-badge { margin-left: auto; background: rgba(255, 255, 255, 0.2); color: #FFFFFF; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: var(--r-pill); }
+    .sidebar-badge.green { background: var(--c-green); color: #FFFFFF; font-size: 0.6rem; }
+
+    /* Main */
+    .app-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: var(--c-bg-page); }
+
+    .app-topbar { padding: 18px 40px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--c-border); display: flex; align-items: center; justify-content: space-between; gap: 20px; position: sticky; top: 0; z-index: 50; }
+    .topbar-search { position: relative; width: 400px; }
+    .topbar-search input { width: 100%; padding: 10px 42px; border-radius: var(--r-pill); border: 1px solid var(--c-border); background: #FFFFFF; font-family: var(--font-brand); font-size: 0.85rem; color: var(--c-text); outline: none; }
+    .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; stroke: var(--c-text-muted); stroke-width: 2.2; fill: none; }
+    .topbar-actions { display: flex; align-items: center; gap: 14px; }
+    .topbar-user { display: flex; align-items: center; gap: 12px; padding-left: 16px; border-left: 1px solid var(--c-border); }
+    .user-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--c-blue-dark) 0%, #1D356A 100%); color: #FFFFFF; font-weight: 800; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; }
+    .user-name { font-size: 0.88rem; font-weight: 700; color: var(--c-text); }
+    .user-role { font-size: 0.72rem; font-weight: 600; color: var(--c-text-muted); }
+
+    /* Header */
+    .page-header { padding: 32px 40px 24px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+    .ph-title { font-size: 1.85rem; font-weight: 800; color: var(--c-text); }
+    .title-thread-accent { display: flex; gap: 6px; margin: 8px 0 6px; }
+    .title-thread-accent span { height: 4px; border-radius: 2px; }
+    .title-thread-accent .th-blue { width: 44px; background: var(--th-blue); }
+    .title-thread-accent .th-yellow { width: 28px; background: var(--th-yellow); }
+    .title-thread-accent .th-green { width: 56px; background: var(--th-green); }
+    .title-thread-accent .th-orange { width: 32px; background: var(--th-orange); }
+    .ph-sub { font-size: 0.88rem; color: var(--c-text-muted); font-weight: 500; }
+
+    /* Botões */
+    .btn-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--r-pill); font-size: 0.84rem; font-weight: 700; font-family: var(--font-brand); cursor: pointer; border: 1px solid transparent; text-decoration: none; transition: all 0.22s ease; }
+    .btn-pill-primary { background: var(--c-blue); color: #FFFFFF; box-shadow: 0 4px 14px rgba(26, 95, 255, 0.25); }
+    .btn-pill-primary:hover { background: var(--c-blue-hover); transform: translateY(-1px); }
+    .btn-pill-secondary { background: #FFFFFF; color: var(--c-text); border-color: var(--c-border); }
+    .btn-pill-secondary:hover { border-color: var(--c-blue); color: var(--c-blue); }
+
+    /* Grid de Cursos */
+    .courses-grid { padding: 0 40px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; }
+    .course-card { background: #FFFFFF; border: 1px solid var(--c-border); border-radius: var(--r-card); padding: 24px; box-shadow: var(--sh-card); display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s ease; position: relative; overflow: hidden; }
+    .course-card:hover { transform: translateY(-3px); box-shadow: var(--sh-card-hover); border-color: rgba(26, 95, 255, 0.3); }
+    .course-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--c-blue); }
+    .course-card.green::before { background: var(--c-green); }
+    .course-card.yellow::before { background: var(--c-yellow); }
+    .course-card.teal::before { background: var(--th-teal); }
+    .course-card.orange::before { background: var(--th-orange); }
+
+    .cc-badge-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .cc-tag { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 3px 10px; border-radius: var(--r-pill); background: var(--c-bg-page); color: var(--c-text); border: 1px solid var(--c-border); }
+    .cc-status { font-size: 0.68rem; font-weight: 800; color: var(--c-green); background: var(--c-green-subtle); padding: 3px 8px; border-radius: 12px; }
+    .cc-title { font-size: 1.15rem; font-weight: 800; color: var(--c-text); line-height: 1.3; margin-bottom: 8px; }
+    .cc-desc { font-size: 0.8rem; color: var(--c-text-muted); line-height: 1.5; margin-bottom: 20px; }
+
+    .cc-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 12px; background: var(--c-bg-page); border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--c-border); text-align: center; }
+    .cc-metric-val { font-size: 1.15rem; font-weight: 800; color: var(--c-blue); font-family: var(--font-brand); }
+    .cc-metric-lbl { font-size: 0.65rem; font-weight: 700; color: var(--c-text-muted); text-transform: uppercase; margin-top: 2px; }
+
+    .cc-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--c-border); }
+    .cc-author { font-size: 0.74rem; color: var(--c-text-muted); display: flex; align-items: center; gap: 6px; }
+
+    /* Modal de Cadastro / Edição */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 27, 53, 0.6); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #FFFFFF; border-radius: var(--r-card); width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; padding: 32px; box-shadow: 0 20px 50px rgba(15, 27, 53, 0.3); position: relative; }
+    .modal-close { position: absolute; top: 20px; right: 20px; background: var(--c-bg-page); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--c-text-muted); }
+    .modal-title { font-size: 1.35rem; font-weight: 800; color: var(--c-text); margin-bottom: 4px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--c-text); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--c-border); font-family: var(--font-brand); font-size: 0.85rem; color: var(--c-text); background: var(--c-bg-page); outline: none; }
+    .form-input:focus { border-color: var(--c-blue); background: #FFFFFF; }
+
+    /* Toast */
+    .toast-pill { position: fixed; bottom: 28px; right: 28px; background: #0F1B35; color: #FFFFFF; padding: 12px 24px; border-radius: var(--r-pill); font-size: 0.83rem; font-weight: 700; box-shadow: 0 10px 30px rgba(15, 27, 53, 0.25); display: flex; align-items: center; gap: 10px; z-index: 999999; transform: translateY(100px); opacity: 0; transition: all 0.35s; }
+    .toast-pill.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+
+<body>
+
+  <div class="brand-top-thread" aria-hidden="true">
+    <span class="th-1"></span><span class="th-2"></span><span class="th-3"></span><span class="th-4"></span><span class="th-5"></span>
+  </div>
+
+  <div class="app-frame">
+
+    <!-- SIDEBAR INSTITUCIONAL COMPASSION -->
+    <aside class="app-sidebar">
+      <a href="index.html" class="sidebar-brand" title="Compassion Brasil — Início">
+        <img src="assets/logo/logo_branco_bandeira.svg" alt="Compassion Brasil">
+      </a>
+
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">Menu Principal</div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="treinamentos.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" /><rect x="14" y="3" width="7" height="7" rx="2" /><rect x="14" y="14" width="7" height="7" rx="2" /><rect x="3" y="14" width="7" height="7" rx="2" /></svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="cursos-detalhes.html" class="sidebar-link active">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+              <span>Cursos & Trilhas</span>
+              <span class="sidebar-badge">14</span>
+            </a>
+          </li>
+          <li>
+            <a href="usuarios-inscricoes.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span>Usuários & Alunos</span>
+            </a>
+          </li>
+          <li>
+            <a href="biblioteca-materiais.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+              <span>Biblioteca</span>
+            </a>
+          </li>
+          <li>
+            <a href="treinamentos.html#relatorios" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+              <span>Relatórios</span>
+            </a>
+          </li>
+          <li>
+            <a href="moodle-config.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>
+              <span>Moodle</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="sidebar-link logout">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-search">
+          <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+          <input type="text" placeholder="Filtrar cursos por título, trilha ou carga horária..." id="searchCourses">
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-user">
+            <div class="user-avatar">AF</div>
+            <div class="user-info">
+              <div class="user-name">Alexandre Ferreira</div>
+              <div class="user-role">Gestor Corporativo</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-header">
+        <div>
+          <h1 class="ph-title">Gestão de Cursos em Alta & Trilhas</h1>
+          <p class="ph-sub">Supervisione os 14 cursos publicados no Moodle, estatísticas de adesão e cadastre novos conteúdos.</p>
+        </div>
+        <div>
+          <button class="btn-pill btn-pill-primary" onclick="abrirModalCurso()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Cadastrar Novo Curso
+          </button>
+        </div>
+      </section>
+
+      <!-- Grade de Cursos Detalhados -->
+      <div class="courses-grid" id="coursesContainer">
+        <!-- Curso 1 -->
+        <div class="course-card">
+          <div class="cc-badge-row">
+            <span class="cc-tag">Trilha Obrigatória</span>
+            <span class="cc-status">PUBLICADO NO MOODLE</span>
+          </div>
+          <h2 class="cc-title">Proteção & Salvaguarda Infantil</h2>
+          <p class="cc-desc">Formação mandante e continuada em salvaguarda, prevenção de abuso e protocolos legais de proteção integral da criança.</p>
+          <div class="cc-metrics">
+            <div>
+              <div class="cc-metric-val">487</div>
+              <div class="cc-metric-lbl">Inscritos</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">40h</div>
+              <div class="cc-metric-lbl">Carga</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">84%</div>
+              <div class="cc-metric-lbl">Conclusão</div>
+            </div>
+          </div>
+          <div class="cc-footer">
+            <div class="cc-author">Coordenação Nacional de Proteção</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="editarCurso('Proteção & Salvaguarda Infantil', '40h', 'Trilha Obrigatória', 'Coordenação Nacional de Proteção')">Editar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curso 2 -->
+        <div class="course-card green">
+          <div class="cc-badge-row">
+            <span class="cc-tag">Primeira Infância</span>
+            <span class="cc-status">PUBLICADO NO MOODLE</span>
+          </div>
+          <h2 class="cc-title">Acolhimento Materno-Infantil</h2>
+          <p class="cc-desc">Capacitação voltada a gestantes, puérperas e bebês de 0 a 3 anos em comunidades de alta vulnerabilidade social.</p>
+          <div class="cc-metrics">
+            <div>
+              <div class="cc-metric-val">412</div>
+              <div class="cc-metric-lbl">Inscritos</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">30h</div>
+              <div class="cc-metric-lbl">Carga</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">79%</div>
+              <div class="cc-metric-lbl">Conclusão</div>
+            </div>
+          </div>
+          <div class="cc-footer">
+            <div class="cc-author">Especialistas em Primeira Infância</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="editarCurso('Acolhimento Materno-Infantil', '30h', 'Primeira Infância', 'Especialistas em Primeira Infância')">Editar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curso 3 -->
+        <div class="course-card yellow">
+          <div class="cc-badge-row">
+            <span class="cc-tag">Mentoria & Vocação</span>
+            <span class="cc-status">PUBLICADO NO MOODLE</span>
+          </div>
+          <h2 class="cc-title">Liderança Servidora Jovem</h2>
+          <p class="cc-desc">Desenvolvimento de liderança ética, projeto de vida vocacional e protagonismo jovem segundo o exemplo de Jesus Cristo.</p>
+          <div class="cc-metrics">
+            <div>
+              <div class="cc-metric-val">315</div>
+              <div class="cc-metric-lbl">Inscritos</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">45h</div>
+              <div class="cc-metric-lbl">Carga</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">73%</div>
+              <div class="cc-metric-lbl">Conclusão</div>
+            </div>
+          </div>
+          <div class="cc-footer">
+            <div class="cc-author">Núcleo de Juventudes e Liderança</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="editarCurso('Liderança Servidora Jovem', '45h', 'Mentoria & Vocação', 'Núcleo de Juventudes e Liderança')">Editar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curso 4 -->
+        <div class="course-card teal">
+          <div class="cc-badge-row">
+            <span class="cc-tag">Pedagogia Infantil</span>
+            <span class="cc-status">PUBLICADO NO MOODLE</span>
+          </div>
+          <h2 class="cc-title">Discipulado Bíblico Criativo</h2>
+          <p class="cc-desc">Metodologias ativas e dinâmicas interativas para o ensino bíblico transformador com foco em desenvolvimento integral.</p>
+          <div class="cc-metrics">
+            <div>
+              <div class="cc-metric-val">248</div>
+              <div class="cc-metric-lbl">Inscritos</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">25h</div>
+              <div class="cc-metric-lbl">Carga</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">88%</div>
+              <div class="cc-metric-lbl">Conclusão</div>
+            </div>
+          </div>
+          <div class="cc-footer">
+            <div class="cc-author">Equipe Pedagógica Compassion</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="editarCurso('Discipulado Bíblico Criativo', '25h', 'Pedagogia Infantil', 'Equipe Pedagógica Compassion')">Editar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curso 5 -->
+        <div class="course-card orange">
+          <div class="cc-badge-row">
+            <span class="cc-tag">Gestão de Projetos</span>
+            <span class="cc-status">PUBLICADO NO MOODLE</span>
+          </div>
+          <h2 class="cc-title">Gestão Social de Projetos Parceiros</h2>
+          <p class="cc-desc">Administração responsável, prestação de contas, governança e monitoramento de indicadores de impacto comunitário.</p>
+          <div class="cc-metrics">
+            <div>
+              <div class="cc-metric-val">195</div>
+              <div class="cc-metric-lbl">Inscritos</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">35h</div>
+              <div class="cc-metric-lbl">Carga</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">91%</div>
+              <div class="cc-metric-lbl">Conclusão</div>
+            </div>
+          </div>
+          <div class="cc-footer">
+            <div class="cc-author">Comitê de Governança e Compliance</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="editarCurso('Gestão Social de Projetos Parceiros', '35h', 'Gestão de Projetos', 'Comitê de Governança')">Editar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Curso 6 -->
+        <div class="course-card">
+          <div class="cc-badge-row">
+            <span class="cc-tag">Metodologia Oficial</span>
+            <span class="cc-status">PUBLICADO NO MOODLE</span>
+          </div>
+          <h2 class="cc-title">Metodologia Compassion — Módulo 1</h2>
+          <p class="cc-desc">Imersão completa nos 4 pilares: Desenvolvimento Físico, Socioemocional, Cognitivo e Espiritual da criança.</p>
+          <div class="cc-metrics">
+            <div>
+              <div class="cc-metric-val">520</div>
+              <div class="cc-metric-lbl">Inscritos</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">60h</div>
+              <div class="cc-metric-lbl">Carga</div>
+            </div>
+            <div>
+              <div class="cc-metric-val">82%</div>
+              <div class="cc-metric-lbl">Conclusão</div>
+            </div>
+          </div>
+          <div class="cc-footer">
+            <div class="cc-author">Academia Compassion Brasil</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-pill btn-pill-secondary" style="padding:6px 14px;font-size:0.75rem;" onclick="editarCurso('Metodologia Compassion — Módulo 1', '60h', 'Metodologia Oficial', 'Academia Compassion')">Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Cadastro / Edição -->
+  <div class="modal-overlay" id="modalCurso">
+    <div class="modal-box">
+      <button class="modal-close" onclick="fecharModal()">&times;</button>
+      <h2 class="modal-title" id="modalTitulo">Cadastrar Novo Curso no Moodle</h2>
+      <p style="font-size:0.78rem;color:var(--c-text-muted);margin-bottom:20px;">Preencha as informações para registrar o conteúdo e sincronizar com o Moodle LMS.</p>
+      
+      <form onsubmit="salvarCurso(event)">
+        <div class="form-group">
+          <label class="form-label">Título do Curso</label>
+          <input type="text" class="form-input" id="cursoNome" placeholder="Ex: Nutrição e Saúde da Criança" required>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-group">
+            <label class="form-label">Carga Horária (Horas)</label>
+            <input type="text" class="form-input" id="cursoCarga" placeholder="Ex: 30h" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Trilha / Categoria</label>
+            <select class="form-input" id="cursoCategoria">
+              <option>Trilha Obrigatória</option>
+              <option>Primeira Infância</option>
+              <option>Mentoria & Vocação</option>
+              <option>Pedagogia Infantil</option>
+              <option>Gestão de Projetos</option>
+              <option>Saúde e Nutrição</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Instrutor / Departamento Responsável</label>
+          <input type="text" class="form-input" id="cursoAutor" placeholder="Ex: Núcleo de Saúde Comunitária" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ementa / Descrição Resumida</label>
+          <textarea class="form-input" id="cursoDesc" rows="3" placeholder="Descreva os objetivos de aprendizagem e competências desenvolvidas..." required></textarea>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+          <button type="button" class="btn-pill btn-pill-secondary" onclick="fecharModal()">Cancelar</button>
+          <button type="submit" class="btn-pill btn-pill-primary">Salvar & Publicar no Moodle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-pill" id="toastPill">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Curso salvo e sincronizado com sucesso!</span>
+  </div>
+
+  <script>
+    function mostrarToast(msg) {
+      const t = document.getElementById("toastPill");
+      const m = document.getElementById("toastMsg");
+      m.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3200);
+    }
+
+    function abrirModalCurso() {
+      document.getElementById("modalTitulo").textContent = "Cadastrar Novo Curso no Moodle";
+      document.getElementById("cursoNome").value = "";
+      document.getElementById("cursoCarga").value = "";
+      document.getElementById("cursoAutor").value = "";
+      document.getElementById("cursoDesc").value = "";
+      document.getElementById("modalCurso").classList.add("open");
+    }
+
+    function editarCurso(nome, carga, cat, autor) {
+      document.getElementById("modalTitulo").textContent = "Editar Curso: " + nome;
+      document.getElementById("cursoNome").value = nome;
+      document.getElementById("cursoCarga").value = carga;
+      document.getElementById("cursoAutor").value = autor;
+      document.getElementById("cursoDesc").value = "Curso oficial do catálogo da Compassion Brasil homologado para líderes voluntários e pastores.";
+      document.getElementById("modalCurso").classList.add("open");
+    }
+
+    function fecharModal() {
+      document.getElementById("modalCurso").classList.remove("open");
+    }
+
+    function salvarCurso(e) {
+      e.preventDefault();
+      fecharModal();
+      mostrarToast("Curso registrado e integrado ao Moodle com sucesso!");
+    }
+
+    // Filtro em tempo real
+    document.getElementById("searchCourses").addEventListener("input", function(e) {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll(".course-card").forEach(c => {
+        const text = c.textContent.toLowerCase();
+        c.style.display = text.includes(q) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

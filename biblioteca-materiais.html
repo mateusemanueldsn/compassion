@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca de Materiais Pedagógicos — Compassion Brasil</title>
+  <meta name="description"
+    content="Biblioteca completa de metodologias, apostilas SCORM, manuais e guias de proteção infantil da Compassion Brasil para download.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Estilos base e fontes oficiais da marca -->
+  <link rel="stylesheet" href="wireframe.css">
+
+  <style>
+    :root {
+      --c-blue: #1A5FFF;
+      --c-blue-hover: #1048D9;
+      --c-blue-high: #AABBF7;
+      --c-blue-subtle: rgba(26, 95, 255, 0.08);
+      --c-blue-dark: #0F1B35;
+      --c-text: #0F1B35;
+      --c-text-muted: #5C677D;
+      --c-border: #E5E9F2;
+      --c-bg-page: #F7F4EF;
+      --c-bg-card: #FFFFFF;
+      --th-blue: #1A5FFF;
+      --th-yellow: #F5C400;
+      --th-green: #2ABB6E;
+      --th-orange: #E8472A;
+      --th-teal: #00B5CC;
+      --c-green: #2ABB6E;
+      --c-green-subtle: #E8F8F0;
+      --c-yellow: #F5C400;
+      --c-yellow-subtle: #FEF9E6;
+      --font-brand: "Neighbour Sans", "Montserrat", sans-serif;
+      --r-card: 20px;
+      --r-item: 14px;
+      --r-sm: 10px;
+      --r-pill: 9999px;
+      --sh-sidebar: 10px 0 35px rgba(15, 27, 53, 0.08);
+      --sh-card: 0 4px 16px rgba(15, 27, 53, 0.04);
+      --sh-card-hover: 0 12px 28px rgba(26, 95, 255, 0.09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--c-bg-page); color: var(--c-text); font-family: var(--font-brand); min-height: 100vh; display: flex; overflow-x: hidden; }
+
+    .brand-top-thread { position: fixed; top: 0; left: 0; right: 0; height: 4px; display: flex; z-index: 9999; }
+    .brand-top-thread span { flex: 1; height: 100%; }
+    .brand-top-thread .th-1 { background: var(--th-blue); }
+    .brand-top-thread .th-2 { background: var(--th-yellow); }
+    .brand-top-thread .th-3 { background: var(--th-green); }
+    .brand-top-thread .th-4 { background: var(--th-orange); }
+    .brand-top-thread .th-5 { background: var(--th-teal); }
+
+    .app-frame { width: 100%; display: flex; min-height: 100vh; position: relative; }
+
+    /* Sidebar */
+    .app-sidebar {
+      width: 275px; background: linear-gradient(180deg, #0F1B35 0%, #0A1428 100%);
+      border-right: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; flex-shrink: 0;
+      padding: 24px 20px 20px; height: 100vh; position: sticky; top: 0; overflow-y: auto; z-index: 100; box-shadow: var(--sh-sidebar);
+    }
+    .sidebar-brand { display: flex; align-items: center; justify-content: flex-start; padding: 8px 6px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-decoration: none; position: relative; }
+    .sidebar-brand img { width: 100%; max-width: 200px; height: auto; }
+    .sidebar-brand-badge { position: absolute; bottom: 6px; right: 6px; background: rgba(245, 196, 0, 0.15); border: 1px solid rgba(245, 196, 0, 0.35); color: var(--th-yellow); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 2px 6px; border-radius: var(--r-pill); }
+    .sidebar-nav-group { margin-top: 24px; }
+    .sidebar-group-title { font-size: 0.65rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(255, 255, 255, 0.45); padding: 0 12px 10px; display: flex; align-items: center; gap: 6px; }
+    .sidebar-group-title::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--th-yellow); }
+    .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--r-item); font-size: 0.86rem; font-weight: 600; color: rgba(255, 255, 255, 0.72); text-decoration: none; transition: all 0.22s ease; position: relative; }
+    .sidebar-link:hover { background: rgba(255, 255, 255, 0.06); color: #FFFFFF; transform: translateX(2px); }
+    .sidebar-link.active { background: linear-gradient(90deg, var(--c-blue) 0%, #2566FF 100%); color: #FFFFFF; font-weight: 700; box-shadow: 0 6px 18px rgba(26, 95, 255, 0.35); }
+    .sidebar-link.active::before { content: ""; position: absolute; left: -6px; top: 50%; transform: translateY(-50%); width: 4px; height: 18px; background: var(--th-yellow); border-radius: 4px; }
+    .sidebar-link.logout { margin-top: 12px; padding-top: 14px; border-top: 1px dashed rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.55); }
+    .sidebar-icon { width: 19px; height: 19px; stroke-width: 2; stroke: currentColor; fill: none; flex-shrink: 0; }
+    .sidebar-badge { margin-left: auto; background: rgba(255, 255, 255, 0.2); color: #FFFFFF; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: var(--r-pill); }
+    .sidebar-badge.green { background: var(--c-green); color: #FFFFFF; font-size: 0.6rem; }
+
+    /* Main */
+    .app-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: var(--c-bg-page); }
+
+    .app-topbar { padding: 18px 40px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--c-border); display: flex; align-items: center; justify-content: space-between; gap: 20px; position: sticky; top: 0; z-index: 50; }
+    .topbar-search { position: relative; width: 400px; }
+    .topbar-search input { width: 100%; padding: 10px 42px; border-radius: var(--r-pill); border: 1px solid var(--c-border); background: #FFFFFF; font-family: var(--font-brand); font-size: 0.85rem; color: var(--c-text); outline: none; }
+    .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; stroke: var(--c-text-muted); stroke-width: 2.2; fill: none; }
+    .topbar-actions { display: flex; align-items: center; gap: 14px; }
+    .topbar-user { display: flex; align-items: center; gap: 12px; padding-left: 16px; border-left: 1px solid var(--c-border); }
+    .user-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--c-blue-dark) 0%, #1D356A 100%); color: #FFFFFF; font-weight: 800; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; }
+    .user-name { font-size: 0.88rem; font-weight: 700; color: var(--c-text); }
+    .user-role { font-size: 0.72rem; font-weight: 600; color: var(--c-text-muted); }
+
+    /* Header */
+    .page-header { padding: 32px 40px 24px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+    .ph-title { font-size: 1.85rem; font-weight: 800; color: var(--c-text); }
+    .title-thread-accent { display: flex; gap: 6px; margin: 8px 0 6px; }
+    .title-thread-accent span { height: 4px; border-radius: 2px; }
+    .title-thread-accent .th-blue { width: 44px; background: var(--th-blue); }
+    .title-thread-accent .th-yellow { width: 28px; background: var(--th-yellow); }
+    .title-thread-accent .th-green { width: 56px; background: var(--th-green); }
+    .title-thread-accent .th-orange { width: 32px; background: var(--th-orange); }
+    .ph-sub { font-size: 0.88rem; color: var(--c-text-muted); font-weight: 500; }
+
+    /* Botões */
+    .btn-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: var(--r-pill); font-size: 0.84rem; font-weight: 700; font-family: var(--font-brand); cursor: pointer; border: 1px solid transparent; text-decoration: none; transition: all 0.22s ease; }
+    .btn-pill-primary { background: var(--c-blue); color: #FFFFFF; box-shadow: 0 4px 14px rgba(26, 95, 255, 0.25); }
+    .btn-pill-primary:hover { background: var(--c-blue-hover); transform: translateY(-1px); }
+    .btn-pill-secondary { background: #FFFFFF; color: var(--c-text); border-color: var(--c-border); }
+    .btn-pill-secondary:hover { border-color: var(--c-blue); color: var(--c-blue); }
+
+    /* Filtros Rápidos */
+    .filter-bar { padding: 0 40px 24px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .f-chip { background: #FFFFFF; border: 1px solid var(--c-border); color: var(--c-text-muted); padding: 8px 18px; border-radius: var(--r-pill); font-size: 0.78rem; font-weight: 700; font-family: var(--font-brand); cursor: pointer; transition: all 0.2s; }
+    .f-chip.active { background: var(--c-blue); border-color: var(--c-blue); color: #FFFFFF; box-shadow: 0 2px 8px rgba(26, 95, 255, 0.25); }
+
+    /* Grid de Materiais */
+    .materials-grid { padding: 0 40px 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .material-card { background: #FFFFFF; border: 1px solid var(--c-border); border-radius: var(--r-card); padding: 24px; box-shadow: var(--sh-card); display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s ease; position: relative; overflow: hidden; }
+    .material-card:hover { transform: translateY(-3px); box-shadow: var(--sh-card-hover); border-color: rgba(26, 95, 255, 0.3); }
+    .material-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--c-blue); }
+    .material-card.green::before { background: var(--c-green); }
+    .material-card.yellow::before { background: var(--c-yellow); }
+    .material-card.teal::before { background: var(--th-teal); }
+
+    .mc-type-badge { font-size: 0.68rem; font-weight: 800; padding: 4px 10px; border-radius: var(--r-pill); letter-spacing: 0.5px; }
+    .mc-type-badge.pdf { background: var(--c-green-subtle); color: var(--c-green); }
+    .mc-type-badge.scorm { background: var(--c-blue-subtle); color: var(--c-blue); }
+    .mc-type-badge.manual { background: var(--c-yellow-subtle); color: #9E6B00; }
+
+    .mc-title { font-size: 1.15rem; font-weight: 800; color: var(--c-text); line-height: 1.35; margin: 12px 0 8px; }
+    .mc-desc { font-size: 0.8rem; color: var(--c-text-muted); line-height: 1.5; margin-bottom: 20px; }
+
+    .mc-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--c-border); }
+    .mc-count { font-size: 1.15rem; font-weight: 800; color: var(--c-blue); font-family: var(--font-brand); }
+    .mc-count-lbl { font-size: 0.65rem; color: var(--c-text-muted); font-weight: 700; text-transform: uppercase; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 27, 53, 0.6); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #FFFFFF; border-radius: var(--r-card); width: 100%; max-width: 580px; padding: 32px; box-shadow: 0 20px 50px rgba(15, 27, 53, 0.3); position: relative; }
+    .modal-close { position: absolute; top: 20px; right: 20px; background: var(--c-bg-page); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--c-text); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-input { width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--c-border); font-family: var(--font-brand); font-size: 0.85rem; color: var(--c-text); background: var(--c-bg-page); outline: none; }
+    .form-input:focus { border-color: var(--c-blue); background: #FFFFFF; }
+
+    /* Toast */
+    .toast-pill { position: fixed; bottom: 28px; right: 28px; background: #0F1B35; color: #FFFFFF; padding: 12px 24px; border-radius: var(--r-pill); font-size: 0.83rem; font-weight: 700; box-shadow: 0 10px 30px rgba(15, 27, 53, 0.25); display: flex; align-items: center; gap: 10px; z-index: 999999; transform: translateY(100px); opacity: 0; transition: all 0.35s; }
+    .toast-pill.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+
+<body>
+
+  <div class="brand-top-thread" aria-hidden="true">
+    <span class="th-1"></span><span class="th-2"></span><span class="th-3"></span><span class="th-4"></span><span class="th-5"></span>
+  </div>
+
+  <div class="app-frame">
+
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar">
+      <a href="index.html" class="sidebar-brand" title="Compassion Brasil — Início">
+        <img src="assets/logo/logo_branco_bandeira.svg" alt="Compassion Brasil">
+      </a>
+
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">Menu Principal</div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="treinamentos.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" /><rect x="14" y="3" width="7" height="7" rx="2" /><rect x="14" y="14" width="7" height="7" rx="2" /><rect x="3" y="14" width="7" height="7" rx="2" /></svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="cursos-detalhes.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+              <span>Cursos & Trilhas</span>
+              <span class="sidebar-badge">14</span>
+            </a>
+          </li>
+          <li>
+            <a href="usuarios-inscricoes.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span>Usuários & Alunos</span>
+            </a>
+          </li>
+          <li>
+            <a href="biblioteca-materiais.html" class="sidebar-link active">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+              <span>Biblioteca</span>
+            </a>
+          </li>
+          <li>
+            <a href="treinamentos.html#relatorios" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+              <span>Relatórios</span>
+            </a>
+          </li>
+          <li>
+            <a href="moodle-config.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>
+              <span>Moodle</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="sidebar-link logout">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-search">
+          <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+          <input type="text" placeholder="Buscar materiais, guias, manuais e apostilas..." id="searchMaterial">
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-user">
+            <div class="user-avatar">AF</div>
+            <div class="user-info">
+              <div class="user-name">Alexandre Ferreira</div>
+              <div class="user-role">Gestor Corporativo</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-header">
+        <div>
+          <h1 class="ph-title">Biblioteca de Materiais Pedagógicos & Metodologias</h1>
+          <p class="ph-sub">Total de 18 materiais catalogados e 5.218 downloads registrados pela rede de parceiros.</p>
+        </div>
+        <div>
+          <button class="btn-pill btn-pill-primary" onclick="abrirModalUpload()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Publicar Novo Material
+          </button>
+        </div>
+      </section>
+
+      <!-- Barra de Filtros -->
+      <div class="filter-bar">
+        <button class="f-chip active" onclick="filtrarCategoria('todos', this)">Todos os Materiais (18)</button>
+        <button class="f-chip" onclick="filtrarCategoria('salvaguarda', this)">Proteção & Salvaguarda</button>
+        <button class="f-chip" onclick="filtrarCategoria('primeira-infancia', this)">Primeira Infância</button>
+        <button class="f-chip" onclick="filtrarCategoria('lideranca', this)">Liderança & Discipulado</button>
+        <button class="f-chip" onclick="filtrarCategoria('scorm', this)">Pacotes SCORM Interativos</button>
+      </div>
+
+      <!-- Grid de Materiais -->
+      <div class="materials-grid" id="materialsContainer">
+        <!-- Item 1 -->
+        <div class="material-card" data-cat="salvaguarda">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span class="mc-type-badge pdf">PDF OFICIAL</span>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">12.4 MB</span>
+            </div>
+            <h2 class="mc-title">Guia de Proteção e Salvaguarda Infantil</h2>
+            <p class="mc-desc">Diretriz nacional obrigatória para líderes, voluntários e educadores de projetos parceiros da Compassion no Brasil.</p>
+          </div>
+          <div class="mc-footer">
+            <div>
+              <div class="mc-count">1.842</div>
+              <div class="mc-count-lbl">Downloads</div>
+            </div>
+            <button class="btn-pill btn-pill-primary" style="padding:7px 16px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Guia de Proteção Infantil (12.4 MB).')">Baixar PDF</button>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="material-card green" data-cat="scorm">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span class="mc-type-badge scorm">APOSTILA SCORM</span>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">18.2 MB</span>
+            </div>
+            <h2 class="mc-title">Caderno do Facilitador de Turmas</h2>
+            <p class="mc-desc">Metodologia de aplicação prática de dinâmicas, planos de aula socioemocionais e gestão de rodas de conversa.</p>
+          </div>
+          <div class="mc-footer">
+            <div>
+              <div class="mc-count">1.415</div>
+              <div class="mc-count-lbl">Downloads</div>
+            </div>
+            <button class="btn-pill btn-pill-primary" style="padding:7px 16px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Caderno do Facilitador (18.2 MB).')">Baixar Pacote</button>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="material-card yellow" data-cat="primeira-infancia">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span class="mc-type-badge manual">MANUAL PRÁTICO</span>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">9.6 MB</span>
+            </div>
+            <h2 class="mc-title">Apostila de Desenvolvimento Infantil</h2>
+            <p class="mc-desc">Fundamentos cognitivos, socioemocionais, físicos e espirituais para voluntários atuantes na Primeira Infância.</p>
+          </div>
+          <div class="mc-footer">
+            <div>
+              <div class="mc-count">1.096</div>
+              <div class="mc-count-lbl">Downloads</div>
+            </div>
+            <button class="btn-pill btn-pill-primary" style="padding:7px 16px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Apostila de Desenvolvimento Infantil (9.6 MB).')">Baixar Manual</button>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="material-card teal" data-cat="lideranca">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span class="mc-type-badge scorm">LIVRO TEXTO</span>
+              <span style="font-size:0.75rem;font-weight:700;color:var(--c-text-muted);">15.8 MB</span>
+            </div>
+            <h2 class="mc-title">Discipulado Bíblico Criativo e Vocação</h2>
+            <p class="mc-desc">Atividades pedagógicas e dinâmicas bíblicas para igrejas e centros comunitários que atendem crianças e jovens.</p>
+          </div>
+          <div class="mc-footer">
+            <div>
+              <div class="mc-count">865</div>
+              <div class="mc-count-lbl">Downloads</div>
+            </div>
+            <button class="btn-pill btn-pill-primary" style="padding:7px 16px;font-size:0.75rem;" onclick="mostrarToast('Download iniciado: Discipulado Bíblico (15.8 MB).')">Baixar Livro</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal de Upload de Material -->
+  <div class="modal-overlay" id="modalUpload">
+    <div class="modal-box">
+      <button class="modal-close" onclick="fecharModal()">&times;</button>
+      <h2 style="font-size:1.3rem;font-weight:800;color:var(--c-text);margin-bottom:4px;">Publicar Novo Material Pedagógico</h2>
+      <p style="font-size:0.78rem;color:var(--c-text-muted);margin-bottom:20px;">O arquivo será disponibilizado para download e indexado na biblioteca do Moodle.</p>
+      
+      <form onsubmit="salvarMaterial(event)">
+        <div class="form-group">
+          <label class="form-label">Título do Material</label>
+          <input type="text" class="form-input" placeholder="Ex: Manual de Segurança Alimentar" required>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-group">
+            <label class="form-label">Categoria</label>
+            <select class="form-input">
+              <option>Proteção & Salvaguarda</option>
+              <option>Primeira Infância</option>
+              <option>Liderança & Vocação</option>
+              <option>Pedagogia Bíblica</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo de Arquivo</label>
+            <select class="form-input">
+              <option>Documento PDF</option>
+              <option>Pacote SCORM .zip</option>
+              <option>Apresentação PPTX</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Descrição Resumida</label>
+          <textarea class="form-input" rows="3" placeholder="Explique como os educadores devem aplicar este material..." required></textarea>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
+          <button type="button" class="btn-pill btn-pill-secondary" onclick="fecharModal()">Cancelar</button>
+          <button type="submit" class="btn-pill btn-pill-primary">Fazer Upload & Publicar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-pill" id="toastPill">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--c-green)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toastMsg">Material publicado com sucesso!</span>
+  </div>
+
+  <script>
+    function mostrarToast(msg) {
+      const t = document.getElementById("toastPill");
+      const m = document.getElementById("toastMsg");
+      m.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3200);
+    }
+
+    function abrirModalUpload() {
+      document.getElementById("modalUpload").classList.add("open");
+    }
+
+    function fecharModal() {
+      document.getElementById("modalUpload").classList.remove("open");
+    }
+
+    function salvarMaterial(e) {
+      e.preventDefault();
+      fecharModal();
+      mostrarToast("Material enviado com sucesso e catalogado no Moodle!");
+    }
+
+    function filtrarCategoria(cat, btn) {
+      document.querySelectorAll(".f-chip").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".material-card").forEach(card => {
+        if (cat === "todos" || card.dataset.cat === cat) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    document.getElementById("searchMaterial").addEventListener("input", function(e) {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll(".material-card").forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? "flex" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

@@ -335,7 +335,7 @@ Esta é a seção mais técnica do site, contendo o SVG interativo com 27 estado
   - Linha inferior (`footer-bottom`): Direitos autorais e CNPJ.
 * **Como implementar no WordPress / Elementor:**
   - Criar o template no **Elementor Theme Builder > Footer** e definir a condição para exibir em todo o site (*Entire Site*).
-  - A coluna **Siga-nos** deve conter o widget de Ícones Sociais (com estilo circular estilizado) e um bloco de imagem/HTML com o selo da Mandalla apontando para `https://mandalladesign.com.br`.
+  - A coluna **Siga-nos** deve conter o widget de Ícones Sociais (com estilo circular estilizado) e um bloco de imagem/HTML com o selo da Mandalla apontando para `https://www.instagram.com/mandallacomunicacao/`.
 
 ---
 

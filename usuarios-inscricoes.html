@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuários & Inscrições Ativas — Compassion Brasil</title>
+  <meta name="description"
+    content="Monitoramento individual de participantes, líderes comunitários, inscrições ativas em cursos e histórico de materiais baixados.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Estilos base e fontes oficiais da marca -->
+  <link rel="stylesheet" href="wireframe.css">
+
+  <style>
+    :root {
+      --c-blue: #1A5FFF;
+      --c-blue-hover: #1048D9;
+      --c-blue-high: #AABBF7;
+      --c-blue-subtle: rgba(26, 95, 255, 0.08);
+      --c-blue-dark: #0F1B35;
+      --c-text: #0F1B35;
+      --c-text-muted: #5C677D;
+      --c-border: #E5E9F2;
+      --c-bg-page: #F7F4EF;
+      --c-bg-card: #FFFFFF;
+      --th-blue: #1A5FFF;
+      --th-yellow: #F5C400;
+      --th-green: #2ABB6E;
+      --th-orange: #E8472A;
+      --th-teal: #00B5CC;
+      --c-green: #2ABB6E;
+      --c-green-subtle: #E8F8F0;
+      --c-yellow: #F5C400;
+      --c-yellow-subtle: #FEF9E6;
+      --font-brand: "Neighbour Sans", "Montserrat", sans-serif;
+      --r-card: 20px;
+      --r-item: 14px;
+      --r-sm: 10px;
+      --r-pill: 9999px;
+      --sh-sidebar: 10px 0 35px rgba(15, 27, 53, 0.08);
+      --sh-card: 0 4px 16px rgba(15, 27, 53, 0.04);
+      --sh-card-hover: 0 12px 28px rgba(26, 95, 255, 0.09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--c-bg-page); color: var(--c-text); font-family: var(--font-brand); min-height: 100vh; display: flex; overflow-x: hidden; }
+
+    .brand-top-thread { position: fixed; top: 0; left: 0; right: 0; height: 4px; display: flex; z-index: 9999; }
+    .brand-top-thread span { flex: 1; height: 100%; }
+    .brand-top-thread .th-1 { background: var(--th-blue); }
+    .brand-top-thread .th-2 { background: var(--th-yellow); }
+    .brand-top-thread .th-3 { background: var(--th-green); }
+    .brand-top-thread .th-4 { background: var(--th-orange); }
+    .brand-top-thread .th-5 { background: var(--th-teal); }
+
+    .app-frame { width: 100%; display: flex; min-height: 100vh; position: relative; }
+
+    /* Sidebar */
+    .app-sidebar {
+      width: 275px; background: linear-gradient(180deg, #0F1B35 0%, #0A1428 100%);
+      border-right: 1px solid rgba(255, 255, 255, 0.08); display: flex; flex-direction: column; flex-shrink: 0;
+      padding: 24px 20px 20px; height: 100vh; position: sticky; top: 0; overflow-y: auto; z-index: 100; box-shadow: var(--sh-sidebar);
+    }
+    .sidebar-brand { display: flex; align-items: center; justify-content: flex-start; padding: 8px 6px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); text-decoration: none; position: relative; }
+    .sidebar-brand img { width: 100%; max-width: 200px; height: auto; }
+    .sidebar-brand-badge { position: absolute; bottom: 6px; right: 6px; background: rgba(245, 196, 0, 0.15); border: 1px solid rgba(245, 196, 0, 0.35); color: var(--th-yellow); font-size: 0.58rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; padding: 2px 6px; border-radius: var(--r-pill); }
+    .sidebar-nav-group { margin-top: 24px; }
+    .sidebar-group-title { font-size: 0.65rem; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(255, 255, 255, 0.45); padding: 0 12px 10px; display: flex; align-items: center; gap: 6px; }
+    .sidebar-group-title::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--th-yellow); }
+    .sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .sidebar-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--r-item); font-size: 0.86rem; font-weight: 600; color: rgba(255, 255, 255, 0.72); text-decoration: none; transition: all 0.22s ease; position: relative; }
+    .sidebar-link:hover { background: rgba(255, 255, 255, 0.06); color: #FFFFFF; transform: translateX(2px); }
+    .sidebar-link.active { background: linear-gradient(90deg, var(--c-blue) 0%, #2566FF 100%); color: #FFFFFF; font-weight: 700; box-shadow: 0 6px 18px rgba(26, 95, 255, 0.35); }
+    .sidebar-link.active::before { content: ""; position: absolute; left: -6px; top: 50%; transform: translateY(-50%); width: 4px; height: 18px; background: var(--th-yellow); border-radius: 4px; }
+    .sidebar-link.logout { margin-top: 12px; padding-top: 14px; border-top: 1px dashed rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.55); }
+    .sidebar-icon { width: 19px; height: 19px; stroke-width: 2; stroke: currentColor; fill: none; flex-shrink: 0; }
+    .sidebar-badge { margin-left: auto; background: rgba(255, 255, 255, 0.2); color: #FFFFFF; font-size: 0.65rem; font-weight: 800; padding: 2px 8px; border-radius: var(--r-pill); }
+    .sidebar-badge.green { background: var(--c-green); color: #FFFFFF; font-size: 0.6rem; }
+
+    /* Main */
+    .app-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: var(--c-bg-page); }
+
+    .app-topbar { padding: 18px 40px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--c-border); display: flex; align-items: center; justify-content: space-between; gap: 20px; position: sticky; top: 0; z-index: 50; }
+    .topbar-search { position: relative; width: 400px; }
+    .topbar-search input { width: 100%; padding: 10px 42px; border-radius: var(--r-pill); border: 1px solid var(--c-border); background: #FFFFFF; font-family: var(--font-brand); font-size: 0.85rem; color: var(--c-text); outline: none; }
+    .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 17px; height: 17px; stroke: var(--c-text-muted); stroke-width: 2.2; fill: none; }
+    .topbar-actions { display: flex; align-items: center; gap: 14px; }
+    .topbar-user { display: flex; align-items: center; gap: 12px; padding-left: 16px; border-left: 1px solid var(--c-border); }
+    .user-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--c-blue-dark) 0%, #1D356A 100%); color: #FFFFFF; font-weight: 800; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; }
+    .user-name { font-size: 0.88rem; font-weight: 700; color: var(--c-text); }
+    .user-role { font-size: 0.72rem; font-weight: 600; color: var(--c-text-muted); }
+
+    /* Header */
+    .page-header { padding: 32px 40px 24px; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+    .ph-title { font-size: 1.85rem; font-weight: 800; color: var(--c-text); }
+    .title-thread-accent { display: flex; gap: 6px; margin: 8px 0 6px; }
+    .title-thread-accent span { height: 4px; border-radius: 2px; }
+    .title-thread-accent .th-blue { width: 44px; background: var(--th-blue); }
+    .title-thread-accent .th-yellow { width: 28px; background: var(--th-yellow); }
+    .title-thread-accent .th-green { width: 56px; background: var(--th-green); }
+    .title-thread-accent .th-orange { width: 32px; background: var(--th-orange); }
+    .ph-sub { font-size: 0.88rem; color: var(--c-text-muted); font-weight: 500; }
+
+    /* Tabela */
+    .table-box { margin: 0 40px 40px; background: #FFFFFF; border: 1px solid var(--c-border); border-radius: var(--r-card); box-shadow: var(--sh-card); overflow: hidden; }
+    .table-top-bar { padding: 20px 26px; border-bottom: 1px solid var(--c-border); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .tsc-filters { display: flex; gap: 8px; }
+    .tsc-chip { background: var(--c-bg-page); border: 1px solid var(--c-border); color: var(--c-text-muted); padding: 7px 16px; border-radius: var(--r-pill); font-size: 0.74rem; font-weight: 700; font-family: var(--font-brand); cursor: pointer; transition: all 0.2s; }
+    .tsc-chip.active { background: var(--c-blue); border-color: var(--c-blue); color: #FFFFFF; }
+
+    .clean-table { width: 100%; border-collapse: collapse; }
+    .clean-table th { padding: 14px 26px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--c-text-muted); background: var(--c-bg-page); border-bottom: 1px solid var(--c-border); text-align: left; }
+    .clean-table td { padding: 16px 26px; font-size: 0.83rem; color: var(--c-text); border-bottom: 1px solid var(--c-border); vertical-align: middle; }
+    .clean-table tr:hover td { background: rgba(26, 95, 255, 0.02); }
+
+    .user-td-wrap { display: flex; align-items: center; gap: 12px; }
+    .user-initials { width: 38px; height: 38px; border-radius: 50%; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; color: #FFFFFF; flex-shrink: 0; }
+
+    .status-pill { font-size: 0.69rem; font-weight: 700; padding: 4px 10px; border-radius: var(--r-pill); white-space: nowrap; }
+    .status-pill.concluido { background: var(--c-green-subtle); color: var(--c-green); border: 1px solid rgba(42, 187, 110, 0.2); }
+    .status-pill.andamento { background: var(--c-blue-subtle); color: var(--c-blue); border: 1px solid rgba(26, 95, 255, 0.2); }
+    .status-pill.inscrito { background: var(--c-yellow-subtle); color: #9E6B00; border: 1px solid rgba(245, 196, 0, 0.3); }
+
+    .progress-bar-flat { width: 75px; height: 6px; border-radius: var(--r-pill); background: var(--c-bg-page); overflow: hidden; border: 1px solid var(--c-border); }
+    .p-bar-fill { height: 100%; border-radius: var(--r-pill); background: var(--c-blue); }
+
+    .btn-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: var(--r-pill); font-size: 0.75rem; font-weight: 700; font-family: var(--font-brand); cursor: pointer; border: 1px solid var(--c-border); background: var(--c-bg-page); color: var(--c-text); text-decoration: none; transition: all 0.2s; }
+    .btn-pill:hover { border-color: var(--c-blue); color: var(--c-blue); background: #FFFFFF; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 27, 53, 0.6); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #FFFFFF; border-radius: var(--r-card); width: 100%; max-width: 560px; padding: 32px; box-shadow: 0 20px 50px rgba(15, 27, 53, 0.3); position: relative; }
+    .modal-close { position: absolute; top: 20px; right: 20px; background: var(--c-bg-page); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+    /* Toast */
+    .toast-pill { position: fixed; bottom: 28px; right: 28px; background: #0F1B35; color: #FFFFFF; padding: 12px 24px; border-radius: var(--r-pill); font-size: 0.83rem; font-weight: 700; box-shadow: 0 10px 30px rgba(15, 27, 53, 0.25); display: flex; align-items: center; gap: 10px; z-index: 999999; transform: translateY(100px); opacity: 0; transition: all 0.35s; }
+    .toast-pill.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+
+<body>
+
+  <div class="brand-top-thread" aria-hidden="true">
+    <span class="th-1"></span><span class="th-2"></span><span class="th-3"></span><span class="th-4"></span><span class="th-5"></span>
+  </div>
+
+  <div class="app-frame">
+
+    <!-- SIDEBAR -->
+    <aside class="app-sidebar">
+      <a href="index.html" class="sidebar-brand" title="Compassion Brasil — Início">
+        <img src="assets/logo/logo_branco_bandeira.svg" alt="Compassion Brasil">
+      </a>
+
+      <div class="sidebar-nav-group">
+        <div class="sidebar-group-title">Menu Principal</div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="treinamentos.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2" /><rect x="14" y="3" width="7" height="7" rx="2" /><rect x="14" y="14" width="7" height="7" rx="2" /><rect x="3" y="14" width="7" height="7" rx="2" /></svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="cursos-detalhes.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+              <span>Cursos & Trilhas</span>
+              <span class="sidebar-badge">14</span>
+            </a>
+          </li>
+          <li>
+            <a href="usuarios-inscricoes.html" class="sidebar-link active">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span>Usuários & Alunos</span>
+            </a>
+          </li>
+          <li>
+            <a href="biblioteca-materiais.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+              <span>Biblioteca</span>
+            </a>
+          </li>
+          <li>
+            <a href="treinamentos.html#relatorios" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
+              <span>Relatórios</span>
+            </a>
+          </li>
+          <li>
+            <a href="moodle-config.html" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>
+              <span>Moodle</span>
+            </a>
+          </li>
+          <li>
+            <a href="index.html" class="sidebar-link logout">
+              <svg class="sidebar-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" /></svg>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-search">
+          <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+          <input type="text" placeholder="Filtrar por nome do participante, igreja ou UF..." id="searchUser">
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-user">
+            <div class="user-avatar">AF</div>
+            <div class="user-info">
+              <div class="user-name">Alexandre Ferreira</div>
+              <div class="user-role">Gestor Corporativo</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-header">
+        <div>
+          <h1 class="ph-title">Participantes, Inscrições Ativas & Downloads</h1>
+          <p class="ph-sub">Consulte os líderes cadastrados, andamento nos módulos do Moodle e materiais pedagógicos baixados.</p>
+        </div>
+      </section>
+
+      <div class="table-box">
+        <div class="table-top-bar">
+          <div class="tsc-filters">
+            <button class="tsc-chip active" onclick="filtrar('todos', this)">Todos (18)</button>
+            <button class="tsc-chip" onclick="filtrar('concluido', this)">Concluídos (8)</button>
+            <button class="tsc-chip" onclick="filtrar('andamento', this)">Em Andamento (6)</button>
+            <button class="tsc-chip" onclick="filtrar('inscrito', this)">Inscritos Recentes (4)</button>
+          </div>
+        </div>
+
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Participante & Cargo</th>
+              <th>UF</th>
+              <th>Curso Ativo</th>
+              <th>Progresso</th>
+              <th>Status</th>
+              <th>Downloads Realizados</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <!-- Renderizado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Detalhes do Usuário -->
+  <div class="modal-overlay" id="modalUser">
+    <div class="modal-box">
+      <button class="modal-close" onclick="fecharModal()">&times;</button>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+        <div class="user-initials" id="mAvatar" style="width:48px;height:48px;font-size:1.1rem;background:var(--c-blue);">CS</div>
+        <div>
+          <h2 style="font-size:1.25rem;font-weight:800;color:var(--c-text);" id="mNome">Nome</h2>
+          <div style="font-size:0.78rem;color:var(--c-text-muted);" id="mCargo">Cargo</div>
+        </div>
+      </div>
+      
+      <div style="background:var(--c-bg-page);padding:16px;border-radius:12px;margin-bottom:20px;border:1px solid var(--c-border);">
+        <div style="font-size:0.75rem;font-weight:800;color:var(--c-text);text-transform:uppercase;margin-bottom:8px;">Trilha Ativa no Moodle</div>
+        <div style="font-size:0.95rem;font-weight:700;color:var(--c-blue);" id="mCurso">Curso</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
+          <div class="progress-bar-flat" style="flex:1;">
+            <div class="p-bar-fill" id="mBar" style="width:100%;"></div>
+          </div>
+          <span style="font-size:0.8rem;font-weight:800;" id="mPct">100%</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:0.75rem;font-weight:800;color:var(--c-text);text-transform:uppercase;margin-bottom:10px;">Metodologias Baixadas</div>
+        <ul style="font-size:0.8rem;color:var(--c-text-muted);display:flex;flex-direction:column;gap:6px;padding-left:18px;">
+          <li>Guia de Proteção e Salvaguarda Infantil (PDF)</li>
+          <li>Caderno do Facilitador de Turmas Socioemocionais</li>
+          <li>Plano de Aula — Módulo Primeira Infância</li>
+        </ul>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;">
+        <button class="btn-pill" style="background:var(--c-blue);color:#FFFFFF;" onclick="fecharModal()">Fechar Dossiê</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const listaUsuarios = [
+      { nome: "Carlos Eduardo Silva", profissao: "Pastor", estado: "SP", curso: "Liderança Servidora e Protagonismo", progresso: 100, status: "concluido", downloads: "3 materiais baixados", cor: "#1A5FFF", ini: "CS" },
+      { nome: "Ana Paula Rodrigues", profissao: "Educadora Social", estado: "MG", curso: "Oficial de Proteção e Salvaguarda Infantil", progresso: 78, status: "andamento", downloads: "5 materiais baixados", cor: "#2ABB6E", ini: "AR" },
+      { nome: "Marcos Antônio Pereira", profissao: "Líder de Min. Infantil", estado: "BA", curso: "Acolhimento e Vínculo Materno-Infantil", progresso: 100, status: "concluido", downloads: "2 materiais baixados", cor: "#F5C400", ini: "MP" },
+      { nome: "Fernanda Costa Lima", profissao: "Voluntária", estado: "RS", curso: "Discipulado e Educação Bíblica Criativa", progresso: 55, status: "andamento", downloads: "7 materiais baixados", cor: "#00B5CC", ini: "FC" },
+      { nome: "Ricardo Souza Mendes", profissao: "Pastor", estado: "PE", curso: "Liderança Servidora e Protagonismo", progresso: 0, status: "inscrito", downloads: "0 materiais baixados", cor: "#1A5FFF", ini: "RS" },
+      { nome: "Juliana Alves Barros", profissao: "Educadora Social", estado: "CE", curso: "Oficial de Proteção e Salvaguarda Infantil", progresso: 100, status: "concluido", downloads: "4 materiais baixados", cor: "#2ABB6E", ini: "JA" },
+      { nome: "Paulo Roberto Nascimento", profissao: "Líder Comunitário", estado: "RJ", curso: "Gestão Social de Projetos Parceiros", progresso: 40, status: "andamento", downloads: "1 material baixado", cor: "#E8472A", ini: "PN" },
+      { nome: "Maria Eduarda Santos", profissao: "Voluntária", estado: "GO", curso: "Metodologia Compassion — Módulo 1", progresso: 0, status: "inscrito", downloads: "2 materiais baixados", cor: "#00B5CC", ini: "MS" },
+      { nome: "José Luiz Cavalcante", profissao: "Pastor", estado: "AM", curso: "Liderança Servidora e Protagonismo", progresso: 100, status: "concluido", downloads: "3 materiais baixados", cor: "#1A5FFF", ini: "JC" },
+      { nome: "Luciana Ferreira Gomes", profissao: "Educadora Social", estado: "PA", curso: "Acolhimento e Vínculo Materno-Infantil", progresso: 90, status: "andamento", downloads: "6 materiais baixados", cor: "#2ABB6E", ini: "LG" },
+      { nome: "Bruno Henrique Torres", profissao: "Líder de Min. Infantil", estado: "PR", curso: "Oficial de Proteção e Salvaguarda Infantil", progresso: 100, status: "concluido", downloads: "2 materiais baixados", cor: "#F5C400", ini: "BT" },
+      { nome: "Isabela Martins Cruz", profissao: "Voluntária", estado: "SC", curso: "Discipulado e Educação Bíblica Criativa", progresso: 60, status: "andamento", downloads: "4 materiais baixados", cor: "#00B5CC", ini: "IC" },
+      { nome: "Daniel Oliveira Pinto", profissao: "Pastor", estado: "MT", curso: "Liderança Servidora e Protagonismo", progresso: 0, status: "inscrito", downloads: "0 materiais baixados", cor: "#1A5FFF", ini: "DP" },
+      { nome: "Priscila Lima Almeida", profissao: "Líder Comunitária", estado: "MS", curso: "Acolhimento e Vínculo Materno-Infantil", progresso: 100, status: "concluido", downloads: "5 materiais baixados", cor: "#2ABB6E", ini: "PA" },
+      { nome: "Rafael Carvalho Dias", profissao: "Educador Social", estado: "ES", curso: "Oficial de Proteção e Salvaguarda Infantil", progresso: 35, status: "andamento", downloads: "1 material baixado", cor: "#E8472A", ini: "RD" },
+      { nome: "Camila Rocha Freitas", profissao: "Voluntária", estado: "DF", curso: "Gestão Social de Projetos Parceiros", progresso: 0, status: "inscrito", downloads: "3 materiais baixados", cor: "#00B5CC", ini: "CF" },
+      { nome: "André Luís Moreira", profissao: "Pastor", estado: "RN", curso: "Liderança Servidora e Protagonismo", progresso: 100, status: "concluido", downloads: "2 materiais baixados", cor: "#1A5FFF", ini: "AM" },
+      { nome: "Tatiana Borges Nunes", profissao: "Educadora Social", estado: "PB", curso: "Acolhimento e Vínculo Materno-Infantil", progresso: 70, status: "andamento", downloads: "4 materiais baixados", cor: "#2ABB6E", ini: "TN" }
+    ];
+
+    const statusMap = {
+      concluido: { label: "Concluído", class: "concluido" },
+      andamento: { label: "Em Andamento", class: "andamento" },
+      inscrito: { label: "Inscrito", class: "inscrito" }
+    };
+
+    function renderTabela(filtro) {
+      const tbody = document.getElementById("usersTableBody");
+      const lista = filtro === "todos" ? listaUsuarios : listaUsuarios.filter(u => u.status === filtro);
+      tbody.innerHTML = lista.map((u, i) => `
+        <tr>
+          <td>
+            <div class="user-td-wrap">
+              <div class="user-initials" style="background:${u.cor}">${u.ini}</div>
+              <div>
+                <strong style="color:var(--c-text);display:block;">${u.nome}</strong>
+                <span style="font-size:0.72rem;color:var(--c-text-muted);">${u.profissao}</span>
+              </div>
+            </div>
+          </td>
+          <td><span style="background:var(--c-bg-page);border:1px solid var(--c-border);color:var(--c-blue);padding:2px 8px;border-radius:var(--r-sm);font-size:0.72rem;font-weight:700;">${u.estado}</span></td>
+          <td style="font-size:0.82rem;font-weight:600;color:var(--c-text);">${u.curso}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="progress-bar-flat">
+                <div class="p-bar-fill" style="width:${u.progresso}%;"></div>
+              </div>
+              <span style="font-size:0.72rem;font-weight:700;color:var(--c-text-muted);">${u.progresso}%</span>
+            </div>
+          </td>
+          <td><span class="status-pill ${statusMap[u.status].class}">${statusMap[u.status].label}</span></td>
+          <td style="font-weight:700;color:var(--c-blue);font-size:0.8rem;">${u.downloads}</td>
+          <td>
+            <button class="btn-pill" onclick="abrirDossie('${u.nome}', '${u.profissao} · ${u.estado}', '${u.curso}', ${u.progresso}, '${u.cor}', '${u.ini}')">Ver Ficha</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function filtrar(tipo, btn) {
+      document.querySelectorAll(".tsc-chip").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderTabela(tipo);
+    }
+
+    function abrirDossie(nome, cargo, curso, pct, cor, ini) {
+      document.getElementById("mNome").textContent = nome;
+      document.getElementById("mCargo").textContent = cargo;
+      document.getElementById("mCurso").textContent = curso;
+      document.getElementById("mPct").textContent = pct + "%";
+      document.getElementById("mBar").style.width = pct + "%";
+      document.getElementById("mAvatar").textContent = ini;
+      document.getElementById("mAvatar").style.background = cor;
+      document.getElementById("modalUser").classList.add("open");
+    }
+
+    function fecharModal() {
+      document.getElementById("modalUser").classList.remove("open");
+    }
+
+    renderTabela("todos");
+
+    document.getElementById("searchUser").addEventListener("input", function(e) {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll("#usersTableBody tr").forEach(tr => {
+        const text = tr.textContent.toLowerCase();
+        tr.style.display = text.includes(q) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

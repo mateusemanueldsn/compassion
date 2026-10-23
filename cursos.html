@@ -16,13 +16,7 @@
   <!-- Barra de progresso de leitura -->
   <div id="scrollProgress"></div>
 
-  <!-- Cursor customizado oficial -->
-  <div id="customCursor" aria-hidden="true">
-    <svg id="cursorSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 293 360.1" width="36" height="36">
-      <path id="cursorPath" fill="#1A5FFF"
-        d="M122.7,175.3c-7.6,4.3-14.7,9.3-21.3,15C89.3,201,79.5,214,72.4,228.5c-7.7,14-13.6,31.5-18.3,52.6c-2.1,9.4-3.4,19-3.9,28.6l5.1-7.1c-1.7,10.3-2.6,20.7-2.8,31.1c2.4-4.1,4-6.9,5.1-8.5l-0.6,27.2l11.2-27.2c0.8,2.4,1.4,4.9,2.2,7.9c6.9-16,12.8-29.2,18.1-39.6c4.8-10.2,10.2-20,16.2-29.6c5.2-8.6,11-16.8,17.3-24.6c5.7-7.1,13-15.6,21.9-24.9c1.6-2.2,10.9-6.2,11.4-6.5c3.9-1.4,8.9-3,15.2-4.5c3-0.8,10.1-2.4,20.9-5.1c9.5-2.2,17.1-4.3,23.1-5.7c18.3-5.1,32.3-10.6,42.4-16.6c12.8-7.9,20.2-16.9,22.1-27.6c-12.4,2.8-25,4.5-37.6,5.3c-6.9,0.4-17.1,0.6-31.1,0.6c-9.5-0.2-18.9,0.2-28.4,1c-10.3,1.1-20.4,3.4-30.1,6.8C141.7,165.5,131.9,170,122.7,175.3L122.7,175.3z M67.5,194.6l-5.7,8.5c4.3-3.7,12.4-8.7,23.9-14.8c7.7-4.1,26.5-14,56.2-29.2c22.5-11.6,41-29,55.4-52c4.7-7.4,8.8-15.2,12.2-23.3c1.7-4,3.2-8.1,4.5-12.2c0.5-2.3,0.7-4.7,0.6-7.1c0.2-3.3,0.1-6.6-0.4-9.8c-0.4-3.5-1-5.9-2-7.1c-1-1.2-2.6-0.6-3.9,1.8c-10.8,14.9-23.4,28.5-37.5,40.5c-15.9,13.2-33.2,24.5-51.6,33.9c-23.7,11.6-43,23.8-58.1,36.5c-15.8,13.2-29.8,28.4-41.6,45.3c-1.9,3-3.3,6.4-4.1,9.9c2.2-1.4,4.8-1.9,7.3-1.4L18,223l7.3-5.9c1.9-1.8,4.2-3.1,6.7-3.9l-1.8,6.2c5.6-5.3,11.8-10,18.3-14l-2.6,6.4c3.1-3.2,6.5-6.1,10.1-8.7L67.5,194.6L67.5,194.6z M69.6,64.1c-2.8,3.7-4.7,7.9-5.7,12.4c-1.4,4.6-1.4,9.5-0.2,14.2c1.1,4.7,3.1,9.1,5.9,13c3,3.9,6.8,7.2,11,9.7c4.4,2.5,9.1,4.3,14,5.3c10.5,2.1,21.4,0.2,30.6-5.3c4.2-2.5,7.9-5.8,10.9-9.7c2.8-3.7,4.8-7.9,5.7-12.4c1.2-4.6,1.3-9.4,0.2-14c-0.9-4.8-3-9.3-5.9-13.2c-3.1-3.8-6.8-7.1-11-9.7c-4.4-2.6-9.1-4.4-14-5.5c-5.3-1-10.7-1-16,0C90,49.8,85,51.6,80.6,54.3C76.3,56.8,72.6,60.1,69.6,64.1L69.6,64.1z" />
-    </svg>
-  </div>
+
 
   <!-- ═══════════════════════════════════════════════
        HEADER
@@ -350,73 +344,146 @@
           <!-- Lado direito: formulário de inscrição -->
           <div class="contact-form-col reveal d1">
 
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+              <span style="background:rgba(26,95,255,0.1);color:var(--blue);border:1px solid rgba(26,95,255,0.25);padding:3px 10px;border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">
+                Integração Moodle LMS
+              </span>
+              <span style="font-size:0.75rem;color:var(--g500)">Cadastro Oficial</span>
+            </div>
 
-            <h3 style="font-size:1.35rem;font-weight:800;color:var(--dark);margin-bottom:6px">Formulário de Inscrição
-            </h3>
-            <p style="font-size:.85rem;color:var(--g500);margin-bottom:24px">Preencha com seus dados para liberar seu
-              acesso à plataforma.</p>
+            <h3 style="font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:6px">Cadastro e Inscrição em Cursos</h3>
+            <p style="font-size:.85rem;color:var(--g500);margin-bottom:24px">
+              Preencha seus dados para provisionar seu acesso unificado no Moodle e garantir a emissão nominal do seu certificado.
+            </p>
 
             <form class="contact-form" id="pageEnrollForm">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="pageEnrollName" style="color:var(--dark)">Nome completo</label>
-                  <input type="text" id="pageEnrollName" required placeholder="Seu nome"
-                    style="border:1.5px solid var(--g300)">
-                </div>
-                <div class="form-group">
-                  <label for="pageEnrollEmail" style="color:var(--dark)">E-mail institucional/pessoal</label>
-                  <input type="email" id="pageEnrollEmail" required placeholder="seu@email.com"
-                    style="border:1.5px solid var(--g300)">
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="pageEnrollPhone" style="color:var(--dark)">WhatsApp</label>
-                  <input type="tel" id="pageEnrollPhone" required placeholder="(00) 00000-0000"
-                    style="border:1.5px solid var(--g300)">
-                </div>
-                <div class="form-group">
-                  <label for="pageEnrollChurch" style="color:var(--dark)">Igreja / Organização</label>
-                  <input type="text" id="pageEnrollChurch" required placeholder="Nome da igreja ou projeto"
-                    style="border:1.5px solid var(--g300)">
-                </div>
-              </div>
-
+              <!-- Nome Completo (Certificado) -->
               <div class="form-group">
-                <label for="pageEnrollCourse" style="color:var(--dark)">Curso de interesse</label>
-                <select id="pageEnrollCourse" required
-                  style="width:100%;padding:14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
+                <label for="pageEnrollName" style="color:var(--dark)">Nome Completo *</label>
+                <input type="text" id="pageEnrollName" required placeholder="Ex: Carlos Eduardo da Silva" style="border:1.5px solid var(--g300)">
+                <small style="font-size:0.72rem;color:var(--g500);margin-top:2px">Nome oficial que será impresso no certificado de conclusão.</small>
+              </div>
+
+              <!-- E-mail (Chave Única / Login) -->
+              <div class="form-group">
+                <label for="pageEnrollEmail" style="color:var(--dark)">E-mail Corporativo ou Pessoal (Login) *</label>
+                <input type="email" id="pageEnrollEmail" required placeholder="seu.email@exemplo.com" style="border:1.5px solid var(--g300)">
+                <small style="font-size:0.72rem;color:var(--g500);margin-top:2px">Será seu usuário de login no Moodle e onde você receberá o link de ativação.</small>
+              </div>
+
+              <!-- Estado (UF) e Cidade -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="pageEnrollState" style="color:var(--dark)">Estado (UF) *</label>
+                  <select id="pageEnrollState" required style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
+                    <option value="">Selecione o estado...</option>
+                    <option value="AC">Acre (AC)</option>
+                    <option value="AL">Alagoas (AL)</option>
+                    <option value="AP">Amapá (AP)</option>
+                    <option value="AM">Amazonas (AM)</option>
+                    <option value="BA">Bahia (BA)</option>
+                    <option value="CE">Ceará (CE)</option>
+                    <option value="DF">Distrito Federal (DF)</option>
+                    <option value="ES">Espírito Santo (ES)</option>
+                    <option value="GO">Goiás (GO)</option>
+                    <option value="MA">Maranhão (MA)</option>
+                    <option value="MT">Mato Grosso (MT)</option>
+                    <option value="MS">Mato Grosso do Sul (MS)</option>
+                    <option value="MG">Minas Gerais (MG)</option>
+                    <option value="PA">Pará (PA)</option>
+                    <option value="PB">Paraíba (PB)</option>
+                    <option value="PR">Paraná (PR)</option>
+                    <option value="PE">Pernambuco (PE)</option>
+                    <option value="PI">Piauí (PI)</option>
+                    <option value="RJ">Rio de Janeiro (RJ)</option>
+                    <option value="RN">Rio Grande do Norte (RN)</option>
+                    <option value="RS">Rio Grande do Sul (RS)</option>
+                    <option value="RO">Rondônia (RO)</option>
+                    <option value="RR">Roraima (RR)</option>
+                    <option value="SC">Santa Catarina (SC)</option>
+                    <option value="SP">São Paulo (SP)</option>
+                    <option value="SE">Sergipe (SE)</option>
+                    <option value="TO">Tocantins (TO)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="pageEnrollCity" style="color:var(--dark)">Cidade *</label>
+                  <input type="text" id="pageEnrollCity" required placeholder="Sua cidade" style="border:1.5px solid var(--g300)">
+                </div>
+              </div>
+
+              <!-- Profissão / Atuação e Igreja Parceira -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="pageEnrollRole" style="color:var(--dark)">Profissão / Área de Atuação *</label>
+                  <select id="pageEnrollRole" required style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
+                    <option value="">Selecione sua atuação...</option>
+                    <option value="Pastor / Líder Eclesiástico">Pastor / Líder Eclesiástico</option>
+                    <option value="Líder de Ministério Infantil">Líder de Ministério Infantil</option>
+                    <option value="Educador(a) Social">Educador(a) Social</option>
+                    <option value="Líder Comunitário">Líder Comunitário</option>
+                    <option value="Voluntário(a) de Igreja Parceira">Voluntário(a) de Igreja Parceira</option>
+                    <option value="Profissional da Rede de Proteção">Profissional da Rede de Proteção</option>
+                    <option value="Outros">Outros</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="pageEnrollChurch" style="color:var(--dark)">Igreja Parceira / Instituição</label>
+                  <input type="text" id="pageEnrollChurch" placeholder="Nome da igreja ou projeto" style="border:1.5px solid var(--g300)">
+                </div>
+              </div>
+
+              <!-- Curso de Interesse -->
+              <div class="form-group">
+                <label for="pageEnrollCourse" style="color:var(--dark)">Curso de Interesse *</label>
+                <select id="pageEnrollCourse" required style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
                   <option value="">Selecione o curso desejado...</option>
-                  <option value="Oficial de Proteção e Salvaguarda Infantil">Oficial de Proteção e Salvaguarda Infantil
-                  </option>
-                  <option value="Acolhimento e Vínculo Materno-Infantil">Acolhimento e Vínculo Materno-Infantil (0 a 5
-                    anos)</option>
-                  <option value="Liderança Servidora e Protagonismo Jovem">Liderança Servidora e Protagonismo Jovem
-                  </option>
-                  <option value="Discipulado e Educação Bíblica Criativa">Discipulado e Educação Bíblica Criativa
-                  </option>
-                  <option value="Gestão e Sustentabilidade de Projetos Sociais">Gestão e Sustentabilidade de Projetos
-                    Sociais</option>
-                  <option value="Cuidado Pós-Trauma e Saúde Emocional">Cuidado Pós-Trauma e Saúde Emocional</option>
+                  <option value="Oficial de Proteção e Salvaguarda Infantil">Oficial de Proteção e Salvaguarda Infantil (40h · Certificado Oficial)</option>
+                  <option value="Acolhimento e Vínculo Materno-Infantil">Acolhimento e Vínculo Materno-Infantil (0 a 5 anos · 30h)</option>
+                  <option value="Liderança Servidora e Protagonismo Jovem">Liderança Servidora e Protagonismo Jovem (45h · Certificado Oficial)</option>
+                  <option value="Discipulado e Educação Bíblica Criativa">Discipulado e Educação Bíblica Criativa (25h · Certificado Oficial)</option>
+                  <option value="Gestão e Sustentabilidade de Projetos Sociais">Gestão e Sustentabilidade de Projetos Sociais (35h · Certificado Oficial)</option>
+                  <option value="Cuidado Pós-Trauma e Saúde Emocional">Cuidado Pós-Trauma e Saúde Emocional (30h · Certificado Oficial)</option>
                 </select>
               </div>
 
-              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:10px">
-                Confirmar Inscrição Gratuita →
+              <!-- Senha & Confirmação de Senha (para provisionamento Moodle) -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="pageEnrollPassword" style="color:var(--dark)">Criar Senha de Acesso *</label>
+                  <input type="password" id="pageEnrollPassword" required minlength="8" placeholder="Mínimo 8 caracteres" style="border:1.5px solid var(--g300)">
+                </div>
+
+                <div class="form-group">
+                  <label for="pageEnrollPasswordConfirm" style="color:var(--dark)">Confirmar Senha *</label>
+                  <input type="password" id="pageEnrollPasswordConfirm" required minlength="8" placeholder="Repita a senha" style="border:1.5px solid var(--g300)">
+                </div>
+              </div>
+
+              <div style="background:rgba(26,95,255,0.05);border:1px solid rgba(26,95,255,0.18);padding:10px 14px;border-radius:8px;font-size:0.75rem;color:var(--g700);line-height:1.45;display:flex;align-items:flex-start;gap:8px">
+                <span style="font-size:1rem;color:var(--blue)">ℹ</span>
+                <span><strong>Validação por E-mail (Double Opt-in):</strong> Após o envio, você receberá um link de confirmação para ativar sua conta e liberar o acesso às aulas no Moodle LMS.</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;font-size:0.95rem;font-weight:700">
+                Criar Cadastro e Liberar Acesso no Moodle →
               </button>
             </form>
 
             <!-- Mensagem de confirmação pós-envio -->
-            <div id="pageEnrollSuccess" style="display:none;text-align:center;padding:24px 10px">
-              <div
-                style="width:54px;height:54px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px">
-                ✓</div>
-              <h4 style="font-size:1.25rem;font-weight:800;color:var(--dark);margin-bottom:8px">Inscrição Confirmada!
-              </h4>
-              <p style="font-size:.9rem;color:var(--g700);line-height:1.6">
-                Seus dados foram registrados com sucesso. Enviamos as instruções de acesso para o e-mail informado.
+            <div id="pageEnrollSuccess" style="display:none;text-align:center;padding:32px 16px">
+              <div style="width:60px;height:60px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px;box-shadow:0 8px 24px rgba(42,187,110,0.3)">
+                ✓
+              </div>
+              <h4 style="font-size:1.35rem;font-weight:800;color:var(--dark);margin-bottom:8px">Cadastro Realizado com Sucesso!</h4>
+              <p style="font-size:.92rem;color:var(--g700);line-height:1.65;max-width:440px;margin:0 auto 20px">
+                Enviamos um e-mail de ativação para <strong id="sentEmailDisplay" style="color:var(--blue)">seu e-mail</strong>. Por favor, verifique sua caixa de entrada e clique no link para ativar sua conta e iniciar seu curso.
               </p>
+              <button type="button" class="btn btn-outline" id="btnResetPageForm" style="font-size:0.82rem;padding:8px 16px;border:1.5px solid var(--blue);color:var(--blue);background:transparent;border-radius:6px;cursor:pointer">
+                Realizar outro cadastro
+              </button>
             </div>
 
           </div>
@@ -428,58 +495,120 @@
   </main>
 
   <!-- ═══════════════════════════════════════════════
-       MODAL DE INSCRIÇÃO RÁPIDA
+       MODAL DE INSCRIÇÃO RÁPIDA (INTEGRAÇÃO MOODLE LMS)
        ═══════════════════════════════════════════════ -->
   <div class="course-enroll-modal" id="courseEnrollModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="course-enroll-card">
+    <div class="course-enroll-card" style="max-width:560px;padding:32px 30px">
       <button class="course-enroll-close" id="closeEnrollModal" aria-label="Fechar modal">&times;</button>
 
-      <h3 id="modalTitle" style="font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:6px">Inscrição no
-        Curso</h3>
-      <p style="font-size:.85rem;color:var(--g500);margin-bottom:24px">Complete os campos abaixo para iniciar sua
-        capacitação.</p>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="background:rgba(26,95,255,0.1);color:var(--blue);border:1px solid rgba(26,95,255,0.25);padding:3px 10px;border-radius:9999px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">
+          Moodle LMS
+        </span>
+        <span style="font-size:0.75rem;color:var(--g500)">Matrícula Imediata</span>
+      </div>
+
+      <h3 id="modalTitle" style="font-size:1.35rem;font-weight:800;color:var(--dark);margin-bottom:4px">
+        Inscrição e Cadastro no Curso
+      </h3>
+      <p style="font-size:.82rem;color:var(--g500);margin-bottom:18px">
+        Preencha os campos abaixo para provisionar sua conta no Moodle e iniciar sua capacitação.
+      </p>
 
       <form id="enrollForm">
-        <div class="form-group" style="margin-bottom:16px">
-          <label style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Curso Escolhido</label>
+        <!-- Curso Selecionado -->
+        <div class="form-group" style="margin-bottom:12px">
+          <label style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Curso Selecionado</label>
           <input type="text" id="enrollCourseSelect" readonly
-            style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--g100);font-weight:600">
+            style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid rgba(26,95,255,0.25);background:rgba(26,95,255,0.05);color:var(--blue);font-weight:700;font-size:0.9rem">
         </div>
 
-        <div class="form-group" style="margin-bottom:16px">
-          <label for="mName" style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Nome
-            Completo</label>
-          <input type="text" id="mName" required placeholder="Seu nome"
-            style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300)">
+        <!-- Nome Completo (Certificado) -->
+        <div class="form-group" style="margin-bottom:12px">
+          <label for="mName" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Nome Completo *</label>
+          <input type="text" id="mName" required placeholder="Ex: Carlos Eduardo da Silva"
+            style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
+          <small style="font-size:0.68rem;color:var(--g500);margin-top:2px;display:block">Nome para composição do certificado oficial de conclusão.</small>
         </div>
 
-        <div class="form-group" style="margin-bottom:16px">
-          <label for="mEmail" style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Seu E-mail</label>
-          <input type="email" id="mEmail" required placeholder="seu@email.com"
-            style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300)">
+        <!-- E-mail (Login) -->
+        <div class="form-group" style="margin-bottom:12px">
+          <label for="mEmail" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">E-mail Corporativo ou Pessoal (Login) *</label>
+          <input type="email" id="mEmail" required placeholder="seu.email@exemplo.com"
+            style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
         </div>
 
-        <div class="form-group" style="margin-bottom:24px">
-          <label for="mPhone" style="font-size:.8rem;font-weight:700;display:block;margin-bottom:6px">Telefone /
-            WhatsApp</label>
-          <input type="tel" id="mPhone" required placeholder="(00) 00000-0000"
-            style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300)">
+        <!-- Estado (UF) e Cidade -->
+        <div class="form-row" style="margin-bottom:12px">
+          <div class="form-group">
+            <label for="mState" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Estado (UF) *</label>
+            <select id="mState" required style="width:100%;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.85rem">
+              <option value="">UF...</option>
+              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+              <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+              <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+              <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+              <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+              <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+              <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+              <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+              <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mCity" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Cidade *</label>
+            <input type="text" id="mCity" required placeholder="Sua cidade"
+              style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
-          Confirmar e Começar →
+        <!-- Profissão / Área de Atuação -->
+        <div class="form-group" style="margin-bottom:12px">
+          <label for="mRole" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Profissão / Área de Atuação *</label>
+          <select id="mRole" required style="width:100%;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.85rem">
+            <option value="">Selecione sua atuação...</option>
+            <option value="Pastor / Líder Eclesiástico">Pastor / Líder Eclesiástico</option>
+            <option value="Líder de Ministério Infantil">Líder de Ministério Infantil</option>
+            <option value="Educador(a) Social">Educador(a) Social</option>
+            <option value="Líder Comunitário">Líder Comunitário</option>
+            <option value="Voluntário(a) de Igreja Parceira">Voluntário(a) de Igreja Parceira</option>
+            <option value="Profissional da Rede de Proteção">Profissional da Rede de Proteção</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+
+        <!-- Senha e Confirmação -->
+        <div class="form-row" style="margin-bottom:16px">
+          <div class="form-group">
+            <label for="mPassword" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Criar Senha *</label>
+            <input type="password" id="mPassword" required minlength="8" placeholder="Mínimo 8 dígitos"
+              style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
+          </div>
+
+          <div class="form-group">
+            <label for="mPasswordConfirm" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Confirmar Senha *</label>
+            <input type="password" id="mPasswordConfirm" required minlength="8" placeholder="Repita a senha"
+              style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:0.92rem;font-weight:700">
+          Confirmar Cadastro & Ingressar no Curso →
         </button>
       </form>
 
-      <div id="enrollSuccess" style="display:none;text-align:center;padding:24px 10px">
-        <div
-          style="width:52px;height:52px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 16px">
-          ✓</div>
-        <h4 style="font-size:1.2rem;font-weight:800;color:var(--dark);margin-bottom:8px">Inscrição Realizada com
-          Sucesso!</h4>
-        <p style="font-size:.88rem;color:var(--g700);line-height:1.6">
-          Verifique sua caixa de entrada para acessar a plataforma de aulas.
+      <div id="enrollSuccess" style="display:none;text-align:center;padding:28px 12px">
+        <div style="width:56px;height:56px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 16px;box-shadow:0 8px 24px rgba(42,187,110,0.3)">
+          ✓
+        </div>
+        <h4 style="font-size:1.3rem;font-weight:800;color:var(--dark);margin-bottom:8px">Matrícula Solicitada com Sucesso!</h4>
+        <p style="font-size:.9rem;color:var(--g700);line-height:1.6;margin-bottom:20px">
+          Enviamos as instruções e o link de ativação da sua conta para <strong id="modalSentEmailDisplay" style="color:var(--blue)">seu e-mail</strong>. Ative seu acesso para ingressar imediatamente no Moodle.
         </p>
+        <button type="button" class="btn btn-outline" id="btnCloseSuccessModal" style="font-size:0.82rem;padding:8px 16px;border:1.5px solid var(--blue);color:var(--blue);background:transparent;border-radius:6px;cursor:pointer">
+          Concluir
+        </button>
       </div>
     </div>
   </div>
@@ -577,14 +706,96 @@
   </footer>
 
   <script>
-    // Listener adicional para o formulário da página cursos.html
+    // ── 1. FORMULÁRIO PRINCIPAL DA PÁGINA (#pageEnrollForm) ──
     const pageForm = document.getElementById('pageEnrollForm');
     const pageSuccess = document.getElementById('pageEnrollSuccess');
+    const btnResetPageForm = document.getElementById('btnResetPageForm');
+    const sentEmailDisplay = document.getElementById('sentEmailDisplay');
+
     if (pageForm && pageSuccess) {
       pageForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const p1 = document.getElementById('pageEnrollPassword').value;
+        const p2 = document.getElementById('pageEnrollPasswordConfirm').value;
+        if (p1 !== p2) {
+          alert('As senhas digitadas não coincidem. Por favor, verifique.');
+          document.getElementById('pageEnrollPasswordConfirm').focus();
+          return;
+        }
+        const email = document.getElementById('pageEnrollEmail').value;
+        if (sentEmailDisplay) sentEmailDisplay.textContent = email;
         pageForm.style.display = 'none';
         pageSuccess.style.display = 'block';
+      });
+
+      if (btnResetPageForm) {
+        btnResetPageForm.addEventListener('click', () => {
+          pageForm.reset();
+          pageForm.style.display = 'flex';
+          pageSuccess.style.display = 'none';
+        });
+      }
+    }
+
+    // ── 2. MODAL DE INSCRIÇÃO RÁPIDA (#courseEnrollModal) ──
+    const modalEnroll = document.getElementById('courseEnrollModal');
+    const modalForm = document.getElementById('enrollForm');
+    const modalSuccess = document.getElementById('enrollSuccess');
+    const closeEnroll = document.getElementById('closeEnrollModal');
+    const btnCloseSuccessModal = document.getElementById('btnCloseSuccessModal');
+    const enrollCourseInput = document.getElementById('enrollCourseSelect');
+    const modalSentEmailDisplay = document.getElementById('modalSentEmailDisplay');
+
+    // Ao clicar em qualquer botão "Inscrever-se" dos cards de curso
+    document.querySelectorAll('.btn-open-enroll').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const course = btn.dataset.course || 'Curso de Capacitação Compassion';
+        if (enrollCourseInput) enrollCourseInput.value = course;
+        if (modalForm) {
+          modalForm.reset();
+          if (enrollCourseInput) enrollCourseInput.value = course;
+          modalForm.style.display = 'block';
+        }
+        if (modalSuccess) modalSuccess.style.display = 'none';
+        if (modalEnroll) modalEnroll.classList.add('open');
+      });
+    });
+
+    const closeModal = () => {
+      if (modalEnroll) modalEnroll.classList.remove('open');
+    };
+
+    if (closeEnroll) closeEnroll.addEventListener('click', closeModal);
+    if (btnCloseSuccessModal) btnCloseSuccessModal.addEventListener('click', closeModal);
+
+    if (modalEnroll) {
+      modalEnroll.addEventListener('click', (e) => {
+        if (e.target === modalEnroll) closeModal();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalEnroll && modalEnroll.classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    // Submissão do formulário no modal
+    if (modalForm && modalSuccess) {
+      modalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const p1 = document.getElementById('mPassword').value;
+        const p2 = document.getElementById('mPasswordConfirm').value;
+        if (p1 !== p2) {
+          alert('As senhas digitadas não coincidem. Por favor, verifique.');
+          document.getElementById('mPasswordConfirm').focus();
+          return;
+        }
+        const email = document.getElementById('mEmail').value;
+        if (modalSentEmailDisplay) modalSentEmailDisplay.textContent = email;
+        modalForm.style.display = 'none';
+        modalSuccess.style.display = 'block';
       });
     }
   </script>

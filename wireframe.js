@@ -260,47 +260,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }, true);
   }
 
-  /* ── 8.1 MODAL DE INSCRIÇÃO EM CURSOS (cursos.html) ── */
+  /* ── 8.1 MODAL DE AVISO: AMBIENTE EM DESENVOLVIMENTO (cursos.html) ── */
   const enrollModal = document.getElementById("courseEnrollModal");
-  const enrollCourseSelect = document.getElementById("enrollCourseSelect");
+  const modalCourseNotice = document.getElementById("modalCourseNotice");
   const openEnrollBtns = document.querySelectorAll(".btn-open-enroll");
   const closeEnrollBtn = document.getElementById("closeEnrollModal");
+  const btnAcknowledgeNotice = document.getElementById("btnAcknowledgeNotice");
 
   if (enrollModal) {
+    const closeModal = () => {
+      enrollModal.classList.remove("open");
+    };
+
     openEnrollBtns.forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const courseName = btn.dataset.course;
-        if (enrollCourseSelect && courseName) {
-          enrollCourseSelect.value = courseName;
+        if (modalCourseNotice) {
+          if (courseName) {
+            modalCourseNotice.innerHTML = `O curso <strong>"${courseName}"</strong> e todo o ambiente de capacitação da Compassion Brasil estão em fase de desenvolvimento.<br><br>Em breve, disponibilizaremos o acesso completo às inscrições, aulas e certificações para todos os projetos parceiros.`;
+          } else {
+            modalCourseNotice.innerHTML = `Este ambiente de cursos e capacitações da Compassion Brasil está em fase de desenvolvimento. Em breve, disponibilizaremos o acesso completo às inscrições, aulas e certificações para todos os projetos parceiros.`;
+          }
         }
         enrollModal.classList.add("open");
       });
     });
 
     if (closeEnrollBtn) {
-      closeEnrollBtn.addEventListener("click", () => {
-        enrollModal.classList.remove("open");
-      });
+      closeEnrollBtn.addEventListener("click", closeModal);
+    }
+
+    if (btnAcknowledgeNotice) {
+      btnAcknowledgeNotice.addEventListener("click", closeModal);
     }
 
     enrollModal.addEventListener("click", (e) => {
       if (e.target === enrollModal) {
-        enrollModal.classList.remove("open");
+        closeModal();
       }
     });
 
-    const enrollForm = document.getElementById("enrollForm");
-    if (enrollForm) {
-      enrollForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const successEl = document.getElementById("enrollSuccess");
-        if (successEl) {
-          enrollForm.style.display = "none";
-          successEl.style.display = "block";
-        }
-      });
-    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && enrollModal.classList.contains("open")) {
+        closeModal();
+      }
+    });
   }
 
   /* ── 9. HERO THREAD NAV (tooltip hover já é CSS; click = scroll) ── */
@@ -329,66 +334,18 @@ document.addEventListener("DOMContentLoaded", () => {
     tObs.observe(threadAccent);
   }
 
-  /* ── 11. CURSOR CUSTOMIZADO (skipping.svg) ── */
-  const cursorEl = document.getElementById("customCursor");
-  const cursorPath = document.getElementById("cursorPath");
-
-  // Seções de fundo escuro — cursor vira branco
-  const darkSelectors = [
-    ".stats-section",
-    ".map-section",
-    ".cta-section",
-    ".site-footer",
-    ".section-dark",
-  ];
-
-  if (cursorEl && cursorPath) {
-    let mouseX = -100, mouseY = -100;
-    let rafId = null;
-    let isDarkMode = false;
-
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          cursorEl.style.transform = `translate(${mouseX - 12}px, ${mouseY - 12}px)`;
-          if (!cursorEl.classList.contains("visible")) {
-            cursorEl.classList.add("visible");
-          }
-          rafId = null;
-        });
-      }
-
-      // Detecta fundo escuro pelo elemento sob o cursor
-      const el = document.elementFromPoint(e.clientX, e.clientY);
-      if (el) {
-        const isDark = darkSelectors.some(sel => el.closest(sel) !== null);
-        if (isDark !== isDarkMode) {
-          isDarkMode = isDark;
-          cursorPath.setAttribute("fill", isDark ? "#FFFFFF" : "#1A5FFF");
-          document.documentElement.style.setProperty("--pulse-r", isDark ? "255" : "26");
-          document.documentElement.style.setProperty("--pulse-g", isDark ? "255" : "95");
-          document.documentElement.style.setProperty("--pulse-b", isDark ? "255" : "255");
-        }
-      }
-    });
-
-    document.addEventListener("mouseleave", () => { cursorEl.style.opacity = "0"; });
-    document.addEventListener("mouseenter", () => { cursorEl.style.opacity = "1"; });
-  }
-
+  /* ── 11. CURSOR CUSTOMIZADO REMOVIDO (utiliza cursor padrão) ── */
 });
 
 
-/* -- 7. CAROUSEL DE FASES -- */
-const carousel = document.getElementById("phasesCarousel");
-const dots = document.querySelectorAll("#phasesDots .carousel-dot");
-const prevBtn = document.getElementById("phasesPrev");
-const nextBtn = document.getElementById("phasesNext");
+/* ── 7. CAROUSEL DE FASES (Inicialização com proteção contra execução prematura) ── */
+function initPhasesCarousel() {
+  const carousel = document.getElementById("phasesCarousel");
+  if (!carousel) return;
 
-if (carousel) {
+  const dots = document.querySelectorAll("#phasesDots .carousel-dot");
+  const prevBtn = document.getElementById("phasesPrev");
+  const nextBtn = document.getElementById("phasesNext");
   const slides = carousel.querySelectorAll(".phase-slide");
 
   function scrollToSlide(index) {
@@ -424,46 +381,84 @@ if (carousel) {
     });
 
     if (prevBtn) {
-      const isStart = activeIndex === 0;
-      prevBtn.disabled = isStart;
-      prevBtn.style.opacity = isStart ? "0.35" : "1";
-      prevBtn.style.cursor = isStart ? "not-allowed" : "pointer";
+      prevBtn.disabled = false;
+      prevBtn.style.opacity = "1";
+      prevBtn.style.cursor = "pointer";
     }
     if (nextBtn) {
-      const isEnd = activeIndex >= slides.length - 1;
-      nextBtn.disabled = isEnd;
-      nextBtn.style.opacity = isEnd ? "0.35" : "1";
-      nextBtn.style.cursor = isEnd ? "not-allowed" : "pointer";
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = "1";
+      nextBtn.style.cursor = "pointer";
     }
   }
 
   carousel.addEventListener("scroll", updateCarouselState, { passive: true });
 
+  // Autoplay com rotação contínua (4.5s)
+  let autoplayTimer = null;
+  const AUTOPLAY_INTERVAL = 4500;
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      const current = getActiveIndex();
+      const nextIndex = (current + 1) % slides.length;
+      scrollToSlide(nextIndex);
+    }, AUTOPLAY_INTERVAL);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  // Pausa ao passar o mouse ou tocar no carrossel
+  const wrapper = carousel.closest(".phases-carousel-wrapper") || carousel;
+  wrapper.addEventListener("mouseenter", stopAutoplay);
+  wrapper.addEventListener("mouseleave", startAutoplay);
+  wrapper.addEventListener("touchstart", stopAutoplay, { passive: true });
+  wrapper.addEventListener("touchend", startAutoplay, { passive: true });
+
   dots.forEach((dot, i) => {
     dot.addEventListener("click", () => {
       scrollToSlide(i);
+      resetAutoplay();
     });
   });
 
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       const current = getActiveIndex();
-      if (current > 0) {
-        scrollToSlide(current - 1);
-      }
+      const prevIndex = current > 0 ? current - 1 : slides.length - 1;
+      scrollToSlide(prevIndex);
+      resetAutoplay();
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       const current = getActiveIndex();
-      if (current < slides.length - 1) {
-        scrollToSlide(current + 1);
-      }
+      const nextIndex = (current + 1) % slides.length;
+      scrollToSlide(nextIndex);
+      resetAutoplay();
     });
   }
 
-  // Define estado inicial das setas e dots
+  // Define estado inicial das setas e dots e inicia autoplay
   updateCarouselState();
+  startAutoplay();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initPhasesCarousel);
+} else {
+  initPhasesCarousel();
 }
 

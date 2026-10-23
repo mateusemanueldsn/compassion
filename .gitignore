@@ -1,4 +1,4 @@
-﻿# Dependencias e caches
+# Dependencias e caches
 node_modules/
 .DS_Store
 Thumbs.db
@@ -16,3 +16,4 @@ backlog/inspiracao/
 
 assets/video/
 *.mp4
+*.zip
