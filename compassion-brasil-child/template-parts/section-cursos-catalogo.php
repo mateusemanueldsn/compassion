@@ -10,7 +10,7 @@
 <section class="page-hero">
   <div class="container">
     <div class="section-eyebrow reveal">
-      <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
       Plataforma de Formação Compassion
     </div>
     <h1 class="page-hero-title reveal d1">
@@ -52,7 +52,7 @@
 
     <div class="section-header center reveal">
       <div class="section-eyebrow">
-        <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
         Catálogo de Cursos
       </div>
       <h2 class="section-title">Explore Nossas Trilhas de Formação</h2>
@@ -252,7 +252,7 @@
       <!-- Lado esquerdo: informações -->
       <div class="contact-text reveal">
         <div class="section-eyebrow" style="color:var(--white)">
-          <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping_branco.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
           Matrícula e Cadastro
         </div>
         <h2 class="contact-heading" style="color:var(--white)">

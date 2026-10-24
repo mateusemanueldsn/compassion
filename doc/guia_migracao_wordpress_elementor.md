@@ -223,7 +223,7 @@ Esta seção possui o carrossel de 4 cards com linha colorida, textos longos des
 * **Fotos Oficiais Configuradas:**
   1. **Sobrevivência:** `assets/images/PG23 PROGRAMA SOBREVIVENCIA  OP1.jpg` (Linha amarela)
   2. **Primeira Infância:** `assets/images/CC_BR0524_TheySurvived_13_2307.jpg` (Linha azul)
-  3. **Infância:** `assets/images/CC_BR_MyHappyPlace_05_2312.jpg` (Linha verde)
+  3. **Infância:** `assets/images/CC_BR0529_HowMuchDoesPovertyCost_06_2509 (1).jpg` (Linha verde)
   4. **Juventude:** `assets/images/CC-BR040700645-MyNewSong-13-2211.jpg` (Linha laranja)
 
 * **Melhor Forma de Integração (Shortcode com ACF Repeater):**

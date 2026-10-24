@@ -5,7 +5,7 @@
           <!-- Lado esquerdo: texto -->
           <div class="contact-text reveal">
             <div class="section-eyebrow" style="margin-bottom:16px">
-              <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+              <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
               Fale Conosco
             </div>
             <h2 class="contact-heading" id="contactHeading">

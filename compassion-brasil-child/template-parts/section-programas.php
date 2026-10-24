@@ -3,7 +3,7 @@
 
         <div class="section-header center reveal">
           <div class="section-eyebrow">
-            <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
             Nossos Programas
           </div>
           <h2 class="section-title" id="programasHeading">Desenvolvimento Holístico<br>& Integral</h2>

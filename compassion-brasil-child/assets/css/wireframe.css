@@ -884,43 +884,23 @@ img {
   align-items: center
 }
 
-/* Thread accent abaixo do título */
+/* Skipping accent abaixo do título */
+.title-skipping-accent,
 .title-thread-accent {
-  margin: 20px 0 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px
+  margin: 18px 0 26px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-skipping-img {
+  width: 46px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 14px rgba(26, 95, 255, 0.22));
 }
 
 .title-thread-accent span {
-  display: block;
-  height: 7px;
-  border-radius: 3px;
-  animation: threadIn .6s var(--ease) both
-}
-
-.title-thread-accent span:nth-child(1) {
-  width: 52px;
-  background: var(--blue);
-  animation-delay: 0s
-}
-
-.title-thread-accent span:nth-child(2) {
-  width: 76px;
-  background: var(--yellow);
-  animation-delay: .08s
-}
-
-.title-thread-accent span:nth-child(3) {
-  width: 40px;
-  background: var(--green);
-  animation-delay: .16s
-}
-
-.title-thread-accent span:nth-child(4) {
-  width: 64px;
-  background: var(--orange);
-  animation-delay: .24s
+  display: none;
 }
 
 /* ── BOTÕES ── */
@@ -1103,30 +1083,33 @@ img {
 }
 
 .eyebrow-threads {
-  display: flex;
-  flex-direction: column;
-  gap: 2px
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
 }
 
 .eyebrow-threads span {
-  display: block;
-  height: 3px;
-  border-radius: 1px
+  display: none;
 }
 
-.eyebrow-threads span:nth-child(1) {
-  width: 20px;
-  background: var(--blue)
+.eyebrow-skipping-icon {
+  width: 17px;
+  height: 21px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 4px rgba(26, 95, 255, 0.15));
 }
 
-.eyebrow-threads span:nth-child(2) {
-  width: 14px;
-  background: var(--yellow)
-}
-
-.eyebrow-threads span:nth-child(3) {
-  width: 10px;
-  background: var(--green)
+/* Em seções escuras */
+.map-section .eyebrow-skipping-icon,
+.section-blue .eyebrow-skipping-icon,
+.section-dark .eyebrow-skipping-icon,
+.footer .eyebrow-skipping-icon,
+[style*="color:rgba(255,255,255"] .eyebrow-skipping-icon,
+[style*="color:var(--white)"] .eyebrow-skipping-icon {
+  filter: brightness(0) invert(1);
 }
 
 .section-title {

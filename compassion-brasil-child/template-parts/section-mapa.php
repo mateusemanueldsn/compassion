@@ -1,9 +1,7 @@
 <section class="map-section" id="impacto" aria-labelledby="mapHeading">
       <div class="container">
         <div class="section-eyebrow reveal" style="color:rgba(255,255,255,.7)">
-          <div class="eyebrow-threads" aria-hidden="true" style="filter:brightness(2)">
-            <span></span><span></span><span></span>
-          </div>
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping_branco.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
           Onde Atuamos
         </div>
 

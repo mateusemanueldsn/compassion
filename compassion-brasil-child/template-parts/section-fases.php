@@ -2,7 +2,7 @@
       <div class="container">
         <div class="section-header reveal" style="text-align: left; margin-bottom: 0;">
           <div class="section-eyebrow">
-            <div class="eyebrow-threads" aria-hidden="true"><span></span><span></span><span></span></div>
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping_branco.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
             Como Trabalhamos
           </div>
           <h2 class="section-title" id="comoTrabalhamosHeading">As 4 fases da nossa<br>Atuação</h2>
@@ -67,7 +67,7 @@
                     em suas famílias e comunidades, além da promoção do bem-estar físico, mental e social.</p>
                 </div>
                 <div class="phase-card-right">
-                  <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/CC_BR_MyHappyPlace_05_2312.jpg" alt="Infância" class="phase-card-img"
+                  <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/CC_BR0529_HowMuchDoesPovertyCost_06_2509 (1).jpg" alt="Infância" class="phase-card-img"
                     loading="lazy">
                 </div>
               </div>

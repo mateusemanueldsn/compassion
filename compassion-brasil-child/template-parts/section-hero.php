@@ -14,12 +14,9 @@
             nome de Jesus
           </h1>
 
-          <!-- Threads accent embaixo do título -->
-          <div class="title-thread-accent reveal d2" aria-hidden="true">
-            <span style="width:52px"></span>
-            <span style="width:76px"></span>
-            <span style="width:40px"></span>
-            <span style="width:64px"></span>
+          <!-- Skipping accent embaixo do título -->
+          <div class="title-skipping-accent reveal d2" aria-hidden="true">
+            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/logo/skipping.svg" alt="" class="hero-skipping-img">
           </div>
 
           <p class="hero-desc reveal d3">
