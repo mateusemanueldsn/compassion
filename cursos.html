@@ -1,14 +1,560 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cursos e Capacitação — Compassion Brasil</title>
+  <title>Capacitações & Materiais Metodológicos — Compassion Brasil</title>
   <meta name="description"
-    content="Plataforma de cursos e formação da Compassion Brasil. Capacitando pastores, líderes, voluntários e educadores na proteção, cuidado e desenvolvimento integral da criança.">
+    content="Acesse e baixe materiais pedagógicos, metodologias e campanhas da Compassion Brasil para capacitar sua igreja, educadores e comunidade na proteção e desenvolvimento de crianças e jovens.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="wireframe.css">
   <script src="wireframe.js" defer></script>
+
+  <style>
+    /* ══════════════════════════════════════════════════
+       CAPACITAÇÕES & MATERIAIS METODOLÓGICOS — ESTILOS
+       Design System Oficial Compassion Brasil (wireframe.css)
+       Azul Oficial: var(--blue) [#1A5FFF]
+       ══════════════════════════════════════════════════ */
+
+    .page-hero {
+      padding: 70px 0 54px;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      position: relative;
+    }
+
+    .page-hero-title {
+      font-size: clamp(2.3rem, 4vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -1.2px;
+      color: var(--dark);
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .page-hero-title span.blue-highlight {
+      color: var(--blue);
+    }
+
+    .page-hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--g700);
+      max-width: 720px;
+      line-height: 1.68;
+      margin-bottom: 32px;
+    }
+
+    .page-stats-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .page-stat-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      padding: 10px 18px;
+      border-radius: var(--r-pill);
+      box-shadow: var(--sh-sm);
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--dark);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .page-stat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Tabs de Filtro */
+    .materiais-filter-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 44px;
+    }
+
+    .materiais-filter-tabs {
+      display: inline-flex;
+      background: rgba(15, 27, 53, 0.06);
+      padding: 5px;
+      border-radius: var(--r-pill);
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .m-filter-btn {
+      padding: 9px 22px;
+      border-radius: var(--r-pill);
+      border: none;
+      background: transparent;
+      font-family: var(--font);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--g700);
+      cursor: pointer;
+      transition: var(--t1);
+    }
+
+    .m-filter-btn:hover {
+      color: var(--dark);
+    }
+
+    .m-filter-btn.active {
+      background: var(--white);
+      color: var(--blue);
+      box-shadow: var(--sh-sm);
+    }
+
+    /* Grid de Blocos Metodológicos */
+    .materiais-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .material-card {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: var(--sh-sm);
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      position: relative;
+    }
+
+    .material-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--sh-md);
+    }
+
+    @media (max-width: 920px) {
+      .material-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .material-cover {
+      position: relative;
+      background: var(--dark);
+      min-height: 280px;
+      overflow: hidden;
+    }
+
+    .material-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease);
+    }
+
+    .material-card:hover .material-cover img {
+      transform: scale(1.04);
+    }
+
+    .material-cover-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: rgba(15, 27, 53, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .material-cover-badge svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .material-content {
+      padding: 36px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 600px) {
+      .material-content {
+        padding: 24px 20px;
+      }
+    }
+
+    .material-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .material-cat-tag {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: var(--r-pill);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .material-cat-juventude {
+      background: rgba(26, 95, 255, 0.1);
+      color: var(--blue);
+    }
+
+    .material-cat-protecao {
+      background: rgba(245, 196, 0, 0.18);
+      color: #9A6700;
+    }
+
+    .material-format-label {
+      font-size: 0.78rem;
+      color: var(--g500);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .material-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .material-quote {
+      font-size: 0.94rem;
+      font-style: italic;
+      color: var(--blue);
+      background: rgba(26, 95, 255, 0.05);
+      padding: 12px 16px;
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .material-desc {
+      font-size: 0.98rem;
+      color: var(--g700);
+      line-height: 1.68;
+      margin-bottom: 20px;
+    }
+
+    /* Lista de Itens Inclusos no Kit */
+    .material-kit-box {
+      background: var(--cream);
+      border-radius: var(--r-md);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .kit-box-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kit-items-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 16px;
+      list-style: none;
+    }
+
+    @media (max-width: 680px) {
+      .kit-items-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .kit-item-entry {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--g700);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kit-item-icon {
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* Ações do Card */
+    .material-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .btn-download-kit {
+      background: var(--blue);
+      color: var(--white);
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 11px 22px;
+      border-radius: var(--r-pill);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--t1);
+      text-decoration: none;
+    }
+
+    .btn-download-kit:hover {
+      background: #0D4FD8;
+      transform: translateY(-1px);
+      box-shadow: var(--sh-blue);
+    }
+
+    .btn-view-details {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--g300);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 9px 18px;
+      border-radius: var(--r-pill);
+      cursor: pointer;
+      transition: var(--t1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-view-details:hover {
+      background: var(--white);
+      border-color: var(--dark);
+      color: var(--dark);
+    }
+
+    .moodle-notice-tag {
+      font-size: 0.74rem;
+      color: var(--g500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Seção: Como Aplicar */
+    .metodologia-passos-section {
+      background: var(--cream);
+      padding: 86px 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .passos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    @media (max-width: 980px) {
+      .passos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .passos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .passo-card {
+      background: var(--white);
+      border-radius: var(--r-md);
+      padding: 28px 22px;
+      box-shadow: var(--sh-sm);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      position: relative;
+    }
+
+    .passo-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .passo-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .passo-desc {
+      font-size: 0.88rem;
+      color: var(--g700);
+      line-height: 1.55;
+    }
+
+    /* Modal de Download & Detalhes do Material */
+    .material-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 27, 53, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .material-modal.open {
+      display: flex;
+      animation: modalFadeIn 0.3s var(--ease);
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .material-modal-box {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 36px;
+      position: relative;
+      box-shadow: var(--sh-lg);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--g500);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--t1);
+    }
+
+    .modal-close-btn:hover {
+      background: var(--g100);
+      color: var(--dark);
+    }
+
+    .modal-file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .modal-file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--cream);
+      padding: 12px 16px;
+      border-radius: var(--r-md);
+      font-size: 0.88rem;
+    }
+
+    .modal-file-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .modal-file-size {
+      font-size: 0.76rem;
+      color: var(--g500);
+      font-weight: 600;
+    }
+
+    .modal-banner-moodle {
+      background: rgba(26, 95, 255, 0.08);
+      border: 1px solid rgba(26, 95, 255, 0.2);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    .modal-banner-moodle strong {
+      color: var(--blue);
+    }
+  </style>
 </head>
 
 <body>
@@ -16,10 +562,8 @@
   <!-- Barra de progresso de leitura -->
   <div id="scrollProgress"></div>
 
-
-
   <!-- ═══════════════════════════════════════════════
-       HEADER
+       HEADER CANÔNICO DA COMPASSION BRASIL
        ═══════════════════════════════════════════════ -->
   <header class="site-header" id="siteHeader">
     <div class="header-inner">
@@ -63,429 +607,418 @@
   <main>
 
     <!-- ═══════════════════════════════════════════════
-         HERO DA PÁGINA DE CURSOS
+         HERO DA PÁGINA DE CAPACITAÇÕES
          ═══════════════════════════════════════════════ -->
     <section class="page-hero">
       <div class="container">
         <div class="section-eyebrow reveal">
           <img src="assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
-          Plataforma de Formação Compassion
+          Metodologias & Materiais Pedagógicos
         </div>
         <h1 class="page-hero-title reveal d1">
-          Capacitando Líderes para<br>
-          Proteger, Cuidar e Servir</span>
+          Capacitações e Recursos para <span class="blue-highlight">Transformar Vidas</span>
         </h1>
         <p class="page-hero-subtitle reveal d2">
-          Conheça o catálogo completo de cursos e trilhas formativas da Compassion do Brasil. Um ambiente desenvolvido
-          para capacitar igrejas, voluntários, pastores, educadores e projetos parceiros, integrando referencial
-          bíblico, rigor técnico, fundamentação teórica e metodológica e excelência prática.
+          Disponibilizamos abertamente nossas metodologias e materiais pedagógicos para pastores, líderes, educadores sociais e voluntários. Recursos testados em centenas de comunidades no Brasil, unindo rigor técnico, fundamentação bíblica e aplicabilidade prática.
         </p>
 
         <div class="page-stats-row reveal d3">
           <div class="page-stat-badge">
             <span class="page-stat-dot" style="background:var(--blue)"></span>
-            +14 Trilhas Formativas
+            Kits Metodológicos Completos
           </div>
           <div class="page-stat-badge">
             <span class="page-stat-dot" style="background:var(--green)"></span>
-            100% Online & Flexível
+            Downloads Gratuitos para Educadores
           </div>
           <div class="page-stat-badge">
             <span class="page-stat-dot" style="background:var(--yellow)"></span>
-            Certificação Oficial
+            Guias do Mentor & Atividades
           </div>
           <div class="page-stat-badge">
             <span class="page-stat-dot" style="background:var(--orange)"></span>
-            Gratuito para Igrejas Parceiras
+            Em Breve: Integração Moodle LMS
           </div>
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         CATÁLOGO COMPLETO DE CURSOS
+         CATÁLOGO DE MATERIAIS METODOLÓGICOS (DOWNLOADS)
          ═══════════════════════════════════════════════ -->
-    <section class="section section-white" id="catalogo">
+    <section class="section section-white" id="materiais">
       <div class="container">
 
         <div class="section-header center reveal">
-          <div class="section-eyebrow">
+          <div class="section-eyebrow" style="justify-content:center;">
             <img src="assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
-            Catálogo de Cursos
+            Repositório de Materiais
           </div>
-          <h2 class="section-title">Explore Nossas Trilhas de Formação</h2>
+          <h2 class="section-title">Baixe Nossos Materiais e Metodologias</h2>
           <p class="section-subtitle">
-            Selecione uma categoria ou navegue pelos cursos abaixo para conhecer a ementa e garantir sua vaga.
+            Selecione uma área de atuação ou faça o download direto dos manuais, cartazes e roteiros para aplicar na sua igreja ou comunidade.
           </p>
         </div>
 
-        <!-- Grade Completa de Cursos (3 por linha com fundo cinza) -->
-        <div class="programs-grid" id="coursesGrid">
+        <!-- Filtro Rápido de Categorias -->
+        <div class="materiais-filter-wrap reveal">
+          <div class="materiais-filter-tabs">
+            <button class="m-filter-btn active" data-filter="all">Todos os Materiais</button>
+            <button class="m-filter-btn" data-filter="protecao">Proteção & Salvaguarda</button>
+            <button class="m-filter-btn" data-filter="juventude">Juventude & Hombridade</button>
+          </div>
+        </div>
 
-          <!-- Curso 01 -->
-          <article class="course-card reveal">
-            <div class="course-thumb-ph">
-              <span class="course-thumb-badge" style="border-left: 3px solid var(--yellow)">Proteção &
-                Salvaguarda</span>
-              <div class="course-thumb-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3" />
+        <!-- Lista de Blocos de Materiais Metodológicos -->
+        <div class="materiais-grid">
+
+          <!-- ═══════════════════════════════════════
+               MATERIAL 1: HOMEM DE HONRA
+               ═══════════════════════════════════════ -->
+          <article class="material-card reveal" data-category="juventude" id="material-homem-de-honra">
+            <div class="material-cover">
+              <img src="assets/images/FOTOS PORTFOLIOCC_BR_CustomMedia_MenOfHonor_Photo09_2511.jpg" alt="Programa Homem de Honra da Compassion Brasil">
+              <span class="material-cover-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
-              </div>
-              <span class="course-thumb-meta">40 horas · 100% Online</span>
+                Kit Metodológico
+              </span>
             </div>
-            <div class="course-card-content">
-              <span class="course-cat-tag">Trilha Obrigatória para Parceiros</span>
-              <h3 class="course-card-title">Oficial de Proteção e Salvaguarda Infantil</h3>
-              <p class="course-card-desc">
-                Formação aprofundada nos protocolos institucionais de prevenção, encaminhamento legal, acolhimento de
-                denúncias e manutenção de ambientes seguros para crianças e adolescentes.
-              </p>
-              <div class="course-card-footer">
-                <span class="course-card-meta">Certificado com Chancela</span>
-                <button type="button" class="btn btn-primary btn-open-enroll"
-                  data-course="Oficial de Proteção e Salvaguarda Infantil" style="padding:7px 14px;font-size:.78rem">
-                  Inscrever-se
+
+            <div class="material-content">
+              <div>
+                <div class="material-header-row">
+                  <span class="material-cat-tag material-cat-juventude">Categoria · Juventude</span>
+                  <span class="material-format-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    PDF + Slides + Atividades
+                  </span>
+                </div>
+
+                <h3 class="material-title">Homem de Honra</h3>
+
+                <div class="material-quote">
+                  "Uma jornada para formar homens com propósito."
+                </div>
+
+                <p class="material-desc">
+                  Criado para adolescentes e jovens do sexo masculino, este programa ensina sobre <strong>hombridade, identidade e propósito</strong> com base bíblica, linguagem atual e abordagem integral. Cada aula prepara o jovem para os desafios da vida real, enquanto o mentor assume o papel de guia, conselheiro e referência. Mais que conteúdo — uma missão de transformação.
+                </p>
+
+                <!-- Box de Itens do Kit -->
+                <div class="material-kit-box">
+                  <div class="kit-box-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    Arquivos Inclusos no Pacote de Download:
+                  </div>
+                  <ul class="kit-items-list">
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon">✓</span>
+                      Guia do Mentor e Manual do Educador
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon">✓</span>
+                      Caderno de Atividades Práticas do Jovem
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon">✓</span>
+                      Roteiro Estruturado de Aulas e Dinâmicas
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon">✓</span>
+                      Apresentações em Slides de Apoio Didático
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="material-actions-row">
+                <button type="button" class="btn-download-kit btn-trigger-download"
+                  data-material="Homem de Honra"
+                  data-cat="Juventude"
+                  data-files="Guia do Mentor (PDF);Caderno do Jovem (PDF);Roteiro de Aulas (PDF);Apresentações em Slides (PDF/PPTX)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Baixar Kit Metodológico Completo
                 </button>
+
+                <button type="button" class="btn-view-details btn-trigger-details"
+                  data-material="Homem de Honra"
+                  data-cat="Juventude"
+                  data-desc="Programa de formação em hombridade bíblica, caráter, vocação e integridade para rapazes de 12 a 22 anos, guiados por mentores voluntários da igreja local.">
+                  Ver Estrutura das Aulas
+                </button>
+
+                <span class="moodle-notice-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Moodle em integração
+                </span>
               </div>
             </div>
           </article>
 
-          <!-- Curso 02 -->
-          <article class="course-card reveal d1">
-            <div class="course-thumb-ph">
-              <span class="course-thumb-badge" style="border-left: 3px solid var(--blue)">Primeira Infância</span>
-              <div class="course-thumb-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3" />
+
+          <!-- ═══════════════════════════════════════
+               MATERIAL 2: PREVENÇÃO À GRAVIDEZ NA ADOLESCÊNCIA
+               ═══════════════════════════════════════════════ -->
+          <article class="material-card reveal d1" data-category="protecao" id="material-gravidez-adolescencia">
+            <div class="material-cover">
+              <img src="assets/images/PG21 ENSINANDO A PREVINIR OP1.jpg" alt="Campanha de Prevenção à Gravidez na Adolescência">
+              <span class="material-cover-badge" style="background:rgba(180,83,9,0.9);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
-              </div>
-              <span class="course-thumb-meta">30 horas · 100% Online</span>
+                Campanha Nacional
+              </span>
             </div>
-            <div class="course-card-content">
-              <span class="course-cat-tag">Desenvolvimento 0 a 5 Anos</span>
-              <h3 class="course-card-title">Acolhimento e Vínculo Materno-Infantil</h3>
-              <p class="course-card-desc">
-                Capacitação para agentes comunitários em visitação domiciliar, cuidados na gestação, estímulo sensorial
-                precoce e fortalecimento do apego seguro entre mãe e bebê.
-              </p>
-              <div class="course-card-footer">
-                <span class="course-card-meta">Certificado Incluso</span>
-                <button type="button" class="btn btn-primary btn-open-enroll"
-                  data-course="Acolhimento e Vínculo Materno-Infantil" style="padding:7px 14px;font-size:.78rem">
-                  Inscrever-se
+
+            <div class="material-content">
+              <div>
+                <div class="material-header-row">
+                  <span class="material-cat-tag material-cat-protecao">Categoria · Proteção</span>
+                  <span class="material-format-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Cartazes + Guia + Jogos + Quiz
+                  </span>
+                </div>
+
+                <h3 class="material-title">Campanha de Prevenção à Gravidez na Adolescência</h3>
+
+                <div class="material-quote" style="color:#B45309;background:rgba(245,196,0,0.08);border-color:#F5C400;">
+                  "Campanha ‘Não tá na hora!’: informação e proteção para um futuro pleno."
+                </div>
+
+                <p class="material-desc">
+                  A gravidez precoce continua sendo um grande desafio no Brasil, com altos índices de gestação na adolescência. Para contribuir com esse enfrentamento, a Compassion do Brasil promove a campanha <strong>“Não tá na hora!”</strong>, incentivando parceiros a conscientizar jovens sobre os impactos da gravidez precoce e a importância de se prepararem para a vida adulta.
+                </p>
+
+                <!-- Box das 4 Etapas e Itens do Kit -->
+                <div class="material-kit-box">
+                  <div class="kit-box-title" style="color:#9A6700;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    4 Etapas Principais e Materiais Inclusos no Kit:
+                  </div>
+                  <ul class="kit-items-list">
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:#B45309">1.</span>
+                      Capacitação das equipes por meio de vídeos e especialistas
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:#B45309">2.</span>
+                      Cartazes oficiais para divulgação comunitária (A3 e A4)
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:#B45309">3.</span>
+                      Oficinas com jogos educativos e quiz temático interativo
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:#B45309">4.</span>
+                      Instrumentais para registro e envio de relatórios
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="material-actions-row">
+                <button type="button" class="btn-download-kit btn-trigger-download"
+                  style="background:#D97706"
+                  data-material="Campanha Não tá na hora!"
+                  data-cat="Proteção"
+                  data-files="Guia da Campanha (PDF);Cartazes Oficiais A3/A4 (PDF);Jogos Educativos (PDF);Quiz Temático Interativo (PDF);Orientações com Especialistas (PDF)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Baixar Kit de Campanha Completo
                 </button>
+
+                <button type="button" class="btn-view-details btn-trigger-details"
+                  data-material="Campanha Não tá na hora!"
+                  data-cat="Proteção"
+                  data-desc="Kit metodológico composto por 4 etapas estruturadas: treinamento de líderes, mobilização por cartazes, oficinas pedagógicas com jogos e monitoramento de dados com a rede de proteção.">
+                  Ver 4 Etapas da Campanha
+                </button>
+
+                <span class="moodle-notice-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Moodle em integração
+                </span>
               </div>
             </div>
           </article>
 
-          <!-- Curso 03 -->
-          <article class="course-card reveal d2">
-            <div class="course-thumb-ph">
-              <span class="course-thumb-badge" style="border-left: 3px solid var(--orange)">Juventude</span>
-              <div class="course-thumb-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3" />
+
+          <!-- ═══════════════════════════════════════
+               MATERIAL 3: MAIO LARANJA
+               ═══════════════════════════════════════ -->
+          <article class="material-card reveal d2" data-category="protecao" id="material-maio-laranja">
+            <div class="material-cover">
+              <img src="assets/images/18demaioPara Portfólio.jpg" alt="Campanha Maio Laranja Compassion Brasil">
+              <span class="material-cover-badge" style="background:rgba(232,71,42,0.9);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 8v4"/>
+                  <path d="M12 16h.01"/>
                 </svg>
-              </div>
-              <span class="course-thumb-meta">45 horas · 100% Online</span>
+                Proteção e Salvaguarda
+              </span>
             </div>
-            <div class="course-card-content">
-              <span class="course-cat-tag">Liderança & Mentoria</span>
-              <h3 class="course-card-title">Liderança Servidora e Protagonismo Jovem</h3>
-              <p class="course-card-desc">
-                Estratégias de mentoria e facilitação de grupos para adolescentes. Desenvolvimento de resiliência,
-                liderança comunitária, projeto de vida e transição para o mercado profissional.
-              </p>
-              <div class="course-card-footer">
-                <span class="course-card-meta">Certificado Incluso</span>
-                <button type="button" class="btn btn-primary btn-open-enroll"
-                  data-course="Liderança Servidora e Protagonismo Jovem" style="padding:7px 14px;font-size:.78rem">
-                  Inscrever-se
+
+            <div class="material-content">
+              <div>
+                <div class="material-header-row">
+                  <span class="material-cat-tag material-cat-protecao" style="background:rgba(232,71,42,0.12);color:var(--orange);">Categoria · Proteção</span>
+                  <span class="material-format-label">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Cartilha + Banners + Guia Eclesiástico
+                  </span>
+                </div>
+
+                <h3 class="material-title">Maio Laranja: Quem Ama, Protege</h3>
+
+                <div class="material-quote" style="color:var(--orange);background:rgba(232,71,42,0.06);border-color:var(--orange);">
+                  “Erga a voz em favor dos que não podem defender-se, seja o defensor de todos os desamparados. Erga a voz e julgue com justiça; defenda os direitos dos pobres e dos necessitados.” — Provérbios 31:8-9
+                </div>
+
+                <p class="material-desc">
+                  Como Compassion Internacional, somos comprometidos com a proteção integral de todas as crianças e jovens. Entendemos biblicamente nosso dever de <strong>conhecer, amar e proteger</strong> os pequeninos que nos foram confiados pelo Senhor. Todos os meses de maio, fomentamos o olhar cuidadoso sobre todas as crianças e incentivamos que mães, pais, tios e toda a comunidade façam parte desta luta.
+                </p>
+
+                <!-- Box de Itens do Kit -->
+                <div class="material-kit-box">
+                  <div class="kit-box-title" style="color:var(--orange);">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    Arquivos Inclusos no Pacote de Download:
+                  </div>
+                  <ul class="kit-items-list">
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
+                      Cartilha de Salvaguarda e Identificação de Sinais de Risco
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
+                      Kit de Comunicação Visual (Banners, Posts e Telão)
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
+                      Roteiro de Ministração e Lições para Ministério Infantil
+                    </li>
+                    <li class="kit-item-entry">
+                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
+                      Fluxograma Legal de Encaminhamento e Notificação
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="material-actions-row">
+                <button type="button" class="btn-download-kit btn-trigger-download"
+                  style="background:var(--orange)"
+                  data-material="Maio Laranja: Quem Ama Protege"
+                  data-cat="Proteção"
+                  data-files="Cartilha de Salvaguarda (PDF);Kit de Redes Sociais e Telões (ZIP/PNG);Roteiro para Ministério Infantil (PDF);Fluxograma de Notificação Legal (PDF)">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Baixar Kit Maio Laranja
                 </button>
+
+                <button type="button" class="btn-view-details btn-trigger-details"
+                  data-material="Maio Laranja: Quem Ama Protege"
+                  data-cat="Proteção"
+                  data-desc="Materiais de conscientização comunitária e eclesiástica para o 18 de Maio, com orientações bíblicas e jurídicas para blindar ambientes de convivência infantil.">
+                  Ver Guia de Mobilização
+                </button>
+
+                <span class="moodle-notice-tag">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Moodle em integração
+                </span>
               </div>
             </div>
           </article>
 
-          <!-- Curso 04 -->
-          <article class="course-card reveal">
-            <div class="course-thumb-ph">
-              <span class="course-thumb-badge" style="border-left: 3px solid var(--green)">Discipulado</span>
-              <div class="course-thumb-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              </div>
-              <span class="course-thumb-meta">25 horas · 100% Online</span>
-            </div>
-            <div class="course-card-content">
-              <span class="course-cat-tag">Formação Bíblica e Espiritual</span>
-              <h3 class="course-card-title">Discipulado e Educação Bíblica Criativa</h3>
-              <p class="course-card-desc">
-                Metodologias pedagógicas dinâmicas para educadores cristãos ensinarem a Palavra de Deus às crianças de
-                maneira cativante, amorosa e contextualizada.
-              </p>
-              <div class="course-card-footer">
-                <span class="course-card-meta">Certificado Incluso</span>
-                <button type="button" class="btn btn-primary btn-open-enroll"
-                  data-course="Discipulado e Educação Bíblica Criativa" style="padding:7px 14px;font-size:.78rem">
-                  Inscrever-se
-                </button>
-              </div>
-            </div>
-          </article>
+        </div>
 
-          <!-- Curso 05 -->
-          <article class="course-card reveal d1">
-            <div class="course-thumb-ph">
-              <span class="course-thumb-badge" style="border-left: 3px solid var(--teal)">Gestão Social</span>
-              <div class="course-thumb-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              </div>
-              <span class="course-thumb-meta">35 horas · 100% Online</span>
-            </div>
-            <div class="course-card-content">
-              <span class="course-cat-tag">Igrejas e Projetos Locais</span>
-              <h3 class="course-card-title">Gestão e Sustentabilidade de Projetos Sociais</h3>
-              <p class="course-card-desc">
-                Governança sem fins lucrativos, gestão financeira e contábil transparente, organização de equipes
-                voluntárias e planejamento de longo prazo para projetos com crianças.
-              </p>
-              <div class="course-card-footer">
-                <span class="course-card-meta">Certificado Incluso</span>
-                <button type="button" class="btn btn-primary btn-open-enroll"
-                  data-course="Gestão e Sustentabilidade de Projetos Sociais" style="padding:7px 14px;font-size:.78rem">
-                  Inscrever-se
-                </button>
-              </div>
-            </div>
-          </article>
+      </div>
+    </section>
 
-          <!-- Curso 06 -->
-          <article class="course-card reveal d2">
-            <div class="course-thumb-ph">
-              <span class="course-thumb-badge" style="border-left: 3px solid var(--yellow)">Saúde Mental</span>
-              <div class="course-thumb-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
-              </div>
-              <span class="course-thumb-meta">30 horas · 100% Online</span>
-            </div>
-            <div class="course-card-content">
-              <span class="course-cat-tag">Apoio Emocional</span>
-              <h3 class="course-card-title">Cuidado Pós-Trauma e Saúde Emocional</h3>
-              <p class="course-card-desc">
-                Abordagem sensível e orientada por princípios científicos e bíblicos para acolher crianças em sofrimento
-                emocional, perdas e situações de vulnerabilidade aguda.
-              </p>
-              <div class="course-card-footer">
-                <span class="course-card-meta">Certificado Incluso</span>
-                <button type="button" class="btn btn-primary btn-open-enroll"
-                  data-course="Cuidado Pós-Trauma e Saúde Emocional" style="padding:7px 14px;font-size:.78rem">
-                  Inscrever-se
-                </button>
-              </div>
-            </div>
-          </article>
+    <!-- ═══════════════════════════════════════════════
+         SEÇÃO: COMO APLICAR ESTAS METODOLOGIAS
+         ═══════════════════════════════════════════════ -->
+    <section class="metodologia-passos-section">
+      <div class="container">
+        <div class="section-header center reveal">
+          <div class="section-eyebrow" style="justify-content:center;">
+            <img src="assets/logo/skipping.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
+            Guia de Implementação
+          </div>
+          <h2 class="section-title">Como Aplicar na sua Igreja ou Projeto</h2>
+          <p class="section-subtitle">
+            Quatro passos simples para colocar essas metodologias em prática e multiplicar o impacto na vida das crianças e adolescentes.
+          </p>
+        </div>
+
+        <div class="passos-grid">
+
+          <div class="passo-card reveal">
+            <div class="passo-num">1</div>
+            <h4 class="passo-title">Baixe o Material</h4>
+            <p class="passo-desc">
+              Faça o download do kit completo em PDF, incluindo manuais do líder, cartazes para impressão e cadernos de atividades.
+            </p>
+          </div>
+
+          <div class="passo-card reveal d1">
+            <div class="passo-num" style="background:var(--yellow);color:var(--dark);">2</div>
+            <h4 class="passo-title">Capacite a Equipe</h4>
+            <p class="passo-desc">
+              Reúna seus educadores, pastores e voluntários para estudar as diretrizes pedagógicas e o referencial bíblico de cada oficina.
+            </p>
+          </div>
+
+          <div class="passo-card reveal d2">
+            <div class="passo-num" style="background:var(--green);">3</div>
+            <h4 class="passo-title">Conduza as Oficinas</h4>
+            <p class="passo-desc">
+              Aplique os encontros de forma dinâmica, relacional e acolhedora, utilizando os jogos, debates e dinâmicas do material.
+            </p>
+          </div>
+
+          <div class="passo-card reveal d3">
+            <div class="passo-num" style="background:var(--orange);">4</div>
+            <h4 class="passo-title">Proteja & Multiplique</h4>
+            <p class="passo-desc">
+              Estabeleça fluxos de escuta atenta, acione a rede de proteção quando necessário e compartilhe os aprendizados com as famílias.
+            </p>
+          </div>
 
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════
-         SEÇÃO DE INSCRIÇÃO DIRETA
+         SEÇÃO FINAL: APOIO E PARCERIAS
          ═══════════════════════════════════════════════ -->
-    <section class="section section-dark" id="inscricao">
-      <div class="container">
-        <div class="contact-layout">
-
-          <!-- Lado esquerdo: informações -->
-          <div class="contact-text reveal">
-            <div class="section-eyebrow" style="color:var(--white)">
-              <img src="assets/logo/skipping_branco.svg" alt="" class="eyebrow-skipping-icon" aria-hidden="true">
-              Matrícula e Cadastro
-            </div>
-            <h2 class="contact-heading" style="color:var(--white)">
-              Comece sua<br>jornada de capacitação<br>hoje mesmo
-            </h2>
-            <p class="contact-desc" style="color:rgba(255,255,255,0.75)">
-              Nossos cursos são disponibilizados gratuitamente para colaboradores, lideranças locais, pastores e
-              voluntários (de igrejas), educadores sociais e profissionais na política de assistência social parceiras
-              da Compassion do Brasil. Preencha seus dados para solicitar acesso imediato à plataforma.
-            </p>
-
-            <ul style="list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:28px">
-              <li style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:.92rem">
-                <span style="color:var(--green);font-size:1.1rem;font-weight:900">✓</span> Acesso a videoaulas, manuais
-                práticos e cartilhas em PDF
-              </li>
-              <li style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:.92rem">
-                <span style="color:var(--green);font-size:1.1rem;font-weight:900">✓</span> Tutoria e suporte com a
-                equipe técnica da Compassion Brasil
-              </li>
-              <li style="display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.85);font-size:.92rem">
-                <span style="color:var(--green);font-size:1.1rem;font-weight:900">✓</span> Certificado de conclusão
-                nominal validado
-              </li>
-            </ul>
-          </div>
-
-          <!-- Lado direito: formulário de inscrição -->
-          <div class="contact-form-col reveal d1">
-
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-              <span style="background:rgba(26,95,255,0.1);color:var(--blue);border:1px solid rgba(26,95,255,0.25);padding:3px 10px;border-radius:9999px;font-size:0.72rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">
-                Integração Moodle LMS
-              </span>
-              <span style="font-size:0.75rem;color:var(--g500)">Cadastro Oficial</span>
-            </div>
-
-            <h3 style="font-size:1.4rem;font-weight:800;color:var(--dark);margin-bottom:6px">Cadastro e Inscrição em Cursos</h3>
-            <p style="font-size:.85rem;color:var(--g500);margin-bottom:24px">
-              Preencha seus dados para provisionar seu acesso unificado no Moodle e garantir a emissão nominal do seu certificado.
-            </p>
-
-            <form class="contact-form" id="pageEnrollForm">
-              <!-- Nome Completo (Certificado) -->
-              <div class="form-group">
-                <label for="pageEnrollName" style="color:var(--dark)">Nome Completo *</label>
-                <input type="text" id="pageEnrollName" required placeholder="Ex: Carlos Eduardo da Silva" style="border:1.5px solid var(--g300)">
-                <small style="font-size:0.72rem;color:var(--g500);margin-top:2px">Nome oficial que será impresso no certificado de conclusão.</small>
-              </div>
-
-              <!-- E-mail (Chave Única / Login) -->
-              <div class="form-group">
-                <label for="pageEnrollEmail" style="color:var(--dark)">E-mail Corporativo ou Pessoal (Login) *</label>
-                <input type="email" id="pageEnrollEmail" required placeholder="seu.email@exemplo.com" style="border:1.5px solid var(--g300)">
-                <small style="font-size:0.72rem;color:var(--g500);margin-top:2px">Será seu usuário de login no Moodle e onde você receberá o link de ativação.</small>
-              </div>
-
-              <!-- Estado (UF) e Cidade -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="pageEnrollState" style="color:var(--dark)">Estado (UF) *</label>
-                  <select id="pageEnrollState" required style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
-                    <option value="">Selecione o estado...</option>
-                    <option value="AC">Acre (AC)</option>
-                    <option value="AL">Alagoas (AL)</option>
-                    <option value="AP">Amapá (AP)</option>
-                    <option value="AM">Amazonas (AM)</option>
-                    <option value="BA">Bahia (BA)</option>
-                    <option value="CE">Ceará (CE)</option>
-                    <option value="DF">Distrito Federal (DF)</option>
-                    <option value="ES">Espírito Santo (ES)</option>
-                    <option value="GO">Goiás (GO)</option>
-                    <option value="MA">Maranhão (MA)</option>
-                    <option value="MT">Mato Grosso (MT)</option>
-                    <option value="MS">Mato Grosso do Sul (MS)</option>
-                    <option value="MG">Minas Gerais (MG)</option>
-                    <option value="PA">Pará (PA)</option>
-                    <option value="PB">Paraíba (PB)</option>
-                    <option value="PR">Paraná (PR)</option>
-                    <option value="PE">Pernambuco (PE)</option>
-                    <option value="PI">Piauí (PI)</option>
-                    <option value="RJ">Rio de Janeiro (RJ)</option>
-                    <option value="RN">Rio Grande do Norte (RN)</option>
-                    <option value="RS">Rio Grande do Sul (RS)</option>
-                    <option value="RO">Rondônia (RO)</option>
-                    <option value="RR">Roraima (RR)</option>
-                    <option value="SC">Santa Catarina (SC)</option>
-                    <option value="SP">São Paulo (SP)</option>
-                    <option value="SE">Sergipe (SE)</option>
-                    <option value="TO">Tocantins (TO)</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="pageEnrollCity" style="color:var(--dark)">Cidade *</label>
-                  <input type="text" id="pageEnrollCity" required placeholder="Sua cidade" style="border:1.5px solid var(--g300)">
-                </div>
-              </div>
-
-              <!-- Profissão / Atuação e Igreja Parceira -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="pageEnrollRole" style="color:var(--dark)">Profissão / Área de Atuação *</label>
-                  <select id="pageEnrollRole" required style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
-                    <option value="">Selecione sua atuação...</option>
-                    <option value="Pastor / Líder Eclesiástico">Pastor / Líder Eclesiástico</option>
-                    <option value="Líder de Ministério Infantil">Líder de Ministério Infantil</option>
-                    <option value="Educador(a) Social">Educador(a) Social</option>
-                    <option value="Líder Comunitário">Líder Comunitário</option>
-                    <option value="Voluntário(a) de Igreja Parceira">Voluntário(a) de Igreja Parceira</option>
-                    <option value="Profissional da Rede de Proteção">Profissional da Rede de Proteção</option>
-                    <option value="Outros">Outros</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="pageEnrollChurch" style="color:var(--dark)">Igreja Parceira / Instituição</label>
-                  <input type="text" id="pageEnrollChurch" placeholder="Nome da igreja ou projeto" style="border:1.5px solid var(--g300)">
-                </div>
-              </div>
-
-              <!-- Curso de Interesse -->
-              <div class="form-group">
-                <label for="pageEnrollCourse" style="color:var(--dark)">Curso de Interesse *</label>
-                <select id="pageEnrollCourse" required style="width:100%;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.95rem">
-                  <option value="">Selecione o curso desejado...</option>
-                  <option value="Oficial de Proteção e Salvaguarda Infantil">Oficial de Proteção e Salvaguarda Infantil (40h · Certificado Oficial)</option>
-                  <option value="Acolhimento e Vínculo Materno-Infantil">Acolhimento e Vínculo Materno-Infantil (0 a 5 anos · 30h)</option>
-                  <option value="Liderança Servidora e Protagonismo Jovem">Liderança Servidora e Protagonismo Jovem (45h · Certificado Oficial)</option>
-                  <option value="Discipulado e Educação Bíblica Criativa">Discipulado e Educação Bíblica Criativa (25h · Certificado Oficial)</option>
-                  <option value="Gestão e Sustentabilidade de Projetos Sociais">Gestão e Sustentabilidade de Projetos Sociais (35h · Certificado Oficial)</option>
-                  <option value="Cuidado Pós-Trauma e Saúde Emocional">Cuidado Pós-Trauma e Saúde Emocional (30h · Certificado Oficial)</option>
-                </select>
-              </div>
-
-              <!-- Senha & Confirmação de Senha (para provisionamento Moodle) -->
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="pageEnrollPassword" style="color:var(--dark)">Criar Senha de Acesso *</label>
-                  <input type="password" id="pageEnrollPassword" required minlength="8" placeholder="Mínimo 8 caracteres" style="border:1.5px solid var(--g300)">
-                </div>
-
-                <div class="form-group">
-                  <label for="pageEnrollPasswordConfirm" style="color:var(--dark)">Confirmar Senha *</label>
-                  <input type="password" id="pageEnrollPasswordConfirm" required minlength="8" placeholder="Repita a senha" style="border:1.5px solid var(--g300)">
-                </div>
-              </div>
-
-              <div style="background:rgba(26,95,255,0.05);border:1px solid rgba(26,95,255,0.18);padding:10px 14px;border-radius:8px;font-size:0.75rem;color:var(--g700);line-height:1.45;display:flex;align-items:flex-start;gap:8px">
-                <span style="font-size:1rem;color:var(--blue)">ℹ</span>
-                <span><strong>Validação por E-mail (Double Opt-in):</strong> Após o envio, você receberá um link de confirmação para ativar sua conta e liberar o acesso às aulas no Moodle LMS.</span>
-              </div>
-
-              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;padding:14px;font-size:0.95rem;font-weight:700">
-                Criar Cadastro e Liberar Acesso no Moodle →
-              </button>
-            </form>
-
-            <!-- Mensagem de confirmação pós-envio -->
-            <div id="pageEnrollSuccess" style="display:none;text-align:center;padding:32px 16px">
-              <div style="width:60px;height:60px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px;box-shadow:0 8px 24px rgba(42,187,110,0.3)">
-                ✓
-              </div>
-              <h4 style="font-size:1.35rem;font-weight:800;color:var(--dark);margin-bottom:8px">Cadastro Realizado com Sucesso!</h4>
-              <p style="font-size:.92rem;color:var(--g700);line-height:1.65;max-width:440px;margin:0 auto 20px">
-                Enviamos um e-mail de ativação para <strong id="sentEmailDisplay" style="color:var(--blue)">seu e-mail</strong>. Por favor, verifique sua caixa de entrada e clique no link para ativar sua conta e iniciar seu curso.
-              </p>
-              <button type="button" class="btn btn-outline" id="btnResetPageForm" style="font-size:0.82rem;padding:8px 16px;border:1.5px solid var(--blue);color:var(--blue);background:transparent;border-radius:6px;cursor:pointer">
-                Realizar outro cadastro
-              </button>
-            </div>
-
-          </div>
-
+    <section class="section section-dark" style="background:var(--dark);padding:70px 0;text-align:center;">
+      <div class="container reveal">
+        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);font-weight:900;color:var(--white);margin-bottom:14px">
+          Quer ser uma Igreja Parceira da Compassion Brasil?
+        </h2>
+        <p style="font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:640px;margin:0 auto 28px;line-height:1.65">
+          Mais de 200 igrejas parceiras já utilizam nossas metodologias e recebem investimento contínuo para transformar a infância e a juventude em seus territórios.
+        </p>
+        <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
+          <a href="index.html#apadrinhar" class="btn btn-primary" style="padding:12px 28px;font-size:0.92rem;font-weight:700">
+            Fale com Nosso Time de Parcerias
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+          <a href="como-trabalhamos.html" class="btn btn-outline" style="padding:12px 24px;font-size:0.92rem;font-weight:700;border-color:rgba(255,255,255,0.4);color:var(--white)">
+            Conheça Nossos Programas
+          </a>
         </div>
       </div>
     </section>
@@ -493,126 +1026,62 @@
   </main>
 
   <!-- ═══════════════════════════════════════════════
-       MODAL DE INSCRIÇÃO RÁPIDA (INTEGRAÇÃO MOODLE LMS)
+       MODAL DE DOWNLOAD & DETALHES DO MATERIAL
        ═══════════════════════════════════════════════ -->
-  <div class="course-enroll-modal" id="courseEnrollModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="course-enroll-card" style="max-width:560px;padding:32px 30px">
-      <button class="course-enroll-close" id="closeEnrollModal" aria-label="Fechar modal">&times;</button>
+  <div class="material-modal" id="materialDownloadModal" role="dialog" aria-modal="true" aria-labelledby="modalMaterialTitle">
+    <div class="material-modal-box">
+      <button class="modal-close-btn" id="closeMaterialModal" aria-label="Fechar">&times;</button>
 
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <span style="background:rgba(26,95,255,0.1);color:var(--blue);border:1px solid rgba(26,95,255,0.25);padding:3px 10px;border-radius:9999px;font-size:0.7rem;font-weight:700;letter-spacing:0.5px;text-transform:uppercase">
-          Moodle LMS
-        </span>
-        <span style="font-size:0.75rem;color:var(--g500)">Matrícula Imediata</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span id="modalCatTag" class="material-cat-tag material-cat-juventude">Juventude</span>
+        <span style="font-size:0.75rem;color:var(--g500);font-weight:700">Material Gratuito</span>
       </div>
 
-      <h3 id="modalTitle" style="font-size:1.35rem;font-weight:800;color:var(--dark);margin-bottom:4px">
-        Inscrição e Cadastro no Curso
+      <h3 id="modalMaterialTitle" style="font-size:1.4rem;font-weight:900;color:var(--dark);margin-bottom:8px">
+        Nome do Material
       </h3>
-      <p style="font-size:.82rem;color:var(--g500);margin-bottom:18px">
-        Preencha os campos abaixo para provisionar sua conta no Moodle e iniciar sua capacitação.
+
+      <p id="modalMaterialDesc" style="font-size:0.9rem;color:var(--g700);line-height:1.6;margin-bottom:18px">
+        Descrição do material metodológico.
       </p>
 
-      <form id="enrollForm">
-        <!-- Curso Selecionado -->
-        <div class="form-group" style="margin-bottom:12px">
-          <label style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Curso Selecionado</label>
-          <input type="text" id="enrollCourseSelect" readonly
-            style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid rgba(26,95,255,0.25);background:rgba(26,95,255,0.05);color:var(--blue);font-weight:700;font-size:0.9rem">
+      <div style="font-size:0.8rem;font-weight:800;color:var(--dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">
+        Arquivos para Download:
+      </div>
+
+      <div class="modal-file-list" id="modalFilesList">
+        <!-- Inserido dinamicamente via JS -->
+      </div>
+
+      <!-- Banner de informação sobre o Moodle -->
+      <div class="modal-banner-moodle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" style="flex-shrink:0;margin-top:2px">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <div>
+          <strong>Ambiente Virtual em Integração:</strong> Este material faz parte do acervo oficial da Compassion Brasil. Em breve, estará integrado com turmas e certificação oficial em nossa plataforma <strong>Moodle LMS</strong>.
         </div>
+      </div>
 
-        <!-- Nome Completo (Certificado) -->
-        <div class="form-group" style="margin-bottom:12px">
-          <label for="mName" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Nome Completo *</label>
-          <input type="text" id="mName" required placeholder="Ex: Carlos Eduardo da Silva"
-            style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
-          <small style="font-size:0.68rem;color:var(--g500);margin-top:2px;display:block">Nome para composição do certificado oficial de conclusão.</small>
-        </div>
-
-        <!-- E-mail (Login) -->
-        <div class="form-group" style="margin-bottom:12px">
-          <label for="mEmail" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">E-mail Corporativo ou Pessoal (Login) *</label>
-          <input type="email" id="mEmail" required placeholder="seu.email@exemplo.com"
-            style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
-        </div>
-
-        <!-- Estado (UF) e Cidade -->
-        <div class="form-row" style="margin-bottom:12px">
-          <div class="form-group">
-            <label for="mState" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Estado (UF) *</label>
-            <select id="mState" required style="width:100%;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.85rem">
-              <option value="">UF...</option>
-              <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
-              <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
-              <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
-              <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
-              <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
-              <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
-              <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
-              <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
-              <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="mCity" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Cidade *</label>
-            <input type="text" id="mCity" required placeholder="Sua cidade"
-              style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
-          </div>
-        </div>
-
-        <!-- Profissão / Área de Atuação -->
-        <div class="form-group" style="margin-bottom:12px">
-          <label for="mRole" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Profissão / Área de Atuação *</label>
-          <select id="mRole" required style="width:100%;padding:10px 12px;border-radius:var(--r-sm);border:1.5px solid var(--g300);background:var(--white);font-family:var(--font);font-size:.85rem">
-            <option value="">Selecione sua atuação...</option>
-            <option value="Pastor / Líder Eclesiástico">Pastor / Líder Eclesiástico</option>
-            <option value="Líder de Ministério Infantil">Líder de Ministério Infantil</option>
-            <option value="Educador(a) Social">Educador(a) Social</option>
-            <option value="Líder Comunitário">Líder Comunitário</option>
-            <option value="Voluntário(a) de Igreja Parceira">Voluntário(a) de Igreja Parceira</option>
-            <option value="Profissional da Rede de Proteção">Profissional da Rede de Proteção</option>
-            <option value="Outros">Outros</option>
-          </select>
-        </div>
-
-        <!-- Senha e Confirmação -->
-        <div class="form-row" style="margin-bottom:16px">
-          <div class="form-group">
-            <label for="mPassword" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Criar Senha *</label>
-            <input type="password" id="mPassword" required minlength="8" placeholder="Mínimo 8 dígitos"
-              style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
-          </div>
-
-          <div class="form-group">
-            <label for="mPasswordConfirm" style="font-size:.75rem;font-weight:700;color:var(--dark);display:block;margin-bottom:4px">Confirmar Senha *</label>
-            <input type="password" id="mPasswordConfirm" required minlength="8" placeholder="Repita a senha"
-              style="width:100%;padding:10px 14px;border-radius:var(--r-sm);border:1.5px solid var(--g300);font-size:0.9rem">
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;font-size:0.92rem;font-weight:700">
-          Confirmar Cadastro & Ingressar no Curso →
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap">
+        <button type="button" class="btn-view-details" id="btnCancelModal">Fechar</button>
+        <button type="button" class="btn-download-kit" id="btnConfirmDownload">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Baixar Arquivo Completo
         </button>
-      </form>
+      </div>
 
-      <div id="enrollSuccess" style="display:none;text-align:center;padding:28px 12px">
-        <div style="width:56px;height:56px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;margin:0 auto 16px;box-shadow:0 8px 24px rgba(42,187,110,0.3)">
-          ✓
-        </div>
-        <h4 style="font-size:1.3rem;font-weight:800;color:var(--dark);margin-bottom:8px">Matrícula Solicitada com Sucesso!</h4>
-        <p style="font-size:.9rem;color:var(--g700);line-height:1.6;margin-bottom:20px">
-          Enviamos as instruções e o link de ativação da sua conta para <strong id="modalSentEmailDisplay" style="color:var(--blue)">seu e-mail</strong>. Ative seu acesso para ingressar imediatamente no Moodle.
-        </p>
-        <button type="button" class="btn btn-outline" id="btnCloseSuccessModal" style="font-size:0.82rem;padding:8px 16px;border:1.5px solid var(--blue);color:var(--blue);background:transparent;border-radius:6px;cursor:pointer">
-          Concluir
-        </button>
+      <!-- Feedback de sucesso -->
+      <div id="downloadFeedback" style="display:none;margin-top:16px;background:#ECFDF5;border:1px solid #10B981;padding:12px 16px;border-radius:var(--r-md);color:#065F46;font-size:0.85rem;font-weight:700;text-align:center">
+        ✓ Download iniciado com sucesso! Aproveite este material com sua comunidade.
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════
-       FOOTER
+       FOOTER OFICIAL
        ═══════════════════════════════════════════════ -->
   <footer class="site-footer" aria-labelledby="footerHeading">
     <div class="container">
@@ -632,20 +1101,20 @@
         <div class="footer-col">
           <h5 id="footerHeading">Programas</h5>
           <ul>
-            <li><a href="index.html#programas">Desenvolvimento da Criança</a></li>
-            <li><a href="index.html#programas">Proteção e Cuidado</a></li>
-            <li><a href="index.html#programas">Fortalecimento Familiar</a></li>
-            <li><a href="index.html#programas">Liderança Jovem</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Desenvolvimento da Criança</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Proteção e Cuidado</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Fortalecimento Familiar</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Liderança Jovem</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Cursos</h5>
+          <h5>Capacitações</h5>
           <ul>
-            <li><a href="cursos.html">Catálogo de Cursos</a></li>
-            <li><a href="cursos.html#catalogo">Trilhas de Proteção</a></li>
-            <li><a href="cursos.html#inscricao">Inscrição & Certificados</a></li>
-            <li><a href="cursos.html#inscricao">Para Igrejas Parceiras</a></li>
+            <li><a href="#materiais">Materiais Metodológicos</a></li>
+            <li><a href="#material-homem-de-honra">Homem de Honra</a></li>
+            <li><a href="#material-gravidez-adolescencia">Campanha Não tá na hora!</a></li>
+            <li><a href="#material-maio-laranja">Maio Laranja</a></li>
           </ul>
         </div>
 
@@ -703,99 +1172,125 @@
     </div>
   </footer>
 
+  <!-- ═══════════════════════════════════════════════
+       INTERATIVIDADE: FILTROS & MODAL DE DOWNLOAD
+       ═══════════════════════════════════════════════ -->
   <script>
-    // ── 1. FORMULÁRIO PRINCIPAL DA PÁGINA (#pageEnrollForm) ──
-    const pageForm = document.getElementById('pageEnrollForm');
-    const pageSuccess = document.getElementById('pageEnrollSuccess');
-    const btnResetPageForm = document.getElementById('btnResetPageForm');
-    const sentEmailDisplay = document.getElementById('sentEmailDisplay');
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Filtros por Categoria
+      const filterBtns = document.querySelectorAll('.m-filter-btn');
+      const cards = document.querySelectorAll('.material-card');
 
-    if (pageForm && pageSuccess) {
-      pageForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const p1 = document.getElementById('pageEnrollPassword').value;
-        const p2 = document.getElementById('pageEnrollPasswordConfirm').value;
-        if (p1 !== p2) {
-          alert('As senhas digitadas não coincidem. Por favor, verifique.');
-          document.getElementById('pageEnrollPasswordConfirm').focus();
-          return;
-        }
-        const email = document.getElementById('pageEnrollEmail').value;
-        if (sentEmailDisplay) sentEmailDisplay.textContent = email;
-        pageForm.style.display = 'none';
-        pageSuccess.style.display = 'block';
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const category = btn.dataset.filter;
+
+          cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+              card.style.display = 'grid';
+              setTimeout(() => card.style.opacity = '1', 50);
+            } else {
+              card.style.opacity = '0';
+              setTimeout(() => card.style.display = 'none', 200);
+            }
+          });
+        });
       });
 
-      if (btnResetPageForm) {
-        btnResetPageForm.addEventListener('click', () => {
-          pageForm.reset();
-          pageForm.style.display = 'flex';
-          pageSuccess.style.display = 'none';
+      // 2. Modal de Download & Detalhes
+      const modal = document.getElementById('materialDownloadModal');
+      const closeBtn = document.getElementById('closeMaterialModal');
+      const cancelBtn = document.getElementById('btnCancelModal');
+      const confirmBtn = document.getElementById('btnConfirmDownload');
+      const titleEl = document.getElementById('modalMaterialTitle');
+      const descEl = document.getElementById('modalMaterialDesc');
+      const catEl = document.getElementById('modalCatTag');
+      const filesContainer = document.getElementById('modalFilesList');
+      const feedback = document.getElementById('downloadFeedback');
+
+      const openModal = (material, cat, desc, filesStr) => {
+        titleEl.textContent = material;
+        descEl.textContent = desc || 'Kit completo de aplicação metodológica e pedagógica da Compassion Brasil.';
+        catEl.textContent = cat;
+        if (cat === 'Proteção') {
+          catEl.className = 'material-cat-tag material-cat-protecao';
+        } else {
+          catEl.className = 'material-cat-tag material-cat-juventude';
+        }
+
+        // Renderiza lista de arquivos
+        filesContainer.innerHTML = '';
+        const files = (filesStr || 'Guia do Facilitador (PDF);Material Didático (PDF);Cartazes e Recursos Visuais (ZIP)').split(';');
+        files.forEach((file, idx) => {
+          const div = document.createElement('div');
+          div.className = 'modal-file-item';
+          div.innerHTML = `
+            <div class="modal-file-info">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <span>${file}</span>
+            </div>
+            <span class="modal-file-size">PDF / Kit Pronto</span>
+          `;
+          filesContainer.appendChild(div);
+        });
+
+        feedback.style.display = 'none';
+        modal.classList.add('open');
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('open');
+      };
+
+      // Disparar modal via botões de download
+      document.querySelectorAll('.btn-trigger-download').forEach(btn => {
+        btn.addEventListener('click', () => {
+          openModal(btn.dataset.material, btn.dataset.cat, null, btn.dataset.files);
+        });
+      });
+
+      // Disparar modal via botões de detalhes
+      document.querySelectorAll('.btn-trigger-details').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.material-card');
+          const dBtn = card.querySelector('.btn-trigger-download');
+          openModal(btn.dataset.material, btn.dataset.cat, btn.dataset.desc, dBtn ? dBtn.dataset.files : '');
+        });
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
         });
       }
-    }
 
-    // ── 2. MODAL DE INSCRIÇÃO RÁPIDA (#courseEnrollModal) ──
-    const modalEnroll = document.getElementById('courseEnrollModal');
-    const modalForm = document.getElementById('enrollForm');
-    const modalSuccess = document.getElementById('enrollSuccess');
-    const closeEnroll = document.getElementById('closeEnrollModal');
-    const btnCloseSuccessModal = document.getElementById('btnCloseSuccessModal');
-    const enrollCourseInput = document.getElementById('enrollCourseSelect');
-    const modalSentEmailDisplay = document.getElementById('modalSentEmailDisplay');
-
-    // Ao clicar em qualquer botão "Inscrever-se" dos cards de curso
-    document.querySelectorAll('.btn-open-enroll').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const course = btn.dataset.course || 'Curso de Capacitação Compassion';
-        if (enrollCourseInput) enrollCourseInput.value = course;
-        if (modalForm) {
-          modalForm.reset();
-          if (enrollCourseInput) enrollCourseInput.value = course;
-          modalForm.style.display = 'block';
-        }
-        if (modalSuccess) modalSuccess.style.display = 'none';
-        if (modalEnroll) modalEnroll.classList.add('open');
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
       });
-    });
 
-    const closeModal = () => {
-      if (modalEnroll) modalEnroll.classList.remove('open');
-    };
-
-    if (closeEnroll) closeEnroll.addEventListener('click', closeModal);
-    if (btnCloseSuccessModal) btnCloseSuccessModal.addEventListener('click', closeModal);
-
-    if (modalEnroll) {
-      modalEnroll.addEventListener('click', (e) => {
-        if (e.target === modalEnroll) closeModal();
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalEnroll && modalEnroll.classList.contains('open')) {
-        closeModal();
+      // Simulação do download com feedback imediato
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+          feedback.style.display = 'block';
+          // Simula acionamento de download estático
+          const dummyLink = document.createElement('a');
+          dummyLink.href = '#';
+          dummyLink.setAttribute('download', `${titleEl.textContent.trim().replace(/\\s+/g, '_')}_Compassion_Brasil.pdf`);
+          setTimeout(() => {
+            feedback.innerHTML = `✓ Pacote <strong>${titleEl.textContent}</strong> preparado para download!`;
+          }, 600);
+        });
       }
     });
-
-    // Submissão do formulário no modal
-    if (modalForm && modalSuccess) {
-      modalForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const p1 = document.getElementById('mPassword').value;
-        const p2 = document.getElementById('mPasswordConfirm').value;
-        if (p1 !== p2) {
-          alert('As senhas digitadas não coincidem. Por favor, verifique.');
-          document.getElementById('mPasswordConfirm').focus();
-          return;
-        }
-        const email = document.getElementById('mEmail').value;
-        if (modalSentEmailDisplay) modalSentEmailDisplay.textContent = email;
-        modalForm.style.display = 'none';
-        modalSuccess.style.display = 'block';
-      });
-    }
   </script>
 
 </body>

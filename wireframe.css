@@ -3653,4 +3653,164 @@ h3.course-card-title {
   .prog-deep-media {
     height: 240px;
   }
-}
+}
+
+/* ══════════════════════════════════════════════════════
+   CAPACITAÇÕES — Cards de Materiais Metodológicos (Home)
+   Usados em: index.html (seção #cursos), cursos.html
+   ══════════════════════════════════════════════════════ */
+
+.cap-materiais-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .cap-materiais-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .cap-materiais-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cap-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--sh-md);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+
+.cap-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sh-lg);
+}
+
+.cap-card-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cap-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.cap-card:hover .cap-card-img-wrap img {
+  transform: scale(1.05);
+}
+
+.cap-card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 13px;
+  border-radius: var(--r-pill);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.cap-badge-blue {
+  background: rgba(26, 95, 255, 0.18);
+  color: #1A5FFF;
+  border: 1px solid rgba(26, 95, 255, 0.3);
+}
+
+.cap-badge-amber {
+  background: rgba(180, 83, 9, 0.18);
+  color: #9A6700;
+  border: 1px solid rgba(180, 83, 9, 0.3);
+}
+
+.cap-badge-orange {
+  background: rgba(232, 71, 42, 0.18);
+  color: var(--orange, #E8472A);
+  border: 1px solid rgba(232, 71, 42, 0.3);
+}
+
+.cap-card-dl-icon {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, color 0.2s;
+}
+
+.cap-card:hover .cap-card-dl-icon {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.cap-card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 20px;
+  flex: 1;
+  gap: 8px;
+}
+
+.cap-card-type {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--g500);
+}
+
+.cap-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.cap-card-desc {
+  font-size: 0.875rem;
+  color: var(--g700);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.cap-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-top: 4px;
+  transition: gap 0.2s;
+}
+
+.cap-card:hover .cap-card-cta {
+  gap: 10px;
+}
+
