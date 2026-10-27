@@ -107,69 +107,99 @@
       flex-shrink: 0;
     }
 
+    /* === HERO VISUAL: Foto sem caixa, editorial === */
     .historia-hero-visual {
       position: relative;
     }
 
-    .historia-hero-card {
+    .hero-photo-spread {
       position: relative;
-      background: var(--white);
-      border-radius: var(--r-lg);
-      padding: 14px;
-      box-shadow: var(--sh-md);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    .historia-hero-card-img-wrap {
-      width: 100%;
-      height: 380px;
-      border-radius: var(--r-md);
+      border-radius: 20px;
       overflow: hidden;
-      position: relative;
-      background: var(--dark);
+      height: 460px;
+      background: #051030;
     }
 
-    .historia-hero-card-img-wrap img {
+    .hero-photo-spread img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
-      filter: grayscale(15%);
-      transition: transform 0.6s var(--ease);
+      transition: transform 0.7s var(--ease);
     }
 
-    .historia-hero-card:hover .historia-hero-card-img-wrap img {
+    .hero-photo-spread:hover img {
       transform: scale(1.03);
     }
 
-    .historia-hero-card-caption {
-      margin-top: 14px;
-      padding: 4px 8px 8px;
+    /* Gradiente de base para o texto flutuar */
+    .hero-photo-spread::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(5, 16, 48, 0.82) 0%,
+        rgba(5, 16, 48, 0.18) 48%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Legenda que flutua sobre a foto */
+    .hero-photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 28px 28px 24px;
+      z-index: 2;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
+      gap: 16px;
     }
 
-    .historia-hero-caption-text {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--dark);
+    .hero-photo-caption-info {
+      color: #fff;
     }
 
-    .historia-hero-caption-sub {
-      font-size: 0.74rem;
-      color: var(--g500);
-      margin-top: 2px;
+    .hero-photo-caption-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 3px;
     }
 
-    .historia-tag-pill {
-      background: rgba(26, 95, 255, 0.1);
-      color: var(--blue);
+    .hero-photo-caption-role {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    .hero-photo-caption-pill {
+      background: var(--blue);
+      color: #fff;
       font-size: 0.75rem;
       font-weight: 800;
-      padding: 6px 14px;
-      border-radius: var(--r-pill);
-      letter-spacing: 0.04em;
+      padding: 7px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.03em;
+    }
+
+    /* Thread azul lateral — identidade da marca */
+    .hero-photo-spread::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 0;
+      width: 4px;
+      height: 60px;
+      background: var(--blue);
+      border-radius: 0 4px 4px 0;
+      z-index: 3;
     }
 
     /* Seção: O Chamado Original (1952) */
@@ -193,57 +223,121 @@
       }
     }
 
-    .origem-mosaic {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 16px;
+    /* === MOSAICO EDITORIAL SEÇÃO 1952 === */
+    .origem-photo-set {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .origem-mosaic-main {
-      grid-column: 1 / -1;
-      height: 280px;
-      border-radius: var(--r-md);
+    /* Foto principal: maior, com legenda interna */
+    .origem-photo-main {
+      position: relative;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: var(--sh-md);
-      background: var(--dark);
+      height: 300px;
+      background: #051030;
     }
 
-    .origem-mosaic-main img {
+    .origem-photo-main img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 25%;
+      transition: transform 0.6s var(--ease);
     }
 
-    .origem-mosaic-sub {
-      height: 190px;
-      border-radius: var(--r-md);
+    .origem-photo-main:hover img {
+      transform: scale(1.03);
+    }
+
+    .origem-photo-main::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,16,48,0.72) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* Foto secundária + badge numa linha */
+    .origem-photo-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .origem-photo-secondary {
+      position: relative;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: var(--sh-sm);
-      background: var(--dark);
+      height: 160px;
+      background: #051030;
     }
 
-    .origem-mosaic-sub img {
+    .origem-photo-secondary img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.6s var(--ease);
     }
 
-    .origem-floating-badge {
+    .origem-photo-secondary:hover img {
+      transform: scale(1.04);
+    }
+
+    .origem-photo-secondary::after {
+      content: '';
       position: absolute;
-      bottom: -18px;
-      left: 24px;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,16,48,0.6) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Badge âncora de data — fica na direita da linha */
+    .origem-year-badge {
       background: var(--blue);
-      color: var(--white);
-      padding: 12px 22px;
-      border-radius: var(--r-pill);
-      font-size: 0.88rem;
-      font-weight: 800;
-      box-shadow: var(--sh-blue);
-      display: inline-flex;
+      color: #fff;
+      border-radius: 16px;
+      width: 80px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      text-align: center;
+      padding: 14px 8px;
+      gap: 4px;
+    }
+
+    .origem-year-badge strong {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .origem-year-badge span {
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      line-height: 1.3;
+      opacity: 0.85;
+    }
+
+    /* Legendas sobre as fotos */
+    .photo-legend {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      z-index: 2;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.02em;
     }
 
     .origem-text p {
@@ -314,27 +408,27 @@
 
     .timeline-marker {
       position: absolute;
-      left: -48px;
-      top: 0;
-      width: 38px;
-      height: 38px;
+      left: -38.5px;
+      top: 32px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background: var(--white);
-      border: 4px solid var(--blue);
-      box-shadow: var(--sh-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 900;
-      color: var(--blue);
+      background: var(--blue);
+      border: 4px solid var(--white);
+      box-shadow: 0 0 0 2px var(--blue), var(--sh-sm);
+      z-index: 2;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .timeline-node:hover .timeline-marker {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 4px rgba(26, 95, 255, 0.25), 0 0 0 2px var(--blue);
     }
 
     .timeline-node.active .timeline-marker {
       background: var(--blue);
-      color: var(--white);
       border-color: var(--white);
-      box-shadow: var(--sh-blue);
+      box-shadow: 0 0 0 2px var(--blue), 0 0 10px rgba(26, 95, 255, 0.4);
     }
 
     .timeline-card {
@@ -411,29 +505,80 @@
       }
     }
 
-    .brasil-focus-photos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    /* === FOTOS BRASIL: Empilhadas com offset editorial === */
+    .brasil-photo-editorial {
+      position: relative;
+      padding-top: 20px;
     }
 
-    .brasil-photo-box {
-      border-radius: var(--r-md);
+    .brasil-photo-top {
+      position: relative;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: var(--sh-sm);
-      background: var(--cream);
-      height: 260px;
+      height: 280px;
+      background: #051030;
+      margin-right: 32px;
     }
 
-    .brasil-photo-box:first-child {
-      margin-top: 30px;
-    }
-
-    .brasil-photo-box img {
+    .brasil-photo-top img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 30%;
+      transition: transform 0.6s var(--ease);
     }
+
+    .brasil-photo-top:hover img {
+      transform: scale(1.03);
+    }
+
+    .brasil-photo-top::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(5,16,48,0.7) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .brasil-photo-top .photo-legend {
+      top: 14px;
+      bottom: auto;
+      left: 16px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .brasil-photo-bottom {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 240px;
+      background: #051030;
+      margin-left: 32px;
+      margin-top: -50px;
+      border: 5px solid var(--white);
+    }
+
+    .brasil-photo-bottom img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transition: transform 0.6s var(--ease);
+    }
+
+    .brasil-photo-bottom:hover img {
+      transform: scale(1.03);
+    }
+
+    .brasil-photo-bottom::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,16,48,0.65) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+
 
     .brasil-focus-text h2 {
       font-size: clamp(1.9rem, 3.2vw, 2.6rem);
@@ -746,11 +891,13 @@
             </div>
 
             <h1 class="historia-hero-title reveal d1">
-              Uma história de compaixão que liberta crianças da pobreza em <span class="blue-highlight">nome de Jesus</span>
+              Uma história de compaixão que liberta crianças da pobreza em <span class="blue-highlight">nome de
+                Jesus</span>
             </h1>
 
             <p class="historia-hero-subtitle reveal d2">
-              Desde a comoção do Reverendo Everett Swanson em 1952 até nossa atuação diária no semiárido e nas periferias do Brasil: fortalecendo a Igreja Local para que cada criança seja conhecida, amada e protegida.
+              Desde a comoção do Reverendo Everett Swanson em 1952 até nossa atuação diária no semiárido e nas
+              periferias do Brasil: fortalecendo a Igreja Local para que cada criança seja conhecida, amada e protegida.
             </p>
 
             <div class="hero-impact-badges reveal d3">
@@ -773,18 +920,16 @@
             </div>
           </div>
 
-          <!-- Coluna Visual: Foto histórica em moldura elegante da marca -->
+          <!-- Coluna Visual: foto editorial sem caixas -->
           <div class="historia-hero-visual reveal d2">
-            <div class="historia-hero-card">
-              <div class="historia-hero-card-img-wrap">
-                <img src="assets/images/Everett Swanson_236 (2).jpg" alt="Reverendo Everett Swanson com crianças">
-              </div>
-              <div class="historia-hero-card-caption">
-                <div>
-                  <div class="historia-hero-caption-text">Rev. Everett Swanson</div>
-                  <div class="historia-hero-caption-sub">Fundador da Compassion International</div>
+            <div class="hero-photo-spread">
+              <img src="assets/images/Everett Swanson_236 (2).jpg" alt="Rev. Everett Swanson com crianças órfãs em Seul, 1952">
+              <div class="hero-photo-caption">
+                <div class="hero-photo-caption-info">
+                  <div class="hero-photo-caption-name">Rev. Everett Swanson</div>
+                  <div class="hero-photo-caption-role">Fundador da Compassion International · Seul, 1952</div>
                 </div>
-                <span class="historia-tag-pill">Desde 1952</span>
+                <span class="hero-photo-caption-pill">Desde 1952</span>
               </div>
             </div>
           </div>
@@ -800,20 +945,24 @@
       <div class="container">
         <div class="origem-grid">
 
-          <!-- Mosaico fotográfico histórico -->
-          <div class="origem-mosaic reveal">
-            <div class="origem-mosaic-main">
+          <!-- Fotos históricas: composição editorial sem bordas -->
+          <div class="origem-photo-set reveal">
+            <!-- Foto principal -->
+            <div class="origem-photo-main">
               <img src="assets/images/Everett Swanson_249 (2).jpg" alt="Everett Swanson com grupo de crianças acolhidas">
+              <span class="photo-legend">Seul, 1952 — Primeiras crianças acolhidas</span>
             </div>
-            <div class="origem-mosaic-sub" style="grid-column: 1 / -1;">
-              <img src="assets/images/Everett Swanson_221 (2).jpg" alt="Everett Swanson ensinando crianças">
-            </div>
-            <div class="origem-floating-badge">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-              1952 · Onde tudo começou
+
+            <!-- Foto secundária + badge de ano -->
+            <div class="origem-photo-row">
+              <div class="origem-photo-secondary">
+                <img src="assets/images/Everett Swanson_221 (2).jpg" alt="Everett Swanson ensinando crianças">
+                <span class="photo-legend">Educação e Fé Cristã</span>
+              </div>
+              <div class="origem-year-badge">
+                <strong>1952</strong>
+                <span>Onde tudo começou</span>
+              </div>
             </div>
           </div>
 
@@ -829,20 +978,29 @@
             </h2>
 
             <p>
-              Em 1952, o evangelista e missionário americano <strong>Reverendo Everett Swanson</strong> viajou para a Coreia do Sul a fim de ministrar às tropas durante a guerra. Em Seul, deparou-se com uma cena estarrecedora: centenas de crianças órfãs, abandonadas em meio ao frio extremo e à fome nas ruas, recolhidas sem vida ao amanhecer.
+              Em 1952, o evangelista e missionário americano <strong>Reverendo Everett Swanson</strong> viajou para a
+              Coreia do Sul a fim de ministrar às tropas durante a guerra. Em Seul, deparou-se com uma cena
+              estarrecedora: centenas de crianças órfãs, abandonadas em meio ao frio extremo e à fome nas ruas,
+              recolhidas sem vida ao amanhecer.
             </p>
 
             <p>
-              Swanson sentiu no coração que não podia voltar aos Estados Unidos e seguir sua rotina como se nada tivesse visto. Constrangido pelas palavras de Jesus em Mateus 15:32 — <em>"Tenho compaixão desta multidão"</em> —, ele prometeu agir. Começou levantando fundos em sua comunidade para prover alimento, abrigo, educação e o Evangelho para aquelas crianças.
+              Swanson sentiu no coração que não podia voltar aos Estados Unidos e seguir sua rotina como se nada tivesse
+              visto. Constrangido pelas palavras de Jesus em Mateus 15:32 — <em>"Tenho compaixão desta multidão"</em> —,
+              ele prometeu agir. Começou levantando fundos em sua comunidade para prover alimento, abrigo, educação e o
+              Evangelho para aquelas crianças.
             </p>
 
             <p>
-              Ali nascia o modelo que transformaria milhões de vidas ao redor do planeta: um programa de <strong>desenvolvimento integral centrado em Cristo, focado na criança e viabilizado pela Igreja Local</strong>.
+              Ali nascia o modelo que transformaria milhões de vidas ao redor do planeta: um programa de
+              <strong>desenvolvimento integral centrado em Cristo, focado na criança e viabilizado pela Igreja
+                Local</strong>.
             </p>
 
             <div class="quote-card">
               <p>
-                "Não posso simplesmente voltar para casa e pregar sobre o amor de Deus sem me importar com crianças morrendo de frio nas ruas. Se não fizermos algo, quem fará?"
+                "Não posso simplesmente voltar para casa e pregar sobre o amor de Deus sem me importar com crianças
+                morrendo de frio nas ruas. Se não fizermos algo, quem fará?"
               </p>
               <cite>— Rev. Everett Swanson, 1952</cite>
             </div>
@@ -865,7 +1023,8 @@
           </div>
           <h2 class="section-title">Marcos Históricos da Compassion no Brasil</h2>
           <p class="section-subtitle">
-            Do chamado visionário à consolidação de uma das maiores redes de proteção e cuidado à infância vulnerável do país.
+            Do chamado visionário à consolidação de uma das maiores redes de proteção e cuidado à infância vulnerável do
+            país.
           </p>
         </div>
 
@@ -873,7 +1032,7 @@
 
           <!-- Marco 1: 1952 -->
           <div class="timeline-node reveal">
-            <div class="timeline-marker">52</div>
+            <div class="timeline-marker" aria-hidden="true"></div>
             <div class="timeline-card">
               <div class="timeline-head">
                 <span class="timeline-year">1952</span>
@@ -881,29 +1040,32 @@
               </div>
               <h3 class="timeline-title">O Chamado do Rev. Everett Swanson</h3>
               <p class="timeline-desc">
-                Após presenciar a tragédia das crianças órfãs na Guerra da Coreia, nasce a Compassion com a convicção de que cada criança importa para Deus e merece a oportunidade de ter seu potencial plenamente desenvolvido.
+                Após presenciar a tragédia das crianças órfãs na Guerra da Coreia, nasce a Compassion com a convicção de
+                que cada criança importa para Deus e merece a oportunidade de ter seu potencial plenamente desenvolvido.
               </p>
             </div>
           </div>
 
           <!-- Marco 2: 1987 -->
           <div class="timeline-node active reveal d1">
-            <div class="timeline-marker">87</div>
+            <div class="timeline-marker" aria-hidden="true"></div>
             <div class="timeline-card">
               <div class="timeline-head">
                 <span class="timeline-year">1987</span>
-                <span class="timeline-badge" style="background:rgba(26,95,255,0.1);color:var(--blue);">Chegada ao Brasil</span>
+                <span class="timeline-badge" style="background:rgba(26,95,255,0.1);color:var(--blue);">Chegada ao
+                  Brasil</span>
               </div>
               <h3 class="timeline-title">Início das Atividades em Território Brasileiro</h3>
               <p class="timeline-desc">
-                A Compassion estabelece formalmente sua base brasileira no interior paulista (Campinas/SP), iniciando as primeiras alianças estratégicas com comunidades de fé e projetos de atendimento a crianças vulneráveis.
+                A Compassion estabelece formalmente sua base brasileira no interior paulista (Campinas/SP), iniciando as
+                primeiras alianças estratégicas com comunidades de fé e projetos de atendimento a crianças vulneráveis.
               </p>
             </div>
           </div>
 
           <!-- Marco 3: Estratégia Nordeste / Fortaleza -->
           <div class="timeline-node reveal d2">
-            <div class="timeline-marker">NE</div>
+            <div class="timeline-marker" aria-hidden="true"></div>
             <div class="timeline-card">
               <div class="timeline-head">
                 <span class="timeline-year">Transição Estratégica</span>
@@ -911,22 +1073,27 @@
               </div>
               <h3 class="timeline-title">Transferência da Sede Nacional para Fortaleza / CE</h3>
               <p class="timeline-desc">
-                Guiada pela missão de estar presente onde os índices de vulnerabilidade social e pobreza multidimensional são mais severos, a Compassion transfere sua sede para o Nordeste, priorizando o semiárido brasileiro e comunidades do Norte.
+                Guiada pela missão de estar presente onde os índices de vulnerabilidade social e pobreza
+                multidimensional são mais severos, a Compassion transfere sua sede para o Nordeste, priorizando o
+                semiárido brasileiro e comunidades do Norte.
               </p>
             </div>
           </div>
 
           <!-- Marco 4: Hoje -->
           <div class="timeline-node active reveal d3">
-            <div class="timeline-marker">HOJE</div>
+            <div class="timeline-marker" aria-hidden="true"></div>
             <div class="timeline-card">
               <div class="timeline-head">
                 <span class="timeline-year">Presente & Impacto</span>
-                <span class="timeline-badge" style="background:rgba(42,187,110,0.12);color:var(--green);">+60.000 Vidas</span>
+                <span class="timeline-badge" style="background:rgba(42,187,110,0.12);color:var(--green);">+60.000
+                  Vidas</span>
               </div>
               <h3 class="timeline-title">+200 Igrejas Parceiras em 145 Municípios</h3>
               <p class="timeline-desc">
-                A Compassion Brasil consolida suas 4 fases de desenvolvimento (Sobrevivência, Primeira Infância, Infância e Juventude), equipando voluntários e lideranças cristãs em estados como Ceará, Maranhão, Piauí, Rio Grande do Norte, Pernambuco, Paraíba, Bahia e Amazonas.
+                A Compassion Brasil consolida suas 4 fases de desenvolvimento (Sobrevivência, Primeira Infância,
+                Infância e Juventude), equipando voluntários e lideranças cristãs em estados como Ceará, Maranhão,
+                Piauí, Rio Grande do Norte, Pernambuco, Paraíba, Bahia e Amazonas.
               </p>
             </div>
           </div>
@@ -942,13 +1109,15 @@
       <div class="container">
         <div class="brasil-focus-grid">
 
-          <!-- Fotos Oficiais: Atuação com Igrejas Parceiras no Brasil -->
-          <div class="brasil-focus-photos reveal">
-            <div class="brasil-photo-box">
-              <img src="assets/images/PG40 ASSESSORAMENTO OP1.jpg" alt="Capacitação e assessoria da Compassion Brasil com lideranças locais">
+          <!-- Fotos de campo: composição editorial empilhada -->
+          <div class="brasil-photo-editorial reveal">
+            <div class="brasil-photo-top">
+              <img src="assets/images/PG40 ASSESSORAMENTO OP1.jpg" alt="Equipe Compassion em comunidade ribeirinha no Norte do Brasil">
+              <span class="photo-legend">Atuação em Comunidades Vulneráveis</span>
             </div>
-            <div class="brasil-photo-box">
-              <img src="assets/images/PG40 ASSESSORAMENTO  OP2.jpg" alt="Equipe Compassion Brasil em mobilização e apoio às igrejas parceiras">
+            <div class="brasil-photo-bottom">
+              <img src="assets/images/PG40 ASSESSORAMENTO  OP2.jpg" alt="Capacitação e mentoria de líderes parceiros pela Compassion Brasil">
+              <span class="photo-legend">Mentoria com Líderes Locais</span>
             </div>
           </div>
 
@@ -962,50 +1131,61 @@
             <h2>Não criamos estruturas paralelas: fortalecemos a Igreja Local</h2>
 
             <p>
-              A Compassion Brasil tem uma convicção inegociável: <strong>a Igreja de Cristo é o instrumento ideal de Deus para alcançar e restaurar famílias em situação de pobreza</strong>. Ela já vive na comunidade, conhece cada vizinho pelo nome e permanece presente antes, durante e depois de qualquer intervenção social.
+              A Compassion Brasil tem uma convicção inegociável: <strong>a Igreja de Cristo é o instrumento ideal de
+                Deus para alcançar e restaurar famílias em situação de pobreza</strong>. Ela já vive na comunidade,
+              conhece cada vizinho pelo nome e permanece presente antes, durante e depois de qualquer intervenção
+              social.
             </p>
 
             <p>
-              Por isso, não operamos centros isolados. Nós investimos recursos, metodologia, supervisão técnica e acompanhamento pastoral nas igrejas locais parceiras.
+              Por isso, não operamos centros isolados. Nós investimos recursos, metodologia, supervisão técnica e
+              acompanhamento pastoral nas igrejas locais parceiras.
             </p>
 
             <div class="pillar-list">
               <div class="pillar-item">
                 <div class="pillar-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"/>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
                 <div class="pillar-content">
                   <h4>Centrada em Cristo</h4>
-                  <p>Cada atividade compartilha a mensagem de esperança e o evangelho integral de Jesus com respeito e amor.</p>
+                  <p>Cada atividade compartilha a mensagem de esperança e o evangelho integral de Jesus com respeito e
+                    amor.</p>
                 </div>
               </div>
 
               <div class="pillar-item">
                 <div class="pillar-icon" style="background:var(--yellow);color:var(--dark);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                   </svg>
                 </div>
                 <div class="pillar-content">
                   <h4>Focada na Criança</h4>
-                  <p>Desenvolvimento biopsicossocial completo: saúde física, crescimento cognitivo, equilíbrio emocional e apoio espiritual.</p>
+                  <p>Desenvolvimento biopsicossocial completo: saúde física, crescimento cognitivo, equilíbrio emocional
+                    e apoio espiritual.</p>
                 </div>
               </div>
 
               <div class="pillar-item">
                 <div class="pillar-icon" style="background:var(--green);">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                 </div>
                 <div class="pillar-content">
                   <h4>Viabilizada pela Igreja Local</h4>
-                  <p>Mais de 200 comunidades cristãs capacitadas para gerir os projetos de proteção e atendimento integral.</p>
+                  <p>Mais de 200 comunidades cristãs capacitadas para gerir os projetos de proteção e atendimento
+                    integral.</p>
                 </div>
               </div>
             </div>
@@ -1028,7 +1208,8 @@
             Nossos Pilares Éticos
           </div>
           <h2>Valores que Guardam Cada Ação</h2>
-          <p>Cinco compromissos centrais que orientam a gestão dos recursos, o tratamento com as crianças e as relações com parceiros.</p>
+          <p>Cinco compromissos centrais que orientam a gestão dos recursos, o tratamento com as crianças e as relações
+            com parceiros.</p>
         </div>
 
         <div class="valores-grid">
@@ -1036,58 +1217,71 @@
           <!-- 1. Integridade -->
           <div class="valor-card reveal" style="--accent:var(--blue);">
             <div class="valor-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
             <h3 class="valor-title">Integridade</h3>
-            <p class="valor-desc">Alinhamos nossas ações e intenções aos mais elevados padrões éticos e aos princípios da Palavra de Deus.</p>
+            <p class="valor-desc">Alinhamos nossas ações e intenções aos mais elevados padrões éticos e aos princípios
+              da Palavra de Deus.</p>
           </div>
 
           <!-- 2. Excelência -->
           <div class="valor-card reveal d1" style="--accent:var(--yellow);">
             <div class="valor-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
               </svg>
             </div>
             <h3 class="valor-title">Excelência</h3>
-            <p class="valor-desc">Buscamos superar expectativas na gestão, no cuidado infantil e no suporte contínuo a cada parceiro.</p>
+            <p class="valor-desc">Buscamos superar expectativas na gestão, no cuidado infantil e no suporte contínuo a
+              cada parceiro.</p>
           </div>
 
           <!-- 3. Mordomia -->
           <div class="valor-card reveal d2" style="--accent:var(--green);">
             <div class="valor-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
               </svg>
             </div>
             <h3 class="valor-title">Mordomia</h3>
-            <p class="valor-desc">Gerenciamos com rigor, responsabilidade e transparência cada centavo e recurso confiado à nossa missão.</p>
+            <p class="valor-desc">Gerenciamos com rigor, responsabilidade e transparência cada centavo e recurso
+              confiado à nossa missão.</p>
           </div>
 
           <!-- 4. Dignidade -->
           <div class="valor-card reveal d3" style="--accent:var(--orange);">
             <div class="valor-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
             </div>
             <h3 class="valor-title">Dignidade</h3>
-            <p class="valor-desc">Reconhecemos o valor infinito de cada criança, família e colaborador como seres criados à imagem de Deus.</p>
+            <p class="valor-desc">Reconhecemos o valor infinito de cada criança, família e colaborador como seres
+              criados à imagem de Deus.</p>
           </div>
 
           <!-- 5. Discernimento -->
           <div class="valor-card reveal d4" style="--accent:var(--teal);">
             <div class="valor-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="16" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
               </svg>
             </div>
             <h3 class="valor-title">Discernimento</h3>
-            <p class="valor-desc">Buscamos a sabedoria divina e o rigor analítico para tomar decisões de impacto duradouro e sustentável.</p>
+            <p class="valor-desc">Buscamos a sabedoria divina e o rigor analítico para tomar decisões de impacto
+              duradouro e sustentável.</p>
           </div>
 
         </div>
@@ -1103,22 +1297,26 @@
         <div class="historia-cta-inner reveal">
           <h2>Faça parte desta história viva de transformação</h2>
           <p>
-            Você pode caminhar ao lado de uma criança brasileira, apoiando seu desenvolvimento integral, seus estudos e sua formação em valores cristãos.
+            Você pode caminhar ao lado de uma criança brasileira, apoiando seu desenvolvimento integral, seus estudos e
+            sua formação em valores cristãos.
           </p>
 
           <div class="cta-btn-group">
             <a href="https://www.compassion.com/sponsor-a-child/?AgeMaxFilter=22&amp;AgeMinFilter=1&amp;countries=BR&amp;home_hero=true"
               target="_blank" rel="noopener noreferrer" class="btn-cta-white">
               Apadrinhe uma Criança no Brasil
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
 
             <a href="como-trabalhamos.html" class="btn-cta-outline-white">
               Conheça Como Trabalhamos
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"/>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6" />
               </svg>
             </a>
           </div>
@@ -1141,6 +1339,7 @@
             <img src="assets/logo/logo_branco_bandeira.svg" alt="Compassion Brasil" class="footer-logo-img"
               style="width: 280px; max-width: 100%; height: auto;">
           </div>
+
           <p class="footer-brand-text">
             Libertando crianças da pobreza em nome de Jesus.
           </p>
@@ -1150,30 +1349,29 @@
         <div class="footer-col">
           <h5 id="footerHeading">Programas</h5>
           <ul>
-            <li><a href="como-trabalhamos.html#fases-atuacao">Sobrevivência (0 a 1 ano)</a></li>
-            <li><a href="como-trabalhamos.html#fases-atuacao">Primeira Infância (1 a 3 anos)</a></li>
-            <li><a href="como-trabalhamos.html#fases-atuacao">Infância (4 a 11 anos)</a></li>
-            <li><a href="como-trabalhamos.html#fases-atuacao">Juventude (12 a 22 anos)</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Desenvolvimento da Criança</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Proteção e Cuidado</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Fortalecimento Familiar</a></li>
+            <li><a href="como-trabalhamos.html#fases-atuacao">Liderança Jovem</a></li>
           </ul>
         </div>
 
-        <!-- Coluna Institucional -->
+        <!-- Coluna Cursos -->
+        <div class="footer-col">
+          <h5>Cursos</h5>
+          <ul>
+            <li><a href="cursos.html">Catálogo de Cursos</a></li>
+            <li><a href="cursos.html#categoria-protecao">Trilhas de Proteção</a></li>
+            <li><a href="cursos.html#inscricao">Inscrição & Certificados</a></li>
+            <li><a href="cursos.html#categoria-igrejas">Para Igrejas e Parceiras</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna Institucional & Contato -->
         <div class="footer-col">
           <h5>Institucional</h5>
           <ul>
             <li><a href="nossa-historia.html">Nossa História</a></li>
-            <li><a href="como-trabalhamos.html">Como Trabalhamos</a></li>
-            <li><a href="cursos.html">Capacitações & Cursos</a></li>
-            <li><a href="index.html#impacto">Onde Atuamos</a></li>
-          </ul>
-        </div>
-
-        <!-- Coluna Contato -->
-        <div class="footer-col">
-          <h5>Contato</h5>
-          <ul>
-            <li><a href="mailto:brasil@compassion.com">brasil@compassion.com</a></li>
-            <li><a href="index.html#apadrinhar">Fale Conosco</a></li>
             <li><a href="#">Assessoria de Imprensa</a></li>
             <li><a href="#">Política de Privacidade</a></li>
           </ul>
@@ -1192,7 +1390,6 @@
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
               </svg>
             </a>
-
             <a href="https://www.youtube.com/@compassiondobrasil" target="_blank" rel="noopener noreferrer"
               class="footer-social-btn" aria-label="YouTube">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1205,8 +1402,8 @@
           </div>
 
           <div class="mandalla-seal-wrap">
-            <a href="https://www.instagram.com/mandallacomunicacao/" target="_blank" rel="noopener noreferrer" class="mandalla-seal-link"
-              title="Desenvolvido por Mandalla Comunicação & Design">
+            <a href="https://www.instagram.com/mandallacomunicacao/" target="_blank" rel="noopener noreferrer"
+              class="mandalla-seal-link" title="Desenvolvido por Mandalla Comunicação & Design">
               <img src="assets/FeitoComCarinho.svg" alt="Feito com carinho" class="mandalla-seal-img" width="124"
                 height="37">
               <span class="mandalla-seal-text">Por Mandalla Comunicação &amp; Design</span>

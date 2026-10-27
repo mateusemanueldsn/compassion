@@ -3104,8 +3104,9 @@ details[open] .accordion-icon {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 min(80px, 6vw);
-  max-width: 600px;
+  padding-left: clamp(120px, 11vw, 190px);
+  padding-right: 40px;
+  max-width: 680px;
 }
 
 .fases-phase-badge {
@@ -3155,7 +3156,7 @@ details[open] .accordion-icon {
   line-height: 1.65;
   color: rgba(255,255,255,0.78);
   margin: 0 0 28px;
-  max-width: 480px;
+  max-width: 500px;
 }
 
 .fases-accent-bar {
@@ -3165,158 +3166,118 @@ details[open] .accordion-icon {
   opacity: 0.8;
 }
 
-/* ── Painel lateral (UI) ── */
-.fases-ui {
+/* ── Controles do Carrossel (Arrows & Dots) ── */
+.fases-nav-arrow {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px 28px;
-  background: rgba(5, 16, 48, 0.55);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border-left: 1px solid rgba(255,255,255,0.08);
-  gap: 28px;
-  z-index: 10;
-}
-
-.fases-tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.fases-tab {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  padding: 13px 14px;
-  border: none;
-  background: transparent;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.22s ease;
-}
-
-.fases-tab:hover {
-  background: rgba(255,255,255,0.07);
-}
-
-.fases-tab.active {
-  background: rgba(255,255,255,0.10);
-}
-
-.fases-tab-num {
-  font-family: var(--font);
-  font-weight: 900;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  line-height: 1;
-}
-
-.fases-tab-label {
-  font-family: var(--font);
-  font-weight: 600;
-  font-size: 0.84rem;
-  color: rgba(255,255,255,0.60);
-  line-height: 1.2;
-  transition: color 0.22s;
-}
-
-.fases-tab.active .fases-tab-label {
-  color: var(--white);
-}
-
-.fases-tab-progress {
-  width: 100%;
-  height: 2px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-
-.fases-tab-fill {
-  display: block;
-  height: 100%;
-  width: 0%;
-  border-radius: 2px;
-}
-
-.fases-arrows {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.fases-arrow {
-  width: 44px;
-  height: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(5, 16, 48, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+  transition: all 0.25s var(--ease);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.fases-arrow:hover {
-  background: rgba(255,255,255,0.22);
-  transform: scale(1.1);
+.fases-arrow-prev {
+  left: clamp(20px, 2.5vw, 36px);
 }
 
-.fases-arrow:active {
-  transform: scale(0.94);
+.fases-arrow-next {
+  right: clamp(20px, 2.5vw, 36px);
+}
+
+.fases-nav-arrow:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(26, 95, 255, 0.4);
+}
+
+.fases-nav-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.fases-dots {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.fases-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.65);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.35s var(--ease);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.fases-dot:hover {
+  background: var(--white);
+  transform: scale(1.2);
+}
+
+.fases-dot.active {
+  width: 36px;
+  background: var(--blue, #1A5FFF) !important;
+  box-shadow: 0 0 14px rgba(26, 95, 255, 0.7), 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Responsivo mobile ── */
-@media (max-width: 1024px) {
-  .fases-ui { width: 220px; padding: 28px 18px; }
-}
-
 @media (max-width: 768px) {
   .fases-hero-section { height: 100svh; min-height: 580px; }
 
-  .fases-ui {
-    right: auto; left: 0; width: 100%;
-    top: auto; bottom: 0;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 18px;
-    gap: 12px;
+  .fases-nav-arrow {
+    width: 42px;
+    height: 42px;
+  }
+  .fases-arrow-prev {
+    left: 14px;
+  }
+  .fases-arrow-next {
+    right: 14px;
   }
 
-  .fases-tabs {
-    flex-direction: row;
-    gap: 6px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    flex: 1;
+  .fases-dots {
+    bottom: 24px;
+    padding: 0;
+    gap: 10px;
   }
-  .fases-tabs::-webkit-scrollbar { display: none; }
-
-  .fases-tab {
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    white-space: nowrap;
+  .fases-dot {
+    width: 10px;
+    height: 10px;
   }
-  .fases-tab-progress { display: none; }
-  .fases-tab-label { font-size: 0.75rem; }
+  .fases-dot.active {
+    width: 28px;
+  }
 
   .fases-content {
-    padding: 80px 22px 175px;
+    padding: 80px 24px 130px;
     max-width: 100%;
     justify-content: flex-end;
   }
@@ -3571,6 +3532,30 @@ h3.course-card-title {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.prog-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+
+.prog-link-btn svg {
+  transition: transform 0.25s var(--ease);
+}
+
+.prog-link-btn:hover {
+  text-decoration: underline;
+}
+
+.prog-link-btn:hover svg {
+  transform: translateX(5px);
 }
 
 /* Mídia do Card em profundidade */
@@ -3719,31 +3704,25 @@ h3.course-card-title {
   position: absolute;
   top: 14px;
   left: 14px;
-  padding: 5px 13px;
+  padding: 6px 14px;
   border-radius: var(--r-pill);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  backdrop-filter: blur(8px);
+  background: #FFFFFF;
+  color: #051030;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  border: none;
 }
 
-.cap-badge-blue {
-  background: rgba(26, 95, 255, 0.18);
-  color: #1A5FFF;
-  border: 1px solid rgba(26, 95, 255, 0.3);
-}
-
-.cap-badge-amber {
-  background: rgba(180, 83, 9, 0.18);
-  color: #9A6700;
-  border: 1px solid rgba(180, 83, 9, 0.3);
-}
-
+.cap-badge-blue,
+.cap-badge-amber,
 .cap-badge-orange {
-  background: rgba(232, 71, 42, 0.18);
-  color: var(--orange, #E8472A);
-  border: 1px solid rgba(232, 71, 42, 0.3);
+  background: #FFFFFF;
+  color: #051030;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 .cap-card-dl-icon {
@@ -3812,5 +3791,35 @@ h3.course-card-title {
 
 .cap-card:hover .cap-card-cta {
   gap: 10px;
+}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM SCROLLBAR — Identidade Visual Compassion
+   ═══════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(5, 16, 48, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blue, #1A5FFF);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.25s var(--ease);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0043ce;
+  background-clip: padding-box;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue, #1A5FFF) rgba(5, 16, 48, 0.04);
 }
 

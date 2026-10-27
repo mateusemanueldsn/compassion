@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -117,267 +117,182 @@
     }
 
     /* Grid de Blocos Metodológicos */
+    /* ═══════════════════════════════════════════════
+       GRID DE MATERIAIS METODOLÓGICOS (CARDS COMPACTOS HOME)
+       ═══════════════════════════════════════════════ */
     .materiais-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 36px;
-      max-width: 1120px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .material-card {
+    @media (max-width: 960px) {
+      .materiais-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .materiais-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cap-card.material-card {
       background: var(--white);
       border-radius: var(--r-lg);
-      border: 1px solid rgba(0, 0, 0, 0.07);
-      box-shadow: var(--sh-sm);
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      overflow: hidden;
-      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
-      position: relative;
-    }
-
-    .material-card:hover {
-      transform: translateY(-3px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
       box-shadow: var(--sh-md);
-    }
-
-    @media (max-width: 920px) {
-      .material-card {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .material-cover {
-      position: relative;
-      background: var(--dark);
-      min-height: 280px;
       overflow: hidden;
-    }
-
-    .material-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s var(--ease);
-    }
-
-    .material-card:hover .material-cover img {
-      transform: scale(1.04);
-    }
-
-    .material-cover-badge {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      background: rgba(15, 27, 53, 0.85);
-      backdrop-filter: blur(8px);
-      color: var(--white);
-      font-size: 0.72rem;
-      font-weight: 800;
-      padding: 6px 14px;
-      border-radius: var(--r-pill);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .material-cover-badge svg {
-      width: 13px;
-      height: 13px;
-    }
-
-    .material-content {
-      padding: 36px 40px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      cursor: pointer;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+      position: relative;
     }
 
-    @media (max-width: 600px) {
-      .material-content {
-        padding: 24px 20px;
-      }
+    .cap-card.material-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sh-lg);
     }
 
-    .material-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .material-cat-tag {
-      font-size: 0.74rem;
-      font-weight: 800;
-      padding: 5px 12px;
-      border-radius: var(--r-pill);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .material-cat-juventude {
-      background: rgba(26, 95, 255, 0.1);
-      color: var(--blue);
-    }
-
-    .material-cat-protecao {
-      background: rgba(245, 196, 0, 0.18);
-      color: #9A6700;
-    }
-
-    .material-format-label {
-      font-size: 0.78rem;
-      color: var(--g500);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .material-title {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--dark);
-      letter-spacing: -0.5px;
-      line-height: 1.25;
-      margin-bottom: 12px;
-    }
-
-    .material-quote {
-      font-size: 0.94rem;
-      font-style: italic;
-      color: var(--blue);
-      background: rgba(26, 95, 255, 0.05);
-      padding: 12px 16px;
-      border-left: 3px solid var(--blue);
-      border-radius: 0 var(--r-sm) var(--r-sm) 0;
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .material-desc {
-      font-size: 0.98rem;
-      color: var(--g700);
-      line-height: 1.68;
-      margin-bottom: 20px;
-    }
-
-    /* Lista de Itens Inclusos no Kit */
-    .material-kit-box {
-      background: var(--cream);
-      border-radius: var(--r-md);
-      padding: 18px 20px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(0, 0, 0, 0.04);
-    }
-
-    .kit-box-title {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--dark);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .kit-items-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 16px;
-      list-style: none;
-    }
-
-    @media (max-width: 680px) {
-      .kit-items-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .kit-item-entry {
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--g700);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .kit-item-icon {
-      color: var(--blue);
+    .cap-card-img-wrap {
+      position: relative;
+      height: 230px;
+      overflow: hidden;
+      background: var(--dark);
       flex-shrink: 0;
     }
 
-    /* Ações do Card */
-    .material-actions-row {
+    .cap-card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease);
+    }
+
+    .cap-card.material-card:hover .cap-card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .cap-card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 6px 14px;
+      border-radius: var(--r-pill);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: #FFFFFF;
+      color: #051030;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      border: none;
+    }
+
+    .cap-badge-blue,
+    .cap-badge-amber,
+    .cap-badge-orange {
+      background: #FFFFFF;
+      color: #051030;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .cap-card-dl-icon {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .cap-card.material-card:hover .cap-card-dl-icon {
+      background: var(--blue);
+      color: var(--white);
+      transform: scale(1.08);
+    }
+
+    .cap-card-body {
+      display: flex;
+      flex-direction: column;
+      padding: 22px 22px 20px;
+      flex: 1;
+      gap: 10px;
+    }
+
+    .cap-card-type {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--g500);
+    }
+
+    .cap-card-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .cap-card-desc {
+      font-size: 0.88rem;
+      color: var(--g700);
+      line-height: 1.6;
+      margin: 0;
+      flex: 1;
+    }
+
+    .cap-card-footer {
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding-top: 14px;
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
     }
 
-    .btn-download-kit {
-      background: var(--blue);
-      color: var(--white);
-      font-family: var(--font);
-      font-weight: 800;
+    .btn-card-details {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 0.88rem;
-      padding: 11px 22px;
-      border-radius: var(--r-pill);
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: var(--t1);
-      text-decoration: none;
-    }
-
-    .btn-download-kit:hover {
-      background: #0D4FD8;
-      transform: translateY(-1px);
-      box-shadow: var(--sh-blue);
-    }
-
-    .btn-view-details {
+      font-weight: 800;
+      color: var(--blue);
       background: transparent;
-      color: var(--dark);
-      border: 1.5px solid var(--g300);
-      font-family: var(--font);
-      font-weight: 700;
-      font-size: 0.85rem;
-      padding: 9px 18px;
-      border-radius: var(--r-pill);
+      border: none;
+      padding: 0;
       cursor: pointer;
-      transition: var(--t1);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      transition: gap 0.2s, color 0.2s;
     }
 
-    .btn-view-details:hover {
-      background: var(--white);
-      border-color: var(--dark);
-      color: var(--dark);
+    .cap-card.material-card:hover .btn-card-details {
+      color: #0d4fd8;
+      gap: 10px;
     }
 
-    .moodle-notice-tag {
-      font-size: 0.74rem;
+    .card-format-pill {
+      font-size: 0.72rem;
       color: var(--g500);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-weight: 600;
+      background: var(--cream);
+      padding: 4px 9px;
+      border-radius: var(--r-pill);
     }
 
     /* Seção: Como Aplicar */
@@ -442,12 +357,12 @@
       line-height: 1.55;
     }
 
-    /* Modal de Download & Detalhes do Material */
+    /* Modal de Download & Detalhes Aprofundados do Material */
     .material-modal {
       position: fixed;
       inset: 0;
-      background: rgba(15, 27, 53, 0.75);
-      backdrop-filter: blur(6px);
+      background: rgba(15, 27, 53, 0.78);
+      backdrop-filter: blur(8px);
       z-index: 10000;
       display: none;
       align-items: center;
@@ -463,37 +378,69 @@
     @keyframes modalFadeIn {
       from {
         opacity: 0;
-        transform: scale(0.96);
+        transform: scale(0.96) translateY(8px);
       }
+
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
       }
     }
 
     .material-modal-box {
       background: var(--white);
       border-radius: var(--r-lg);
-      max-width: 640px;
+      max-width: 680px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
       padding: 36px;
       position: relative;
       box-shadow: var(--sh-lg);
+      scrollbar-width: thin;
+      scrollbar-color: var(--blue, #1A5FFF) rgba(26, 95, 255, 0.06);
+    }
+
+    /* Scrollbar personalizada - Identidade Compassion */
+    .material-modal-box::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    .material-modal-box::-webkit-scrollbar-track {
+      background: rgba(26, 95, 255, 0.05);
+      border-radius: 10px;
+      margin: 16px 4px;
+    }
+
+    .material-modal-box::-webkit-scrollbar-thumb {
+      background: var(--blue, #1A5FFF);
+      border-radius: 10px;
+      border: 1px solid var(--white);
+      transition: background 0.25s ease;
+    }
+
+    .material-modal-box::-webkit-scrollbar-thumb:hover {
+      background: #0043ce;
+    }
+
+    @media (max-width: 600px) {
+      .material-modal-box {
+        padding: 24px 20px;
+      }
     }
 
     .modal-close-btn {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background: transparent;
+      top: 18px;
+      right: 18px;
+      background: var(--g100);
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      line-height: 1;
       cursor: pointer;
-      color: var(--g500);
-      width: 32px;
-      height: 32px;
+      color: var(--g700);
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -502,25 +449,155 @@
     }
 
     .modal-close-btn:hover {
-      background: var(--g100);
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    .modal-header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      padding-right: 40px;
+    }
+
+    .modal-cat-tag {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: var(--r-pill);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .modal-cat-juventude {
+      background: rgba(26, 95, 255, 0.12);
+      color: var(--blue);
+    }
+
+    .modal-cat-protecao {
+      background: rgba(217, 119, 6, 0.15);
+      color: #9A6700;
+    }
+
+    .modal-badge-free {
+      font-size: 0.75rem;
+      color: #065F46;
+      background: #D1FAE5;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--r-pill);
+      letter-spacing: 0.4px;
+    }
+
+    .modal-title-heading {
+      font-size: 1.6rem;
+      font-weight: 900;
       color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .modal-quote {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--blue);
+      background: rgba(26, 95, 255, 0.05);
+      padding: 12px 16px;
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--r-sm) var(--r-sm) 0;
+      margin-bottom: 18px;
+      line-height: 1.55;
+    }
+
+    .modal-desc-body {
+      font-size: 0.94rem;
+      color: var(--g700);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .modal-features-wrap {
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: var(--r-md);
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+
+    .modal-features-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .modal-feature-item {
+      font-size: 0.86rem;
+      color: var(--g700);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+
+    .modal-feature-dot {
+      color: var(--green, #10B981);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .modal-kit-box {
+      background: var(--cream);
+      border-radius: var(--r-md);
+      padding: 20px 22px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .modal-kit-box-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .modal-file-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin: 20px 0;
     }
 
     .modal-file-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--cream);
+      background: var(--white);
       padding: 12px 16px;
       border-radius: var(--r-md);
       font-size: 0.88rem;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      gap: 12px;
     }
 
     .modal-file-info {
@@ -535,14 +612,15 @@
       font-size: 0.76rem;
       color: var(--g500);
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .modal-banner-moodle {
-      background: rgba(26, 95, 255, 0.08);
+      background: rgba(26, 95, 255, 0.07);
       border: 1px solid rgba(26, 95, 255, 0.2);
       border-radius: var(--r-md);
       padding: 14px 18px;
-      margin-top: 20px;
+      margin-bottom: 22px;
       display: flex;
       align-items: flex-start;
       gap: 12px;
@@ -553,6 +631,65 @@
 
     .modal-banner-moodle strong {
       color: var(--blue);
+    }
+
+    .modal-actions-bar {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .btn-modal-close {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--g300);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 11px 22px;
+      border-radius: var(--r-pill);
+      cursor: pointer;
+      transition: var(--t1);
+    }
+
+    .btn-modal-close:hover {
+      background: var(--g100);
+      border-color: var(--dark);
+    }
+
+    .btn-modal-download {
+      background: var(--blue);
+      color: var(--white);
+      font-family: var(--font);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 11px 24px;
+      border-radius: var(--r-pill);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--t1);
+    }
+
+    .btn-modal-download:hover {
+      background: #0D4FD8;
+      transform: translateY(-1px);
+      box-shadow: var(--sh-blue);
+    }
+
+    .modal-feedback-box {
+      margin-top: 16px;
+      background: #ECFDF5;
+      border: 1px solid #10B981;
+      padding: 13px 18px;
+      border-radius: var(--r-md);
+      color: #065F46;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-align: center;
     }
   </style>
 </head>
@@ -616,10 +753,12 @@
           Metodologias & Materiais Pedagógicos
         </div>
         <h1 class="page-hero-title reveal d1">
-          Capacitações e Recursos para <span class="blue-highlight">Transformar Vidas</span>
+          <span>Capacitações e Recursos para Transformar Vidas</span>
         </h1>
         <p class="page-hero-subtitle reveal d2">
-          Disponibilizamos abertamente nossas metodologias e materiais pedagógicos para pastores, líderes, educadores sociais e voluntários. Recursos testados em centenas de comunidades no Brasil, unindo rigor técnico, fundamentação bíblica e aplicabilidade prática.
+          Disponibilizamos abertamente nossas metodologias e materiais pedagógicos para pastores, líderes, educadores
+          sociais e voluntários. Recursos testados em centenas de comunidades no Brasil, unindo rigor técnico,
+          fundamentação bíblica e aplicabilidade prática.
         </p>
 
         <div class="page-stats-row reveal d3">
@@ -656,7 +795,8 @@
           </div>
           <h2 class="section-title">Baixe Nossos Materiais e Metodologias</h2>
           <p class="section-subtitle">
-            Selecione uma área de atuação ou faça o download direto dos manuais, cartazes e roteiros para aplicar na sua igreja ou comunidade.
+            Selecione uma área de atuação ou clique em qualquer material para conferir o conteúdo completo e fazer o
+            download gratuito.
           </p>
         </div>
 
@@ -669,274 +809,107 @@
           </div>
         </div>
 
-        <!-- Lista de Blocos de Materiais Metodológicos -->
+        <!-- Lista de Materiais Metodológicos — Formato Compacto (Estilo Home) -->
         <div class="materiais-grid">
 
-          <!-- ═══════════════════════════════════════
-               MATERIAL 1: HOMEM DE HONRA
-               ═══════════════════════════════════════ -->
-          <article class="material-card reveal" data-category="juventude" id="material-homem-de-honra">
-            <div class="material-cover">
-              <img src="assets/images/FOTOS PORTFOLIOCC_BR_CustomMedia_MenOfHonor_Photo09_2511.jpg" alt="Programa Homem de Honra da Compassion Brasil">
-              <span class="material-cover-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
+          <!-- CARD 1: HOMEM DE HONRA -->
+          <article class="cap-card material-card reveal" data-category="juventude" data-material-id="homem-de-honra"
+            id="material-homem-de-honra">
+            <div class="cap-card-img-wrap">
+              <img src="assets/images/FOTOS PORTFOLIOCC_BR_CustomMedia_MenOfHonor_Photo09_2511.jpg"
+                alt="Programa Homem de Honra - Compassion Brasil" loading="lazy">
+              <span class="cap-card-badge cap-badge-blue">Juventude</span>
+              <button type="button" class="cap-card-dl-icon btn-open-modal" data-material-id="homem-de-honra"
+                aria-label="Ver mais detalhes de Homem de Honra" title="Ver mais detalhes">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                Kit Metodológico
-              </span>
+              </button>
             </div>
-
-            <div class="material-content">
-              <div>
-                <div class="material-header-row">
-                  <span class="material-cat-tag material-cat-juventude">Categoria · Juventude</span>
-                  <span class="material-format-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    PDF + Slides + Atividades
-                  </span>
-                </div>
-
-                <h3 class="material-title">Homem de Honra</h3>
-
-                <div class="material-quote">
-                  "Uma jornada para formar homens com propósito."
-                </div>
-
-                <p class="material-desc">
-                  Criado para adolescentes e jovens do sexo masculino, este programa ensina sobre <strong>hombridade, identidade e propósito</strong> com base bíblica, linguagem atual e abordagem integral. Cada aula prepara o jovem para os desafios da vida real, enquanto o mentor assume o papel de guia, conselheiro e referência. Mais que conteúdo — uma missão de transformação.
-                </p>
-
-                <!-- Box de Itens do Kit -->
-                <div class="material-kit-box">
-                  <div class="kit-box-title">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                    Arquivos Inclusos no Pacote de Download:
-                  </div>
-                  <ul class="kit-items-list">
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon">✓</span>
-                      Guia do Mentor e Manual do Educador
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon">✓</span>
-                      Caderno de Atividades Práticas do Jovem
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon">✓</span>
-                      Roteiro Estruturado de Aulas e Dinâmicas
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon">✓</span>
-                      Apresentações em Slides de Apoio Didático
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="material-actions-row">
-                <button type="button" class="btn-download-kit btn-trigger-download"
-                  data-material="Homem de Honra"
-                  data-cat="Juventude"
-                  data-files="Guia do Mentor (PDF);Caderno do Jovem (PDF);Roteiro de Aulas (PDF);Apresentações em Slides (PDF/PPTX)">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            <div class="cap-card-body">
+              <span class="cap-card-type">Kit Metodológico</span>
+              <h3 class="cap-card-title">Homem de Honra</h3>
+              <p class="cap-card-desc">Uma jornada para formar homens com propósito — hombridade, identidade e caráter
+                com base bíblica para jovens rapazes.</p>
+              <div class="cap-card-footer">
+                <button type="button" class="btn-card-details btn-open-modal" data-material-id="homem-de-honra">
+                  Ver mais detalhes
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6" />
                   </svg>
-                  Baixar Kit Metodológico Completo
                 </button>
-
-                <button type="button" class="btn-view-details btn-trigger-details"
-                  data-material="Homem de Honra"
-                  data-cat="Juventude"
-                  data-desc="Programa de formação em hombridade bíblica, caráter, vocação e integridade para rapazes de 12 a 22 anos, guiados por mentores voluntários da igreja local.">
-                  Ver Estrutura das Aulas
-                </button>
-
-                <span class="moodle-notice-tag">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  Moodle em integração
-                </span>
+                <span class="card-format-pill">PDF + Slides</span>
               </div>
             </div>
           </article>
 
-
-          <!-- ═══════════════════════════════════════
-               MATERIAL 2: PREVENÇÃO À GRAVIDEZ NA ADOLESCÊNCIA
-               ═══════════════════════════════════════════════ -->
-          <article class="material-card reveal d1" data-category="protecao" id="material-gravidez-adolescencia">
-            <div class="material-cover">
-              <img src="assets/images/PG21 ENSINANDO A PREVINIR OP1.jpg" alt="Campanha de Prevenção à Gravidez na Adolescência">
-              <span class="material-cover-badge" style="background:rgba(180,83,9,0.9);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <!-- CARD 2: CAMPANHA NÃO TÁ NA HORA! -->
+          <article class="cap-card material-card reveal d1" data-category="protecao"
+            data-material-id="gravidez-adolescencia" id="material-gravidez-adolescencia">
+            <div class="cap-card-img-wrap">
+              <img src="assets/images/PG21 ENSINANDO A PREVINIR OP1.jpg"
+                alt="Campanha de Prevenção à Gravidez na Adolescência — Compassion Brasil" loading="lazy">
+              <span class="cap-card-badge cap-badge-amber">Proteção</span>
+              <button type="button" class="cap-card-dl-icon btn-open-modal" data-material-id="gravidez-adolescencia"
+                aria-label="Ver mais detalhes da Campanha Não tá na hora!" title="Ver mais detalhes">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                Campanha Nacional
-              </span>
+              </button>
             </div>
-
-            <div class="material-content">
-              <div>
-                <div class="material-header-row">
-                  <span class="material-cat-tag material-cat-protecao">Categoria · Proteção</span>
-                  <span class="material-format-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    Cartazes + Guia + Jogos + Quiz
-                  </span>
-                </div>
-
-                <h3 class="material-title">Campanha de Prevenção à Gravidez na Adolescência</h3>
-
-                <div class="material-quote" style="color:#B45309;background:rgba(245,196,0,0.08);border-color:#F5C400;">
-                  "Campanha ‘Não tá na hora!’: informação e proteção para um futuro pleno."
-                </div>
-
-                <p class="material-desc">
-                  A gravidez precoce continua sendo um grande desafio no Brasil, com altos índices de gestação na adolescência. Para contribuir com esse enfrentamento, a Compassion do Brasil promove a campanha <strong>“Não tá na hora!”</strong>, incentivando parceiros a conscientizar jovens sobre os impactos da gravidez precoce e a importância de se prepararem para a vida adulta.
-                </p>
-
-                <!-- Box das 4 Etapas e Itens do Kit -->
-                <div class="material-kit-box">
-                  <div class="kit-box-title" style="color:#9A6700;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    4 Etapas Principais e Materiais Inclusos no Kit:
-                  </div>
-                  <ul class="kit-items-list">
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:#B45309">1.</span>
-                      Capacitação das equipes por meio de vídeos e especialistas
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:#B45309">2.</span>
-                      Cartazes oficiais para divulgação comunitária (A3 e A4)
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:#B45309">3.</span>
-                      Oficinas com jogos educativos e quiz temático interativo
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:#B45309">4.</span>
-                      Instrumentais para registro e envio de relatórios
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="material-actions-row">
-                <button type="button" class="btn-download-kit btn-trigger-download"
-                  style="background:#D97706"
-                  data-material="Campanha Não tá na hora!"
-                  data-cat="Proteção"
-                  data-files="Guia da Campanha (PDF);Cartazes Oficiais A3/A4 (PDF);Jogos Educativos (PDF);Quiz Temático Interativo (PDF);Orientações com Especialistas (PDF)">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            <div class="cap-card-body">
+              <span class="cap-card-type">Campanha Nacional · 4 Etapas</span>
+              <h3 class="cap-card-title">Não tá na hora!</h3>
+              <p class="cap-card-desc">Prevenção à gravidez na adolescência: cartazes, jogos educativos, quiz temático e
+                guias de oficina para igrejas parceiras.</p>
+              <div class="cap-card-footer">
+                <button type="button" class="btn-card-details btn-open-modal" data-material-id="gravidez-adolescencia">
+                  Ver mais detalhes
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6" />
                   </svg>
-                  Baixar Kit de Campanha Completo
                 </button>
-
-                <button type="button" class="btn-view-details btn-trigger-details"
-                  data-material="Campanha Não tá na hora!"
-                  data-cat="Proteção"
-                  data-desc="Kit metodológico composto por 4 etapas estruturadas: treinamento de líderes, mobilização por cartazes, oficinas pedagógicas com jogos e monitoramento de dados com a rede de proteção.">
-                  Ver 4 Etapas da Campanha
-                </button>
-
-                <span class="moodle-notice-tag">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  Moodle em integração
-                </span>
+                <span class="card-format-pill">Cartazes + Jogos</span>
               </div>
             </div>
           </article>
 
-
-          <!-- ═══════════════════════════════════════
-               MATERIAL 3: MAIO LARANJA
-               ═══════════════════════════════════════ -->
-          <article class="material-card reveal d2" data-category="protecao" id="material-maio-laranja">
-            <div class="material-cover">
-              <img src="assets/images/18demaioPara Portfólio.jpg" alt="Campanha Maio Laranja Compassion Brasil">
-              <span class="material-cover-badge" style="background:rgba(232,71,42,0.9);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 8v4"/>
-                  <path d="M12 16h.01"/>
+          <!-- CARD 3: MAIO LARANJA -->
+          <article class="cap-card material-card reveal d2" data-category="protecao" data-material-id="maio-laranja"
+            id="material-maio-laranja">
+            <div class="cap-card-img-wrap">
+              <img src="assets/images/18demaioPara Portfólio.jpg" alt="Campanha Maio Laranja — Compassion Brasil"
+                loading="lazy">
+              <span class="cap-card-badge cap-badge-orange">Proteção</span>
+              <button type="button" class="cap-card-dl-icon btn-open-modal" data-material-id="maio-laranja"
+                aria-label="Ver mais detalhes do Maio Laranja" title="Ver mais detalhes">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                Proteção e Salvaguarda
-              </span>
+              </button>
             </div>
-
-            <div class="material-content">
-              <div>
-                <div class="material-header-row">
-                  <span class="material-cat-tag material-cat-protecao" style="background:rgba(232,71,42,0.12);color:var(--orange);">Categoria · Proteção</span>
-                  <span class="material-format-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    Cartilha + Banners + Guia Eclesiástico
-                  </span>
-                </div>
-
-                <h3 class="material-title">Maio Laranja: Quem Ama, Protege</h3>
-
-                <div class="material-quote" style="color:var(--orange);background:rgba(232,71,42,0.06);border-color:var(--orange);">
-                  “Erga a voz em favor dos que não podem defender-se, seja o defensor de todos os desamparados. Erga a voz e julgue com justiça; defenda os direitos dos pobres e dos necessitados.” — Provérbios 31:8-9
-                </div>
-
-                <p class="material-desc">
-                  Como Compassion Internacional, somos comprometidos com a proteção integral de todas as crianças e jovens. Entendemos biblicamente nosso dever de <strong>conhecer, amar e proteger</strong> os pequeninos que nos foram confiados pelo Senhor. Todos os meses de maio, fomentamos o olhar cuidadoso sobre todas as crianças e incentivamos que mães, pais, tios e toda a comunidade façam parte desta luta.
-                </p>
-
-                <!-- Box de Itens do Kit -->
-                <div class="material-kit-box">
-                  <div class="kit-box-title" style="color:var(--orange);">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                    Arquivos Inclusos no Pacote de Download:
-                  </div>
-                  <ul class="kit-items-list">
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
-                      Cartilha de Salvaguarda e Identificação de Sinais de Risco
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
-                      Kit de Comunicação Visual (Banners, Posts e Telão)
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
-                      Roteiro de Ministração e Lições para Ministério Infantil
-                    </li>
-                    <li class="kit-item-entry">
-                      <span class="kit-item-icon" style="color:var(--orange)">✓</span>
-                      Fluxograma Legal de Encaminhamento e Notificação
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="material-actions-row">
-                <button type="button" class="btn-download-kit btn-trigger-download"
-                  style="background:var(--orange)"
-                  data-material="Maio Laranja: Quem Ama Protege"
-                  data-cat="Proteção"
-                  data-files="Cartilha de Salvaguarda (PDF);Kit de Redes Sociais e Telões (ZIP/PNG);Roteiro para Ministério Infantil (PDF);Fluxograma de Notificação Legal (PDF)">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            <div class="cap-card-body">
+              <span class="cap-card-type">Campanha Anual · Maio</span>
+              <h3 class="cap-card-title">Maio Laranja</h3>
+              <p class="cap-card-desc">“Quem ama, protege.” Mobilização de famílias e comunidades pela proteção integral
+                das crianças com materiais de conscientização.</p>
+              <div class="cap-card-footer">
+                <button type="button" class="btn-card-details btn-open-modal" data-material-id="maio-laranja">
+                  Ver mais detalhes
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6" />
                   </svg>
-                  Baixar Kit Maio Laranja
                 </button>
-
-                <button type="button" class="btn-view-details btn-trigger-details"
-                  data-material="Maio Laranja: Quem Ama Protege"
-                  data-cat="Proteção"
-                  data-desc="Materiais de conscientização comunitária e eclesiástica para o 18 de Maio, com orientações bíblicas e jurídicas para blindar ambientes de convivência infantil.">
-                  Ver Guia de Mobilização
-                </button>
-
-                <span class="moodle-notice-tag">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  Moodle em integração
-                </span>
+                <span class="card-format-pill">Cartilha + Banners</span>
               </div>
             </div>
           </article>
@@ -958,7 +931,8 @@
           </div>
           <h2 class="section-title">Como Aplicar na sua Igreja ou Projeto</h2>
           <p class="section-subtitle">
-            Quatro passos simples para colocar essas metodologias em prática e multiplicar o impacto na vida das crianças e adolescentes.
+            Quatro passos simples para colocar essas metodologias em prática e multiplicar o impacto na vida das
+            crianças e adolescentes.
           </p>
         </div>
 
@@ -968,7 +942,8 @@
             <div class="passo-num">1</div>
             <h4 class="passo-title">Baixe o Material</h4>
             <p class="passo-desc">
-              Faça o download do kit completo em PDF, incluindo manuais do líder, cartazes para impressão e cadernos de atividades.
+              Faça o download do kit completo em PDF, incluindo manuais do líder, cartazes para impressão e cadernos de
+              atividades.
             </p>
           </div>
 
@@ -976,7 +951,8 @@
             <div class="passo-num" style="background:var(--yellow);color:var(--dark);">2</div>
             <h4 class="passo-title">Capacite a Equipe</h4>
             <p class="passo-desc">
-              Reúna seus educadores, pastores e voluntários para estudar as diretrizes pedagógicas e o referencial bíblico de cada oficina.
+              Reúna seus educadores, pastores e voluntários para estudar as diretrizes pedagógicas e o referencial
+              bíblico de cada oficina.
             </p>
           </div>
 
@@ -984,7 +960,8 @@
             <div class="passo-num" style="background:var(--green);">3</div>
             <h4 class="passo-title">Conduza as Oficinas</h4>
             <p class="passo-desc">
-              Aplique os encontros de forma dinâmica, relacional e acolhedora, utilizando os jogos, debates e dinâmicas do material.
+              Aplique os encontros de forma dinâmica, relacional e acolhedora, utilizando os jogos, debates e dinâmicas
+              do material.
             </p>
           </div>
 
@@ -992,7 +969,8 @@
             <div class="passo-num" style="background:var(--orange);">4</div>
             <h4 class="passo-title">Proteja & Multiplique</h4>
             <p class="passo-desc">
-              Estabeleça fluxos de escuta atenta, acione a rede de proteção quando necessário e compartilhe os aprendizados com as famílias.
+              Estabeleça fluxos de escuta atenta, acione a rede de proteção quando necessário e compartilhe os
+              aprendizados com as famílias.
             </p>
           </div>
 
@@ -1000,81 +978,97 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════
-         SEÇÃO FINAL: APOIO E PARCERIAS
-         ═══════════════════════════════════════════════ -->
-    <section class="section section-dark" style="background:var(--dark);padding:70px 0;text-align:center;">
-      <div class="container reveal">
-        <h2 style="font-size:clamp(1.8rem, 3.2vw, 2.6rem);font-weight:900;color:var(--white);margin-bottom:14px">
-          Quer ser uma Igreja Parceira da Compassion Brasil?
-        </h2>
-        <p style="font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:640px;margin:0 auto 28px;line-height:1.65">
-          Mais de 200 igrejas parceiras já utilizam nossas metodologias e recebem investimento contínuo para transformar a infância e a juventude em seus territórios.
-        </p>
-        <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap">
-          <a href="index.html#apadrinhar" class="btn btn-primary" style="padding:12px 28px;font-size:0.92rem;font-weight:700">
-            Fale com Nosso Time de Parcerias
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-          </a>
-          <a href="como-trabalhamos.html" class="btn btn-outline" style="padding:12px 24px;font-size:0.92rem;font-weight:700;border-color:rgba(255,255,255,0.4);color:var(--white)">
-            Conheça Nossos Programas
-          </a>
-        </div>
-      </div>
-    </section>
 
   </main>
 
   <!-- ═══════════════════════════════════════════════
-       MODAL DE DOWNLOAD & DETALHES DO MATERIAL
+       MODAL DE DETALHES COMPLETOS & DOWNLOAD DO MATERIAL
        ═══════════════════════════════════════════════ -->
-  <div class="material-modal" id="materialDownloadModal" role="dialog" aria-modal="true" aria-labelledby="modalMaterialTitle">
+  <div class="material-modal" id="materialDownloadModal" role="dialog" aria-modal="true"
+    aria-labelledby="modalMaterialTitle">
     <div class="material-modal-box">
       <button class="modal-close-btn" id="closeMaterialModal" aria-label="Fechar">&times;</button>
 
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-        <span id="modalCatTag" class="material-cat-tag material-cat-juventude">Juventude</span>
-        <span style="font-size:0.75rem;color:var(--g500);font-weight:700">Material Gratuito</span>
+      <div class="modal-header-meta">
+        <span id="modalCatTag" class="modal-cat-tag modal-cat-juventude">Juventude</span>
+        <span id="modalFormatLabel" class="card-format-pill">
+          PDF + Slides + Atividades
+        </span>
+        <span class="modal-badge-free">100% Gratuito</span>
       </div>
 
-      <h3 id="modalMaterialTitle" style="font-size:1.4rem;font-weight:900;color:var(--dark);margin-bottom:8px">
+      <h3 id="modalMaterialTitle" class="modal-title-heading">
         Nome do Material
       </h3>
 
-      <p id="modalMaterialDesc" style="font-size:0.9rem;color:var(--g700);line-height:1.6;margin-bottom:18px">
-        Descrição do material metodológico.
-      </p>
-
-      <div style="font-size:0.8rem;font-weight:800;color:var(--dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">
-        Arquivos para Download:
+      <!-- Citação / Versículo / Frase de destaque -->
+      <div id="modalMaterialQuote" class="modal-quote">
+        "Frase de impacto e propósito do material"
       </div>
 
-      <div class="modal-file-list" id="modalFilesList">
-        <!-- Inserido dinamicamente via JS -->
+      <!-- Descrição Completa -->
+      <div id="modalMaterialDesc" class="modal-desc-body">
+        Descrição completa e fundamentação pedagógica.
+      </div>
+
+      <!-- Destaques Metodológicos -->
+      <div id="modalFeaturesWrap" class="modal-features-wrap">
+        <div class="modal-features-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Destaques da Metodologia:
+        </div>
+        <ul id="modalFeaturesList" class="modal-features-list">
+          <!-- Inserido dinamicamente via JS -->
+        </ul>
+      </div>
+
+      <!-- Box de Arquivos para Download -->
+      <div class="modal-kit-box">
+        <div class="modal-kit-box-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <line x1="3" y1="9" x2="21" y2="9" />
+            <line x1="9" y1="21" x2="9" y2="9" />
+          </svg>
+          Arquivos Inclusos no Pacote de Download:
+        </div>
+        <div class="modal-file-list" id="modalFilesList">
+          <!-- Inserido dinamicamente via JS -->
+        </div>
       </div>
 
       <!-- Banner de informação sobre o Moodle -->
       <div class="modal-banner-moodle">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" style="flex-shrink:0;margin-top:2px">
-          <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"
+          style="flex-shrink:0;margin-top:2px">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <line x1="12" y1="8" x2="12.01" y2="8" />
         </svg>
         <div>
-          <strong>Ambiente Virtual em Integração:</strong> Este material faz parte do acervo oficial da Compassion Brasil. Em breve, estará integrado com turmas e certificação oficial em nossa plataforma <strong>Moodle LMS</strong>.
+          <strong>Ambiente Virtual em Integração:</strong> Este material faz parte do acervo oficial da Compassion
+          Brasil. Em breve, estará integrado com turmas e certificação oficial em nossa plataforma <strong>Moodle
+            LMS</strong>.
         </div>
       </div>
 
-      <div style="margin-top:24px;display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap">
-        <button type="button" class="btn-view-details" id="btnCancelModal">Fechar</button>
-        <button type="button" class="btn-download-kit" id="btnConfirmDownload">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      <div class="modal-actions-bar">
+        <button type="button" class="btn-modal-close" id="btnCancelModal">Fechar</button>
+        <button type="button" class="btn-modal-download" id="btnConfirmDownload">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-          Baixar Arquivo Completo
+          <span id="btnConfirmDownloadText">Baixar Kit Completo Grátis</span>
         </button>
       </div>
 
       <!-- Feedback de sucesso -->
-      <div id="downloadFeedback" style="display:none;margin-top:16px;background:#ECFDF5;border:1px solid #10B981;padding:12px 16px;border-radius:var(--r-md);color:#065F46;font-size:0.85rem;font-weight:700;text-align:center">
+      <div id="downloadFeedback" class="modal-feedback-box" style="display:none;">
         ✓ Download iniciado com sucesso! Aproveite este material com sua comunidade.
       </div>
     </div>
@@ -1083,10 +1077,11 @@
   <!-- ═══════════════════════════════════════════════
        FOOTER OFICIAL
        ═══════════════════════════════════════════════ -->
-  <footer class="site-footer" aria-labelledby="footerHeading">
+  <footer class="site-footer" id="contato" aria-labelledby="footerHeading">
     <div class="container">
       <div class="footer-grid">
 
+        <!-- Coluna da marca -->
         <div class="footer-brand">
           <div class="logo-wrap" style="margin-bottom:12px">
             <img src="assets/logo/logo_branco_bandeira.svg" alt="Compassion Brasil" class="footer-logo-img"
@@ -1098,6 +1093,7 @@
           </p>
         </div>
 
+        <!-- Coluna Programas -->
         <div class="footer-col">
           <h5 id="footerHeading">Programas</h5>
           <ul>
@@ -1108,22 +1104,23 @@
           </ul>
         </div>
 
+        <!-- Coluna Cursos -->
         <div class="footer-col">
-          <h5>Capacitações</h5>
+          <h5>Cursos</h5>
           <ul>
-            <li><a href="#materiais">Materiais Metodológicos</a></li>
-            <li><a href="#material-homem-de-honra">Homem de Honra</a></li>
-            <li><a href="#material-gravidez-adolescencia">Campanha Não tá na hora!</a></li>
-            <li><a href="#material-maio-laranja">Maio Laranja</a></li>
+            <li><a href="cursos.html">Catálogo de Cursos</a></li>
+            <li><a href="cursos.html#categoria-protecao">Trilhas de Proteção</a></li>
+            <li><a href="cursos.html#inscricao">Inscrição & Certificados</a></li>
+            <li><a href="cursos.html#categoria-igrejas">Para Igrejas e Parceiras</a></li>
           </ul>
         </div>
 
+        <!-- Coluna Institucional & Contato -->
         <div class="footer-col">
           <h5>Institucional</h5>
           <ul>
             <li><a href="nossa-historia.html">Nossa História</a></li>
-            <li><a href="mailto:brasil@compassion.com">brasil@compassion.com</a></li>
-            <li><a href="index.html#apadrinhar">Fale Conosco</a></li>
+            <li><a href="#">Assessoria de Imprensa</a></li>
             <li><a href="#">Política de Privacidade</a></li>
           </ul>
         </div>
@@ -1141,7 +1138,6 @@
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
               </svg>
             </a>
-
             <a href="https://www.youtube.com/@compassiondobrasil" target="_blank" rel="noopener noreferrer"
               class="footer-social-btn" aria-label="YouTube">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1154,7 +1150,7 @@
           </div>
 
           <div class="mandalla-seal-wrap">
-            <a href="https://mandalladesign.com.br" target="_blank" rel="noopener noreferrer" class="mandalla-seal-link"
+            <a href="https://www.instagram.com/mandallacomunicacao/" target="_blank" rel="noopener noreferrer" class="mandalla-seal-link"
               title="Desenvolvido por Mandalla Comunicação & Design">
               <img src="assets/FeitoComCarinho.svg" alt="Feito com carinho" class="mandalla-seal-img" width="124"
                 height="37">
@@ -1173,11 +1169,92 @@
   </footer>
 
   <!-- ═══════════════════════════════════════════════
-       INTERATIVIDADE: FILTROS & MODAL DE DOWNLOAD
+       INTERATIVIDADE: FILTROS & MODAL DE DETALHES RICOS
        ═══════════════════════════════════════════════ -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Filtros por Categoria
+      // 1. Banco de Dados dos Materiais Metodológicos
+      const materiaisData = {
+        'homem-de-honra': {
+          id: 'homem-de-honra',
+          category: 'juventude',
+          catName: 'Juventude',
+          format: '5 Apostilas (PDF) + 3 Vídeos (MP4)',
+          title: 'Homem de Honra',
+          quote: '"Uma jornada para formar homens com propósito."',
+          fullDesc: 'Criado para adolescentes e jovens do sexo masculino, este programa ensina sobre <strong>hombridade, identidade e propósito</strong> com base bíblica, linguagem atual e abordagem integral. Cada aula prepara o jovem para os desafios da vida real, enquanto o mentor assume o papel de guia, conselheiro e referência. Mais que conteúdo — uma missão de transformação.',
+          downloadUrl: 'https://compassion-my.sharepoint.com/:f:/r/personal/abarbosa_us_ci_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fabarbosa%5Fus%5Fci%5Forg%2FDocuments%2FDocuments%2FTraining%20%26%20Development%2FRecursos%20Site%20Compassion%2FHomem%20De%20Honra&share=cgqxljsnayc8Ra1qkqawOM22EgUCOS2wynQT05UkGM0rZpKqIA',
+          files: [
+            { name: 'Apostila_do_Aluno_-_Homem_de_Honra_-_Men-715.pdf', size: '1,88 MB', type: 'pdf' },
+            { name: 'Apostila_do_Aluno_-_Homem_de_Honra_-_Par-647.pdf', size: '2,30 MB', type: 'pdf' },
+            { name: 'Apostila_do_Aluno_-_Homem_de_Honra_-_Par-648.pdf', size: '12,3 MB', type: 'pdf' },
+            { name: 'Apostila_do_Aluno_-_Homem_de_Honra_-_Par-717.pdf', size: '12,3 MB', type: 'pdf' },
+            { name: 'Homem de Honra - guia de implementação.pdf', size: '954 KB', type: 'pdf' },
+            { name: 'homem-de-honra-01.mp4', size: '9,94 MB', type: 'video' },
+            { name: 'homem-de-honra-02.mp4', size: '24,0 MB', type: 'video' },
+            { name: 'homem-de-honra-03.mp4', size: '3,90 MB', type: 'video' }
+          ],
+          features: [
+            '12 encontros temáticos estruturados com referencial bíblico',
+            'Metodologia centrada em mentoria 1:1 e pequenos grupos',
+            'Atividades práticas e reflexões comunitárias para adolescentes e jovens'
+          ],
+          downloadFilename: 'Homem_de_Honra_Kit_Completo.pdf'
+        },
+        'gravidez-adolescencia': {
+          id: 'gravidez-adolescencia',
+          category: 'protecao',
+          catName: 'Proteção',
+          format: '5 PDFs + 3 Vídeos + 1 DOCX (~74 MB)',
+          title: 'Campanha: Não tá na hora!',
+          quote: '"Campanha ‘Não tá na hora!’: informação e proteção para um futuro pleno."',
+          fullDesc: 'A gravidez precoce continua sendo um grande desafio no Brasil, com altos índices de gestação na adolescência. Para contribuir com esse enfrentamento, a Compassion do Brasil promove a campanha <strong>“Não tá na hora!”</strong>, incentivando parceiros a conscientizar jovens sobre os impactos da gravidez precoce e a importância de se prepararem para a vida adulta.',
+          downloadUrl: 'https://compassion-my.sharepoint.com/:f:/r/personal/abarbosa_us_ci_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fabarbosa%5Fus%5Fci%5Forg%2FDocuments%2FDocuments%2FTraining%20%26%20Development%2FRecursos%20Site%20Compassion%2Fcampanha%2Dde%2Dprevencao%2Da%2Dgravidez%2Dna%2Dadol%2D427&share=cgqiGBSs%2DVDRT7YQ2LiEAngrEgUC%2DnqQcMWrB9qZ8HLJ4%5FzPZQ',
+          files: [
+            { name: 'Cartaz_da_Campanha_de_Prevenção_à_Gravid-428.pdf', size: '5,51 MB', type: 'pdf' },
+            { name: 'eclair-kirniew-ximenes-medica-campanha-d-438.mp4', size: '20,3 MB', type: 'video' },
+            { name: 'elizabeth-almeida-procuradora-do-mpce-ca-440.mp4', size: '6,19 MB', type: 'video' },
+            { name: 'Guia_da_Campanha_de_Prevenção_à_Gravidez-430.pdf', size: '196 KB', type: 'pdf' },
+            { name: 'Jogo_Ajuda_ou_não_Ajuda.pdf', size: '4,40 MB', type: 'pdf' },
+            { name: 'jogo_da_memória.docx', size: '12,2 KB', type: 'docx' },
+            { name: 'Jogo_Dominó_da_Vida_Real_01.02.24.pdf', size: '14,9 MB', type: 'pdf' },
+            { name: 'Quiz_da_gravidez_na_adolescência_6bbTkGH-437.pdf', size: '5,93 MB', type: 'pdf' },
+            { name: 'vanessa-de-paula-psicologa-campanha-de-p-443.mp4', size: '21,9 MB', type: 'video' }
+          ],
+          features: [
+            '4 etapas estruturadas: capacitação, mobilização, oficinas e monitoramento',
+            'Vídeos com médicas, psicólogas e procuradora da infância',
+            'Jogos educativos, dominó da vida real e quiz temático interativo'
+          ],
+          downloadFilename: 'Campanha_Nao_Ta_Na_Hora_Kit_Completo.pdf'
+        },
+        'maio-laranja': {
+          id: 'maio-laranja',
+          category: 'protecao',
+          catName: 'Proteção',
+          format: '4 Folders/Banners (PDF) + 2 Vídeos (MP4) (~35 MB)',
+          title: 'Maio Laranja: Quem Ama, Protege',
+          quote: '“Erga a voz em favor dos que não podem defender-se, seja o defensor de todos os desamparados. Erga a voz e julgue com justiça; defenda os direitos dos pobres e dos necessitados.” — Provérbios 31:8-9',
+          fullDesc: 'Como Compassion Internacional, somos comprometidos com a proteção integral de todas as crianças e jovens. Entendemos biblicamente nosso dever de <strong>conhecer, amar e proteger</strong> os pequeninos que nos foram confiados pelo Senhor. Todos os meses de maio, fomentamos o olhar cuidadoso sobre todas as crianças e incentivamos que mães, pais, tios e toda a comunidade façam parte desta luta.',
+          downloadUrl: 'https://compassion-my.sharepoint.com/:f:/r/personal/abarbosa_us_ci_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fabarbosa%5Fus%5Fci%5Forg%2FDocuments%2FDocuments%2FTraining%20%26%20Development%2FRecursos%20Site%20Compassion%2Fmaio%2Dlaranja&share=cgpTJwf5TEgiRJXb1ZNtpajXEgUC3uB8162wVHF7Md1A8Z8iNQ',
+          files: [
+            { name: 'Banner_oficial_da_campanha.pdf', size: '3,83 MB', type: 'pdf' },
+            { name: 'Folder_para_adolescentes_e_jovens.pdf', size: '7,05 MB', type: 'pdf' },
+            { name: 'Folder_para_crianças.pdf', size: '5,05 MB', type: 'pdf' },
+            { name: 'Folder_para_pais_e_responsáveis.pdf', size: '3,62 MB', type: 'pdf' },
+            { name: 'video-maio-laranja-adolescentes-e-jovens-280.mp4', size: '6,88 MB', type: 'video' },
+            { name: 'video-maio-laranja-criancas-2022.mp4', size: '8,40 MB', type: 'video' }
+          ],
+          features: [
+            'Totalmente alinhado à Lei Federal 13.431/2017 (Sistema de Garantia de Direitos)',
+            'Folders segmentados: crianças, adolescentes e jovens, pais e responsáveis',
+            'Vídeos oficiais para ministração com crianças e jovens'
+          ],
+          downloadFilename: 'Maio_Laranja_Kit_Protecao_Integral.pdf'
+        }
+      };
+
+      // 2. Filtros por Categoria
       const filterBtns = document.querySelectorAll('.m-filter-btn');
       const cards = document.querySelectorAll('.material-card');
 
@@ -1190,8 +1267,8 @@
 
           cards.forEach(card => {
             if (category === 'all' || card.dataset.category === category) {
-              card.style.display = 'grid';
-              setTimeout(() => card.style.opacity = '1', 50);
+              card.style.display = 'flex';
+              setTimeout(() => card.style.opacity = '1', 30);
             } else {
               card.style.opacity = '0';
               setTimeout(() => card.style.display = 'none', 200);
@@ -1200,67 +1277,101 @@
         });
       });
 
-      // 2. Modal de Download & Detalhes
+      // 3. Modal de Detalhes Completos & Download
       const modal = document.getElementById('materialDownloadModal');
       const closeBtn = document.getElementById('closeMaterialModal');
       const cancelBtn = document.getElementById('btnCancelModal');
       const confirmBtn = document.getElementById('btnConfirmDownload');
       const titleEl = document.getElementById('modalMaterialTitle');
       const descEl = document.getElementById('modalMaterialDesc');
+      const quoteEl = document.getElementById('modalMaterialQuote');
       const catEl = document.getElementById('modalCatTag');
+      const formatEl = document.getElementById('modalFormatLabel');
+      const featuresList = document.getElementById('modalFeaturesList');
       const filesContainer = document.getElementById('modalFilesList');
       const feedback = document.getElementById('downloadFeedback');
+      let currentMaterialId = 'homem-de-honra';
 
-      const openModal = (material, cat, desc, filesStr) => {
-        titleEl.textContent = material;
-        descEl.textContent = desc || 'Kit completo de aplicação metodológica e pedagógica da Compassion Brasil.';
-        catEl.textContent = cat;
-        if (cat === 'Proteção') {
-          catEl.className = 'material-cat-tag material-cat-protecao';
+      const openModalWithData = (matId) => {
+        const data = materiaisData[matId] || materiaisData['homem-de-honra'];
+        currentMaterialId = matId;
+
+        titleEl.textContent = data.title;
+        descEl.innerHTML = data.fullDesc;
+        quoteEl.textContent = data.quote;
+        quoteEl.style.display = data.quote ? 'block' : 'none';
+
+        catEl.textContent = data.catName;
+        if (data.category === 'protecao') {
+          catEl.className = 'modal-cat-tag modal-cat-protecao';
         } else {
-          catEl.className = 'material-cat-tag material-cat-juventude';
+          catEl.className = 'modal-cat-tag modal-cat-juventude';
         }
 
-        // Renderiza lista de arquivos
+        formatEl.textContent = data.format;
+
+        // Renderiza Destaques Metodológicos
+        featuresList.innerHTML = '';
+        data.features.forEach(feat => {
+          const li = document.createElement('li');
+          li.className = 'modal-feature-item';
+          li.innerHTML = `<span class="modal-feature-dot">✓</span> <span>${feat}</span>`;
+          featuresList.appendChild(li);
+        });
+
+        // Renderiza Lista de Arquivos
         filesContainer.innerHTML = '';
-        const files = (filesStr || 'Guia do Facilitador (PDF);Material Didático (PDF);Cartazes e Recursos Visuais (ZIP)').split(';');
-        files.forEach((file, idx) => {
+        data.files.forEach(file => {
+          const isObj = typeof file === 'object';
+          const fileName = isObj ? file.name : file;
+          const fileSize = isObj ? file.size : 'PDF / Pronto';
+          const isVideo = isObj && file.type === 'video';
+          const isDocx = isObj && file.type === 'docx';
+
+          let iconSvg = '';
+          if (isVideo) {
+            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+          } else if (isDocx) {
+            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
+          } else {
+            iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`;
+          }
+
           const div = document.createElement('div');
           div.className = 'modal-file-item';
           div.innerHTML = `
             <div class="modal-file-info">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-              </svg>
-              <span>${file}</span>
+              ${iconSvg}
+              <span>${fileName}</span>
             </div>
-            <span class="modal-file-size">PDF / Kit Pronto</span>
+            <span class="modal-file-size">${fileSize}</span>
           `;
           filesContainer.appendChild(div);
         });
 
         feedback.style.display = 'none';
         modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
       };
 
       const closeModal = () => {
         modal.classList.remove('open');
+        document.body.style.overflow = '';
       };
 
-      // Disparar modal via botões de download
-      document.querySelectorAll('.btn-trigger-download').forEach(btn => {
-        btn.addEventListener('click', () => {
-          openModal(btn.dataset.material, btn.dataset.cat, null, btn.dataset.files);
+      // Disparar modal ao clicar no card ou nos botões de abrir
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          const matId = card.dataset.materialId;
+          openModalWithData(matId);
         });
       });
 
-      // Disparar modal via botões de detalhes
-      document.querySelectorAll('.btn-trigger-details').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const card = btn.closest('.material-card');
-          const dBtn = card.querySelector('.btn-trigger-download');
-          openModal(btn.dataset.material, btn.dataset.cat, btn.dataset.desc, dBtn ? dBtn.dataset.files : '');
+      document.querySelectorAll('.btn-open-modal').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const matId = btn.dataset.materialId;
+          openModalWithData(matId);
         });
       });
 
@@ -1277,18 +1388,33 @@
         if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
       });
 
-      // Simulação do download com feedback imediato
+      // Download com direcionamento oficial
       if (confirmBtn) {
         confirmBtn.addEventListener('click', () => {
+          const data = materiaisData[currentMaterialId] || materiaisData['homem-de-honra'];
           feedback.style.display = 'block';
-          // Simula acionamento de download estático
-          const dummyLink = document.createElement('a');
-          dummyLink.href = '#';
-          dummyLink.setAttribute('download', `${titleEl.textContent.trim().replace(/\\s+/g, '_')}_Compassion_Brasil.pdf`);
-          setTimeout(() => {
-            feedback.innerHTML = `✓ Pacote <strong>${titleEl.textContent}</strong> preparado para download!`;
-          }, 600);
+
+          if (data.downloadUrl) {
+            feedback.innerHTML = `✓ Abrindo pasta com os 8 arquivos oficiais de <strong>${data.title}</strong> no OneDrive...`;
+            window.open(data.downloadUrl, '_blank');
+          } else {
+            feedback.innerHTML = `⏳ Preparando download de <strong>${data.title}</strong>...`;
+            const dummyLink = document.createElement('a');
+            dummyLink.href = '#';
+            dummyLink.setAttribute('download', data.downloadFilename);
+            setTimeout(() => {
+              feedback.innerHTML = `✓ Download de <strong>${data.title}</strong> iniciado com sucesso!`;
+            }, 600);
+          }
         });
+      }
+
+      // Abrir modal automaticamente se houver hash na URL
+      if (window.location.hash) {
+        const hashId = window.location.hash.replace('#material-', '');
+        if (materiaisData[hashId]) {
+          setTimeout(() => openModalWithData(hashId), 300);
+        }
       }
     });
   </script>
