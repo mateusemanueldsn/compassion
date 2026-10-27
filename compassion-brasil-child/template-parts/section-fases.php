@@ -87,7 +87,7 @@
                   </p>
                 </div>
                 <div class="phase-card-right">
-                  <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/_2412_Alice’sStory_04.jpg" alt="Juventude" class="phase-card-img"
+                  <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/_2412_Alice_Story_04.jpg" alt="Juventude" class="phase-card-img"
                     loading="lazy">
                 </div>
               </div>

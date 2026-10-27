@@ -3,13 +3,28 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Ignorar fotos pesadas de alta resolucao para manter o repositorio e deploy leves
-# Ignora todo o diretorio de imagens, exceto as que sao efetivamente utilizadas no site:
+# Ignorar fotos brutas pesadas de backup, permitindo as imagens utilizadas no site:
 assets/images/*
-!assets/images/PG23 PROGRAMA SOBREVIVENCIA  OP1.jpg
-!assets/images/CC_BR0524_TheySurvived_13_2307.jpg
+!assets/images/PG23*
+!assets/images/CC_BR0524*
+!assets/images/CC_BR0529*
+!assets/images/_2412_Alice*
+!assets/images/juventude_hero.jpg
+!assets/images/protecao_programa.jpg
+!assets/images/sobrevivencia_card.jpg
+!assets/images/PG39*
+!assets/images/PG28_29*
+!assets/images/civ_infraestrutura.jpg
+!assets/images/FOTOS*
+!assets/images/PG21*
+!assets/images/18demaio*
+!assets/images/Everett*
+!assets/images/PG40*
 !assets/images/CC_BR_MyHappyPlace_05_2312.jpg
 !assets/images/CC-BR040700645-MyNewSong-13-2211.jpg
+
+# O tema child mantem suas imagens essenciais completas para o WordPress:
+!compassion-brasil-child/assets/images/*
 
 backlog/brandbook/
 backlog/inspiracao/

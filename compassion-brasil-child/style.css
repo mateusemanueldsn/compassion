@@ -5,7 +5,7 @@ Description: Tema institucional oficial da Compassion Brasil integrado ao Elemen
 Author: Compassion Brasil / Mandalla Design
 Author URI: https://compassiondobrasil.org.br
 Template: hello-elementor
-Version: 1.0.9
+Version: 1.1.0
 Text Domain: compassion-brasil-child
 */
 
@@ -17,73 +17,57 @@ Text Domain: compassion-brasil-child
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Light.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Light.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Light.woff2") format("woff2");
   font-weight: 300;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Regular.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Regular.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Regular.woff2") format("woff2");
   font-weight: 400;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Medium.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Medium.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Medium.woff2") format("woff2");
   font-weight: 500;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-DemiBold.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-DemiBold.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-DemiBold.woff2") format("woff2");
   font-weight: 600;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Bold.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Bold.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Bold.woff2") format("woff2");
   font-weight: 700;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-ExtraBold.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-ExtraBold.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-ExtraBold.woff2") format("woff2");
   font-weight: 800;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Neighbour Sans";
-  src: url("assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Heavy.woff2") format("woff2"),
-       url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Heavy.woff2") format("woff2");
+  src: url("assets/fonts/Neighbour Sans/Webfont/NeighbourSans-Heavy.woff2") format("woff2");
   font-weight: 900;
-  font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Ballinger Condensed";
-  src: url("assets/fonts/Ballinger%20Condensed%20Series/Fonts/ballingercondensed-bold.otf") format("opentype"),
-       url("assets/fonts/Ballinger Condensed Series/Fonts/ballingercondensed-bold.otf") format("opentype");
+  src: url("assets/fonts/Ballinger Condensed Series/Fonts/ballingercondensed-bold.otf") format("opentype");
   font-weight: 700;
-  font-style: normal;
   font-display: swap;
 }
 
@@ -631,7 +615,6 @@ img {
   padding-bottom: 0
 }
 
-
 /* Coluna de threads laterais desativada */
 .hero-nav-threads {
   display: none
@@ -645,7 +628,6 @@ img {
   height: 100vh;
   overflow: hidden;
   background: var(--dark);
-  /* fica abaixo do painel de texto */
   z-index: 0
 }
 
@@ -663,7 +645,7 @@ img {
   pointer-events: none
 }
 
-/* Overlay semitransparente para legibilidade */
+/* Overlay semitransparente sobre o vídeo */
 .hero-video-overlay {
   position: absolute;
   inset: 0;
@@ -676,7 +658,7 @@ img {
   position: absolute;
   inset: 0;
   z-index: 2;
-  /* gradiente mais forte embaixo — onde o painel vai aparecer */
+  /* gradiente mais denso na base — onde o painel emerge */
   background: linear-gradient(
     180deg,
     rgba(15, 27, 53, .15) 0%,
@@ -700,17 +682,17 @@ img {
   box-shadow: 0 -24px 100px rgba(15, 27, 53, .38)
 }
 
-/* Grid de 2 colunas dentro do painel hero */
+/* Grid de 2 colunas dentro do painel hero (alinhado com .container) */
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: 64px;
-  padding: 72px 80px 80px;
-  align-items: center
+  padding: 72px 0 84px;
+  align-items: center;
 }
 
 .hero-col-left {
-  /* coluna esquerda: eyebrow + título + ícone */
+  /* coluna esquerda: eyebrow + título */
 }
 
 .hero-col-right {
@@ -718,9 +700,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0
 }
-
 
 /* ─── Tipografia hero ─── */
 .hero-eyebrow {
@@ -732,7 +712,7 @@ img {
   margin-bottom: 16px;
   display: flex;
   align-items: center;
-  gap: 10px
+  gap: 10px;
 }
 
 .hero-eyebrow::before {
@@ -741,31 +721,56 @@ img {
   width: 20px;
   height: 3px;
   background: var(--blue);
-  border-radius: 2px
+  border-radius: 2px;
 }
 
 .hero-title {
-  font-size: clamp(2.6rem, 4.2vw, 4rem);
+  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
   font-weight: 900;
   line-height: 1.08;
   letter-spacing: -2px;
   color: var(--dark);
-  margin-bottom: 24px
+  margin-bottom: 0;
 }
 
 .hero-desc {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   color: var(--g700);
   line-height: 1.7;
-  max-width: 520px;
-  margin-bottom: 40px
+  max-width: 500px;
+  margin-bottom: 32px;
 }
 
 .hero-actions {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  align-items: center
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 56px 0 68px;
+    align-items: flex-start;
+  }
+
+  .hero-desc {
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    padding: 44px 0 54px;
+    gap: 28px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 7.5vw, 2.75rem);
+  }
 }
 
 /* Skipping accent abaixo do título */
@@ -986,7 +991,7 @@ img {
   filter: drop-shadow(0 2px 4px rgba(26, 95, 255, 0.15));
 }
 
-/* Em seções escuras */
+/* Em seções escuras (contraste automático para branco) */
 .map-section .eyebrow-skipping-icon,
 .section-blue .eyebrow-skipping-icon,
 .section-dark .eyebrow-skipping-icon,
@@ -2236,20 +2241,11 @@ img {
    RESPONSIVIDADE
    ══════════════════════════════════════ */
 @media(max-width:1024px) {
-  .hero {
-    grid-template-columns: 1fr
-  }
-
-  .hero-nav-threads {
-    display: none
-  }
-
-  .hero-body {
-    grid-template-columns: 1fr
-  }
-
-  .hero-right {
-    min-height: 360px
+  /* hero: 1 coluna em tablet */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 56px 48px 64px
   }
 
   .programs-grid {
@@ -2299,8 +2295,11 @@ img {
     display: none
   }
 
-  .hero-left {
-    padding: 48px 20px
+  /* hero mobile: 1 coluna empilhada */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 40px 24px 56px
   }
 
   .hero-title {
@@ -2919,912 +2918,791 @@ details[open] .accordion-icon {
   }
 }
 
-/* ==========================================================================
-   DEFENSIVE RESETS FOR WORDPRESS & ELEMENTOR
-   Garante fidelidade 100% contra regras globais do tema pai / plugins
-   ========================================================================== */
+/* ═══════════════════════════════════════════════════════
+   CARROSSEL FULLSCREEN — COMO TRABALHAMOS (estilo Peru)
+   ═══════════════════════════════════════════════════════ */
 
-
-/* 2. Reset rigoroso das Tabs de Filtro de Programas */
-.filter-tabs {
-  background: rgba(0, 0, 0, 0.06) !important;
-  padding: 4px !important;
-  border-radius: 9999px !important;
-  display: flex !important;
-  gap: 4px !important;
+.fases-hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--dark);
 }
 
-.filter-tabs .filter-tab,
-button.filter-tab,
-.filter-tab {
-  background: transparent !important;
-  background-color: transparent !important;
-  color: #6B7280 !important; /* var(--g500) */
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  padding: 10px 22px !important;
-  border-radius: 9999px !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+.fases-track {
+  position: absolute;
+  inset: 0;
 }
 
-.filter-tabs .filter-tab:hover,
-button.filter-tab:hover,
-.filter-tab:hover {
-  background-color: rgba(255, 255, 255, 0.5) !important;
-  color: #0F1B35 !important; /* var(--dark) */
+.fases-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.75s;
+  pointer-events: none;
 }
 
-.filter-tabs .filter-tab.active,
-button.filter-tab.active,
-.filter-tab.active {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #1A5FFF !important; /* var(--blue) */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+.fases-slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
-/* 3. Reset rigoroso dos botões de navegação dos carrosséis (Fases) */
-.phases-nav-btn,
-button.phases-nav-btn {
-  position: absolute !important;
-  top: calc(50% - 22px) !important;
-  transform: translateY(-50%) !important;
-  width: 50px !important;
-  height: 50px !important;
-  min-width: 50px !important;
-  max-width: 50px !important;
-  min-height: 50px !important;
-  max-height: 50px !important;
-  border-radius: 50% !important;
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #1A5FFF !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  z-index: 10 !important;
-  cursor: pointer !important;
-  outline: none !important;
-  line-height: 1 !important;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s ease,
-              background-color 0.2s ease,
-              color 0.2s ease,
-              opacity 0.2s ease !important;
+.fases-bg {
+  position: absolute;
+  inset: 0;
 }
 
-.phases-nav-btn svg,
-button.phases-nav-btn svg {
-  width: 22px !important;
-  height: 22px !important;
-  stroke: #1A5FFF !important;
-  color: #1A5FFF !important;
-  fill: none !important;
-  stroke-width: 2.5 !important;
-  display: block !important;
-  margin: 0 !important;
+.fases-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transform: scale(1.04);
+  transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.phases-nav-btn:hover:not(:disabled),
-button.phases-nav-btn:hover:not(:disabled) {
-  background: #1A5FFF !important;
-  background-color: #1A5FFF !important;
-  color: #FFFFFF !important;
-  transform: translateY(-50%) scale(1.1) !important;
-  box-shadow: 0 8px 24px rgba(26, 95, 255, 0.5) !important;
+.fases-slide.active .fases-bg-img {
+  transform: scale(1);
 }
 
-.phases-nav-btn:hover:not(:disabled) svg,
-button.phases-nav-btn:hover:not(:disabled) svg {
-  stroke: #FFFFFF !important;
-  color: #FFFFFF !important;
+.fases-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(5, 16, 48, 0.88) 0%,
+    rgba(5, 16, 48, 0.58) 45%,
+    rgba(5, 16, 48, 0.10) 100%
+  );
 }
 
-.phases-nav-btn:active:not(:disabled),
-button.phases-nav-btn:active:not(:disabled) {
-  transform: translateY(-50%) scale(0.96) !important;
+.fases-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: clamp(120px, 11vw, 190px);
+  padding-right: 40px;
+  max-width: 680px;
 }
 
-.phases-nav-btn:disabled,
-button.phases-nav-btn:disabled {
-  opacity: 0.35 !important;
-  cursor: not-allowed !important;
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #1A5FFF !important;
-  transform: translateY(-50%) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+.fases-phase-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.phases-nav-btn.phases-prev,
-button.phases-nav-btn.phases-prev {
-  left: 6px !important;
+.fases-phase-num {
+  font-family: var(--font);
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--accent, var(--yellow));
+  line-height: 1;
 }
 
-.phases-nav-btn.phases-next,
-button.phases-nav-btn.phases-next {
-  right: 6px !important;
+.fases-phase-bar {
+  flex: 0 0 52px;
+  height: 3px;
+  background: var(--accent, var(--yellow));
+  border-radius: 2px;
 }
 
-@media (max-width: 991px) {
-  .phases-nav-btn,
-  button.phases-nav-btn {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-    max-width: 42px !important;
-    min-height: 42px !important;
-    max-height: 42px !important;
+.fases-eyebrow {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
+  margin: 0 0 14px;
+}
+
+.fases-title {
+  font-family: var(--font);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  color: var(--white);
+  line-height: 1.08;
+  margin: 0 0 20px;
+}
+
+.fases-desc {
+  font-size: clamp(0.93rem, 1.3vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  margin: 0 0 28px;
+  max-width: 500px;
+}
+
+.fases-accent-bar {
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+/* ── Controles do Carrossel (Arrows & Dots) ── */
+.fases-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(5, 16, 48, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.25s var(--ease);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.fases-arrow-prev {
+  left: clamp(20px, 2.5vw, 36px);
+}
+
+.fases-arrow-next {
+  right: clamp(20px, 2.5vw, 36px);
+}
+
+.fases-nav-arrow:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(26, 95, 255, 0.4);
+}
+
+.fases-nav-arrow:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+.fases-dots {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.fases-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.65);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.35s var(--ease);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.fases-dot:hover {
+  background: var(--white);
+  transform: scale(1.2);
+}
+
+.fases-dot.active {
+  width: 36px;
+  background: var(--blue, #1A5FFF) !important;
+  box-shadow: 0 0 14px rgba(26, 95, 255, 0.7), 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Responsivo mobile ── */
+@media (max-width: 768px) {
+  .fases-hero-section { height: 100svh; min-height: 580px; }
+
+  .fases-nav-arrow {
+    width: 42px;
+    height: 42px;
   }
-  .phases-nav-btn.phases-prev,
-  button.phases-nav-btn.phases-prev {
-    left: 4px !important;
+  .fases-arrow-prev {
+    left: 14px;
   }
-  .phases-nav-btn.phases-next,
-  button.phases-nav-btn.phases-next {
-    right: 4px !important;
+  .fases-arrow-next {
+    right: 14px;
+  }
+
+  .fases-dots {
+    bottom: 24px;
+    padding: 0;
+    gap: 10px;
+  }
+  .fases-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .fases-dot.active {
+    width: 28px;
+  }
+
+  .fases-content {
+    padding: 80px 24px 130px;
+    max-width: 100%;
+    justify-content: flex-end;
+  }
+  .fases-title { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+  .fases-desc { font-size: 0.9rem; max-width: 100%; }
+  .fases-overlay {
+    background: linear-gradient(180deg,
+      rgba(5,16,48,0.22) 0%,
+      rgba(5,16,48,0.70) 55%,
+      rgba(5,16,48,0.92) 100%
+    );
   }
 }
 
-/* Dots indicadores do Carrossel de Fases */
-.carousel-dots,
-div.carousel-dots {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 8px !important;
-  margin-top: 24px !important;
-  padding: 0 !important;
-  list-style: none !important;
-}
-
-.carousel-dot,
-button.carousel-dot,
-.carousel-dots .carousel-dot {
-  width: 12px !important;
-  height: 12px !important;
-  min-width: 12px !important;
-  max-width: 12px !important;
-  min-height: 12px !important;
-  max-height: 12px !important;
-  border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.35) !important;
-  background-color: rgba(255, 255, 255, 0.35) !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  box-shadow: none !important;
-  cursor: pointer !important;
-  outline: none !important;
-  display: inline-block !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.carousel-dot.active,
-button.carousel-dot.active,
-.carousel-dots .carousel-dot.active {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  transform: scale(1.25) !important;
-  opacity: 1 !important;
-}
-
-.btn-carousel-nav,
-button.btn-carousel-nav {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #0F1B35 !important;
-  border: 1px solid #D1D5DB !important;
-  border-radius: 50% !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-}
-
-.btn-carousel-nav:hover,
-button.btn-carousel-nav:hover {
-  background: #0F1B35 !important;
-  background-color: #0F1B35 !important;
-  color: #FFFFFF !important;
-}
-
-/* 4. Tipografia e Botões CTAs */
-.btn-primary,
-a.btn-primary,
-button.btn-primary {
-  background: #1A5FFF !important;
-  background-color: #1A5FFF !important;
-  color: #FFFFFF !important;
-}
-
-.btn-primary:hover,
-a.btn-primary:hover,
-button.btn-primary:hover {
-  background: #0D4FD8 !important;
-  background-color: #0D4FD8 !important;
-  color: #FFFFFF !important;
-}
-
-.btn-ghost,
-a.btn-ghost,
-button.btn-ghost {
-  background: transparent !important;
-  background-color: transparent !important;
-  color: #0F1B35 !important;
-  border: 1.5px solid #D1D5DB !important;
-}
-
-.btn-ghost:hover,
-a.btn-ghost:hover,
-button.btn-ghost:hover {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  border-color: #0F1B35 !important;
-}
-
-/* Header CTAs */
-.btn-nav-cta {
-  background: #1A5FFF !important;
-  background-color: #1A5FFF !important;
-  color: #FFFFFF !important;
-}
-.btn-nav-causes {
-  background: #F5C400 !important;
-  background-color: #F5C400 !important;
-  color: #0F1B35 !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   5. OVERRIDES — SEÇÕES ESCURAS & TÍTULOS DOS CARDS
-   ═══════════════════════════════════════════════════════ */
-.map-section .map-heading,
-.map-heading,
-.section-dark > .container > .section-header .section-title,
-.section-dark .section-title,
-.section-dark .contact-heading,
-.section-dark .section-eyebrow {
-  color: #FFFFFF !important;
-}
-
-/* CARDS DE FASES (fundo branco do card dentro da seção dark):
-   O título do card DEVE SER AZUL COMPASSION e o texto cinza escuro,
-   nunca branco como o fundo da seção! */
-.section-dark .phase-card,
-.phase-card {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #0F1B35 !important;
-}
-
-.section-dark .phase-card .phase-ed-title,
-.section-dark .phase-card h3,
-.phase-card .phase-ed-title,
-.phase-card h3,
-.phase-card-left .phase-ed-title,
-.phase-card-left h3 {
-  color: #1A5FFF !important; /* Azul oficial Compassion */
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 1.65rem !important;
-  font-weight: 800 !important;
-  margin-bottom: 14px !important;
-  line-height: 1.2 !important;
-}
-
-.section-dark .phase-card .phase-ed-desc,
-.section-dark .phase-card p,
-.phase-card .phase-ed-desc,
-.phase-card p,
-.phase-card-left .phase-ed-desc,
-.phase-card-left p {
-  color: #374151 !important; /* Cinza escuro com contraste perfeito */
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.95rem !important;
-  line-height: 1.55 !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   6. OVERRIDES — BORDER-RADIUS PÍLULA NOS BOTÕES
-   ═══════════════════════════════════════════════════════ */
-.btn,
-a.btn,
-button.btn,
-.btn-primary,
-a.btn-primary,
-button.btn-primary,
-.btn-ghost,
-a.btn-ghost,
-button.btn-ghost,
-.btn-white,
-a.btn-white,
-button.btn-white,
-.btn-open-enroll,
-button.btn-open-enroll {
-  border-radius: 9999px !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-weight: 700 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-  cursor: pointer !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   7. OVERRIDES — LINKS DO HEADER (nav-link)
-   ═══════════════════════════════════════════════════════ */
-.site-header .nav-link,
-.site-header a.nav-link {
-  color: #374151 !important;
-  text-decoration: none !important;
-}
-
-.site-header .nav-link:hover,
-.site-header a.nav-link:hover {
-  color: #0F1B35 !important;
-  text-decoration: none !important;
-}
-
-.site-header .nav-link.active,
-.site-header a.nav-link.active {
-  color: #1A5FFF !important;
-}
-
-.site-header .btn,
-.site-header a.btn,
-.site-header .btn-nav-cta,
-.site-header .btn-nav-causes {
-  text-decoration: none !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   8. OVERRIDES — FOOTER COMPLETO CONTRA ELEMENTOR
-   Garante que nenhum link fique verde ou herde cores externas.
-   ═══════════════════════════════════════════════════════ */
-.site-footer,
-footer.site-footer {
-  background: #0F1B35 !important;
-  background-color: #0F1B35 !important;
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-.site-footer h5,
-footer.site-footer h5,
-.site-footer .footer-col h5 {
-  color: #FFFFFF !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.78rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 1.5px !important;
-  text-transform: uppercase !important;
-  margin-bottom: 18px !important;
-}
-
-.site-footer .footer-brand-text {
-  color: rgba(255, 255, 255, 0.65) !important;
-}
-
-/* Links das colunas do footer */
-.site-footer .footer-col ul li a,
-footer.site-footer .footer-col ul li a,
-.site-footer ul li a,
-.site-footer a:not(.btn):not(.footer-social-btn):not(.mandalla-seal-link) {
-  color: rgba(255, 255, 255, 0.65) !important;
-  text-decoration: none !important;
-  font-size: 0.88rem !important;
-  transition: all 0.25s ease !important;
-}
-
-.site-footer .footer-col ul li a:hover,
-footer.site-footer .footer-col ul li a:hover,
-.site-footer ul li a:hover,
-.site-footer a:not(.btn):not(.footer-social-btn):not(.mandalla-seal-link):hover {
-  color: #FFFFFF !important;
-  text-decoration: none !important;
-  padding-left: 4px !important;
-}
-
-/* Ícones de Redes Sociais no Rodapé (Instagram, YouTube) */
-.footer-social-icons,
-.site-footer .footer-social-icons {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  margin-bottom: 24px !important;
-}
-
-.footer-social-btn,
-a.footer-social-btn,
-.site-footer a.footer-social-btn,
-footer.site-footer a.footer-social-btn {
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  max-width: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
-  border-radius: 50% !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  text-decoration: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  transition: all 0.25s ease !important;
-}
-
-.footer-social-btn svg,
-a.footer-social-btn svg,
-.site-footer a.footer-social-btn svg {
-  width: 18px !important;
-  height: 18px !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-  stroke: rgba(255, 255, 255, 0.85) !important;
-  fill: none !important;
-  display: block !important;
-}
-
-.footer-social-btn svg rect,
-.footer-social-btn svg path,
-.footer-social-btn svg line,
-a.footer-social-btn svg rect,
-a.footer-social-btn svg path,
-a.footer-social-btn svg line {
-  stroke: rgba(255, 255, 255, 0.85) !important;
-}
-
-.footer-social-btn svg polygon,
-a.footer-social-btn svg polygon,
-.site-footer a.footer-social-btn svg polygon {
-  fill: rgba(255, 255, 255, 0.85) !important;
-  stroke: none !important;
-}
-
-/* Hover dos ícones sociais */
-.footer-social-btn:hover,
-a.footer-social-btn:hover,
-.site-footer a.footer-social-btn:hover,
-footer.site-footer a.footer-social-btn:hover {
-  color: #FFFFFF !important;
-  border-color: rgba(255, 255, 255, 0.8) !important;
-  background: rgba(255, 255, 255, 0.18) !important;
-  background-color: rgba(255, 255, 255, 0.18) !important;
-  transform: translateY(-2px) !important;
-}
-
-.footer-social-btn:hover svg,
-a.footer-social-btn:hover svg,
-.site-footer a.footer-social-btn:hover svg {
-  color: #FFFFFF !important;
-  stroke: #FFFFFF !important;
-}
-
-.footer-social-btn:hover svg rect,
-.footer-social-btn:hover svg path,
-.footer-social-btn:hover svg line,
-a.footer-social-btn:hover svg rect,
-a.footer-social-btn:hover svg path,
-a.footer-social-btn:hover svg line {
-  stroke: #FFFFFF !important;
-}
-
-.footer-social-btn:hover svg polygon,
-a.footer-social-btn:hover svg polygon,
-.site-footer a.footer-social-btn:hover svg polygon {
-  fill: #FFFFFF !important;
-}
-
-/* Selo Mandalla */
-.mandalla-seal-wrap {
-  margin-top: 16px !important;
-}
-.mandalla-seal-link {
-  display: inline-flex !important;
-  flex-direction: column !important;
-  align-items: flex-start !important;
-  text-decoration: none !important;
-}
-.mandalla-seal-text,
-.site-footer .mandalla-seal-text {
-  margin-top: 8px !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.85rem !important;
-  color: rgba(255, 255, 255, 0.7) !important;
-  font-weight: 400 !important;
-  text-decoration: none !important;
-}
-.mandalla-seal-link:hover .mandalla-seal-text,
-.site-footer .mandalla-seal-link:hover .mandalla-seal-text {
-  color: #FFFFFF !important;
-}
-
-/* Rodapé inferior */
-.footer-bottom,
-.footer-bottom span,
-.site-footer .footer-bottom span {
-  color: rgba(255, 255, 255, 0.45) !important;
-}
-
-/* ═══════════════════════════════════════════════════════
-   9. OVERRIDES — PÁGINA DE CURSOS CONTRA ELEMENTOR
-   ═══════════════════════════════════════════════════════ */
-.page-hero {
-  background: #F7F4EF !important;
-  background-color: #F7F4EF !important;
-  padding: 80px 0 60px !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-}
-
-.page-hero-title,
-h1.page-hero-title {
-  color: #0F1B35 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: clamp(2.4rem, 4vw, 3.4rem) !important;
-  font-weight: 900 !important;
-  letter-spacing: -1.5px !important;
-  line-height: 1.1 !important;
-  margin-bottom: 16px !important;
-}
-
-.page-hero-subtitle,
-p.page-hero-subtitle {
-  color: #4B5563 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 1.15rem !important;
-  line-height: 1.65 !important;
-  max-width: 680px !important;
-  margin-bottom: 32px !important;
-}
-
-.page-stat-badge {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #0F1B35 !important;
-  border-radius: 9999px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.86rem !important;
-  font-weight: 700 !important;
-}
-
-/* Catálogo de Cursos */
-.section-white {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-}
-
-.course-card,
-article.course-card {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  border-radius: 16px !important;
-  border: 1px solid #F3F4F6 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.course-card:hover,
-article.course-card:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1) !important;
-}
-
-.course-thumb-ph {
-  background: #0F1B35 !important;
-  background-color: #0F1B35 !important;
-  min-height: 140px !important;
-  position: relative !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 14px !important;
-}
-
-.course-thumb-badge {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #0F1B35 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
-  border-radius: 4px !important;
-  padding: 3px 8px !important;
-}
-
-.course-thumb-center {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  border-radius: 50% !important;
-  background: #1A5FFF !important;
-  background-color: #1A5FFF !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: #FFFFFF !important;
-}
-
-.course-thumb-center svg {
-  color: #FFFFFF !important;
-  stroke: #FFFFFF !important;
-  fill: none !important;
-}
-
-.course-thumb-meta {
-  background: rgba(255, 255, 255, 0.92) !important;
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  color: #0F1B35 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.72rem !important;
-  font-weight: 600 !important;
-  border-radius: 4px !important;
-  padding: 3px 8px !important;
-}
-
-.course-cat-tag {
-  color: #1A5FFF !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.7rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  margin-bottom: 8px !important;
-  display: block !important;
-}
-
-.course-card-title,
-h3.course-card-title,
-.course-card h3 {
-  color: #0F1B35 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 1.15rem !important;
-  font-weight: 800 !important;
-  line-height: 1.3 !important;
-  margin-bottom: 10px !important;
-}
-
-.course-card-desc,
-p.course-card-desc,
-.course-card p {
-  color: #4B5563 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.86rem !important;
-  line-height: 1.55 !important;
-  margin-bottom: 18px !important;
-}
-
-.course-card-meta {
-  color: #6B7280 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.76rem !important;
-  font-weight: 600 !important;
-}
-
-.course-card-btn,
-a.course-card-btn {
-  color: #1A5FFF !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.84rem !important;
-  font-weight: 700 !important;
-  text-decoration: none !important;
-}
-
-.course-card-btn:hover,
-a.course-card-btn:hover {
-  color: #0D4FD8 !important;
-  text-decoration: none !important;
-}
-
-/* Botão de inscrição nos cards */
-.btn-open-enroll,
-button.btn-open-enroll,
-.course-card .btn-open-enroll {
-  background: #1A5FFF !important;
-  background-color: #1A5FFF !important;
-  color: #FFFFFF !important;
-  border-radius: 9999px !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.78rem !important;
-  font-weight: 700 !important;
-  padding: 7px 16px !important;
-  border: none !important;
-  cursor: pointer !important;
-  transition: all 0.25s ease !important;
-}
-
-.btn-open-enroll:hover,
-button.btn-open-enroll:hover,
-.course-card .btn-open-enroll:hover {
-  background: #0D4FD8 !important;
-  background-color: #0D4FD8 !important;
-  color: #FFFFFF !important;
-}
-
-/* Formulário de Inscrição da Página de Cursos */
-#pageEnrollForm,
-#enrollForm {
-  text-align: left !important;
-}
-
-#pageEnrollForm label,
-#enrollForm label {
-  color: #0F1B35 !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.8rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.3px !important;
-  margin-bottom: 6px !important;
-  display: block !important;
-}
-
-#pageEnrollForm input,
-#pageEnrollForm select,
-#enrollForm input {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  color: #0F1B35 !important;
-  border: 1.5px solid #D1D5DB !important;
-  border-radius: 8px !important;
-  font-family: var(--font), 'Montserrat', sans-serif !important;
-  font-size: 0.95rem !important;
-  padding: 12px 16px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  outline: none !important;
-  transition: all 0.25s ease !important;
-}
-
-#pageEnrollForm input:focus,
-#pageEnrollForm select:focus,
-#enrollForm input:focus {
-  border-color: #1A5FFF !important;
-  box-shadow: 0 0 0 3px rgba(26, 95, 255, 0.12) !important;
-}
-
-/* Modal de inscrição rápida */
-.course-enroll-card {
-  background: #FFFFFF !important;
-  background-color: #FFFFFF !important;
-  border-radius: 24px !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18) !important;
-}
-
-.course-enroll-close,
-button.course-enroll-close {
-  background: #F3F4F6 !important;
-  background-color: #F3F4F6 !important;
-  color: #0F1B35 !important;
-  border-radius: 50% !important;
-  border: none !important;
-  width: 32px !important;
-  height: 32px !important;
-  min-width: 32px !important;
-  padding: 0 !important;
-}
-
-.course-enroll-close:hover,
-button.course-enroll-close:hover {
-  background: #E5E7EB !important;
-  background-color: #E5E7EB !important;
-  color: #000000 !important;
-}
-
-/* ==========================================================================
-   CORREÇÃO v1.0.7 — Badge e Meta dos Cards de Cursos (posicionamento absoluto)
-   ========================================================================== */
-
-/* Garante que o container seja o ponto de referência e sem padding interno
-   que deslocaria as badges dos cantos */
-.course-thumb-ph {
-  position: relative !important;
-  padding: 0 !important;
-}
-
-/* Badge de categoria: colada ao canto superior esquerdo */
-.course-thumb-badge,
-.course-card .course-thumb-badge {
-  position: absolute !important;
-  top: 8px !important;
-  left: 8px !important;
-  bottom: auto !important;
-  right: auto !important;
-  margin: 0 !important;
-  z-index: 2 !important;
-}
-
-/* Meta de carga horária: colada ao canto inferior direito */
-.course-thumb-meta,
-.course-card .course-thumb-meta {
-  position: absolute !important;
-  bottom: 8px !important;
-  right: 8px !important;
-  top: auto !important;
-  left: auto !important;
-  margin: 0 !important;
-  z-index: 2 !important;
-}
-
-/* ==========================================================================
-   TIPOGRAFIA OFICIAL COMPASSION — TÍTULOS MAIORES EM BOLD BLACK (900 / 800)
-   Sobrescreve resets do Hello Elementor, Elementor Global Kits e Gutenberg
-   ========================================================================== */
-
+/* ── TIPOGRAFIA DOS TÍTULOS PRINCIPAIS (HEAVY / BLACK 900) ── */
 h1,
 h2,
 h3,
 .hero-title,
 h1.hero-title,
-.hero h1,
 .page-hero-title,
 h1.page-hero-title,
-.page-hero h1,
-.section-title,
-h2.section-title,
-.section-header h1,
-.section-header h2,
-.section-header h3,
-.elementor-heading-title,
-.elementor-widget-heading .elementor-heading-title,
-.elementor-widget-heading h1.elementor-heading-title,
-.elementor-widget-heading h2.elementor-heading-title,
-.elementor-widget-heading h3.elementor-heading-title,
-.elementor h1,
-.elementor h2,
-.elementor h3,
-.entry-content h1,
-.entry-content h2,
-.entry-content h3 {
-  font-family: "Neighbour Sans", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  font-weight: 900 !important;
-  font-style: normal !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  text-rendering: optimizeLegibility !important;
-}
-
-.hero-title,
-h1.hero-title,
-.page-hero-title,
-h1.page-hero-title {
-  letter-spacing: -2px !important;
-  line-height: 1.08 !important;
-}
-
 .section-title,
 h2.section-title {
-  letter-spacing: -1.5px !important;
-  line-height: 1.1 !important;
+  font-family: var(--font);
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Sub-títulos e títulos médios com peso ExtraBold 800 */
 h4,
 .phase-ed-title,
 .prog-card-title,
 .prog-full-title,
 .course-card-title,
-h3.course-card-title,
-.course-card h3,
-.course-modal-title,
-.footer-col h5 {
-  font-family: "Neighbour Sans", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  font-weight: 800 !important;
-  font-style: normal !important;
-  -webkit-font-smoothing: antialiased !important;
+h3.course-card-title {
+  font-family: var(--font);
+  font-weight: 800;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* ════════════════════════════════════════════════════════════
+   PÁGINA COMO TRABALHAMOS — DETALHAMENTO EM PROFUNDIDADE
+   ════════════════════════════════════════════════════════════ */
+
+.como-intro-strip {
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 0;
+}
+
+.como-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.como-intro-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--blue-dark);
+  margin-bottom: 14px;
+}
+
+.como-intro-lead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.como-fases-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.como-fase-pill {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.como-fase-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+.como-fase-pill-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.como-fase-pill-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.como-fase-pill-age {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Seção de Programas em Profundidade ── */
+.prog-deep-list {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  margin-top: 40px;
+}
+
+.prog-deep-card {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px;
+  box-shadow: 0 10px 32px rgba(10, 37, 64, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, opacity 0.3s;
+}
+
+.prog-deep-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 44px rgba(10, 37, 64, 0.09);
+}
+
+.prog-deep-card.reverse {
+  grid-template-columns: 0.9fr 1.1fr;
+}
+
+.prog-deep-card.reverse .prog-deep-media {
+  order: 1;
+}
+
+.prog-deep-card.reverse .prog-deep-info {
+  order: 2;
+}
+
+/* Indicador de thread no topo do card */
+.prog-deep-thread {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  display: flex;
+}
+
+.prog-deep-thread span {
+  flex: 1;
+  height: 100%;
+}
+
+.prog-deep-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.prog-deep-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  flex-shrink: 0;
+}
+
+.prog-deep-icon-wrap img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.prog-deep-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.prog-deep-title {
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  color: var(--blue-dark);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+.prog-deep-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: 24px;
+}
+
+.prog-deep-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.prog-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.prog-pillar-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: var(--white);
+}
+
+.prog-pillar-item strong {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.prog-deep-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.prog-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+
+.prog-link-btn svg {
+  transition: transform 0.25s var(--ease);
+}
+
+.prog-link-btn:hover {
+  text-decoration: underline;
+}
+
+.prog-link-btn:hover svg {
+  transform: translateX(5px);
+}
+
+/* Mídia do Card em profundidade */
+.prog-deep-media {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.prog-deep-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prog-deep-card:hover .prog-deep-media img {
+  transform: scale(1.04);
+}
+
+.prog-media-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(5, 16, 48, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--white);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prog-media-badge::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+/* ── Responsivo dos Programas em Profundidade ── */
+@media (max-width: 991px) {
+  .como-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .como-fases-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .prog-deep-card,
+  .prog-deep-card.reverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+  .prog-deep-card.reverse .prog-deep-media,
+  .prog-deep-card .prog-deep-media {
+    order: 2;
+    height: 300px;
+  }
+  .prog-deep-card.reverse .prog-deep-info,
+  .prog-deep-card .prog-deep-info {
+    order: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .como-fases-summary {
+    grid-template-columns: 1fr;
+  }
+  .prog-deep-media {
+    height: 240px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
+   CAPACITAÇÕES — Cards de Materiais Metodológicos (Home)
+   Usados em: index.html (seção #cursos), cursos.html
+   ══════════════════════════════════════════════════════ */
+
+.cap-materiais-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .cap-materiais-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .cap-materiais-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cap-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--sh-md);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+
+.cap-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sh-lg);
+}
+
+.cap-card-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cap-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.cap-card:hover .cap-card-img-wrap img {
+  transform: scale(1.05);
+}
+
+.cap-card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #FFFFFF;
+  color: #051030;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  border: none;
+}
+
+.cap-badge-blue,
+.cap-badge-amber,
+.cap-badge-orange {
+  background: #FFFFFF;
+  color: #051030;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.cap-card-dl-icon {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, color 0.2s;
+}
+
+.cap-card:hover .cap-card-dl-icon {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.cap-card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 20px;
+  flex: 1;
+  gap: 8px;
+}
+
+.cap-card-type {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--g500);
+}
+
+.cap-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dark);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.cap-card-desc {
+  font-size: 0.875rem;
+  color: var(--g700);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.cap-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blue);
+  margin-top: 4px;
+  transition: gap 0.2s;
+}
+
+.cap-card:hover .cap-card-cta {
+  gap: 10px;
+}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM SCROLLBAR — Identidade Visual Compassion
+   ═══════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(5, 16, 48, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--blue, #1A5FFF);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.25s var(--ease);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0043ce;
+  background-clip: padding-box;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue, #1A5FFF) rgba(5, 16, 48, 0.04);
+}
+
