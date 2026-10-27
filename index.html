@@ -9,7 +9,9 @@
     content="Compassion Brasil — conhecida, amada e conectada. Libertando crianças da pobreza em nome de Jesus por meio de programas transformadores.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="wireframe.css">
   <script src="wireframe.js" defer></script>
 </head>
@@ -71,68 +73,58 @@
          ═══════════════════════════════════════════════ -->
     <section class="hero" id="quem-somos" aria-labelledby="heroHeading">
 
+      <!-- CAMADA 1: Vídeo fixo em tela inteira (parallax sticky) -->
+      <div class="hero-video-layer" aria-hidden="true">
+        <iframe class="hero-video-bg"
+          src="https://www.youtube.com/embed/Cas6bKgTXHI?autoplay=1&mute=1&loop=1&playlist=Cas6bKgTXHI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
+          title="Vídeo institucional Compassion Brasil" frameborder="0" allow="autoplay; encrypted-media"
+          aria-hidden="true"></iframe>
+        <div class="hero-video-overlay" aria-hidden="true"></div>
+        <div class="hero-img-gradient"></div>
+      </div>
 
-      <!-- Grid principal do Hero -->
-      <div class="hero-body">
+      <!-- CAMADA 2: Painel de texto que sobe por cima do vídeo -->
+      <div class="hero-content-panel">
+        <div class="container">
+          <div class="hero-grid">
 
-        <!-- Lado esquerdo — texto e CTAs -->
-        <div class="hero-left">
-          <p class="hero-eyebrow reveal" id="heroEyebrow">Conhecido · Amado · Protegido</p>
+            <!-- Coluna esquerda: eyebrow + título -->
+            <div class="hero-col-left">
+              <p class="hero-eyebrow reveal" id="heroEyebrow">Conhecido · Amado · Protegido</p>
 
-          <h1 class="hero-title reveal d1" id="heroHeading">
-            Libertando crianças<br>
-            da pobreza em<br>
-            nome de Jesus
-          </h1>
+              <h1 class="hero-title reveal d1" id="heroHeading">
+                Libertando crianças<br>
+                da pobreza em<br>
+                nome de Jesus
+              </h1>
+            </div>
 
-          <!-- Skipping accent embaixo do título -->
-          <div class="title-skipping-accent reveal d2" aria-hidden="true">
-            <img src="assets/logo/skipping.svg" alt="" class="hero-skipping-img">
-          </div>
+            <!-- Coluna direita: descrição + botões -->
+            <div class="hero-col-right">
+              <p class="hero-desc reveal d3">
+                A Compassion do Brasil conecta crianças em situação de vulnerabilidade a parceiras locais,
+                garantindo que cada uma delas seja conhecida, amada e protegida — para atingir todo o seu
+                potencial dado por Deus.
+              </p>
 
-          <p class="hero-desc reveal d3">
-            A Compassion do Brasil conecta crianças em situação de vulnerabilidade a parceiras locais,
-            garantindo que cada uma delas seja conhecida, amada e protegida — para atingir todo o seu
-            potencial dado por Deus.
-          </p>
+              <div class="hero-actions reveal d4">
+                <a href="nossa-historia.html" class="btn btn-primary" id="heroCta1">
+                  Conheça nossa história
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </a>
+                <a href="https://www.youtube.com/watch?v=Cas6bKgTXHI" target="_blank" rel="noopener noreferrer"
+                  class="btn btn-ghost" id="heroCta2">
+                  ▶ Assistir Vídeo
+                </a>
+              </div>
+            </div>
 
-          <div class="hero-actions reveal d4">
-            <a href="nossa-historia.html" class="btn btn-primary" id="heroCta1">
-              Conheça nossa história
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </a>
-            <a href="https://www.youtube.com/watch?v=Cas6bKgTXHI" target="_blank" rel="noopener noreferrer"
-              class="btn btn-ghost" id="heroCta2">
-              ▶ Assistir Vídeo
-            </a>
           </div>
         </div>
-
-        <!-- Lado direito — visual com imagem da criança -->
-        <div class="hero-right">
-          <!-- Threads laterais do painel escuro -->
-          <div class="hero-visual-threads" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-
-          <!-- Vídeo institucional YouTube em loop como fundo -->
-          <div class="hero-img-bg">
-            <iframe class="hero-video-bg"
-              src="https://www.youtube.com/embed/Cas6bKgTXHI?autoplay=1&mute=1&loop=1&playlist=Cas6bKgTXHI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
-              title="Vídeo institucional Compassion Brasil" frameborder="0" allow="autoplay; encrypted-media"
-              aria-hidden="true"></iframe>
-            <!-- Overlay que bloqueia toda a UI do YouTube -->
-            <div class="hero-video-overlay" aria-hidden="true"></div>
-            <div class="hero-img-gradient"></div>
-          </div>
-
-
-        </div>
-
       </div>
     </section>
 
@@ -2028,7 +2020,10 @@
             </div>
             <h2 class="section-title" id="cursosHeading">Capacita&#xE7;&#xF5;es &amp; Metodologias</h2>
             <p class="section-subtitle">
-              Disponibilizamos recursos e materiais pedagógicos para apoiar líderes de projetos e igrejas, educadores sociais e voluntários. Com base em experiências em diferentes comunidades, nossos materiais combinam fundamentação teórica, metodologia estruturada e aplicação prática para fortalecer o desenvolvimento integral de crianças e adolescentes.
+              Disponibilizamos recursos e materiais pedagógicos para apoiar líderes de projetos e igrejas, educadores
+              sociais e voluntários. Com base em experiências em diferentes comunidades, nossos materiais combinam
+              fundamentação teórica, metodologia estruturada e aplicação prática para fortalecer o desenvolvimento
+              integral de crianças e adolescentes.
             </p>
           </div>
           <div class="courses-nav-btns">
@@ -2047,31 +2042,50 @@
                 alt="Programa Homem de Honra - Compassion Brasil" loading="lazy">
               <span class="cap-card-badge cap-badge-blue">Juventude</span>
               <span class="cap-card-dl-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
               </span>
             </div>
             <div class="cap-card-body">
               <span class="cap-card-type">Kit Metodol&#xF3;gico</span>
               <h3 class="cap-card-title">Homem de Honra</h3>
-              <p class="cap-card-desc">Uma jornada para formar homens com prop&#xF3;sito &#x2014; hombridade, identidade e car&#xE1;ter com base b&#xED;blica para jovens rapazes.</p>
-              <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+              <p class="cap-card-desc">Uma jornada para formar homens com prop&#xF3;sito &#x2014; hombridade, identidade
+                e car&#xE1;ter com base b&#xED;blica para jovens rapazes.</p>
+              <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg></span>
             </div>
           </a>
 
           <a href="cursos.html#material-gravidez-adolescencia" class="cap-card">
             <div class="cap-card-img-wrap">
               <img src="assets/images/PG21 ENSINANDO A PREVINIR OP1.jpg"
-                alt="Campanha de Preven&#xE7;&#xE3;o &#xE0; Gravidez na Adolesc&#xEA;ncia &#x2014; Compassion Brasil" loading="lazy">
+                alt="Campanha de Preven&#xE7;&#xE3;o &#xE0; Gravidez na Adolesc&#xEA;ncia &#x2014; Compassion Brasil"
+                loading="lazy">
               <span class="cap-card-badge cap-badge-amber">Prote&#xE7;&#xE3;o</span>
               <span class="cap-card-dl-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
               </span>
             </div>
             <div class="cap-card-body">
               <span class="cap-card-type">Campanha Nacional &#xB7; 4 Etapas</span>
               <h3 class="cap-card-title">N&#xE3;o t&#xE1; na hora!</h3>
-              <p class="cap-card-desc">Preven&#xE7;&#xE3;o &#xE0; gravidez na adolesc&#xEA;ncia: cartazes, jogos educativos, quiz tem&#xE1;tico e guias de oficina para igrejas parceiras.</p>
-              <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+              <p class="cap-card-desc">Preven&#xE7;&#xE3;o &#xE0; gravidez na adolesc&#xEA;ncia: cartazes, jogos
+                educativos, quiz tem&#xE1;tico e guias de oficina para igrejas parceiras.</p>
+              <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg></span>
             </div>
           </a>
 
@@ -2081,14 +2095,24 @@
                 alt="Campanha Maio Laranja &#x2014; Compassion Brasil" loading="lazy">
               <span class="cap-card-badge cap-badge-orange">Prote&#xE7;&#xE3;o</span>
               <span class="cap-card-dl-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
               </span>
             </div>
             <div class="cap-card-body">
               <span class="cap-card-type">Campanha Anual &#xB7; Maio</span>
               <h3 class="cap-card-title">Maio Laranja</h3>
-              <p class="cap-card-desc">&#x201C;Quem ama, protege.&#x201D; Mobiliza&#xE7;&#xE3;o de fam&#xED;lias e comunidades pela prote&#xE7;&#xE3;o integral das crian&#xE7;as com materiais de conscientiza&#xE7;&#xE3;o.</p>
-              <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+              <p class="cap-card-desc">&#x201C;Quem ama, protege.&#x201D; Mobiliza&#xE7;&#xE3;o de fam&#xED;lias e
+                comunidades pela prote&#xE7;&#xE3;o integral das crian&#xE7;as com materiais de
+                conscientiza&#xE7;&#xE3;o.</p>
+              <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg></span>
             </div>
           </a>
 
@@ -2300,8 +2324,8 @@
           </div>
 
           <div class="mandalla-seal-wrap">
-            <a href="https://www.instagram.com/mandallacomunicacao/" target="_blank" rel="noopener noreferrer" class="mandalla-seal-link"
-              title="Desenvolvido por Mandalla Comunicação & Design">
+            <a href="https://www.instagram.com/mandallacomunicacao/" target="_blank" rel="noopener noreferrer"
+              class="mandalla-seal-link" title="Desenvolvido por Mandalla Comunicação & Design">
               <img src="assets/FeitoComCarinho.svg" alt="Feito com carinho" class="mandalla-seal-img" width="124"
                 height="37">
               <span class="mandalla-seal-text">Por Mandalla Comunicação &amp; Design</span>

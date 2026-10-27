@@ -623,248 +623,106 @@ img {
 }
 
 /* ══════════════════════════════════════
-   HERO — Layout thread-nav lateral
+   HERO — Parallax full-screen + overlay panel
    ══════════════════════════════════════ */
 .hero {
-  min-height: 90vh;
-  background: var(--cream)
+  position: relative;
+  background: transparent;
+  padding-bottom: 0
 }
+
 
 /* Coluna de threads laterais desativada */
 .hero-nav-threads {
   display: none
 }
 
-.hero-nav-item {
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--t2)
-}
-
-.hero-nav-item .nt {
-  display: block;
-  width: 8px;
-  height: 55%;
-  border-radius: 4px;
-  transition: var(--t2)
-}
-
-.hero-nav-item:hover .nt,
-.hero-nav-item.active .nt {
-  width: 13px;
-  height: 80%;
-  border-radius: 0 4px 4px 0
-}
-
-.hero-nav-item:nth-child(1) .nt {
-  background: var(--blue)
-}
-
-.hero-nav-item:nth-child(2) .nt {
-  background: var(--yellow)
-}
-
-.hero-nav-item:nth-child(3) .nt {
-  background: var(--green)
-}
-
-.hero-nav-item:nth-child(4) .nt {
-  background: var(--orange)
-}
-
-.hero-nav-item:nth-child(5) .nt {
-  background: var(--teal)
-}
-
-.hero-nav-item .nt-tip {
-  position: absolute;
-  left: 60px;
-  background: var(--dark);
-  color: var(--white);
-  font-size: .72rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: var(--r-pill);
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: var(--t1);
-  letter-spacing: .3px
-}
-
-.hero-nav-item:hover .nt-tip {
-  opacity: 1
-}
-
-/* Conteúdo hero */
-.hero-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 90vh
-}
-
-.hero-left {
-  padding: 80px 56px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center
-}
-
-.hero-right {
-  background: var(--dark);
-  position: relative;
-  overflow: hidden
-}
-
-/* Threads no painel visual do hero */
-.hero-visual-threads {
-  position: absolute;
-  left: 0;
+/* ─── Camada do vídeo: sticky + tela inteira ─── */
+.hero-video-layer {
+  position: sticky;
   top: 0;
-  bottom: 0;
-  width: 14px;
-  display: flex;
-  flex-direction: column
-}
-
-.hero-visual-threads span {
-  flex: 1
-}
-
-.hero-visual-threads span:nth-child(1) {
-  background: var(--blue)
-}
-
-.hero-visual-threads span:nth-child(2) {
-  background: var(--yellow)
-}
-
-.hero-visual-threads span:nth-child(3) {
-  background: var(--green)
-}
-
-.hero-visual-threads span:nth-child(4) {
-  background: var(--orange)
-}
-
-.hero-visual-threads span:nth-child(5) {
-  background: var(--teal)
-}
-
-.hero-img-bg {
-  position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 460px;
+  height: 100vh;
   overflow: hidden;
-  background: var(--dark)
+  background: var(--dark);
+  /* fica abaixo do painel de texto */
+  z-index: 0
 }
 
-.hero-img-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-  transition: transform 1.2s var(--ease)
-}
-
-.hero-right:hover .hero-img-photo {
-  transform: scale(1.03)
-}
-
-/* Vídeo YouTube como fundo no hero */
 .hero-video-bg {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 300%;
-  height: 300%;
+  /* cobre toda a viewport independente da proporção */
+  width: 177.78vh;  /* 16/9 × 100vh */
+  height: 100vh;
   min-width: 100%;
-  min-height: 100%;
+  min-height: 56.25vw; /* 9/16 × 100vw */
   transform: translate(-50%, -50%);
   border: none;
-  pointer-events: none;
+  pointer-events: none
 }
 
-/* Bloqueia toda a UI do YouTube (play, pause, próximo etc.) */
+/* Overlay semitransparente para legibilidade */
 .hero-video-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
   background: transparent;
-  pointer-events: all;
+  pointer-events: all
 }
 
 .hero-img-gradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15, 27, 53, .1) 0%, rgba(15, 27, 53, .65) 100%);
+  z-index: 2;
+  /* gradiente mais forte embaixo — onde o painel vai aparecer */
+  background: linear-gradient(
+    180deg,
+    rgba(15, 27, 53, .15) 0%,
+    rgba(15, 27, 53, .55) 60%,
+    rgba(15, 27, 53, .85) 100%
+  );
   pointer-events: none
 }
 
-/* Floating card no hero */
-.hero-float-card {
-  position: absolute;
-  bottom: 32px;
-  left: 28px;
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 16px 20px;
-  box-shadow: var(--sh-lg);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  animation: floatY 4s ease-in-out infinite;
-  z-index: 5
+/* ─── Painel de conteúdo: sobe sobre o vídeo ao scrollar ─── */
+.hero-content-panel {
+  position: relative;
+  z-index: 10;
+  background: var(--cream);
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -24px 80px rgba(15, 27, 53, .28);
+  transition: box-shadow .4s ease
 }
 
-.fcard-threads {
+.hero-content-panel:hover {
+  box-shadow: 0 -24px 100px rgba(15, 27, 53, .38)
+}
+
+/* Grid de 2 colunas dentro do painel hero */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  padding: 72px 80px 80px;
+  align-items: center
+}
+
+.hero-col-left {
+  /* coluna esquerda: eyebrow + título + ícone */
+}
+
+.hero-col-right {
+  /* coluna direita: descrição + botões */
   display: flex;
   flex-direction: column;
-  gap: 3px
+  justify-content: center;
+  gap: 0
 }
 
-.fcard-threads span {
-  display: block;
-  height: 5px;
-  border-radius: 2px
-}
 
-.fcard-threads span:nth-child(1) {
-  width: 28px;
-  background: var(--blue)
-}
-
-.fcard-threads span:nth-child(2) {
-  width: 20px;
-  background: var(--yellow)
-}
-
-.fcard-threads span:nth-child(3) {
-  width: 24px;
-  background: var(--green)
-}
-
-.fcard-info .big {
-  font-size: 1.65rem;
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: var(--dark);
-  line-height: 1
-}
-
-.fcard-info .lbl {
-  font-size: .73rem;
-  color: var(--g500);
-  font-weight: 500
-}
-
-/* Tipografia hero */
+/* ─── Tipografia hero ─── */
 .hero-eyebrow {
   font-size: .8rem;
   font-weight: 700;
@@ -895,12 +753,11 @@ img {
   margin-bottom: 24px
 }
 
-
 .hero-desc {
   font-size: 1.1rem;
   color: var(--g700);
   line-height: 1.7;
-  max-width: 480px;
+  max-width: 520px;
   margin-bottom: 40px
 }
 
