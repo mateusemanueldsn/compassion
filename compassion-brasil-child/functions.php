@@ -1,35 +1,64 @@
 <?php
 /**
- * Compassion Brasil Child Theme Functions
+ * Compassion Brasil — Tema Standalone
+ * Sem dependência de tema pai (hello-elementor removido)
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly.
+    exit;
 }
 
-// Forçar HTTPS em URLs de assets caso a conexão seja segura ou via proxy/Cloudflare
+// ─────────────────────────────────────────────
+// 1. SUPORTES DO TEMA
+// ─────────────────────────────────────────────
+add_action( 'after_setup_theme', function() {
+    add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'html5', array(
+        'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script'
+    ) );
+    add_theme_support( 'custom-logo' );
+    add_theme_support( 'align-wide' );
+    add_theme_support( 'wp-block-styles' );
+
+    // Menus de navegação
+    register_nav_menus( array(
+        'primary' => __( 'Menu Principal', 'compassion-brasil' ),
+        'footer'  => __( 'Menu Rodapé', 'compassion-brasil' ),
+    ) );
+} );
+
+// ─────────────────────────────────────────────
+// 2. FORÇAR HTTPS EM URLS DE ASSETS
+// ─────────────────────────────────────────────
 add_filter( 'stylesheet_directory_uri', function( $uri ) {
-    if ( is_ssl() || ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) || ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ) {
+    if ( is_ssl()
+        || ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+        || ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' )
+    ) {
         $uri = set_url_scheme( $uri, 'https' );
     }
     return $uri;
 } );
 
 add_filter( 'stylesheet_uri', function( $uri ) {
-    if ( is_ssl() || ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) || ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ) {
+    if ( is_ssl()
+        || ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+        || ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' )
+    ) {
         $uri = set_url_scheme( $uri, 'https' );
     }
     return $uri;
 } );
 
-/**
- * Enfileirar estilos e scripts do projeto
- */
-function compassion_child_enqueue_assets() {
-    $theme_dir = get_stylesheet_directory_uri();
+// ─────────────────────────────────────────────
+// 3. ENFILEIRAR ASSETS
+// ─────────────────────────────────────────────
+function compassion_enqueue_assets() {
+    $theme_dir  = get_stylesheet_directory_uri();
     $theme_path = get_stylesheet_directory();
 
-    // 1. Google Fonts oficiais
+    // Google Fonts
     wp_enqueue_style(
         'compassion-google-fonts',
         'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap',
@@ -37,139 +66,99 @@ function compassion_child_enqueue_assets() {
         null
     );
 
-    // 2. CSS Principal via style.css do tema (contém todo o Design System)
-    $css_version = file_exists( $theme_path . '/style.css' ) ? filemtime( $theme_path . '/style.css' ) : '1.0.8';
+    // CSS principal (Design System completo)
+    $css_version = file_exists( $theme_path . '/style.css' ) ? filemtime( $theme_path . '/style.css' ) : '1.2.0';
     wp_enqueue_style(
-        'compassion-child-style',
+        'compassion-style',
         get_stylesheet_uri(),
         array(),
         $css_version
     );
 
-    // 2.1 Reforço inline de fontes com URL absoluta e garantia de peso Bold Black (900/800)
-    $font_url_heavy = esc_url( $theme_dir . '/assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Heavy.woff2' );
-    $font_url_extrabold = esc_url( $theme_dir . '/assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-ExtraBold.woff2' );
-    $font_url_bold = esc_url( $theme_dir . '/assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Bold.woff2' );
-    $font_url_regular = esc_url( $theme_dir . '/assets/fonts/Neighbour%20Sans/Webfont/NeighbourSans-Regular.woff2' );
-    $ballinger_url = esc_url( $theme_dir . '/assets/fonts/Ballinger%20Condensed%20Series/Fonts/ballingercondensed-bold.otf' );
-
-    $inline_typography = "
+    // Inline: declarações @font-face das fontes locais
+    $font_dir = $theme_dir . '/assets/fonts';
+    $inline_fonts = "
     @font-face {
         font-family: 'Neighbour Sans';
-        src: url('{$font_url_heavy}') format('woff2');
-        font-weight: 900;
-        font-style: normal;
-        font-display: swap;
+        src: url('{$font_dir}/Neighbour%20Sans/Webfont/NeighbourSans-Heavy.woff2') format('woff2');
+        font-weight: 900; font-style: normal; font-display: swap;
     }
     @font-face {
         font-family: 'Neighbour Sans';
-        src: url('{$font_url_extrabold}') format('woff2');
-        font-weight: 800;
-        font-style: normal;
-        font-display: swap;
+        src: url('{$font_dir}/Neighbour%20Sans/Webfont/NeighbourSans-ExtraBold.woff2') format('woff2');
+        font-weight: 800; font-style: normal; font-display: swap;
     }
     @font-face {
         font-family: 'Neighbour Sans';
-        src: url('{$font_url_bold}') format('woff2');
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
+        src: url('{$font_dir}/Neighbour%20Sans/Webfont/NeighbourSans-Bold.woff2') format('woff2');
+        font-weight: 700; font-style: normal; font-display: swap;
     }
     @font-face {
         font-family: 'Neighbour Sans';
-        src: url('{$font_url_regular}') format('woff2');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
+        src: url('{$font_dir}/Neighbour%20Sans/Webfont/NeighbourSans-Regular.woff2') format('woff2');
+        font-weight: 400; font-style: normal; font-display: swap;
     }
     @font-face {
         font-family: 'Ballinger Condensed';
-        src: url('{$ballinger_url}') format('opentype');
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-    }
-    :root {
-        --font: 'Neighbour Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    }
-    h1, h2, h3, .hero-title, h1.hero-title, .page-hero-title, h1.page-hero-title, .section-title, h2.section-title, .elementor-heading-title, .elementor-widget-heading .elementor-heading-title {
-        font-family: 'Neighbour Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-        font-weight: 900 !important;
-        -webkit-font-smoothing: antialiased !important;
-        -moz-osx-font-smoothing: grayscale !important;
-    }
-    h4, .phase-ed-title, .prog-card-title, .prog-full-title, .course-card-title, h3.course-card-title {
-        font-family: 'Neighbour Sans', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-        font-weight: 800 !important;
+        src: url('{$font_dir}/Ballinger%20Condensed%20Series/Fonts/ballingercondensed-bold.otf') format('opentype');
+        font-weight: 700; font-style: normal; font-display: swap;
     }
     ";
-    wp_add_inline_style( 'compassion-child-style', $inline_typography );
+    wp_add_inline_style( 'compassion-style', $inline_fonts );
 
-    // 3. JS Principal (wireframe.js)
-    $js_version = file_exists( $theme_path . '/assets/js/wireframe.js' ) ? filemtime( $theme_path . '/assets/js/wireframe.js' ) : '1.0.8';
+    // JS principal
+    $js_version = file_exists( $theme_path . '/assets/js/wireframe.js' ) ? filemtime( $theme_path . '/assets/js/wireframe.js' ) : '1.2.0';
     wp_enqueue_script(
-        'compassion-wireframe-js',
+        'compassion-wireframe',
         $theme_dir . '/assets/js/wireframe.js',
-        array('jquery'),
+        array( 'jquery' ),
         $js_version,
-        true // footer
+        true
     );
 }
-add_action( 'wp_enqueue_scripts', 'compassion_child_enqueue_assets', 30 );
+add_action( 'wp_enqueue_scripts', 'compassion_enqueue_assets', 10 );
 
-/**
- * Permitir upload de arquivos SVG com segurança
- */
-function compassion_allow_svg_upload( $mimes ) {
-    $mimes['svg'] = 'image/svg+xml';
+// ─────────────────────────────────────────────
+// 4. DESABILITAR CSS DESNECESSÁRIOS DO WORDPRESS
+// ─────────────────────────────────────────────
+add_action( 'wp_enqueue_scripts', function() {
+    // Remove estilo padrão do bloco editor que interfere no layout
+    wp_dequeue_style( 'wp-block-library' );
+    wp_dequeue_style( 'wp-block-library-theme' );
+    wp_dequeue_style( 'global-styles' );
+    wp_dequeue_style( 'classic-theme-styles' );
+}, 100 );
+
+// ─────────────────────────────────────────────
+// 5. UPLOAD DE SVG
+// ─────────────────────────────────────────────
+add_filter( 'upload_mimes', function( $mimes ) {
+    $mimes['svg']  = 'image/svg+xml';
     $mimes['svgz'] = 'image/svg+xml';
     return $mimes;
-}
-add_filter( 'upload_mimes', 'compassion_allow_svg_upload' );
+} );
 
-/**
- * Shortcodes para uso no Elementor e Páginas
- */
-function compassion_register_shortcode_part( $slug ) {
+// ─────────────────────────────────────────────
+// 6. SHORTCODES DAS SEÇÕES
+// ─────────────────────────────────────────────
+function compassion_get_section( $slug ) {
     ob_start();
     $file = get_stylesheet_directory() . '/template-parts/' . $slug . '.php';
     if ( file_exists( $file ) ) {
         include $file;
     } else {
-        echo '<!-- Template part ' . esc_html( $slug ) . ' not found -->';
+        echo '<!-- Section not found: ' . esc_html( $slug ) . ' -->';
     }
     return ob_get_clean();
 }
 
-add_shortcode( 'compassion_header', function() { return compassion_register_shortcode_part( 'section-header' ); } );
-add_shortcode( 'compassion_hero', function() { return compassion_register_shortcode_part( 'section-hero' ); } );
-add_shortcode( 'compassion_stats', function() { return compassion_register_shortcode_part( 'section-stats' ); } );
-add_shortcode( 'compassion_fases', function() { return compassion_register_shortcode_part( 'section-fases' ); } );
-add_shortcode( 'compassion_programas', function() { return compassion_register_shortcode_part( 'section-programas' ); } );
-add_shortcode( 'compassion_mapa_brasil', function() { return compassion_register_shortcode_part( 'section-mapa' ); } );
-add_shortcode( 'compassion_cursos', function() { return compassion_register_shortcode_part( 'section-cursos' ); } );
-add_shortcode( 'compassion_pagina_cursos', function() { return compassion_register_shortcode_part( 'section-cursos-catalogo' ); } );
-add_shortcode( 'compassion_contato', function() { return compassion_register_shortcode_part( 'section-contato' ); } );
-add_shortcode( 'compassion_footer', function() { return compassion_register_shortcode_part( 'section-footer' ); } );
-
-/**
- * Desativar Header e Footer legados do Elementor Theme Builder (da agência antiga)
- * nas páginas oficiais da Compassion para garantir 100% de controle do Design System
- */
-add_filter( 'elementor/theme/need_override_location', function( $need_override, $location ) {
-    if ( $location === 'header' || $location === 'footer' ) {
-        return false;
-    }
-    return $need_override;
-}, 999, 2 );
-
-/**
- * Suportes essenciais do tema
- */
-add_action( 'after_setup_theme', function() {
-    add_theme_support( 'title-tag' );
-    add_theme_support( 'post-thumbnails' );
-    add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
-} );
-
-
+add_shortcode( 'compassion_header',       function() { return compassion_get_section( 'section-header' ); } );
+add_shortcode( 'compassion_hero',         function() { return compassion_get_section( 'section-hero' ); } );
+add_shortcode( 'compassion_stats',        function() { return compassion_get_section( 'section-stats' ); } );
+add_shortcode( 'compassion_fases',        function() { return compassion_get_section( 'section-fases' ); } );
+add_shortcode( 'compassion_programas',    function() { return compassion_get_section( 'section-programas' ); } );
+add_shortcode( 'compassion_mapa_brasil',  function() { return compassion_get_section( 'section-mapa' ); } );
+add_shortcode( 'compassion_cursos',       function() { return compassion_get_section( 'section-cursos' ); } );
+add_shortcode( 'compassion_pagina_cursos',function() { return compassion_get_section( 'section-cursos-catalogo' ); } );
+add_shortcode( 'compassion_contato',      function() { return compassion_get_section( 'section-contato' ); } );
+add_shortcode( 'compassion_footer',       function() { return compassion_get_section( 'section-footer' ); } );

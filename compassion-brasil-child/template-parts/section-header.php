@@ -1,7 +1,8 @@
 <?php
-$is_front   = is_front_page() || is_home();
-$home_base  = $is_front ? '' : home_url( '/' );
-$is_cursos  = is_page( 'cursos' ) || ( isset( $post ) && ( $post->post_name === 'cursos' || get_page_template_slug() === 'page-templates/template-compassion-cursos.php' ) );
+$is_front        = is_front_page() || is_home();
+$home_base       = $is_front ? '' : home_url( '/' );
+$is_trabalhamos  = is_page( 'como-trabalhamos' ) || ( isset( $post ) && ( $post->post_name === 'como-trabalhamos' || get_page_template_slug() === 'page-templates/template-compassion-como-trabalhamos.php' ) );
+$is_cursos       = is_page( array( 'cursos', 'capacitacoes' ) ) || ( isset( $post ) && ( in_array( $post->post_name, array( 'cursos', 'capacitacoes' ) ) || get_page_template_slug() === 'page-templates/template-compassion-cursos.php' ) );
 ?>
 <header class="site-header" id="siteHeader">
     <div class="header-inner">
@@ -12,11 +13,10 @@ $is_cursos  = is_page( 'cursos' ) || ( isset( $post ) && ( $post->post_name === 
 
       <nav aria-label="Navegação principal">
         <ul class="nav-list">
-          <li><a href="<?php echo esc_url( $home_base . '#quem-somos' ); ?>" class="nav-link<?php echo ($is_front && !$is_cursos) ? ' active' : ''; ?>">Quem Somos<span class="nav-thread"></span></a></li>
-          <li><a href="<?php echo esc_url( $home_base . '#como-trabalhamos' ); ?>" class="nav-link">Como Trabalhamos<span class="nav-thread"></span></a></li>
-          <li><a href="<?php echo esc_url( $home_base . '#programas' ); ?>" class="nav-link">Programas<span class="nav-thread"></span></a></li>
+          <li><a href="<?php echo esc_url( $home_base . '#quem-somos' ); ?>" class="nav-link<?php echo ($is_front && !$is_trabalhamos && !$is_cursos) ? ' active' : ''; ?>">Quem Somos<span class="nav-thread"></span></a></li>
+          <li><a href="<?php echo esc_url( home_url( '/como-trabalhamos/' ) ); ?>" class="nav-link<?php echo $is_trabalhamos ? ' active' : ''; ?>">Como Trabalhamos<span class="nav-thread"></span></a></li>
           <li><a href="<?php echo esc_url( $home_base . '#impacto' ); ?>" class="nav-link">Onde Atuamos<span class="nav-thread"></span></a></li>
-          <li><a href="<?php echo $is_cursos ? '#catalogo' : esc_url( $home_base . '#cursos' ); ?>" class="nav-link<?php echo $is_cursos ? ' active' : ''; ?>">Cursos<span class="nav-thread"></span></a></li>
+          <li><a href="<?php echo $is_cursos ? '#catalogo' : esc_url( $home_base . '#capacitacoes' ); ?>" class="nav-link<?php echo $is_cursos ? ' active' : ''; ?>">Capacitações<span class="nav-thread"></span></a></li>
           <li><a href="<?php echo esc_url( $home_base . '#contato' ); ?>" class="nav-link">Contato<span class="nav-thread"></span></a></li>
         </ul>
       </nav>

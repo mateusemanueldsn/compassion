@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Compassion Brasil - Cursos e Capacitação
- * Description: Modelo oficial e autônomo da Página de Cursos e Capacitação da Compassion Brasil.
+ * Template Name: Compassion Brasil - Capacitações
+ * Description: Modelo oficial e autônomo da Página de Capacitações e Recursos da Compassion Brasil.
  */
 
 $theme_uri = get_stylesheet_directory_uri();

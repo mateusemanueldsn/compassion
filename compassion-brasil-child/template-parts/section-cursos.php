@@ -1,4 +1,5 @@
-<section class="courses-catalog-section" id="cursos" aria-labelledby="cursosHeading">
+<section class="courses-catalog-section" id="capacitacoes" aria-labelledby="cursosHeading">
+<span id="cursos" style="position:relative;top:-100px;display:block;"></span>
   <div class="container">
 
     <div class="courses-header-row reveal">

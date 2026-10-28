@@ -51,8 +51,6 @@ $style_uri = is_ssl() ? set_url_scheme( get_stylesheet_uri(), 'https' ) : get_st
   <?php
   include get_stylesheet_directory() . '/template-parts/section-hero.php';
   include get_stylesheet_directory() . '/template-parts/section-stats.php';
-  include get_stylesheet_directory() . '/template-parts/section-fases.php';
-  include get_stylesheet_directory() . '/template-parts/section-programas.php';
   include get_stylesheet_directory() . '/template-parts/section-mapa.php';
   include get_stylesheet_directory() . '/template-parts/section-cursos.php';
   include get_stylesheet_directory() . '/template-parts/section-contato.php';
