@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, true);
   }
 
-  /* ── 8.1 MODAL DE AVISO: AMBIENTE EM DESENVOLVIMENTO (cursos.html) ── */
+  /* ── 8.1 MODAL DE AVISO: AMBIENTE EM DESENVOLVIMENTO (capacitacoes.html) ── */
   const enrollModal = document.getElementById("courseEnrollModal");
   const modalCourseNotice = document.getElementById("modalCourseNotice");
   const openEnrollBtns = document.querySelectorAll(".btn-open-enroll");

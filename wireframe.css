@@ -62,6 +62,7 @@
 
 :root {
   --blue: #1A5FFF;
+  --blue-dark: #0D4FD8;
   --yellow: #F5C400;
   --green: #2ABB6E;
   --orange: #E8472A;
@@ -596,189 +597,226 @@ img {
 }
 
 /* ══════════════════════════════════════
-   HERO — Parallax full-screen + overlay panel
+   HERO — Vídeo de fundo com overlay (Grid Alinhado + Zero Controles de Vídeo)
    ══════════════════════════════════════ */
-.hero {
+.hero.hero-video-mode {
   position: relative;
-  background: transparent;
-  padding-bottom: 0
-}
-
-/* Coluna de threads laterais desativada */
-.hero-nav-threads {
-  display: none
-}
-
-/* ─── Camada do vídeo: sticky + tela inteira ─── */
-.hero-video-layer {
-  position: sticky;
-  top: 0;
   width: 100%;
   height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   overflow: hidden;
   background: var(--dark);
-  z-index: 0
+  padding: 0;
 }
 
-.hero-video-bg {
+/* Camada do vídeo de fundo */
+.hero.hero-video-mode .hero-video-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* O vídeo cobre a tela inteira sem distorção via object-fit */
+.hero.hero-video-mode .hero-video-bg {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* cobre toda a viewport independente da proporção */
-  width: 177.78vh;  /* 16/9 × 100vh */
-  height: 100vh;
-  min-width: 100%;
-  min-height: 56.25vw; /* 9/16 × 100vw */
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1.06); /* Escala suave para cobrir bordas e legendas */
   border: none;
-  pointer-events: none
+  pointer-events: none;
 }
 
-/* Overlay semitransparente sobre o vídeo */
-.hero-video-overlay {
+/* Cortina que garante carregamento suave e sem nenhum flash ou controle */
+.hero-video-curtain {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background: transparent;
-  pointer-events: all
-}
-
-.hero-img-gradient {
-  position: absolute;
-  inset: 0;
+  background: #0F1B35;
   z-index: 2;
-  /* gradiente mais denso na base — onde o painel emerge */
-  background: linear-gradient(
-    180deg,
-    rgba(15, 27, 53, .15) 0%,
-    rgba(15, 27, 53, .55) 60%,
-    rgba(15, 27, 53, .85) 100%
-  );
-  pointer-events: none
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  opacity: 1;
 }
 
-/* ─── Painel de conteúdo: sobe sobre o vídeo ao scrollar ─── */
-.hero-content-panel {
+.hero-video-curtain.loaded {
+  opacity: 0;
+}
+
+/* Overlay cinematográfico: escuro à esquerda para leitura, limpo à direita para o rosto */
+.hero.hero-video-mode .hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: 
+    linear-gradient(90deg, rgba(15, 27, 53, 0.90) 0%, rgba(15, 27, 53, 0.75) 45%, rgba(15, 27, 53, 0.25) 75%, rgba(15, 27, 53, 0.10) 100%),
+    linear-gradient(180deg, rgba(15, 27, 53, 0.40) 0%, transparent 25%, transparent 65%, rgba(15, 27, 53, 0.85) 85%, #0F1B35 100%);
+  pointer-events: none;
+}
+
+/* Cobertura total de legendas embutidas no rodapé */
+.hero-bottom-cover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(180deg, transparent 0%, rgba(15, 27, 53, 0.88) 45%, #0F1B35 100%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Conteúdo perfeitamente integrado ao grid .container (com mesmo padding lateral do site) */
+.hero-overlay-content {
   position: relative;
-  z-index: 10;
-  background: var(--cream);
-  border-radius: 28px 28px 0 0;
-  box-shadow: 0 -24px 80px rgba(15, 27, 53, .28);
-  transition: box-shadow .4s ease
+  z-index: 5;
+  width: 100%;
+  padding: 30px 0 40px;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.hero-content-panel:hover {
-  box-shadow: 0 -24px 100px rgba(15, 27, 53, .38)
+.hero-overlay-content.content-fade-out {
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
 }
 
-/* Grid de 2 colunas dentro do painel hero (alinhado com .container) */
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 64px;
-  padding: 72px 0 84px;
-  align-items: center;
+.hero-overlay-content .container {
+  display: flex;
+  justify-content: flex-start;
 }
 
-.hero-col-left {
-  /* coluna esquerda: eyebrow + título */
-}
-
-.hero-col-right {
-  /* coluna direita: descrição + botões */
+.hero-content-inner {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 660px;
+  width: 100%;
 }
 
-/* ─── Tipografia hero ─── */
-.hero-eyebrow {
-  font-size: .8rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.hero-eyebrow::before {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 3px;
-  background: var(--blue);
-  border-radius: 2px;
-}
-
-.hero-title {
-  font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+/* Título com efeito de digitação e alinhamento à esquerda */
+.hero-title-video {
+  font-size: clamp(2.3rem, 4.4vw, 3.8rem);
   font-weight: 900;
-  line-height: 1.08;
-  letter-spacing: -2px;
-  color: var(--dark);
-  margin-bottom: 0;
+  line-height: 1.15;
+  letter-spacing: -1.2px;
+  color: var(--white);
+  margin-bottom: 28px;
+  text-align: left;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.70);
+  min-height: 3.5em; /* Altura garantida para 3 linhas sem pulo de layout */
+  display: block;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.hero-desc {
-  font-size: 1.08rem;
-  color: var(--g700);
-  line-height: 1.7;
-  max-width: 500px;
-  margin-bottom: 32px;
-}
 
-.hero-actions {
+
+/* Botões com efeito de esmaecer (fade-in) */
+.hero-actions-video {
   display: flex;
-  gap: 16px;
+  gap: 20px; /* Espaço generoso entre os botões para não ficarem grudados */
   flex-wrap: wrap;
+  justify-content: flex-start;
   align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  margin-top: 8px;
 }
 
-@media (max-width: 1024px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 56px 0 68px;
-    align-items: flex-start;
-  }
+.hero-actions-video.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
-  .hero-desc {
+/* Padronização rigorosa de altura, borda e alinhamento dos dois botões */
+.hero-actions-video .btn {
+  height: 52px;
+  box-sizing: border-box;
+  padding: 0 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--r-pill);
+  line-height: 1;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--t1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hero-actions-video .btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  border: 2px solid var(--blue);
+  box-shadow: 0 8px 24px rgba(26, 95, 255, 0.35);
+}
+
+.hero-actions-video .btn-primary:hover {
+  background: #0D4FD8;
+  border-color: #0D4FD8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(26, 95, 255, 0.45);
+}
+
+.hero-actions-video .btn-video-ghost {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.50);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero-actions-video .btn-video-ghost:hover {
+  background: var(--white);
+  color: var(--dark);
+  border-color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 900px) {
+  .hero-content-inner {
     max-width: 100%;
-    margin-bottom: 28px;
   }
 }
 
 @media (max-width: 768px) {
-  .hero-grid {
-    padding: 44px 0 54px;
-    gap: 28px;
+  .hero.hero-video-mode {
+    min-height: 100svh;
   }
-
-  .hero-title {
-    font-size: clamp(2rem, 7.5vw, 2.75rem);
+  .hero-actions-video {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+    gap: 12px;
   }
-}
-
-/* Skipping accent abaixo do título */
-.title-skipping-accent,
-.title-thread-accent {
-  margin: 18px 0 26px;
-  display: inline-flex;
-  align-items: center;
-}
-
-.hero-skipping-img {
-  width: 46px;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 4px 14px rgba(26, 95, 255, 0.22));
-}
-
-.title-thread-accent span {
-  display: none;
+  .hero-actions-video .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+  .hero-title-video {
+    font-size: clamp(1.85rem, 6.8vw, 2.5rem);
+    min-height: 2.7em;
+    margin-bottom: 24px;
+  }
 }
 
 /* ── BOTÕES ── */
@@ -1421,21 +1459,46 @@ img {
 
 .courses-header-row {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start; /* Sobe o botão para o topo */
   justify-content: space-between;
-  margin-bottom: 36px;
-  gap: 24px;
-  flex-wrap: wrap;
+  margin-bottom: 40px;
+  gap: 36px;
 }
 
 .courses-header-left {
-  max-width: 620px;
+  /* Alinhado exatamente até o término do segundo card do grid de 3 colunas (gap: 28px) */
+  max-width: calc((200% - 28px) / 3);
+  flex: 1;
+}
+
+.courses-header-left .section-subtitle {
+  max-width: 100%;
+  color: var(--g700);
+  line-height: 1.75;
+  font-size: 1.05rem;
 }
 
 .courses-nav-btns {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+  margin-top: -4px; /* Alinha o botão diretamente com a tag 'Materiais Metodológicos' */
+}
+
+.courses-nav-btns .btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .courses-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .courses-nav-btns {
+    margin-bottom: 0;
+  }
 }
 
 .btn-carousel-nav {
@@ -1652,7 +1715,7 @@ img {
   color: #0D4FD8;
 }
 
-/* Estilos adicionais para a página cursos.html */
+/* Estilos adicionais para a página capacitacoes.html */
 .page-hero {
   padding: 80px 0 60px;
   background: var(--cream);
@@ -3514,7 +3577,7 @@ h3.course-card-title {
 
 /* ══════════════════════════════════════════════════════
    CAPACITAÇÕES — Cards de Materiais Metodológicos (Home)
-   Usados em: index.html (seção #cursos), cursos.html
+   Usados em: index.html (seção #cursos), capacitacoes.html
    ══════════════════════════════════════════════════════ */
 
 .cap-materiais-grid {
