@@ -75,10 +75,11 @@
 
       <!-- CAMADA 1: Vídeo de fundo em tela cheia (Sem controles de play/pause do YouTube) -->
       <div class="hero-video-layer" aria-hidden="true">
-        <video class="hero-video-bg" id="heroVideo" autoplay muted loop playsinline preload="auto">
-          <source src="assets/video/hero-video.mp4" type="video/mp4">
-          <source src="assets/video/Vídeo Institucional_Governo.mp4" type="video/mp4">
-        </video>
+        <iframe class="hero-video-bg" id="heroVideo"
+          src="https://www.youtube.com/embed/Cas6bKgTXHI?autoplay=1&mute=1&loop=1&playlist=Cas6bKgTXHI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
+          title="Vídeo institucional Compassion Brasil" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          aria-hidden="true"></iframe>
         <!-- Cortina de transição que impede qualquer flash inicial -->
         <div class="hero-video-curtain" id="heroVideoCurtain"></div>
         <div class="hero-video-overlay" aria-hidden="true"></div>
