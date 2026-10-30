@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homem de Honra — Metodologia Compassion Brasil</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../wireframe.css">
+  <style>
+    /* ============================================================
+       PÁGINA DE METODOLOGIA — Homem de Honra
+    ============================================================ */
+    body { background: var(--cream); }
+
+    /* Thread top */
+    .m-thread-bar { display:flex; height:5px; }
+    .m-thread-bar span { flex:1; }
+    .m-thread-bar span:nth-child(1){background:var(--blue);}
+    .m-thread-bar span:nth-child(2){background:var(--yellow);}
+    .m-thread-bar span:nth-child(3){background:var(--green);}
+    .m-thread-bar span:nth-child(4){background:var(--orange);}
+    .m-thread-bar span:nth-child(5){background:var(--teal);}
+
+    /* Nav restrita */
+    .m-header {
+      background: var(--white);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: var(--sh-sm);
+    }
+    .m-header-left { display:flex; align-items:center; gap:20px; }
+    .m-header-logo img { height:30px; }
+    .m-header-sep { width:1px; height:24px; background:var(--g300); }
+    .m-breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.83rem; color: var(--g500);
+    }
+    .m-breadcrumb a { color: var(--g500); text-decoration: none; font-weight:500; }
+    .m-breadcrumb a:hover { color: var(--blue); }
+    .m-breadcrumb span { color: var(--g300); }
+    .m-breadcrumb strong { color: var(--dark); font-weight:600; }
+
+    .btn-back-lib {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.83rem; font-weight: 600; color: var(--g500);
+      text-decoration: none; transition: var(--t1);
+      padding: 6px 14px; border-radius: var(--r-pill);
+      border: 1.5px solid var(--g300);
+    }
+    .btn-back-lib:hover { color: var(--blue); border-color: var(--blue); }
+    .btn-back-lib svg { width: 14px; height: 14px; }
+
+    /* ---- Hero da metodologia ---- */
+    .met-hero {
+      background: var(--dark);
+      padding: 60px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .met-hero-bg {
+      position: absolute; inset:0;
+      background: linear-gradient(135deg, #0f1b35 0%, #1a3060 60%, #1A5FFF 150%);
+    }
+    .met-hero-threads {
+      position:absolute; bottom:0; left:0; right:0; height:5px;
+      display:flex; z-index:2;
+    }
+    .met-hero-threads span { flex:1; }
+    .met-hero-threads span:nth-child(1){background:var(--blue);}
+    .met-hero-threads span:nth-child(2){background:var(--yellow);}
+    .met-hero-threads span:nth-child(3){background:var(--green);}
+    .met-hero-threads span:nth-child(4){background:var(--orange);}
+    .met-hero-threads span:nth-child(5){background:var(--teal);}
+
+    .met-hero-inner {
+      position:relative; z-index:1;
+      display: grid; grid-template-columns: 1fr 420px;
+      gap: 60px; align-items: flex-end;
+    }
+    .met-hero-content { padding-bottom: 60px; color: var(--white); }
+    .met-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: 18px;
+    }
+    .met-eyebrow svg { width:13px; height:13px; }
+    .met-category-badge {
+      display: inline-block;
+      background: rgba(26,95,255,0.25);
+      border: 1px solid rgba(26,95,255,0.5);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem; font-weight: 700;
+      padding: 4px 12px; border-radius: var(--r-pill);
+      margin-bottom: 18px;
+    }
+    .met-hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900; letter-spacing: -1px;
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .met-hero-desc {
+      font-size: 1.05rem; color: rgba(255,255,255,0.72);
+      line-height: 1.7; max-width: 540px; margin-bottom: 32px;
+    }
+    .met-hero-meta {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .met-meta-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.88rem; color: rgba(255,255,255,0.65);
+    }
+    .met-meta-item svg { width:15px; height:15px; color: var(--yellow); }
+    .met-meta-item strong { color: var(--white); }
+
+    /* Imagem hero */
+    .met-hero-img {
+      border-radius: var(--r-md) var(--r-md) 0 0;
+      overflow: hidden; height: 340px;
+      box-shadow: 0 -12px 40px rgba(0,0,0,0.3);
+    }
+    .met-hero-img img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .met-hero-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1A5FFF 0%, #0D4FD8 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+
+    /* ---- Layout principal ---- */
+    .met-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 40px;
+      padding: 56px 0 80px;
+      align-items: flex-start;
+    }
+
+    /* ---- Coluna principal (conteúdo) ---- */
+    .met-main {}
+
+    /* Seções de conteúdo */
+    .met-section {
+      background: var(--white);
+      border-radius: var(--r-md);
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      box-shadow: var(--sh-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .met-section-title {
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--dark); letter-spacing: -0.3px;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .met-section-title svg { width:18px; height:18px; color: var(--blue); }
+
+    /* Descrição longa */
+    .met-description p {
+      font-size: 0.97rem; color: var(--g700);
+      line-height: 1.75; margin-bottom: 16px;
+    }
+    .met-description p:last-child { margin-bottom: 0; }
+
+    /* Objetivos */
+    .met-objectives { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .met-objectives li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.93rem; color: var(--g700); line-height: 1.55;
+    }
+    .met-obj-icon {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: rgba(26,95,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .met-obj-icon svg { width: 12px; height: 12px; color: var(--blue); stroke-width: 3; }
+
+    /* Público-alvo */
+    .met-audience-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+    }
+    .met-audience-item {
+      background: var(--cream);
+      border-radius: var(--r-sm);
+      padding: 16px 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .met-audience-item-label {
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--g500); margin-bottom: 4px;
+    }
+    .met-audience-item-value {
+      font-size: 0.9rem; font-weight: 600; color: var(--dark);
+    }
+
+    /* Estrutura modular */
+    .met-modules { display: flex; flex-direction: column; gap: 14px; }
+    .met-module {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 18px 20px;
+      background: var(--cream);
+      border-radius: var(--r-sm);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .met-module-num {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--blue); color: var(--white);
+      font-size: 0.85rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .met-module-info {}
+    .met-module-title {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 4px;
+    }
+    .met-module-desc { font-size: 0.85rem; color: var(--g500); line-height: 1.5; }
+
+    /* ---- Coluna lateral (download) ---- */
+    .met-sidebar {}
+
+    /* Card de downloads */
+    .download-card {
+      background: var(--white);
+      border-radius: var(--r-md);
+      padding: 28px;
+      box-shadow: var(--sh-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+      position: sticky; top: 84px;
+    }
+    .download-card-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 6px;
+    }
+    .download-card-header svg { width:18px; height:18px; color:var(--blue); }
+    .download-card-title {
+      font-size: 1.05rem; font-weight: 800; color: var(--dark);
+    }
+    .download-card-subtitle {
+      font-size: 0.83rem; color: var(--g500);
+      margin-bottom: 24px; line-height: 1.5;
+    }
+
+    /* Lista de arquivos */
+    .file-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .file-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 13px 16px;
+      background: var(--cream);
+      border-radius: var(--r-sm);
+      border: 1.5px solid transparent;
+      text-decoration: none;
+      transition: var(--t1);
+      cursor: pointer;
+    }
+    .file-item:hover {
+      border-color: var(--blue);
+      background: rgba(26,95,255,0.04);
+    }
+    .file-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .file-icon svg { width:17px; height:17px; }
+    .file-icon.pdf { background: rgba(220,38,38,0.1); color: #DC2626; }
+    .file-icon.ppt { background: rgba(234,88,12,0.1); color: #EA580C; }
+    .file-icon.doc { background: rgba(37,99,235,0.1); color: #2563EB; }
+    .file-icon.zip { background: rgba(107,114,128,0.1); color: var(--g500); }
+    .file-icon.img { background: rgba(16,185,129,0.1); color: #10B981; }
+    .file-icon.vid { background: rgba(139,92,246,0.1); color: #8B5CF6; }
+
+    .file-info { flex: 1; min-width: 0; }
+    .file-name {
+      font-size: 0.87rem; font-weight: 600; color: var(--dark);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .file-meta {
+      font-size: 0.75rem; color: var(--g500); margin-top: 2px;
+    }
+    .file-dl-icon {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--g300); transition: var(--t1); flex-shrink: 0;
+    }
+    .file-item:hover .file-dl-icon { color: var(--blue); background: rgba(26,95,255,0.1); }
+    .file-dl-icon svg { width: 14px; height: 14px; }
+
+    /* Botão baixar tudo */
+    .btn-download-all {
+      width: 100%;
+      height: 48px;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: var(--r-sm);
+      font-family: var(--font);
+      font-size: 0.93rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--t1);
+      text-decoration: none;
+      margin-bottom: 12px;
+    }
+    .btn-download-all:hover {
+      background: var(--blue-dark);
+      box-shadow: var(--sh-blue);
+      transform: translateY(-1px);
+    }
+    .btn-download-all svg { width:16px; height:16px; }
+    .download-note {
+      font-size: 0.77rem; color: var(--g500); text-align: center; line-height: 1.5;
+    }
+
+    /* Tag de metodologia */
+    .met-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .met-tag {
+      padding: 4px 12px; border-radius: var(--r-pill);
+      font-size: 0.75rem; font-weight: 600;
+      background: rgba(26,95,255,0.08); color: var(--blue);
+      border: 1px solid rgba(26,95,255,0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .met-hero-inner { grid-template-columns: 1fr; }
+      .met-hero-img { display: none; }
+      .met-layout { grid-template-columns: 1fr; }
+      .download-card { position: static; }
+    }
+    @media (max-width: 768px) {
+      .m-header { padding: 0 20px; }
+      .met-section { padding: 24px 20px; }
+      .download-card { padding: 20px; }
+      .met-hero-content { padding-bottom: 40px; }
+      .met-audience-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="m-thread-bar"><span></span><span></span><span></span><span></span><span></span></div>
+
+  <!-- Header -->
+  <header class="m-header">
+    <div class="m-header-left">
+      <a href="../index.html" class="m-header-logo">
+        <img src="../assets/logo/logo_azul.svg" alt="Compassion Brasil">
+      </a>
+      <div class="m-header-sep"></div>
+      <nav class="m-breadcrumb" aria-label="Navegação estrutural">
+        <a href="biblioteca.html">Biblioteca</a>
+        <span>›</span>
+        <a href="biblioteca.html">Metodologias</a>
+        <span>›</span>
+        <strong>Homem de Honra</strong>
+      </nav>
+    </div>
+    <a href="biblioteca.html" class="btn-back-lib">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Voltar à Biblioteca
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <section class="met-hero">
+    <div class="met-hero-bg"></div>
+    <div class="container">
+      <div class="met-hero-inner">
+        <div class="met-hero-content">
+          <div class="met-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            Kit Metodológico
+          </div>
+          <span class="met-category-badge">Juventude &amp; Hombria</span>
+          <h1 class="met-hero-title">Homem de Honra</h1>
+          <p class="met-hero-desc">
+            Uma jornada estruturada para formar jovens rapazes com propósito, identidade e caráter sólido — baseada em princípios bíblicos e práticas pedagógicas testadas em comunidades reais.
+          </p>
+          <div class="met-hero-meta">
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              </svg>
+              <span>Público: <strong>Jovens de 12 a 18 anos</strong></span>
+            </div>
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span>Duração: <strong>8 encontros</strong></span>
+            </div>
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              </svg>
+              <span><strong>6 arquivos</strong> disponíveis</span>
+            </div>
+          </div>
+        </div>
+        <div class="met-hero-img">
+          <img src="../assets/images/homem-de-honra.jpg" alt="Kit Homem de Honra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="met-hero-img-placeholder" style="display:none">🏆</div>
+        </div>
+      </div>
+    </div>
+    <div class="met-hero-threads"><span></span><span></span><span></span><span></span><span></span></div>
+  </section>
+
+  <!-- Layout principal -->
+  <div class="container">
+    <div class="met-layout">
+
+      <!-- Coluna principal -->
+      <main class="met-main">
+
+        <!-- Sobre a metodologia -->
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            Sobre a Metodologia
+          </h2>
+          <div class="met-description">
+            <p>
+              O <strong>Homem de Honra</strong> é um kit metodológico desenvolvido pela Compassion Brasil para apoiar igrejas e líderes comunitários na formação de jovens rapazes. A proposta parte do princípio de que hombria verdadeira nasce de caráter, não de força — e que cada jovem precisa de referências e de uma comunidade que invista nele.
+            </p>
+            <p>
+              O material foi criado a partir de experiências práticas em centenas de projetos Compassion em todo o Brasil, combinando fundamentos bíblicos com abordagens pedagógicas modernas. Cada encontro é pensado para ser conduzido por mentores leigos — pastores, líderes de jovens, educadores e voluntários.
+            </p>
+            <p>
+              A metodologia trabalha com grupos pequenos (6 a 15 rapazes), criando espaço para reflexão, prática e accountability. Ao final dos 8 encontros, espera-se que cada participante tenha clareza sobre sua identidade, seus valores e seu propósito.
+            </p>
+          </div>
+          <div class="met-tags">
+            <span class="met-tag">Identidade</span>
+            <span class="met-tag">Hombria</span>
+            <span class="met-tag">Caráter</span>
+            <span class="met-tag">Propósito</span>
+            <span class="met-tag">Base Bíblica</span>
+            <span class="met-tag">Grupos Pequenos</span>
+          </div>
+        </div>
+
+        <!-- Objetivos -->
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+            Objetivos da Metodologia
+          </h2>
+          <ul class="met-objectives">
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Fortalecer a identidade dos jovens com base em valores bíblicos e uma visão saudável de masculinidade
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Oferecer ferramentas práticas para líderes conduzirem encontros de formação com qualidade e consistência
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Criar vínculos de confiança e comunidade entre rapazes de diferentes contextos sociais
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Prevenir comportamentos de risco por meio da construção de propósito e pertencimento
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Desenvolver liderança jovem dentro das igrejas e projetos Compassion parceiros
+            </li>
+          </ul>
+        </div>
+
+        <!-- Público-alvo -->
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Público-Alvo
+          </h2>
+          <div class="met-audience-grid">
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Participantes</div>
+              <div class="met-audience-item-value">Jovens rapazes — 12 a 18 anos</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Tamanho do grupo</div>
+              <div class="met-audience-item-value">6 a 15 participantes</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Quem conduz</div>
+              <div class="met-audience-item-value">Pastores, líderes de jovens, educadores sociais</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Contexto ideal</div>
+              <div class="met-audience-item-value">Igrejas, projetos sociais, centros comunitários</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Duração total</div>
+              <div class="met-audience-item-value">8 encontros de 90 minutos</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Pré-requisito</div>
+              <div class="met-audience-item-value">Nenhum — líderes sem experiência prévia conseguem aplicar</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estrutura dos encontros -->
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+            Estrutura dos Encontros
+          </h2>
+          <div class="met-modules">
+            <div class="met-module">
+              <div class="met-module-num">01</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Quem sou eu? — Identidade e origem</div>
+                <div class="met-module-desc">Ponto de partida: cada rapaz reflete sobre sua história, sua família e o que o define além das circunstâncias.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">02</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Hombria Real — Desconstruindo mitos</div>
+                <div class="met-module-desc">O que a cultura diz sobre "ser homem" e o que a Bíblia e a ciência revelam sobre masculinidade saudável.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">03</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Caráter sob pressão — Valores e escolhas</div>
+                <div class="met-module-desc">Dinâmicas e reflexões sobre como as escolhas moldam o caráter e determinam o futuro.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">04</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Relacionamentos — Família, amizades e limites</div>
+                <div class="met-module-desc">Como construir relações saudáveis com a família, com os amigos e com possíveis relacionamentos afetivos.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">05</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Sexualidade e integridade</div>
+                <div class="met-module-desc">Conversa aberta e segura sobre sexualidade, pornografia, relacionamentos e a visão bíblica do corpo e da intimidade.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">06</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Propósito e missão de vida</div>
+                <div class="met-module-desc">Ferramentas práticas para que cada jovem identifique seus dons, sonhos e um norte de vida alinhado com seus valores.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">07</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Liderança e impacto na comunidade</div>
+                <div class="met-module-desc">O rapaz como agente de transformação — como sua vida pode impactar positivamente sua família e comunidade.</div>
+              </div>
+            </div>
+            <div class="met-module">
+              <div class="met-module-num">08</div>
+              <div class="met-module-info">
+                <div class="met-module-title">Celebração e compromisso público</div>
+                <div class="met-module-desc">Encontro de encerramento com cerimônia simbólica, cartas de compromisso e celebração com famílias e líderes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Coluna lateral — Downloads -->
+      <aside class="met-sidebar">
+        <div class="download-card">
+          <div class="download-card-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span class="download-card-title">Arquivos do Kit</span>
+          </div>
+          <p class="download-card-subtitle">6 arquivos disponíveis para download. Links ativos em breve via OneDrive.</p>
+
+          <div class="file-list">
+            <a href="#" class="file-item">
+              <div class="file-icon pdf">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Guia do Líder — Homem de Honra</div>
+                <div class="file-meta">PDF · Guia completo de aplicação · ~4,2 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+
+            <a href="#" class="file-item">
+              <div class="file-icon pdf">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Apostila do Participante</div>
+                <div class="file-meta">PDF · Para impressão A5 · ~2,8 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+
+            <a href="#" class="file-item">
+              <div class="file-icon ppt">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7h5a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H8V7z"/><line x1="8" y1="17" x2="8" y2="11"/></svg>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Slides de Apresentação (8 encontros)</div>
+                <div class="file-meta">PPTX · Editável · ~18 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+
+            <a href="#" class="file-item">
+              <div class="file-icon pdf">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Carta de Compromisso — Imprimível</div>
+                <div class="file-meta">PDF · Ceremônia de encerramento · ~0,8 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+
+            <a href="#" class="file-item">
+              <div class="file-icon img">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Kit de Artes Digitais</div>
+                <div class="file-meta">ZIP · Banners, posts e stories · ~24 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+
+            <a href="#" class="file-item">
+              <div class="file-icon doc">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <div class="file-info">
+                <div class="file-name">Relatório de Acompanhamento</div>
+                <div class="file-meta">DOCX · Ficha de cada participante · ~0,4 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+          </div>
+
+          <a href="#" class="btn-download-all">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Baixar Kit Completo (.zip)
+          </a>
+          <p class="download-note">Links de download via OneDrive — serão ativados em breve. Acesso exclusivo para colaboradores credenciados.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background:var(--white);border-top:1px solid rgba(0,0,0,0.06);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-size:0.8rem;color:var(--g500);">© 2025 Compassion Brasil — Uso restrito para parceiros credenciados</span>
+    <a href="biblioteca.html" style="font-size:0.8rem;font-weight:600;color:var(--blue);text-decoration:none;">← Voltar à Biblioteca</a>
+  </footer>
+
+</body>
+</html>
+

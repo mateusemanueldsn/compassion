@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Não tá na hora! — Campanha Nacional · Compassion Brasil</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../wireframe.css">
+  <style>
+    body { background: var(--cream); }
+    .m-thread-bar { display:flex; height:5px; }
+    .m-thread-bar span{flex:1;}
+    .m-thread-bar span:nth-child(1){background:var(--blue);}
+    .m-thread-bar span:nth-child(2){background:var(--yellow);}
+    .m-thread-bar span:nth-child(3){background:var(--green);}
+    .m-thread-bar span:nth-child(4){background:var(--orange);}
+    .m-thread-bar span:nth-child(5){background:var(--teal);}
+
+    .m-header {
+      background:var(--white); border-bottom:1px solid rgba(0,0,0,0.08);
+      padding:0 40px; height:64px; display:flex; align-items:center;
+      justify-content:space-between; position:sticky; top:0; z-index:100;
+      box-shadow:var(--sh-sm);
+    }
+    .m-header-left{display:flex;align-items:center;gap:20px;}
+    .m-header-logo img{height:30px;}
+    .m-header-sep{width:1px;height:24px;background:var(--g300);}
+    .m-breadcrumb{display:flex;align-items:center;gap:6px;font-size:0.83rem;color:var(--g500);}
+    .m-breadcrumb a{color:var(--g500);text-decoration:none;font-weight:500;}
+    .m-breadcrumb a:hover{color:var(--blue);}
+    .m-breadcrumb span{color:var(--g300);}
+    .m-breadcrumb strong{color:var(--dark);font-weight:600;}
+    .btn-back-lib{display:flex;align-items:center;gap:6px;font-size:0.83rem;font-weight:600;
+      color:var(--g500);text-decoration:none;transition:var(--t1);padding:6px 14px;
+      border-radius:var(--r-pill);border:1.5px solid var(--g300);}
+    .btn-back-lib:hover{color:var(--blue);border-color:var(--blue);}
+    .btn-back-lib svg{width:14px;height:14px;}
+
+    /* Hero — dark escuro */
+    .met-hero{background:var(--dark);padding:60px 0 0;position:relative;overflow:hidden;}
+    .met-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0f1b35 0%,#1a2e1a 60%,#2ABB6E 150%);}
+    .met-hero-threads{position:absolute;bottom:0;left:0;right:0;height:5px;display:flex;z-index:2;}
+    .met-hero-threads span{flex:1;}
+    .met-hero-threads span:nth-child(1){background:var(--blue);}
+    .met-hero-threads span:nth-child(2){background:var(--yellow);}
+    .met-hero-threads span:nth-child(3){background:var(--green);}
+    .met-hero-threads span:nth-child(4){background:var(--orange);}
+    .met-hero-threads span:nth-child(5){background:var(--teal);}
+
+    .met-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:flex-end;}
+    .met-hero-content{padding-bottom:60px;color:var(--white);}
+    .met-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:800;
+      letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:18px;}
+    .met-eyebrow svg{width:13px;height:13px;}
+    .met-category-badge{display:inline-block;background:rgba(42,187,110,0.2);border:1px solid rgba(42,187,110,0.4);
+      color:rgba(255,255,255,0.9);font-size:0.75rem;font-weight:700;padding:4px 12px;
+      border-radius:var(--r-pill);margin-bottom:18px;}
+    .met-hero-title{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:20px;}
+    .met-hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.72);line-height:1.7;max-width:540px;margin-bottom:32px;}
+    .met-hero-meta{display:flex;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12);}
+    .met-meta-item{display:flex;align-items:center;gap:8px;font-size:0.88rem;color:rgba(255,255,255,0.65);}
+    .met-meta-item svg{width:15px;height:15px;color:var(--green);}
+    .met-meta-item strong{color:var(--white);}
+
+    .met-hero-img{border-radius:var(--r-md) var(--r-md) 0 0;overflow:hidden;height:340px;box-shadow:0 -12px 40px rgba(0,0,0,0.3);}
+    .met-hero-img img{width:100%;height:100%;object-fit:cover;}
+
+    /* Layout */
+    .met-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;padding:56px 0 80px;align-items:flex-start;}
+
+    /* Seções */
+    .met-section{background:var(--white);border-radius:var(--r-md);padding:36px 40px;margin-bottom:24px;
+      box-shadow:var(--sh-sm);border:1px solid rgba(0,0,0,0.05);}
+    .met-section-title{font-size:1.15rem;font-weight:800;color:var(--dark);letter-spacing:-0.3px;
+      margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .met-section-title svg{width:18px;height:18px;color:var(--green);}
+
+    .met-description p{font-size:0.97rem;color:var(--g700);line-height:1.75;margin-bottom:16px;}
+    .met-description p:last-child{margin-bottom:0;}
+
+    .met-objectives{list-style:none;display:flex;flex-direction:column;gap:12px;}
+    .met-objectives li{display:flex;align-items:flex-start;gap:12px;font-size:0.93rem;color:var(--g700);line-height:1.55;}
+    .met-obj-icon{width:24px;height:24px;border-radius:6px;background:rgba(42,187,110,0.12);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .met-obj-icon svg{width:12px;height:12px;color:var(--green);stroke-width:3;}
+
+    .met-audience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+    .met-audience-item{background:var(--cream);border-radius:var(--r-sm);padding:16px 18px;border:1px solid rgba(0,0,0,0.06);}
+    .met-audience-item-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--g500);margin-bottom:4px;}
+    .met-audience-item-value{font-size:0.9rem;font-weight:600;color:var(--dark);}
+
+    /* Etapas da campanha */
+    .met-etapas{display:flex;flex-direction:column;gap:0;}
+    .met-etapa{display:flex;gap:20px;position:relative;padding-bottom:24px;}
+    .met-etapa:last-child{padding-bottom:0;}
+    .met-etapa-left{display:flex;flex-direction:column;align-items:center;}
+    .met-etapa-num{width:40px;height:40px;border-radius:50%;background:var(--green);color:var(--white);
+      font-size:0.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .met-etapa-line{flex:1;width:2px;background:var(--g300);margin-top:8px;}
+    .met-etapa:last-child .met-etapa-line{display:none;}
+    .met-etapa-content{padding-top:8px;flex:1;}
+    .met-etapa-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--green);margin-bottom:4px;}
+    .met-etapa-title{font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:6px;}
+    .met-etapa-desc{font-size:0.88rem;color:var(--g700);line-height:1.6;}
+
+    .met-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+    .met-tag{padding:4px 12px;border-radius:var(--r-pill);font-size:0.75rem;font-weight:600;
+      background:rgba(42,187,110,0.08);color:var(--green);border:1px solid rgba(42,187,110,0.2);}
+
+    /* Sidebar downloads */
+    .met-sidebar{}
+    .download-card{background:var(--white);border-radius:var(--r-md);padding:28px;
+      box-shadow:var(--sh-sm);border:1px solid rgba(0,0,0,0.05);position:sticky;top:84px;}
+    .download-card-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+    .download-card-header svg{width:18px;height:18px;color:var(--green);}
+    .download-card-title{font-size:1.05rem;font-weight:800;color:var(--dark);}
+    .download-card-subtitle{font-size:0.83rem;color:var(--g500);margin-bottom:24px;line-height:1.5;}
+
+    .file-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+    .file-item{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--cream);
+      border-radius:var(--r-sm);border:1.5px solid transparent;text-decoration:none;transition:var(--t1);}
+    .file-item:hover{border-color:var(--green);background:rgba(42,187,110,0.04);}
+    .file-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .file-icon svg{width:17px;height:17px;}
+    .file-icon.pdf{background:rgba(220,38,38,0.1);color:#DC2626;}
+    .file-icon.ppt{background:rgba(234,88,12,0.1);color:#EA580C;}
+    .file-icon.img{background:rgba(16,185,129,0.1);color:#10B981;}
+    .file-icon.zip{background:rgba(107,114,128,0.1);color:var(--g500);}
+    .file-icon.doc{background:rgba(37,99,235,0.1);color:#2563EB;}
+    .file-info{flex:1;min-width:0;}
+    .file-name{font-size:0.87rem;font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .file-meta{font-size:0.75rem;color:var(--g500);margin-top:2px;}
+    .file-dl-icon{width:28px;height:28px;border-radius:6px;background:transparent;display:flex;
+      align-items:center;justify-content:center;color:var(--g300);transition:var(--t1);flex-shrink:0;}
+    .file-item:hover .file-dl-icon{color:var(--green);background:rgba(42,187,110,0.1);}
+    .file-dl-icon svg{width:14px;height:14px;}
+
+    .btn-download-all{width:100%;height:48px;background:var(--green);color:var(--white);border:none;
+      border-radius:var(--r-sm);font-family:var(--font);font-size:0.93rem;font-weight:700;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--t1);
+      text-decoration:none;margin-bottom:12px;}
+    .btn-download-all:hover{background:#1fa05e;box-shadow:0 12px 40px rgba(42,187,110,0.28);transform:translateY(-1px);}
+    .btn-download-all svg{width:16px;height:16px;}
+    .download-note{font-size:0.77rem;color:var(--g500);text-align:center;line-height:1.5;}
+
+    @media(max-width:1024px){.met-hero-inner{grid-template-columns:1fr}.met-hero-img{display:none}.met-layout{grid-template-columns:1fr}.download-card{position:static}}
+    @media(max-width:768px){.m-header{padding:0 20px}.met-section{padding:24px 20px}.download-card{padding:20px}.met-audience-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+
+<body>
+
+  <div class="m-thread-bar"><span></span><span></span><span></span><span></span><span></span></div>
+
+  <header class="m-header">
+    <div class="m-header-left">
+      <a href="../index.html" class="m-header-logo"><img src="../assets/logo/logo_azul.svg" alt="Compassion Brasil"></a>
+      <div class="m-header-sep"></div>
+      <nav class="m-breadcrumb" aria-label="Navegação estrutural">
+        <a href="biblioteca.html">Biblioteca</a>
+        <span>›</span>
+        <a href="biblioteca.html">Metodologias</a>
+        <span>›</span>
+        <strong>Não tá na hora!</strong>
+      </nav>
+    </div>
+    <a href="biblioteca.html" class="btn-back-lib">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar à Biblioteca
+    </a>
+  </header>
+
+  <section class="met-hero">
+    <div class="met-hero-bg"></div>
+    <div class="container">
+      <div class="met-hero-inner">
+        <div class="met-hero-content">
+          <div class="met-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Campanha Nacional
+          </div>
+          <span class="met-category-badge">Proteção &amp; Prevenção · 4 Etapas</span>
+          <h1 class="met-hero-title">Não tá na hora!</h1>
+          <p class="met-hero-desc">
+            Campanha nacional de prevenção à gravidez na adolescência com abordagem comunitária, bíblica e científica — materiais completos para igrejas, educadores e famílias.
+          </p>
+          <div class="met-hero-meta">
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Público: <strong>Adolescentes 12–18 anos</strong></span>
+            </div>
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Formato: <strong>4 etapas modulares</strong></span>
+            </div>
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <span><strong>5 arquivos</strong> disponíveis</span>
+            </div>
+          </div>
+        </div>
+        <div class="met-hero-img">
+          <img src="../assets/images/nao-ta-na-hora.jpg" alt="Não tá na hora!" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+    <div class="met-hero-threads"><span></span><span></span><span></span><span></span><span></span></div>
+  </section>
+
+  <div class="container">
+    <div class="met-layout">
+
+      <main>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Sobre a Campanha
+          </h2>
+          <div class="met-description">
+            <p>
+              <strong>Não tá na hora!</strong> é uma campanha de prevenção à gravidez na adolescência desenvolvida pela Compassion Brasil como resposta a uma realidade presente em muitas das comunidades atendidas pelos projetos parceiros. O Brasil registra um dos maiores índices de gravidez adolescente da América Latina — e a campanha foi criada para mudar esse cenário de dentro das igrejas e comunidades.
+            </p>
+            <p>
+              O material aborda o tema com abertura, empatia e responsabilidade — sem julgamentos e sem moralismo vazio. A proposta é criar conversas genuínas entre adolescentes, famílias e líderes, combinando dados científicos, narrativas reais e princípios bíblicos de dignidade e propósito.
+            </p>
+            <p>
+              A campanha é estruturada em 4 etapas que podem ser aplicadas em sequência ou de forma independente, adaptando-se à realidade de cada comunidade. Os materiais incluem guias para oficinas, jogos educativos, quiz interativo, cartazes e artes para redes sociais.
+            </p>
+          </div>
+          <div class="met-tags">
+            <span class="met-tag">Prevenção</span>
+            <span class="met-tag">Adolescência</span>
+            <span class="met-tag">Saúde</span>
+            <span class="met-tag">Família</span>
+            <span class="met-tag">Comunidade</span>
+            <span class="met-tag">Proteção Integral</span>
+          </div>
+        </div>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Objetivos
+          </h2>
+          <ul class="met-objectives">
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Reduzir índices de gravidez na adolescência nas comunidades atendidas pelos projetos Compassion
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Criar espaço seguro para que adolescentes possam conversar sobre sexualidade com honestidade e dignidade
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Engajar famílias e líderes religiosos como aliados no desenvolvimento saudável dos adolescentes
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Fortalecer o protagonismo dos jovens na tomada de decisões sobre seu próprio futuro
+            </li>
+          </ul>
+        </div>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Público-Alvo
+          </h2>
+          <div class="met-audience-grid">
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Participantes</div>
+              <div class="met-audience-item-value">Adolescentes — 12 a 18 anos</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Público secundário</div>
+              <div class="met-audience-item-value">Famílias e responsáveis</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Quem conduz</div>
+              <div class="met-audience-item-value">Educadores, pastores, conselheiros pastorais</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Aplicação</div>
+              <div class="met-audience-item-value">Igrejas, projetos sociais, escolas parceiras</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Formato</div>
+              <div class="met-audience-item-value">Oficinas, dinâmicas e campanhas de mobilização</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Sazonalidade</div>
+              <div class="met-audience-item-value">Ideal para planejamento anual — qualquer período</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            As 4 Etapas da Campanha
+          </h2>
+          <div class="met-etapas">
+            <div class="met-etapa">
+              <div class="met-etapa-left">
+                <div class="met-etapa-num">1</div>
+                <div class="met-etapa-line"></div>
+              </div>
+              <div class="met-etapa-content">
+                <div class="met-etapa-label">Etapa 1 — Abertura</div>
+                <div class="met-etapa-title">Quebrando o gelo — "Por que falar sobre isso?"</div>
+                <div class="met-etapa-desc">Dinâmicas de sensibilização para criar um ambiente seguro de diálogo. Uso de dados locais, histórias reais (anonimizadas) e o quiz inicial "Você sabia que...?" para engajar o grupo.</div>
+              </div>
+            </div>
+            <div class="met-etapa">
+              <div class="met-etapa-left">
+                <div class="met-etapa-num">2</div>
+                <div class="met-etapa-line"></div>
+              </div>
+              <div class="met-etapa-content">
+                <div class="met-etapa-label">Etapa 2 — Conteúdo</div>
+                <div class="met-etapa-title">Corpo, decisões e consequências</div>
+                <div class="met-etapa-desc">Oficina educativa com base científica e bíblica: desenvolvimento do corpo na adolescência, decisões e seus impactos, relações afetivas e fronteiras saudáveis. Inclui jogo educativo interativo.</div>
+              </div>
+            </div>
+            <div class="met-etapa">
+              <div class="met-etapa-left">
+                <div class="met-etapa-num">3</div>
+                <div class="met-etapa-line"></div>
+              </div>
+              <div class="met-etapa-content">
+                <div class="met-etapa-label">Etapa 3 — Família</div>
+                <div class="met-etapa-title">Encontro com famílias e responsáveis</div>
+                <div class="met-etapa-desc">Sessão dedicada aos pais e responsáveis: como criar diálogo aberto em casa, sinais de alerta e como ser um porto seguro para o adolescente. Roteiro de facilitação incluso.</div>
+              </div>
+            </div>
+            <div class="met-etapa">
+              <div class="met-etapa-left">
+                <div class="met-etapa-num">4</div>
+                <div class="met-etapa-line"></div>
+              </div>
+              <div class="met-etapa-content">
+                <div class="met-etapa-label">Etapa 4 — Mobilização</div>
+                <div class="met-etapa-title">Campanha na comunidade</div>
+                <div class="met-etapa-desc">Kit completo de mobilização: cartazes, postagens para redes sociais, stories, banner para o culto/reunião. Os próprios adolescentes se tornam agentes da campanha em sua comunidade.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="met-sidebar">
+        <div class="download-card">
+          <div class="download-card-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span class="download-card-title">Materiais da Campanha</span>
+          </div>
+          <p class="download-card-subtitle">5 arquivos disponíveis. Links ativos em breve via OneDrive.</p>
+
+          <div class="file-list">
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Guia Completo do Facilitador</div>
+                <div class="file-meta">PDF · Roteiro das 4 etapas · ~5,1 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Jogo Educativo — Não tá na hora!</div>
+                <div class="file-meta">PDF · Imprimível e plastificável · ~3,6 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Quiz Temático — Imprimível</div>
+                <div class="file-meta">PDF · Atividade de engajamento · ~1,2 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Cartazes da Campanha — A3</div>
+                <div class="file-meta">PDF · Para impressão gráfica · ~8,4 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Kit Redes Sociais (posts + stories)</div>
+                <div class="file-meta">ZIP · Artes prontas para publicar · ~31 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+          </div>
+
+          <a href="#" class="btn-download-all">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Baixar Kit Completo (.zip)
+          </a>
+          <p class="download-note">Links via OneDrive — ativados em breve. Acesso exclusivo para colaboradores.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <footer style="background:var(--white);border-top:1px solid rgba(0,0,0,0.06);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-size:0.8rem;color:var(--g500);">© 2025 Compassion Brasil — Uso restrito para parceiros credenciados</span>
+    <a href="biblioteca.html" style="font-size:0.8rem;font-weight:600;color:var(--green);text-decoration:none;">← Voltar à Biblioteca</a>
+  </footer>
+
+</body>
+</html>
+

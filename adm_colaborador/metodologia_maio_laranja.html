@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maio Laranja — Campanha Anual · Compassion Brasil</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../wireframe.css">
+  <style>
+    body { background: var(--cream); }
+    .m-thread-bar{display:flex;height:5px;}
+    .m-thread-bar span{flex:1;}
+    .m-thread-bar span:nth-child(1){background:var(--blue);}
+    .m-thread-bar span:nth-child(2){background:var(--yellow);}
+    .m-thread-bar span:nth-child(3){background:var(--green);}
+    .m-thread-bar span:nth-child(4){background:var(--orange);}
+    .m-thread-bar span:nth-child(5){background:var(--teal);}
+
+    .m-header{background:var(--white);border-bottom:1px solid rgba(0,0,0,0.08);padding:0 40px;height:64px;
+      display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh-sm);}
+    .m-header-left{display:flex;align-items:center;gap:20px;}
+    .m-header-logo img{height:30px;}
+    .m-header-sep{width:1px;height:24px;background:var(--g300);}
+    .m-breadcrumb{display:flex;align-items:center;gap:6px;font-size:0.83rem;color:var(--g500);}
+    .m-breadcrumb a{color:var(--g500);text-decoration:none;font-weight:500;}
+    .m-breadcrumb a:hover{color:var(--orange);}
+    .m-breadcrumb span{color:var(--g300);}
+    .m-breadcrumb strong{color:var(--dark);font-weight:600;}
+    .btn-back-lib{display:flex;align-items:center;gap:6px;font-size:0.83rem;font-weight:600;
+      color:var(--g500);text-decoration:none;transition:var(--t1);padding:6px 14px;
+      border-radius:var(--r-pill);border:1.5px solid var(--g300);}
+    .btn-back-lib:hover{color:var(--orange);border-color:var(--orange);}
+    .btn-back-lib svg{width:14px;height:14px;}
+
+    /* Hero — tema laranja */
+    .met-hero{background:var(--dark);padding:60px 0 0;position:relative;overflow:hidden;}
+    .met-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0f1b35 0%,#2d1a0f 60%,#E8472A 150%);}
+    .met-hero-threads{position:absolute;bottom:0;left:0;right:0;height:5px;display:flex;z-index:2;}
+    .met-hero-threads span{flex:1;}
+    .met-hero-threads span:nth-child(1){background:var(--blue);}
+    .met-hero-threads span:nth-child(2){background:var(--yellow);}
+    .met-hero-threads span:nth-child(3){background:var(--green);}
+    .met-hero-threads span:nth-child(4){background:var(--orange);}
+    .met-hero-threads span:nth-child(5){background:var(--teal);}
+
+    .met-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:flex-end;}
+    .met-hero-content{padding-bottom:60px;color:var(--white);}
+    .met-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:800;
+      letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:18px;}
+    .met-eyebrow svg{width:13px;height:13px;}
+    .met-category-badge{display:inline-block;background:rgba(232,71,42,0.2);border:1px solid rgba(232,71,42,0.4);
+      color:rgba(255,255,255,0.9);font-size:0.75rem;font-weight:700;padding:4px 12px;
+      border-radius:var(--r-pill);margin-bottom:18px;}
+    .met-hero-title{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:20px;}
+    .met-hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.72);line-height:1.7;max-width:540px;margin-bottom:32px;}
+    .met-hero-meta{display:flex;gap:24px;flex-wrap:wrap;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12);}
+    .met-meta-item{display:flex;align-items:center;gap:8px;font-size:0.88rem;color:rgba(255,255,255,0.65);}
+    .met-meta-item svg{width:15px;height:15px;color:var(--orange);}
+    .met-meta-item strong{color:var(--white);}
+
+    .met-hero-img{border-radius:var(--r-md) var(--r-md) 0 0;overflow:hidden;height:340px;box-shadow:0 -12px 40px rgba(0,0,0,0.3);}
+    .met-hero-img img{width:100%;height:100%;object-fit:cover;}
+
+    /* Layout */
+    .met-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;padding:56px 0 80px;align-items:flex-start;}
+
+    .met-section{background:var(--white);border-radius:var(--r-md);padding:36px 40px;margin-bottom:24px;
+      box-shadow:var(--sh-sm);border:1px solid rgba(0,0,0,0.05);}
+    .met-section-title{font-size:1.15rem;font-weight:800;color:var(--dark);letter-spacing:-0.3px;
+      margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .met-section-title svg{width:18px;height:18px;color:var(--orange);}
+
+    .met-description p{font-size:0.97rem;color:var(--g700);line-height:1.75;margin-bottom:16px;}
+    .met-description p:last-child{margin-bottom:0;}
+
+    /* Highlight da frase de impacto */
+    .met-quote{background:rgba(232,71,42,0.06);border-left:4px solid var(--orange);
+      border-radius:0 var(--r-sm) var(--r-sm) 0;padding:20px 24px;margin:20px 0;
+      font-size:1.05rem;font-weight:700;color:var(--dark);font-style:italic;line-height:1.5;}
+
+    .met-objectives{list-style:none;display:flex;flex-direction:column;gap:12px;}
+    .met-objectives li{display:flex;align-items:flex-start;gap:12px;font-size:0.93rem;color:var(--g700);line-height:1.55;}
+    .met-obj-icon{width:24px;height:24px;border-radius:6px;background:rgba(232,71,42,0.1);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .met-obj-icon svg{width:12px;height:12px;color:var(--orange);stroke-width:3;}
+
+    .met-audience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+    .met-audience-item{background:var(--cream);border-radius:var(--r-sm);padding:16px 18px;border:1px solid rgba(0,0,0,0.06);}
+    .met-audience-item-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--g500);margin-bottom:4px;}
+    .met-audience-item-value{font-size:0.9rem;font-weight:600;color:var(--dark);}
+
+    /* Materiais por bloco */
+    .met-materiais-blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+    .met-mat-block{background:var(--cream);border-radius:var(--r-sm);padding:20px;border:1px solid rgba(0,0,0,0.06);}
+    .met-mat-block-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+    .met-mat-block-icon svg{width:18px;height:18px;}
+    .met-mat-block-icon.orange{background:rgba(232,71,42,0.1);color:var(--orange);}
+    .met-mat-block-icon.blue{background:rgba(26,95,255,0.1);color:var(--blue);}
+    .met-mat-block-icon.green{background:rgba(42,187,110,0.1);color:var(--green);}
+    .met-mat-block-icon.yellow{background:rgba(245,196,0,0.15);color:#92700A;}
+    .met-mat-block-title{font-size:0.9rem;font-weight:700;color:var(--dark);margin-bottom:4px;}
+    .met-mat-block-desc{font-size:0.8rem;color:var(--g500);line-height:1.5;}
+
+    .met-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;}
+    .met-tag{padding:4px 12px;border-radius:var(--r-pill);font-size:0.75rem;font-weight:600;
+      background:rgba(232,71,42,0.07);color:var(--orange);border:1px solid rgba(232,71,42,0.2);}
+
+    /* Sidebar */
+    .download-card{background:var(--white);border-radius:var(--r-md);padding:28px;
+      box-shadow:var(--sh-sm);border:1px solid rgba(0,0,0,0.05);position:sticky;top:84px;}
+    .download-card-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+    .download-card-header svg{width:18px;height:18px;color:var(--orange);}
+    .download-card-title{font-size:1.05rem;font-weight:800;color:var(--dark);}
+    .download-card-subtitle{font-size:0.83rem;color:var(--g500);margin-bottom:24px;line-height:1.5;}
+
+    .file-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+    .file-item{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--cream);
+      border-radius:var(--r-sm);border:1.5px solid transparent;text-decoration:none;transition:var(--t1);}
+    .file-item:hover{border-color:var(--orange);background:rgba(232,71,42,0.04);}
+    .file-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .file-icon svg{width:17px;height:17px;}
+    .file-icon.pdf{background:rgba(220,38,38,0.1);color:#DC2626;}
+    .file-icon.img{background:rgba(16,185,129,0.1);color:#10B981;}
+    .file-icon.zip{background:rgba(107,114,128,0.1);color:var(--g500);}
+    .file-icon.ppt{background:rgba(234,88,12,0.1);color:#EA580C;}
+    .file-info{flex:1;min-width:0;}
+    .file-name{font-size:0.87rem;font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .file-meta{font-size:0.75rem;color:var(--g500);margin-top:2px;}
+    .file-dl-icon{width:28px;height:28px;border-radius:6px;background:transparent;display:flex;
+      align-items:center;justify-content:center;color:var(--g300);transition:var(--t1);flex-shrink:0;}
+    .file-item:hover .file-dl-icon{color:var(--orange);background:rgba(232,71,42,0.1);}
+    .file-dl-icon svg{width:14px;height:14px;}
+
+    .btn-download-all{width:100%;height:48px;background:var(--orange);color:var(--white);border:none;
+      border-radius:var(--r-sm);font-family:var(--font);font-size:0.93rem;font-weight:700;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:8px;transition:var(--t1);
+      text-decoration:none;margin-bottom:12px;}
+    .btn-download-all:hover{background:#c73318;box-shadow:0 12px 40px rgba(232,71,42,0.28);transform:translateY(-1px);}
+    .btn-download-all svg{width:16px;height:16px;}
+    .download-note{font-size:0.77rem;color:var(--g500);text-align:center;line-height:1.5;}
+
+    @media(max-width:1024px){.met-hero-inner{grid-template-columns:1fr}.met-hero-img{display:none}.met-layout{grid-template-columns:1fr}.download-card{position:static}}
+    @media(max-width:768px){.m-header{padding:0 20px}.met-section{padding:24px 20px}.download-card{padding:20px}.met-audience-grid,.met-materiais-blocks{grid-template-columns:1fr}}
+  </style>
+</head>
+
+<body>
+
+  <div class="m-thread-bar"><span></span><span></span><span></span><span></span><span></span></div>
+
+  <header class="m-header">
+    <div class="m-header-left">
+      <a href="../index.html" class="m-header-logo"><img src="../assets/logo/logo_azul.svg" alt="Compassion Brasil"></a>
+      <div class="m-header-sep"></div>
+      <nav class="m-breadcrumb" aria-label="Navegação estrutural">
+        <a href="biblioteca.html">Biblioteca</a>
+        <span>›</span>
+        <a href="biblioteca.html">Metodologias</a>
+        <span>›</span>
+        <strong>Maio Laranja</strong>
+      </nav>
+    </div>
+    <a href="biblioteca.html" class="btn-back-lib">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar à Biblioteca
+    </a>
+  </header>
+
+  <section class="met-hero">
+    <div class="met-hero-bg"></div>
+    <div class="container">
+      <div class="met-hero-inner">
+        <div class="met-hero-content">
+          <div class="met-eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Campanha Anual · Maio
+          </div>
+          <span class="met-category-badge">Proteção Integral · Conscientização</span>
+          <h1 class="met-hero-title">Maio Laranja</h1>
+          <p class="met-hero-desc">
+            "Quem ama, protege." Mobilização de famílias e comunidades pela proteção integral das crianças — materiais de conscientização, engajamento e ação coletiva para o mês de maio.
+          </p>
+          <div class="met-hero-meta">
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <span>Público: <strong>Famílias e comunidade</strong></span>
+            </div>
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Período: <strong>Todo o mês de maio</strong></span>
+            </div>
+            <div class="met-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <span><strong>4 arquivos</strong> disponíveis</span>
+            </div>
+          </div>
+        </div>
+        <div class="met-hero-img">
+          <img src="../assets/images/maio-laranja.jpg" alt="Maio Laranja" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+    <div class="met-hero-threads"><span></span><span></span><span></span><span></span><span></span></div>
+  </section>
+
+  <div class="container">
+    <div class="met-layout">
+
+      <main>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Sobre a Campanha
+          </h2>
+          <div class="met-description">
+            <p>
+              O <strong>Maio Laranja</strong> é o mês de conscientização e combate ao abuso e à exploração sexual de crianças e adolescentes no Brasil. A Compassion Brasil mobiliza seus projetos parceiros e igrejas ao longo do mês com materiais prontos para sensibilizar comunidades, quebrar o silêncio e fortalecer a cultura de proteção.
+            </p>
+            <blockquote class="met-quote">"Quem ama, protege."</blockquote>
+            <p>
+              A campanha vai além da conscientização passiva: ela convoca as famílias, líderes e comunidades a assumirem um papel ativo na proteção das crianças. Os materiais foram desenvolvidos para serem aplicados em contextos variados — desde cultos e reuniões de célula até rodas de conversa nas escolas parceiras.
+            </p>
+            <p>
+              Cada item do kit foi pensado para ser acessível, visualmente impactante e pedagogicamente responsável — respeitando a faixa etária dos públicos envolvidos e evitando revitimização.
+            </p>
+          </div>
+          <div class="met-tags">
+            <span class="met-tag">Proteção</span>
+            <span class="met-tag">Conscientização</span>
+            <span class="met-tag">Famílias</span>
+            <span class="met-tag">Comunidade</span>
+            <span class="met-tag">Denúncia</span>
+            <span class="met-tag">Mobilização</span>
+          </div>
+        </div>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Objetivos
+          </h2>
+          <ul class="met-objectives">
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Engajar igrejas e projetos parceiros na mobilização comunitária durante o mês de maio
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Fortalecer a cultura de denúncia e proteção de crianças e adolescentes nas comunidades
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Informar famílias sobre direitos das crianças, sinais de abuso e canais de denúncia (Disque 100)
+            </li>
+            <li>
+              <div class="met-obj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Amplificar o alcance da campanha nacional nas redes sociais dos projetos parceiros
+            </li>
+          </ul>
+        </div>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Público-Alvo
+          </h2>
+          <div class="met-audience-grid">
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Público primário</div>
+              <div class="met-audience-item-value">Famílias e responsáveis de crianças</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Público secundário</div>
+              <div class="met-audience-item-value">Líderes, educadores e comunidade em geral</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Quem aplica</div>
+              <div class="met-audience-item-value">Qualquer líder ou voluntário credenciado</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Contexto de aplicação</div>
+              <div class="met-audience-item-value">Igrejas, comunidades, projetos sociais, redes sociais</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Período ideal</div>
+              <div class="met-audience-item-value">Maio inteiro — começa na 1ª semana do mês</div>
+            </div>
+            <div class="met-audience-item">
+              <div class="met-audience-item-label">Esforço de aplicação</div>
+              <div class="met-audience-item-value">Baixo — materiais prontos para uso imediato</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="met-section">
+          <h2 class="met-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            O que está no Kit
+          </h2>
+          <div class="met-materiais-blocks">
+            <div class="met-mat-block">
+              <div class="met-mat-block-icon orange">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <div class="met-mat-block-title">Cartazes para impressão (A3 e A4)</div>
+              <div class="met-mat-block-desc">Peças prontas para afixar na igreja, projeto ou escola. Identidade visual Maio Laranja adaptada para a Compassion.</div>
+            </div>
+            <div class="met-mat-block">
+              <div class="met-mat-block-icon blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <div class="met-mat-block-title">Kit Redes Sociais completo</div>
+              <div class="met-mat-block-desc">Posts, stories e capas para Facebook e Instagram — formato quadrado e vertical, editáveis no Canva.</div>
+            </div>
+            <div class="met-mat-block">
+              <div class="met-mat-block-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              <div class="met-mat-block-title">Guia de sensibilização para famílias</div>
+              <div class="met-mat-block-desc">Material imprimível com linguagem acessível: o que é abuso, como identificar, como conversar com seus filhos e onde denunciar.</div>
+            </div>
+            <div class="met-mat-block">
+              <div class="met-mat-block-icon yellow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="met-mat-block-title">Roteiro de culto / momento especial</div>
+              <div class="met-mat-block-desc">Sugestão de momento especial no culto ou reunião dedicado ao tema, com leitura bíblica, reflexão e oração orientada.</div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="download-card">
+          <div class="download-card-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span class="download-card-title">Kit Maio Laranja</span>
+          </div>
+          <p class="download-card-subtitle">4 arquivos disponíveis. Links ativos em breve via OneDrive.</p>
+
+          <div class="file-list">
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Cartazes — Maio Laranja (A3 e A4)</div>
+                <div class="file-meta">PDF · Impressão gráfica ou jato de tinta · ~9,2 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Kit Redes Sociais — Posts e Stories</div>
+                <div class="file-meta">ZIP · PNG + links Canva editável · ~42 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Guia de Sensibilização para Famílias</div>
+                <div class="file-meta">PDF · Imprimível frente e verso · ~2,1 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+            <a href="#" class="file-item">
+              <div class="file-icon pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div class="file-info">
+                <div class="file-name">Roteiro — Culto / Momento Especial</div>
+                <div class="file-meta">PDF · Leitura, reflexão e oração · ~0,9 MB</div>
+              </div>
+              <div class="file-dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            </a>
+          </div>
+
+          <a href="#" class="btn-download-all">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Baixar Kit Completo (.zip)
+          </a>
+          <p class="download-note">Links via OneDrive — ativados em breve. Acesso exclusivo para colaboradores.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <footer style="background:var(--white);border-top:1px solid rgba(0,0,0,0.06);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-size:0.8rem;color:var(--g500);">© 2025 Compassion Brasil — Uso restrito para parceiros credenciados</span>
+    <a href="biblioteca.html" style="font-size:0.8rem;font-weight:600;color:var(--orange);text-decoration:none;">← Voltar à Biblioteca</a>
+  </footer>
+
+</body>
+</html>
+
