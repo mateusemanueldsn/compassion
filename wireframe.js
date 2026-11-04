@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    COMPASSION BRASIL — THREAD-DRIVEN INTERACTIONS
    ========================================================================== */
 
@@ -330,15 +330,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   statItems.forEach(el => statObs.observe(el));
 
-  /* ── 5. NAV ACTIVE LINK (IntersectionObserver) ── */
-  const sections = document.querySelectorAll("section[id]");
+  /* ── 5. NAV ACTIVE LINK ── */
   const navLinks = document.querySelectorAll(".nav-link");
+
+  // 5a. Páginas secundárias: detecta automaticamente pelo pathname/filename
+  (function setActiveByPage() {
+    const currentFile = (window.location.pathname.split("/").pop() || "index.html");
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute("href") || "";
+      const hrefFile = href.split("#")[0].split("/").pop() || "";
+
+      // Apenas links de página (não âncora pura #id)
+      if (hrefFile && !href.startsWith("#")) {
+        const hrefNorm = hrefFile || "index.html";
+        const currNorm = currentFile || "index.html";
+        if (hrefNorm === currNorm) {
+          link.classList.add("active");
+        }
+      }
+    });
+  })();
+
+  // 5b. Home: destaca link de âncora pela seção visível
+  const sections = document.querySelectorAll("section[id]");
   const sectionObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const id = e.target.getAttribute("id");
         navLinks.forEach(link => {
-          link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+          const href = link.getAttribute("href") || "";
+          // Só altera links de âncora, nunca sobrescreve páginas já marcadas
+          if (href.startsWith("#") || href.includes("index.html#")) {
+            link.classList.toggle("active", href === "#" + id || href.endsWith("#" + id));
+          }
         });
         // Hero thread nav
         const heroNavItems = document.querySelectorAll(".hero-nav-item");
