@@ -25,7 +25,7 @@
 
     <div class="cap-materiais-grid reveal d1">
 
-      <a href="<?php echo esc_url( home_url( '/cursos/#material-homem-de-honra' ) ); ?>" class="cap-card">
+      <a href="<?php echo esc_url( home_url( '/cursos/' ) ); ?>" class="cap-card">
         <div class="cap-card-img-wrap">
           <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/FOTOS_PORTFOLIOCC_BR_CustomMedia_MenOfHonor_Photo09_2511.jpg"
             alt="Programa Homem de Honra - Compassion Brasil" loading="lazy">
@@ -51,7 +51,7 @@
         </div>
       </a>
 
-      <a href="<?php echo esc_url( home_url( '/cursos/#material-gravidez-adolescencia' ) ); ?>" class="cap-card">
+      <a href="<?php echo esc_url( home_url( '/cursos/' ) ); ?>" class="cap-card">
         <div class="cap-card-img-wrap">
           <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/PG21_ENSINANDO_A_PREVINIR_OP1.jpg"
             alt="Campanha de Prevenção à Gravidez na Adolescência — Compassion Brasil"
@@ -78,7 +78,7 @@
         </div>
       </a>
 
-      <a href="<?php echo esc_url( home_url( '/cursos/#material-maio-laranja' ) ); ?>" class="cap-card">
+      <a href="<?php echo esc_url( home_url( '/cursos/' ) ); ?>" class="cap-card">
         <div class="cap-card-img-wrap placeholder-gray">
           <div class="placeholder-inner">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

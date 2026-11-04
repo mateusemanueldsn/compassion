@@ -1782,13 +1782,7 @@
         });
       }
 
-      // Abrir modal automaticamente se houver hash na URL
-      if (window.location.hash) {
-        const hashId = window.location.hash.replace('#material-', '');
-        if (materiaisData[hashId]) {
-          setTimeout(() => openModalWithData(hashId), 300);
-        }
-      }
+      // Popup antigo de download desativado — apenas navegação direta para capacitacoes.html
     });
   </script>
 
