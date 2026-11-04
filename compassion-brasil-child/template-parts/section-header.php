@@ -22,15 +22,6 @@ $is_cursos       = is_page( array( 'cursos', 'capacitacoes' ) ) || ( isset( $pos
       </nav>
 
       <div class="header-actions">
-        <a href="https://compassioncauses.com/en?country=BR#cause-browser" target="_blank" rel="noopener noreferrer"
-          class="btn-nav-cta btn-nav-causes" id="headerCauses">
-          Compassion Causas
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </a>
         <a href="https://www.compassion.com/sponsor-a-child/?AgeMaxFilter=22&amp;AgeMinFilter=1&amp;CountryFilter=Peru&amp;ageMax=22&amp;ageMin=1&amp;countries=BR&amp;home_hero=true"
           target="_blank" rel="noopener noreferrer" class="btn-nav-cta" id="headerCta">
           Apadrinhe uma Criança

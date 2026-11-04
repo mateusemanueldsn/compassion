@@ -79,9 +79,15 @@
       </a>
 
       <a href="<?php echo esc_url( home_url( '/cursos/#material-maio-laranja' ) ); ?>" class="cap-card">
-        <div class="cap-card-img-wrap">
-          <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/18demaioPara_Portfolio.jpg"
-            alt="Campanha Maio Laranja — Compassion Brasil" loading="lazy">
+        <div class="cap-card-img-wrap placeholder-gray">
+          <div class="placeholder-inner">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            <span>Foto em breve</span>
+          </div>
           <span class="cap-card-badge cap-badge-orange">Proteção</span>
           <span class="cap-card-dl-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -95,7 +101,7 @@
         <div class="cap-card-body">
           <span class="cap-card-type">Campanha Anual · Maio</span>
           <h3 class="cap-card-title">Maio Laranja</h3>
-          <p class="cap-card-desc">“Quem ama, protege.” Mobilização de famílias e
+          <p class="cap-card-desc">Mobilização de famílias e
             comunidades pela proteção integral das crianças com materiais de
             conscientização.</p>
           <span class="cap-card-cta">Baixar material <svg width="14" height="14" viewBox="0 0 24 24" fill="none"

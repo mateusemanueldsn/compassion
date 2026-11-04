@@ -3,7 +3,7 @@
   <!-- CAMADA 1: Vídeo fixo em tela inteira (parallax sticky) -->
   <div class="hero-video-layer" aria-hidden="true">
     <iframe class="hero-video-bg"
-      src="https://www.youtube.com/embed/Cas6bKgTXHI?autoplay=1&mute=1&loop=1&playlist=Cas6bKgTXHI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
+      src="https://www.youtube.com/embed/9jlvRIaIzGA?autoplay=1&mute=1&loop=1&playlist=9jlvRIaIzGA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
       title="Vídeo institucional Compassion Brasil" frameborder="0" allow="autoplay; encrypted-media"
       aria-hidden="true"></iframe>
     <div class="hero-video-overlay" aria-hidden="true"></div>
@@ -17,7 +17,7 @@
 
         <!-- Coluna esquerda: eyebrow + título -->
         <div class="hero-col-left">
-          <p class="hero-eyebrow reveal" id="heroEyebrow">Conhecido · Amado · Protegido</p>
+          <p class="hero-eyebrow reveal" id="heroEyebrow">Conhecidas · Amadas · Protegidas</p>
 
           <h1 class="hero-title reveal d1" id="heroHeading">
             Libertando crianças<br>
@@ -43,7 +43,7 @@
                 <polyline points="12 5 19 12 12 19" />
               </svg>
             </a>
-            <a href="https://www.youtube.com/watch?v=Cas6bKgTXHI" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.youtube.com/watch?v=9jlvRIaIzGA" target="_blank" rel="noopener noreferrer"
               class="btn btn-ghost" id="heroCta2">
               ▶ Assistir Vídeo
             </a>

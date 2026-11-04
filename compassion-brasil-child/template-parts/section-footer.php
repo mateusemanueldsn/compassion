@@ -41,6 +41,7 @@
         <div class="footer-col">
           <h5>Contato</h5>
           <ul>
+            <li><a href="https://compassion.wd5.myworkdayjobs.com/CompassionCareers" target="_blank" rel="noopener noreferrer">Trabalhe Conosco</a></li>
             <li><a href="#">Assessoria de Imprensa</a></li>
             <li><a href="#">Política de Privacidade</a></li>
           </ul>

@@ -1000,6 +1000,24 @@ img {
   margin-bottom: 16px
 }
 
+/* Hero Eyebrow - Conhecidas · Amadas · Protegidas */
+.hero-eyebrow {
+  display: block;
+  font-family: 'Neighbour Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 14px;
+  opacity: 1;
+}
+
+.hero.hero-video-mode .hero-eyebrow {
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
 .eyebrow-threads {
   display: inline-flex;
   align-items: center;
@@ -3759,4 +3777,111 @@ h3.course-card-title {
   scrollbar-width: thin;
   scrollbar-color: var(--blue, #1A5FFF) rgba(5, 16, 48, 0.04);
 }
-
+
+
+/* ── Aviso Trabalhe Conosco na Área de Contato ── */
+.contact-careers-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(26, 95, 255, 0.05);
+  border: 1.5px solid rgba(26, 95, 255, 0.18);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+
+.careers-notice-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.careers-notice-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-sm);
+  background: var(--blue);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.careers-notice-text strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.careers-notice-text span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--g700);
+  line-height: 1.4;
+}
+
+.careers-notice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: var(--t1);
+  flex-shrink: 0;
+}
+
+.careers-notice-btn:hover {
+  background: var(--blue-dark);
+  box-shadow: 0 4px 14px rgba(26, 95, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .contact-careers-notice {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .careers-notice-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* Placeholders de imagem em destaque */
+.placeholder-gray {
+  background: #E2E8F0 !important;
+  border: 2px dashed #94A3B8 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.placeholder-gray::after {
+  display: none !important;
+}
+.placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #64748B;
+  font-size: 0.88rem;
+  font-weight: 600;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}

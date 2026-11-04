@@ -37,13 +37,13 @@
             <div class="map-states-list">
               <div class="map-states-title">Estados com programas ativos:</div>
               <div class="map-states-grid">
-                <span class="map-state-tag">Pará</span>
-                <span class="map-state-tag">Maranhão</span>
-                <span class="map-state-tag">Ceará</span>
-                <span class="map-state-tag">Piauí</span>
-                <span class="map-state-tag">Pernambuco</span>
-                <span class="map-state-tag">Paraíba</span>
                 <span class="map-state-tag">Alagoas</span>
+                <span class="map-state-tag">Ceará</span>
+                <span class="map-state-tag">Maranhão</span>
+                <span class="map-state-tag">Pará</span>
+                <span class="map-state-tag">Paraíba</span>
+                <span class="map-state-tag">Pernambuco</span>
+                <span class="map-state-tag">Piauí</span>
               </div>
             </div>
           </div>

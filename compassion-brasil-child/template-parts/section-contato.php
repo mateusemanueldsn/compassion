@@ -77,6 +77,29 @@
 
           <!-- Lado direito: formulário -->
           <div class="contact-form-col reveal d2">
+            <!-- Área Trabalhe Conosco (mitigação de e-mails no fale conosco) -->
+            <div class="contact-careers-notice">
+              <div class="careers-notice-left">
+                <div class="careers-notice-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </div>
+                <div class="careers-notice-text">
+                  <strong>Procurando vagas e oportunidades?</strong>
+                  <span>Candidaturas e processos seletivos são centralizados em nosso portal oficial.</span>
+                </div>
+              </div>
+              <a href="https://compassion.wd5.myworkdayjobs.com/CompassionCareers" target="_blank" rel="noopener noreferrer" class="careers-notice-btn">
+                Trabalhe Conosco
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+
             <form class="contact-form" id="contactForm" novalidate>
 
               <div class="form-row">
