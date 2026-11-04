@@ -1,8 +1,10 @@
-<section class="hero" id="quem-somos" aria-labelledby="heroHeading">
+﻿<section class="hero" id="quem-somos" aria-labelledby="heroHeading">
 
   <!-- CAMADA 1: Vídeo fixo em tela inteira (parallax sticky) -->
   <div class="hero-video-layer" aria-hidden="true">
-    <canvas class="hero-video-bg" id="heroCanvas" width="1920" height="1080" data-base-path="<?php echo get_template_directory_uri(); ?>/assets/video/"></canvas>
+    <video class="hero-video-bg" id="heroVideo" autoplay muted loop playsinline preload="auto">
+      <source src="<?php echo get_stylesheet_directory_uri(); ?>/assets/video/hero-video.mp4" type="video/mp4">
+    </video>
     <div class="hero-video-overlay" aria-hidden="true"></div>
     <div class="hero-img-gradient"></div>
   </div>

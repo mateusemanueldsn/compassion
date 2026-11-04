@@ -1,4 +1,4 @@
-# Dependencias e caches
+﻿# Dependencias e caches
 node_modules/
 .DS_Store
 Thumbs.db
@@ -29,6 +29,9 @@ assets/images/*
 backlog/brandbook/
 backlog/inspiracao/
 
-assets/video/
-*.mp4
+# Ignora a sequencia de 6000 quadros jpg e backups pesados, mantendo o video otimizado do hero:
+assets/video/*.jpg
+assets/video/*h264*.mp4
+!assets/video/hero-video.mp4
 *.zip
+compassion-brasil-child/assets/video/
