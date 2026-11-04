@@ -3203,16 +3203,17 @@ details[open] .accordion-icon {
 .fases-wipe-word {
   font-family: var(--font, 'Neighbour', sans-serif);
   font-weight: 900;
-  font-size: clamp(2.2rem, 5.5vw, 4.4rem);
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: #ffffff;
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.88) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 6px 24px rgba(10, 71, 234, 0.6)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  font-size: clamp(2.6rem, 5.8vw, 4.8rem);
+  text-transform: none; /* Caixa normal */
+  letter-spacing: -0.02em; /* Tipografia limpa institucional */
+  color: var(--blue, #1A5FFF);
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: var(--blue, #1A5FFF);
+  text-shadow: none;
+  filter: none;
   opacity: 0;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 /* Animação da palavra durante o wipe */
@@ -3223,23 +3224,19 @@ details[open] .accordion-icon {
 @keyframes wipeWordFade {
   0% {
     opacity: 0;
-    transform: scale(0.92) translateY(14px);
-    filter: blur(12px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0));
+    transform: scale(0.95) translateY(12px);
   }
-  38% {
+  36% {
     opacity: 1;
     transform: scale(1) translateY(0);
-    filter: blur(0px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0.7));
   }
-  62% {
+  64% {
     opacity: 1;
-    transform: scale(1.02) translateY(0);
-    filter: blur(0px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0.7));
+    transform: scale(1.01) translateY(0);
   }
   100% {
     opacity: 0;
-    transform: scale(1.08) translateY(-12px);
-    filter: blur(14px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0));
+    transform: scale(1.04) translateY(-8px);
   }
 }
 
