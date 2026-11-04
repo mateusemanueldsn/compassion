@@ -3039,7 +3039,7 @@ details[open] .accordion-icon {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: clamp(36px, 5vw, 64px) clamp(32px, 4vw, 56px) clamp(50px, 6vw, 80px) clamp(32px, 5vw, 72px);
+  padding: clamp(40px, 5vw, 70px) clamp(36px, 4vw, 56px) clamp(50px, 6vw, 80px) clamp(96px, 8.5vw, 140px);
   z-index: 3;
 }
 
@@ -3160,7 +3160,7 @@ details[open] .accordion-icon {
 }
 
 /* ═══════════════════════════════════════════════════════
-   SOBREPOSIÇÃO DE CAMADAS (AZUL & BRANCO) — TRANSIÇÃO MODERNA
+   SOBREPOSIÇÃO DE CAMADAS (AZUL & BRANCO) COM ESMAECIMENTO TIPOGRÁFICO
    ═══════════════════════════════════════════════════════ */
 .fases-wipe {
   position: absolute;
@@ -3179,7 +3179,7 @@ details[open] .accordion-icon {
   will-change: transform;
 }
 
-/* Camada 2: Branco Puro com sombra sutil */
+/* Camada 2: Branco Puro com sombra suave */
 .fases-wipe-white {
   position: absolute;
   inset: 0;
@@ -3189,13 +3189,67 @@ details[open] .accordion-icon {
   will-change: transform;
 }
 
+/* Tipografia flutuante: FASES DE ATUAÇÃO no segundo da transição */
+.fases-wipe-typography {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 35;
+  pointer-events: none;
+}
+
+.fases-wipe-word {
+  font-family: var(--font, 'Neighbour', sans-serif);
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5.5vw, 4.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.88) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 24px rgba(10, 71, 234, 0.6)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+/* Animação da palavra durante o wipe */
+.fases-wipe.running .fases-wipe-word {
+  animation: wipeWordFade 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes wipeWordFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(14px);
+    filter: blur(12px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0));
+  }
+  38% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0.7));
+  }
+  62% {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+    filter: blur(0px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0.7));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.08) translateY(-12px);
+    filter: blur(14px) drop-shadow(0 6px 24px rgba(10, 71, 234, 0));
+  }
+}
+
 /* Animação DIREITA (next) */
 .fases-wipe.running.dir-next .fases-wipe-blue {
-  animation: wipeInAndOutNext 0.72s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation: wipeInAndOutNext 0.85s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
 .fases-wipe.running.dir-next .fases-wipe-white {
-  animation: wipeInAndOutNext 0.72s cubic-bezier(0.77, 0, 0.175, 1) 0.07s forwards;
+  animation: wipeInAndOutNext 0.85s cubic-bezier(0.77, 0, 0.175, 1) 0.08s forwards;
 }
 
 @keyframes wipeInAndOutNext {
@@ -3212,11 +3266,11 @@ details[open] .accordion-icon {
 
 /* Animação ESQUERDA (prev) */
 .fases-wipe.running.dir-prev .fases-wipe-blue {
-  animation: wipeInAndOutPrev 0.72s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation: wipeInAndOutPrev 0.85s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
 .fases-wipe.running.dir-prev .fases-wipe-white {
-  animation: wipeInAndOutPrev 0.72s cubic-bezier(0.77, 0, 0.175, 1) 0.07s forwards;
+  animation: wipeInAndOutPrev 0.85s cubic-bezier(0.77, 0, 0.175, 1) 0.08s forwards;
 }
 
 @keyframes wipeInAndOutPrev {
@@ -3231,7 +3285,7 @@ details[open] .accordion-icon {
   }
 }
 
-/* ── SETAS DE NAVEGAÇÃO ── */
+/* ── SETAS DE NAVEGAÇÃO COM RESPIRO TOTAL DO TEXTO ── */
 .fases-nav-arrow {
   position: absolute;
   top: 50%;
@@ -3239,10 +3293,10 @@ details[open] .accordion-icon {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(26, 95, 255, 0.20);
+  border: 1.5px solid rgba(26, 95, 255, 0.22);
   color: var(--blue, #1A5FFF);
   display: flex;
   align-items: center;
@@ -3250,17 +3304,17 @@ details[open] .accordion-icon {
   cursor: pointer;
   z-index: 15;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 18px rgba(15, 27, 53, 0.12);
+  box-shadow: 0 4px 18px rgba(15, 27, 53, 0.10);
 }
 
 .fases-arrow-prev {
-  left: clamp(20px, 3vw, 40px);
+  left: clamp(24px, 2.8vw, 42px);
 }
 
 .fases-arrow-next {
-  right: clamp(20px, 3vw, 40px);
-  background: rgba(15, 27, 53, 0.55);
-  border-color: rgba(255, 255, 255, 0.25);
+  right: clamp(24px, 2.8vw, 42px);
+  background: rgba(15, 27, 53, 0.60);
+  border-color: rgba(255, 255, 255, 0.30);
   color: #ffffff;
 }
 
@@ -3276,11 +3330,11 @@ details[open] .accordion-icon {
   transform: translateY(-50%) scale(0.95);
 }
 
-/* ── DOTS DE NAVEGAÇÃO (Na base da coluna de texto) ── */
+/* ── DOTS DE NAVEGAÇÃO (Alinhados com a margem do texto) ── */
 .fases-dots {
   position: absolute;
   bottom: 34px;
-  left: clamp(32px, 5vw, 72px);
+  left: clamp(96px, 8.5vw, 140px);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -3337,7 +3391,7 @@ details[open] .accordion-icon {
     order: 1;
   }
 
-  /* Texto embaixo no mobile */
+  /* Texto embaixo no mobile com padding confortável */
   .fases-col-text {
     order: 2;
     padding: 36px 24px 60px;
@@ -3370,7 +3424,7 @@ details[open] .accordion-icon {
     top: 24vh; /* Centralizada sobre a foto */
   }
 
-  .fases-arrow-prev { left: 14px; background: rgba(15, 27, 53, 0.55); color: #fff; border-color: rgba(255,255,255,0.3); }
+  .fases-arrow-prev { left: 14px; background: rgba(15, 27, 53, 0.60); color: #fff; border-color: rgba(255,255,255,0.3); }
   .fases-arrow-next { right: 14px; }
 }
 

@@ -62,10 +62,13 @@
          ═══════════════════════════════════════════════ -->
     <section class="fases-hero-section" id="fases-atuacao" aria-labelledby="fasesHeading">
 
-      <!-- Painel de transição wipe — camada azul que varre a tela entre slides -->
+      <!-- Painel de transição wipe — sobreposição de camadas com esmaecimento tipográfico -->
       <div class="fases-wipe" id="fasesWipe" aria-hidden="true">
         <div class="fases-wipe-blue"></div>
         <div class="fases-wipe-white"></div>
+        <div class="fases-wipe-typography">
+          <span class="fases-wipe-word">Fases de Atuação</span>
+        </div>
       </div>
 
       <!-- Slides em layout split: texto | foto -->
@@ -520,7 +523,7 @@
   <script>
     (function () {
       const AUTOPLAY_MS = 6500;
-      const WIPE_TIME = 750; // ms de duracao do wipe cinematografico de camadas
+      const WIPE_TIME = 850; // ms de duracao do wipe cinematografico de camadas
 
       const slides = Array.from(document.querySelectorAll('.fases-slide'));
       const dots = Array.from(document.querySelectorAll('.fases-dot'));
