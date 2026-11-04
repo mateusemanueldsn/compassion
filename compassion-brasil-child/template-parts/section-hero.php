@@ -2,10 +2,7 @@
 
   <!-- CAMADA 1: Vídeo fixo em tela inteira (parallax sticky) -->
   <div class="hero-video-layer" aria-hidden="true">
-    <iframe class="hero-video-bg"
-      src="https://www.youtube.com/embed/9jlvRIaIzGA?autoplay=1&mute=1&loop=1&playlist=9jlvRIaIzGA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
-      title="Vídeo institucional Compassion Brasil" frameborder="0" allow="autoplay; encrypted-media"
-      aria-hidden="true"></iframe>
+    <canvas class="hero-video-bg" id="heroCanvas" width="1920" height="1080" data-base-path="<?php echo get_template_directory_uri(); ?>/assets/video/"></canvas>
     <div class="hero-video-overlay" aria-hidden="true"></div>
     <div class="hero-img-gradient"></div>
   </div>

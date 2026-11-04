@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    COMPASSION BRASIL — THREAD-DRIVEN DESIGN SYSTEM
    Redesign baseado nas Threads da marca (barras retangulares coloridas)
    Fontes oficiais: Neighbour Sans & Ballinger Condensed
@@ -632,10 +632,10 @@ img {
   height: 56.25vw; /* 16:9 aspect ratio */
   min-height: 100%;
   min-width: 177.78vh; /* 16:9 aspect ratio */
-  object-fit: cover;
-  transform: translate(-50%, -50%) scale(1.18); /* Escala para cortar bordas e elementos do player */
+  transform: translate(-50%, -50%);
   border: none;
   pointer-events: none;
+  display: block;
 }
 
 /* Cortina que garante carregamento suave e sem nenhum flash ou controle */

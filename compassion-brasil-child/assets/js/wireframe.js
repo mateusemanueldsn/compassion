@@ -3,6 +3,248 @@
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* ── 2.1 TYPEWRITER EFFECT EM 3 LINHAS, 1 MINUTO DE EXIBIÇÃO E CLIQUE NO HERO ── */
+  const heroSection = document.getElementById("quem-somos");
+  const heroHeading = document.getElementById("heroHeading");
+  const typewriterText = heroHeading ? heroHeading.querySelector(".typewriter-text") : null;
+  const heroActions = document.getElementById("heroActions");
+  const heroContent = document.querySelector(".hero-overlay-content");
+  const curtain = document.getElementById("heroVideoCurtain");
+
+  /* ── HERO: PLAYER DE SEQUÊNCIA JPG EM CANVAS ── */
+  (function initHeroCanvasSequence() {
+    const canvas = document.getElementById("heroCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const basePath = canvas.dataset.basePath || "assets/video/";
+    const PREFIX   = "_MConverter.eu_Compassion Brasil  - Site - Compassion do Brasil (1080p, h264)-";
+    const FIRST    = 4;
+    const LAST     = 6029;
+    const TOTAL    = LAST - FIRST + 1;
+    const FPS      = 24;
+    const FRAME_MS = 1000 / FPS;
+    const BUFFER   = 20;   // quantos frames à frente manter pré-carregados
+
+    // Cache de imagens: apenas a janela deslizante fica em memória
+    const imgCache = new Map();
+    let currentFrame = FIRST;
+    let lastFrameTime = 0;
+    let animRafId = null;
+    let started = false;
+
+    function framePath(n) {
+      return basePath + encodeURIComponent(PREFIX + n) + ".jpg";
+    }
+
+    function loadFrame(n) {
+      if (imgCache.has(n)) return imgCache.get(n);
+      const img = new Image();
+      img.src = framePath(n);
+      imgCache.set(n, img);
+      return img;
+    }
+
+    function evictOldFrames(current) {
+      // Remove frames muito atrás do atual para liberar memória
+      const minKeep = current - 2;
+      for (const key of imgCache.keys()) {
+        if (key < minKeep) imgCache.delete(key);
+      }
+    }
+
+    function preloadAhead(current) {
+      for (let i = 0; i <= BUFFER; i++) {
+        const n = FIRST + (current - FIRST + i) % TOTAL;
+        loadFrame(n);
+      }
+    }
+
+    function drawFrame(n) {
+      const img = imgCache.get(n);
+      if (img && img.complete && img.naturalWidth > 0) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        return true;
+      }
+      return false;
+    }
+
+    function loop(ts) {
+      animRafId = requestAnimationFrame(loop);
+      if (ts - lastFrameTime < FRAME_MS) return;
+      lastFrameTime = ts;
+
+      const drawn = drawFrame(currentFrame);
+      if (drawn) {
+        // Revelar canvas assim que o primeiro frame aparecer
+        if (!started) {
+          started = true;
+          if (curtain) curtain.classList.add("loaded");
+        }
+        // Avançar para próximo frame em loop
+        currentFrame = FIRST + (currentFrame - FIRST + 1) % TOTAL;
+      }
+
+      preloadAhead(currentFrame);
+      evictOldFrames(currentFrame);
+    }
+
+    // Pré-carrega o 1º frame e, quando pronto, começa o loop
+    const firstImg = loadFrame(FIRST);
+    preloadAhead(FIRST);
+
+    function startLoop() {
+      if (animRafId) return;
+      animRafId = requestAnimationFrame(loop);
+    }
+
+    if (firstImg.complete) {
+      startLoop();
+    } else {
+      firstImg.addEventListener("load", startLoop, { once: true });
+      firstImg.addEventListener("error", startLoop, { once: true });
+    }
+
+    // Fallback: exibe a cortina mesmo que a sequência demore
+    setTimeout(() => { if (curtain) curtain.classList.add("loaded"); }, 2000);
+  })();
+
+  if (heroHeading && typewriterText) {
+    // 3 linhas exatas
+    const LINES = [
+      "Libertando crianças",
+      "da pobreza em nome",
+      "de Jesus"
+    ];
+
+    let isTyping = false;
+    let isVisibleOnScreen = true;
+    let isContentShown = false;
+    let typingTimeout = null;
+    let hideTimeout = null;
+    let loopTimeout = null;
+    const charSpeed = 42;
+    const ONE_MINUTE = 60000; // 1 minuto (60.000 ms)
+    const PAUSE_BEFORE_AUTOREPEAT = 12000; // 12 segundos com o vídeo limpo antes de repetir
+
+    function clearAllTimers() {
+      if (typingTimeout) clearTimeout(typingTimeout);
+      if (hideTimeout) clearTimeout(hideTimeout);
+      if (loopTimeout) clearTimeout(loopTimeout);
+    }
+
+    function hideContent(callback) {
+      clearAllTimers();
+      isTyping = false;
+      isContentShown = false;
+      if (heroActions) heroActions.classList.remove("visible");
+      if (heroContent) heroContent.classList.add("content-fade-out");
+
+      setTimeout(() => {
+        if (typewriterText) typewriterText.innerHTML = "";
+        if (callback) callback();
+      }, 700);
+    }
+
+    function startTypewriterSequence() {
+      clearAllTimers();
+      isTyping = true;
+      isContentShown = true;
+      if (heroContent) heroContent.classList.remove("content-fade-out");
+      if (heroActions) heroActions.classList.remove("visible");
+      if (typewriterText) typewriterText.innerHTML = "";
+
+      let currentLineIdx = 0;
+      let currentCharIdx = 0;
+
+      function typeNext() {
+        if (!isTyping) return;
+
+        const currentLineStr = LINES[currentLineIdx];
+
+        if (currentCharIdx < currentLineStr.length) {
+          typewriterText.innerHTML += currentLineStr.charAt(currentCharIdx);
+          currentCharIdx++;
+          typingTimeout = setTimeout(typeNext, charSpeed);
+        } else {
+          currentLineIdx++;
+          if (currentLineIdx < LINES.length) {
+            typewriterText.innerHTML += "<br>";
+            currentCharIdx = 0;
+            typingTimeout = setTimeout(typeNext, 120);
+          } else {
+            // Concluiu as 3 linhas
+            isTyping = false;
+
+            // Exibe os botões
+            setTimeout(() => {
+              if (heroActions) heroActions.classList.add("visible");
+            }, 150);
+
+            // Fica visível por 1 MINUTO e depois esmaece
+            hideTimeout = setTimeout(() => {
+              if (isVisibleOnScreen) {
+                hideContent(() => {
+                  // Após sumir, se o usuário continuar no topo sem clicar, repete após pausa
+                  loopTimeout = setTimeout(() => {
+                    if (isVisibleOnScreen && window.scrollY <= 70) {
+                      startTypewriterSequence();
+                    }
+                  }, PAUSE_BEFORE_AUTOREPEAT);
+                });
+              }
+            }, ONE_MINUTE);
+          }
+        }
+      }
+
+      typingTimeout = setTimeout(typeNext, 300);
+    }
+
+    // Inicia no carregamento inicial
+    startTypewriterSequence();
+
+    // ── CLIQUE NO HERO PARA REAPARECER ──
+    if (heroSection) {
+      heroSection.addEventListener("click", (e) => {
+        // Se clicou diretamente nos links/botões de ação, não intercepta a navegação
+        if (e.target.closest("a, button")) return;
+
+        // Ao clicar no hero, reaparece imediatamente (ou renova o tempo de 1 minuto)
+        startTypewriterSequence();
+      });
+    }
+
+    // ── CONTROLE POR SCROLL ──
+    let scrollTicking = false;
+
+    window.addEventListener("scroll", () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          const heroHeight = heroSection ? heroSection.offsetHeight : 600;
+
+          // Se desceu a página: some
+          if (currentY > heroHeight * 0.35) {
+            if (isVisibleOnScreen) {
+              isVisibleOnScreen = false;
+              hideContent();
+            }
+          } 
+          // Se voltou ao topo do vídeo: reaparece por 1 minuto
+          else if (currentY <= 60) {
+            if (!isVisibleOnScreen) {
+              isVisibleOnScreen = true;
+              startTypewriterSequence();
+            }
+          }
+
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+  }
 
   /* ── 1. SCROLL PROGRESS BAR ── */
   const progress = document.getElementById("scrollProgress");
@@ -38,16 +280,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
   revealEls.forEach(el => revealObs.observe(el));
 
-  /* ── 4. STAT THREADS — animação da barra colorida no topo ── */
+  /* ── 4. STAT COUNTER ANIMATION — Contagem de 0 até o valor final ── */
   const statItems = document.querySelectorAll(".stat-item");
+
+  function animateCounter(statNumEl) {
+    const target = parseInt(statNumEl.dataset.count, 10) || 0;
+    const prefix = statNumEl.dataset.prefix || "";
+    const suffix = statNumEl.dataset.sfx || "";
+    const duration = 2000; // 2 segundos de animação fluida
+    const startTime = performance.now();
+
+    // Easing suave (desacelera no final)
+    function easeOutExpo(t) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function updateCount(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const currentVal = Math.round(easeOutExpo(progress) * target);
+
+      statNumEl.textContent = prefix + currentVal.toLocaleString("pt-BR") + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        statNumEl.textContent = prefix + target.toLocaleString("pt-BR") + suffix;
+      }
+    }
+
+    // Inicia imediatamente no zero formatado
+    statNumEl.textContent = prefix + "0" + suffix;
+    requestAnimationFrame(updateCount);
+  }
+
   const statObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add("visible");
+        const numEl = e.target.querySelector(".stat-num");
+        if (numEl && !numEl.classList.contains("counted")) {
+          numEl.classList.add("counted");
+          animateCounter(numEl);
+        }
         statObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.25 });
+
   statItems.forEach(el => statObs.observe(el));
 
   /* ── 5. NAV ACTIVE LINK (IntersectionObserver) ── */

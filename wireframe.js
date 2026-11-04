@@ -9,21 +9,105 @@ document.addEventListener("DOMContentLoaded", () => {
   const typewriterText = heroHeading ? heroHeading.querySelector(".typewriter-text") : null;
   const heroActions = document.getElementById("heroActions");
   const heroContent = document.querySelector(".hero-overlay-content");
-  const videoEl = document.getElementById("heroVideo");
   const curtain = document.getElementById("heroVideoCurtain");
 
-  // Cortina suave para o vídeo
-  if (curtain) {
-    if (videoEl) {
-      if (videoEl.readyState >= 2) {
-        curtain.classList.add("loaded");
-      } else {
-        videoEl.addEventListener("playing", () => curtain.classList.add("loaded"), { once: true });
-        videoEl.addEventListener("loadeddata", () => curtain.classList.add("loaded"), { once: true });
+  /* ── HERO: PLAYER DE SEQUÊNCIA JPG EM CANVAS ── */
+  (function initHeroCanvasSequence() {
+    const canvas = document.getElementById("heroCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    const basePath = canvas.dataset.basePath || "assets/video/";
+    const PREFIX   = "_MConverter.eu_Compassion Brasil  - Site - Compassion do Brasil (1080p, h264)-";
+    const FIRST    = 4;
+    const LAST     = 6029;
+    const TOTAL    = LAST - FIRST + 1;
+    const FPS      = 24;
+    const FRAME_MS = 1000 / FPS;
+    const BUFFER   = 20;   // quantos frames à frente manter pré-carregados
+
+    // Cache de imagens: apenas a janela deslizante fica em memória
+    const imgCache = new Map();
+    let currentFrame = FIRST;
+    let lastFrameTime = 0;
+    let animRafId = null;
+    let started = false;
+
+    function framePath(n) {
+      return basePath + encodeURIComponent(PREFIX + n) + ".jpg";
+    }
+
+    function loadFrame(n) {
+      if (imgCache.has(n)) return imgCache.get(n);
+      const img = new Image();
+      img.src = framePath(n);
+      imgCache.set(n, img);
+      return img;
+    }
+
+    function evictOldFrames(current) {
+      // Remove frames muito atrás do atual para liberar memória
+      const minKeep = current - 2;
+      for (const key of imgCache.keys()) {
+        if (key < minKeep) imgCache.delete(key);
       }
     }
-    setTimeout(() => curtain.classList.add("loaded"), 1200);
-  }
+
+    function preloadAhead(current) {
+      for (let i = 0; i <= BUFFER; i++) {
+        const n = FIRST + (current - FIRST + i) % TOTAL;
+        loadFrame(n);
+      }
+    }
+
+    function drawFrame(n) {
+      const img = imgCache.get(n);
+      if (img && img.complete && img.naturalWidth > 0) {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        return true;
+      }
+      return false;
+    }
+
+    function loop(ts) {
+      animRafId = requestAnimationFrame(loop);
+      if (ts - lastFrameTime < FRAME_MS) return;
+      lastFrameTime = ts;
+
+      const drawn = drawFrame(currentFrame);
+      if (drawn) {
+        // Revelar canvas assim que o primeiro frame aparecer
+        if (!started) {
+          started = true;
+          if (curtain) curtain.classList.add("loaded");
+        }
+        // Avançar para próximo frame em loop
+        currentFrame = FIRST + (currentFrame - FIRST + 1) % TOTAL;
+      }
+
+      preloadAhead(currentFrame);
+      evictOldFrames(currentFrame);
+    }
+
+    // Pré-carrega o 1º frame e, quando pronto, começa o loop
+    const firstImg = loadFrame(FIRST);
+    preloadAhead(FIRST);
+
+    function startLoop() {
+      if (animRafId) return;
+      animRafId = requestAnimationFrame(loop);
+    }
+
+    if (firstImg.complete) {
+      startLoop();
+    } else {
+      firstImg.addEventListener("load", startLoop, { once: true });
+      firstImg.addEventListener("error", startLoop, { once: true });
+    }
+
+    // Fallback: exibe a cortina mesmo que a sequência demore
+    setTimeout(() => { if (curtain) curtain.classList.add("loaded"); }, 2000);
+  })();
 
   if (heroHeading && typewriterText) {
     // 3 linhas exatas
