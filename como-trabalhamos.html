@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -62,86 +62,99 @@
          ═══════════════════════════════════════════════ -->
     <section class="fases-hero-section" id="fases-atuacao" aria-labelledby="fasesHeading">
 
-      <!-- Slides fullscreen empilhados -->
+      <!-- Painel de transição wipe — camada azul que varre a tela entre slides -->
+      <div class="fases-wipe" id="fasesWipe" aria-hidden="true">
+        <div class="fases-wipe-blue"></div>
+        <div class="fases-wipe-white"></div>
+      </div>
+
+      <!-- Slides em layout split: texto | foto -->
       <div class="fases-track" id="fasesTrack">
 
         <!-- Slide 1 — Sobrevivência -->
-        <div class="fases-slide active" data-index="0">
-          <div class="fases-bg">
-            <img src="assets/images/PG23 PROGRAMA SOBREVIVENCIA  OP1.jpg" alt="Sobrevivência" class="fases-bg-img"
-              loading="eager">
-            <div class="fases-overlay"></div>
-          </div>
-          <div class="fases-content">
-            <div class="fases-phase-badge" style="--accent:var(--yellow)">
-              <span class="fases-phase-num">01</span>
-              <span class="fases-phase-bar"></span>
+        <div class="fases-slide active" data-index="0" style="--accent:var(--yellow)">
+          <!-- Coluna esquerda: texto em branco -->
+          <div class="fases-col-text">
+            <div class="fases-col-text-inner">
+              <div class="fases-phase-badge">
+                <span class="fases-phase-num">01</span>
+                <span class="fases-phase-bar"></span>
+              </div>
+              <h1 class="fases-title" id="fasesHeading">Sobrevivência</h1>
+              <p class="fases-desc">Acompanhamos mães e bebês desde a gestação até o 1º ano de vida, oferecendo suporte
+                prático em saúde, segurança alimentar, amamentação, proteção e fortalecimento de vínculos afetivos por
+                meio de visitas domiciliares e encontros em grupo.</p>
+              <div class="fases-accent-bar"></div>
             </div>
-            <h1 class="fases-title" id="fasesHeading">Sobrevivência</h1>
-            <p class="fases-desc">Acompanhamos mães e bebês desde a gestação até o 1º ano de vida, oferecendo suporte
-              prático em saúde, segurança alimentar, amamentação, proteção e fortalecimento de vínculos afetivos por
-              meio de visitas domiciliares e encontros em grupo.</p>
-            <div class="fases-accent-bar" style="background:var(--yellow)"></div>
+          </div>
+          <!-- Coluna direita: foto -->
+          <div class="fases-col-photo">
+            <img src="assets/images/PG23 PROGRAMA SOBREVIVENCIA  OP1.jpg" alt="Sobrevivência" class="fases-bg-img" loading="eager">
+            <div class="fases-photo-overlay"></div>
           </div>
         </div>
 
         <!-- Slide 2 — Primeira Infância -->
-        <div class="fases-slide" data-index="1">
-          <div class="fases-bg">
-            <img src="assets/images/CC_BR0524_TheySurvived_13_2307.jpg" alt="Primeira Infância" class="fases-bg-img"
-              loading="lazy">
-            <div class="fases-overlay"></div>
-          </div>
-          <div class="fases-content">
-            <div class="fases-phase-badge" style="--accent:var(--blue)">
-              <span class="fases-phase-num">02</span>
-              <span class="fases-phase-bar"></span>
+        <div class="fases-slide" data-index="1" style="--accent:var(--blue)">
+          <div class="fases-col-text">
+            <div class="fases-col-text-inner">
+              <div class="fases-phase-badge">
+                <span class="fases-phase-num">02</span>
+                <span class="fases-phase-bar"></span>
+              </div>
+              <h2 class="fases-title">Primeira Infância</h2>
+              <p class="fases-desc">A partir dos três anos, a criança inicia a transição para as atividades desenvolvidas
+                em centros parceiros da Compassion. As ações têm como foco a promoção do desenvolvimento integral,
+                contemplando experiências voltadas ao fortalecimento das habilidades motoras, cognitivas, socioemocionais
+                e de linguagem.</p>
+              <div class="fases-accent-bar"></div>
             </div>
-            <h2 class="fases-title">Primeira Infância</h2>
-            <p class="fases-desc">A partir dos três anos, a criança inicia a transição para as atividades desenvolvidas
-              em centros parceiros da Compassion. As ações têm como foco a promoção do desenvolvimento integral,
-              contemplando experiências voltadas ao fortalecimento das habilidades motoras, cognitivas, socioemocionais
-              e de linguagem.</p>
-            <div class="fases-accent-bar" style="background:var(--blue)"></div>
+          </div>
+          <div class="fases-col-photo">
+            <img src="assets/images/CC_BR0524_TheySurvived_13_2307.jpg" alt="Primeira Infância" class="fases-bg-img" loading="lazy">
+            <div class="fases-photo-overlay"></div>
           </div>
         </div>
 
         <!-- Slide 3 — Infância -->
-        <div class="fases-slide" data-index="2">
-          <div class="fases-bg">
-            <img src="assets/images/CC_BR0529_HowMuchDoesPovertyCost_06_2509 (1).jpg" alt="Infância"
-              class="fases-bg-img" loading="lazy">
-            <div class="fases-overlay"></div>
-          </div>
-          <div class="fases-content">
-            <div class="fases-phase-badge" style="--accent:var(--green)">
-              <span class="fases-phase-num">03</span>
-              <span class="fases-phase-bar"></span>
+        <div class="fases-slide" data-index="2" style="--accent:var(--green)">
+          <div class="fases-col-text">
+            <div class="fases-col-text-inner">
+              <div class="fases-phase-badge">
+                <span class="fases-phase-num">03</span>
+                <span class="fases-phase-bar"></span>
+              </div>
+              <h2 class="fases-title">Infância</h2>
+              <p class="fases-desc">O programa é ofertado em espaços seguros e acolhedores dos centros parceiros,
+                promovendo o estímulo ao desenvolvimento cognitivo, da convivência e da formação da identidade. Também
+                explora oportunidades para o desenvolvimento da autonomia, solidariedade e cidadania ativa.</p>
+              <div class="fases-accent-bar"></div>
             </div>
-            <h2 class="fases-title">Infância</h2>
-            <p class="fases-desc">O programa é ofertado em espaços seguros e acolhedores dos centros parceiros,
-              promovendo o estímulo ao desenvolvimento cognitivo, da convivência e da formação da identidade. Também
-              explora oportunidades para o desenvolvimento da autonomia, solidariedade e cidadania ativa.</p>
-            <div class="fases-accent-bar" style="background:var(--green)"></div>
+          </div>
+          <div class="fases-col-photo">
+            <img src="assets/images/CC_BR0529_HowMuchDoesPovertyCost_06_2509 (1).jpg" alt="Infância" class="fases-bg-img" loading="lazy">
+            <div class="fases-photo-overlay"></div>
           </div>
         </div>
 
         <!-- Slide 4 — Juventude -->
-        <div class="fases-slide" data-index="3">
-          <div class="fases-bg">
-            <img src="assets/images/juventude_hero.jpg" alt="Juventude" class="fases-bg-img" loading="lazy">
-            <div class="fases-overlay"></div>
-          </div>
-          <div class="fases-content">
-            <div class="fases-phase-badge" style="--accent:var(--orange)">
-              <span class="fases-phase-num">04</span>
-              <span class="fases-phase-bar"></span>
+        <div class="fases-slide" data-index="3" style="--accent:var(--orange)">
+          <div class="fases-col-text">
+            <div class="fases-col-text-inner">
+              <div class="fases-phase-badge">
+                <span class="fases-phase-num">04</span>
+                <span class="fases-phase-bar"></span>
+              </div>
+              <h2 class="fases-title">Juventude</h2>
+              <p class="fases-desc">Apoiamos adolescentes e jovens em sua transição para a vida adulta, promovendo
+                protagonismo, liderança servidora e formação integral. Os participantes são incentivados a construir seus
+                projetos de vida e atuar como agentes de transformação em suas famílias e comunidades.</p>
+              <div class="fases-accent-bar"></div>
             </div>
-            <h2 class="fases-title">Juventude</h2>
-            <p class="fases-desc">Apoiamos adolescentes e jovens em sua transição para a vida adulta, promovendo
-              protagonismo, liderança servidora e formação integral. Os participantes são incentivados a construir seus
-              projetos de vida e atuar como agentes de transformação em suas famílias e comunidades.</p>
-            <div class="fases-accent-bar" style="background:var(--orange)"></div>
+          </div>
+          <div class="fases-col-photo">
+            <img src="assets/images/juventude_hero.jpg" alt="Juventude" class="fases-bg-img" loading="lazy">
+            <div class="fases-photo-overlay"></div>
           </div>
         </div>
 
@@ -506,40 +519,68 @@
   <!-- ═══ CARROSSEL FASES HERO — Script ═══ -->
   <script>
     (function () {
-      const AUTOPLAY_MS = 6000;
+      const AUTOPLAY_MS = 6500;
+      const WIPE_TIME = 750; // ms de duracao do wipe cinematografico de camadas
+
       const slides = Array.from(document.querySelectorAll('.fases-slide'));
       const dots = Array.from(document.querySelectorAll('.fases-dot'));
       const btnPrev = document.getElementById('fasesHeroPrev');
       const btnNext = document.getElementById('fasesHeroNext');
       const section = document.querySelector('.fases-hero-section');
+      const wipe = document.getElementById('fasesWipe');
 
       if (!slides.length) return;
 
       let current = 0;
       let timer = null;
       let paused = false;
+      let isTransitioning = false;
 
-      function goTo(idx) {
-        slides[current].classList.remove('active');
-        if (dots[current]) {
-          dots[current].classList.remove('active');
-          dots[current].setAttribute('aria-selected', 'false');
+      function goTo(nextIdx, direction = 'next') {
+        if (isTransitioning) return;
+        const targetIdx = (nextIdx + slides.length) % slides.length;
+        if (targetIdx === current) return;
+
+        isTransitioning = true;
+
+        // Dispara sobreposicao em camadas (azul e branco da marca)
+        if (wipe) {
+          wipe.classList.remove('running', 'dir-prev', 'dir-next');
+          wipe.classList.add(direction === 'prev' ? 'dir-prev' : 'dir-next');
+          void wipe.offsetWidth; // Forcar reflow
+          wipe.classList.add('running');
         }
 
-        current = (idx + slides.length) % slides.length;
+        // No apice da cobertura, troca o slide de forma invisivel
+        setTimeout(() => {
+          slides[current].classList.remove('active');
+          if (dots[current]) {
+            dots[current].classList.remove('active');
+            dots[current].setAttribute('aria-selected', 'false');
+          }
 
-        slides[current].classList.add('active');
-        if (dots[current]) {
-          dots[current].classList.add('active');
-          dots[current].setAttribute('aria-selected', 'true');
-        }
+          current = targetIdx;
 
-        resetTimer();
+          slides[current].classList.add('active');
+          if (dots[current]) {
+            dots[current].classList.add('active');
+            dots[current].setAttribute('aria-selected', 'true');
+          }
+        }, WIPE_TIME * 0.44);
+
+        // Termino da transicao e liberacao de novo clique
+        setTimeout(() => {
+          if (wipe) wipe.classList.remove('running');
+          isTransitioning = false;
+          resetTimer();
+        }, WIPE_TIME + 60);
       }
 
       function resetTimer() {
         clearTimeout(timer);
-        if (!paused) timer = setTimeout(() => goTo(current + 1), AUTOPLAY_MS);
+        if (!paused) {
+          timer = setTimeout(() => goTo(current + 1, 'next'), AUTOPLAY_MS);
+        }
       }
 
       if (section) {
@@ -553,17 +594,33 @@
         });
       }
 
-      if (btnPrev) btnPrev.addEventListener('click', () => goTo(current - 1));
-      if (btnNext) btnNext.addEventListener('click', () => goTo(current + 1));
+      if (btnPrev) {
+        btnPrev.addEventListener('click', (e) => {
+          e.preventDefault();
+          goTo(current - 1, 'prev');
+        });
+      }
 
-      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+      if (btnNext) {
+        btnNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          goTo(current + 1, 'next');
+        });
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', (e) => {
+          e.preventDefault();
+          goTo(i, i > current ? 'next' : 'prev');
+        });
+      });
 
       document.addEventListener('keydown', (e) => {
         if (!section) return;
         const rect = section.getBoundingClientRect();
         if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-        if (e.key === 'ArrowLeft') goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'ArrowLeft') goTo(current - 1, 'prev');
+        if (e.key === 'ArrowRight') goTo(current + 1, 'next');
       });
 
       let touchX = 0;
@@ -571,7 +628,9 @@
         section.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
         section.addEventListener('touchend', (e) => {
           const dx = e.changedTouches[0].clientX - touchX;
-          if (Math.abs(dx) > 48) goTo(current + (dx < 0 ? 1 : -1));
+          if (Math.abs(dx) > 48) {
+            goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? 'next' : 'prev');
+          }
         });
       }
 

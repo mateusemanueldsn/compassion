@@ -2991,260 +2991,387 @@ details[open] .accordion-icon {
 }
 
 /* ═══════════════════════════════════════════════════════
-   CARROSSEL FULLSCREEN — COMO TRABALHAMOS (estilo Peru)
+   CARROSSEL DOS PROGRAMAS — SPLIT SCREEN MODERNO
+   Layout: Coluna Esquerda Branca (Texto) + Coluna Direita (Foto)
+   Transição: Sobreposição de Camadas Azul & Branco (Layered Reveal)
    ═══════════════════════════════════════════════════════ */
 
 .fases-hero-section {
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 560px;
+  height: 88vh;
+  min-height: 600px;
+  max-height: 860px;
   overflow: hidden;
-  background: var(--dark);
+  background: var(--white, #ffffff);
 }
 
 .fases-track {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
+/* ── Cada Slide: Grid 2 Colunas ── */
 .fases-slide {
   position: absolute;
   inset: 0;
+  display: grid;
+  grid-template-columns: 48% 52%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.75s;
   pointer-events: none;
+  z-index: 1;
 }
 
 .fases-slide.active {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  z-index: 2;
 }
 
-.fases-bg {
-  position: absolute;
-  inset: 0;
-}
-
-.fases-bg-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-  transform: scale(1.04);
-  transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.fases-slide.active .fases-bg-img {
-  transform: scale(1);
-}
-
-.fases-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    100deg,
-    rgba(5, 16, 48, 0.88) 0%,
-    rgba(5, 16, 48, 0.58) 45%,
-    rgba(5, 16, 48, 0.10) 100%
-  );
-}
-
-.fases-content {
-  position: absolute;
-  inset: 0;
+/* ── COLUNA ESQUERDA: Fundo Branco com Destaque ao Texto ── */
+.fases-col-text {
+  position: relative;
+  background: #ffffff;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: clamp(120px, 11vw, 190px);
-  padding-right: 40px;
-  max-width: 680px;
+  align-items: center;
+  justify-content: flex-end;
+  padding: clamp(36px, 5vw, 64px) clamp(32px, 4vw, 56px) clamp(50px, 6vw, 80px) clamp(32px, 5vw, 72px);
+  z-index: 3;
 }
 
-.fases-phase-badge {
+.fases-col-text-inner {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* Badge do número da fase */
+.fases-col-text .fases-phase-badge {
   display: flex;
   align-items: center;
   gap: 16px;
   margin-bottom: 20px;
 }
 
-.fases-phase-num {
-  font-family: var(--font);
+.fases-col-text .fases-phase-num {
+  font-family: var(--font, 'Neighbour', sans-serif);
   font-weight: 900;
-  font-size: 0.9rem;
-  letter-spacing: 0.2em;
-  color: var(--accent, var(--yellow));
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  color: var(--accent, var(--blue));
   line-height: 1;
 }
 
-.fases-phase-bar {
-  flex: 0 0 52px;
+.fases-col-text .fases-phase-bar {
+  flex: 0 0 54px;
   height: 3px;
-  background: var(--accent, var(--yellow));
+  background: var(--accent, var(--blue));
   border-radius: 2px;
 }
 
-.fases-eyebrow {
-  font-family: var(--font);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.50);
-  margin: 0 0 14px;
-}
-
-.fases-title {
-  font-family: var(--font);
+/* Título em destaque */
+.fases-col-text .fases-title {
+  font-family: var(--font, 'Neighbour', sans-serif);
   font-weight: 900;
-  font-size: clamp(2.4rem, 5.5vw, 4rem);
-  color: var(--white);
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  color: var(--dark, #0F1B35);
   line-height: 1.08;
-  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+  margin: 0 0 22px;
 }
 
-.fases-desc {
-  font-size: clamp(0.93rem, 1.3vw, 1.05rem);
-  line-height: 1.65;
-  color: rgba(255,255,255,0.78);
+/* Descrição legível */
+.fases-col-text .fases-desc {
+  font-size: clamp(0.96rem, 1.25vw, 1.08rem);
+  line-height: 1.72;
+  color: #3f4d67;
   margin: 0 0 28px;
-  max-width: 500px;
 }
 
-.fases-accent-bar {
-  width: 48px;
+/* Barra de cor da fase */
+.fases-col-text .fases-accent-bar {
+  width: 56px;
   height: 4px;
   border-radius: 2px;
-  opacity: 0.8;
+  background: var(--accent, var(--blue));
 }
 
-/* ── Controles do Carrossel (Arrows & Dots) ── */
+/* Animação Stagger nos elementos do texto ao ativar slide */
+.fases-slide.active .fases-col-text .fases-phase-badge,
+.fases-slide.active .fases-col-text .fases-title,
+.fases-slide.active .fases-col-text .fases-desc,
+.fases-slide.active .fases-col-text .fases-accent-bar {
+  animation: faseFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fases-slide.active .fases-col-text .fases-phase-badge { animation-delay: 0.15s; }
+.fases-slide.active .fases-col-text .fases-title       { animation-delay: 0.25s; }
+.fases-slide.active .fases-col-text .fases-desc        { animation-delay: 0.35s; }
+.fases-slide.active .fases-col-text .fases-accent-bar  { animation-delay: 0.45s; }
+
+@keyframes faseFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── COLUNA DIREITA: Foto em Alta Resolução ── */
+.fases-col-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b1528;
+}
+
+.fases-col-photo .fases-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transform: scale(1.06);
+  transition: transform 6.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fases-slide.active .fases-col-photo .fases-bg-img {
+  transform: scale(1);
+}
+
+/* Gradiente de suavização na foto */
+.fases-col-photo .fases-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 27, 53, 0.20) 0%,
+    rgba(15, 27, 53, 0.05) 30%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SOBREPOSIÇÃO DE CAMADAS (AZUL & BRANCO) — TRANSIÇÃO MODERNA
+   ═══════════════════════════════════════════════════════ */
+.fases-wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Camada 1: Azul Royal da Compassion */
+.fases-wipe-blue {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0A47EA 0%, #1A5FFF 100%);
+  transform: translateX(-101%);
+  will-change: transform;
+}
+
+/* Camada 2: Branco Puro com sombra sutil */
+.fases-wipe-white {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  transform: translateX(-101%);
+  box-shadow: -10px 0 35px rgba(10, 71, 234, 0.25);
+  will-change: transform;
+}
+
+/* Animação DIREITA (next) */
+.fases-wipe.running.dir-next .fases-wipe-blue {
+  animation: wipeInAndOutNext 0.72s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.fases-wipe.running.dir-next .fases-wipe-white {
+  animation: wipeInAndOutNext 0.72s cubic-bezier(0.77, 0, 0.175, 1) 0.07s forwards;
+}
+
+@keyframes wipeInAndOutNext {
+  0% {
+    transform: translateX(-101%);
+  }
+  46% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(101%);
+  }
+}
+
+/* Animação ESQUERDA (prev) */
+.fases-wipe.running.dir-prev .fases-wipe-blue {
+  animation: wipeInAndOutPrev 0.72s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+.fases-wipe.running.dir-prev .fases-wipe-white {
+  animation: wipeInAndOutPrev 0.72s cubic-bezier(0.77, 0, 0.175, 1) 0.07s forwards;
+}
+
+@keyframes wipeInAndOutPrev {
+  0% {
+    transform: translateX(101%);
+  }
+  46% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-101%);
+  }
+}
+
+/* ── SETAS DE NAVEGAÇÃO ── */
 .fases-nav-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: rgba(5, 16, 48, 0.45);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(255, 255, 255, 0.22);
-  color: var(--white);
+  border: 1.5px solid rgba(26, 95, 255, 0.20);
+  color: var(--blue, #1A5FFF);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
-  transition: all 0.25s var(--ease);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 15;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(15, 27, 53, 0.12);
 }
 
 .fases-arrow-prev {
-  left: clamp(20px, 2.5vw, 36px);
+  left: clamp(20px, 3vw, 40px);
 }
 
 .fases-arrow-next {
-  right: clamp(20px, 2.5vw, 36px);
+  right: clamp(20px, 3vw, 40px);
+  background: rgba(15, 27, 53, 0.55);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 .fases-nav-arrow:hover {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: var(--white);
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 6px 20px rgba(26, 95, 255, 0.4);
+  background: var(--blue, #1A5FFF);
+  border-color: var(--blue, #1A5FFF);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(26, 95, 255, 0.45);
 }
 
 .fases-nav-arrow:active {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%) scale(0.95);
 }
 
+/* ── DOTS DE NAVEGAÇÃO (Na base da coluna de texto) ── */
 .fases-dots {
   position: absolute;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 34px;
+  left: clamp(32px, 5vw, 72px);
   display: flex;
   align-items: center;
   gap: 12px;
-  z-index: 10;
-  background: transparent;
-  border: none;
-  padding: 0;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  z-index: 15;
 }
 
 .fases-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: var(--r-pill);
-  background: rgba(255, 255, 255, 0.65);
-  border: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: rgba(26, 95, 255, 0.22);
+  border: 1.5px solid rgba(26, 95, 255, 0.35);
   cursor: pointer;
   padding: 0;
-  transition: all 0.35s var(--ease);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fases-dot:hover {
-  background: var(--white);
-  transform: scale(1.2);
+  background: rgba(26, 95, 255, 0.55);
+  transform: scale(1.25);
 }
 
 .fases-dot.active {
-  width: 36px;
+  width: 38px;
   background: var(--blue, #1A5FFF) !important;
-  box-shadow: 0 0 14px rgba(26, 95, 255, 0.7), 0 2px 8px rgba(0, 0, 0, 0.5);
+  border-color: var(--blue, #1A5FFF);
+  box-shadow: 0 2px 10px rgba(26, 95, 255, 0.5);
 }
 
-/* ── Responsivo mobile ── */
-@media (max-width: 768px) {
-  .fases-hero-section { height: 100svh; min-height: 580px; }
+/* ── RESPONSIVIDADE (Telas menores e Mobile) ── */
+@media (max-width: 960px) {
+  .fases-hero-section {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+  }
 
-  .fases-nav-arrow {
-    width: 42px;
-    height: 42px;
+  .fases-slide {
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    display: none;
   }
-  .fases-arrow-prev {
-    left: 14px;
+
+  .fases-slide.active {
+    display: flex;
+    flex-direction: column;
   }
-  .fases-arrow-next {
-    right: 14px;
+
+  /* Foto no topo no mobile */
+  .fases-col-photo {
+    height: 48vh;
+    min-height: 280px;
+    order: 1;
+  }
+
+  /* Texto embaixo no mobile */
+  .fases-col-text {
+    order: 2;
+    padding: 36px 24px 60px;
+    justify-content: flex-start;
+  }
+
+  .fases-col-text-inner {
+    max-width: 100%;
+  }
+
+  .fases-col-text .fases-title {
+    font-size: clamp(2rem, 6.5vw, 2.8rem);
+    margin-bottom: 16px;
+  }
+
+  .fases-col-text .fases-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 22px;
   }
 
   .fases-dots {
-    bottom: 24px;
-    padding: 0;
-    gap: 10px;
-  }
-  .fases-dot {
-    width: 10px;
-    height: 10px;
-  }
-  .fases-dot.active {
-    width: 28px;
+    bottom: 22px;
+    left: 24px;
   }
 
-  .fases-content {
-    padding: 80px 24px 130px;
-    max-width: 100%;
-    justify-content: flex-end;
+  .fases-nav-arrow {
+    width: 44px;
+    height: 44px;
+    top: 24vh; /* Centralizada sobre a foto */
   }
-  .fases-title { font-size: clamp(1.9rem, 7vw, 2.6rem); }
-  .fases-desc { font-size: 0.9rem; max-width: 100%; }
-  .fases-overlay {
-    background: linear-gradient(180deg,
-      rgba(5,16,48,0.22) 0%,
-      rgba(5,16,48,0.70) 55%,
-      rgba(5,16,48,0.92) 100%
-    );
-  }
+
+  .fases-arrow-prev { left: 14px; background: rgba(15, 27, 53, 0.55); color: #fff; border-color: rgba(255,255,255,0.3); }
+  .fases-arrow-next { right: 14px; }
 }
 
 /* ── TIPOGRAFIA DOS TÍTULOS PRINCIPAIS (HEAVY / BLACK 900) ── */
