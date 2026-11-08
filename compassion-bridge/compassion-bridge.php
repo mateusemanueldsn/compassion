@@ -176,3 +176,4 @@ function compassion_bridge_settings_page() {
     </div>
     <?php
 }
+
