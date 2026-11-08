@@ -66,7 +66,9 @@
 
       <!-- CAMADA 1: Vídeo de fundo em tela cheia (Sem controles de play/pause do YouTube) -->
       <div class="hero-video-layer" aria-hidden="true">
-        <canvas class="hero-video-bg" id="heroCanvas" width="1920" height="1080" data-base-path="assets/video/"></canvas>
+        <video class="hero-video-bg" id="heroVideo" autoplay muted loop playsinline preload="metadata">
+          <source src="assets/video/hero-video.mp4" type="video/mp4">
+        </video>
         <!-- Cortina de transição que impede qualquer flash inicial -->
         <div class="hero-video-curtain" id="heroVideoCurtain"></div>
         <div class="hero-video-overlay" aria-hidden="true"></div>
