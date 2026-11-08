@@ -717,3 +717,21 @@ if (document.readyState === "loading") {
   initPhasesCarousel();
 }
 
+/* ── 12. REMOVE BADGE/DRAWER INJETADO PELA NETLIFY ── */
+(function() {
+  function purgeNetlifyBadge() {
+    const targets = document.querySelectorAll('#nl-badge-frame, #nl-hud-frame, iframe[title="Powered by Netlify"], iframe[id^="nl-"]');
+    targets.forEach(el => el.remove());
+  }
+
+  purgeNetlifyBadge();
+  document.addEventListener("DOMContentLoaded", purgeNetlifyBadge);
+  window.addEventListener("load", purgeNetlifyBadge);
+
+  if ("MutationObserver" in window) {
+    const observer = new MutationObserver(purgeNetlifyBadge);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  }
+})();
+
+

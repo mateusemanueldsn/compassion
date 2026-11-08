@@ -4118,3 +4118,20 @@ h3.course-card-title {
   height: 100%;
   text-align: center;
 }
+
+/* Oculta permanentemente o badge/botão injetado pela Netlify */
+#nl-badge-frame,
+#nl-hud-frame,
+iframe[title="Powered by Netlify"],
+iframe[id^="nl-"],
+.nl-wrap,
+#nl-badge {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
