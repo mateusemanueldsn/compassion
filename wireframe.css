@@ -636,6 +636,7 @@ img {
   border: none;
   pointer-events: none;
   display: block;
+  object-fit: cover;
 }
 
 /* Cortina que garante carregamento suave e sem nenhum flash ou controle */

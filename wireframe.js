@@ -18,14 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
       if (curtain) curtain.classList.add("loaded");
     }
 
+    // Garante modo mudo e inline para destravar o autoplay em todos os navegadores
+    videoEl.muted = true;
+    videoEl.defaultMuted = true;
+    videoEl.playsInline = true;
+
+    // Dispara a reprodução
+    const playPromise = videoEl.play();
+    if (playPromise !== undefined) {
+      playPromise.then(revealVideo).catch(() => {
+        // Fallback se autoplay for adiado pelo navegador
+        setTimeout(revealVideo, 500);
+      });
+    }
+
     if (videoEl.readyState >= 2) {
       revealVideo();
     } else {
       videoEl.addEventListener("playing", revealVideo, { once: true });
       videoEl.addEventListener("loadeddata", revealVideo, { once: true });
       videoEl.addEventListener("canplay", revealVideo, { once: true });
+      videoEl.addEventListener("timeupdate", revealVideo, { once: true });
     }
-    setTimeout(revealVideo, 1200);
+    setTimeout(revealVideo, 800);
 
     // Otimização: pausar quando fora do viewport para poupar bateria/CPU
     if ("IntersectionObserver" in window) {
